@@ -1,0 +1,1 @@
+json.partial! "cons_raw_materials/cons_raw_material", cons_raw_material: @cons_raw_material

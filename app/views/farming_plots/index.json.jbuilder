@@ -1,0 +1,1 @@
+json.array! @farming_plots, partial: 'farming_plots/farming_plot', as: :farming_plot

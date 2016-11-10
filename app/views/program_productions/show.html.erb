@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Estimate sale:</strong>
+  <%= @program_production.estimate_sale.farming_plot.name %>
+</p>
+
+<p>
+  <strong>Stock initial:</strong>
+  <%= @program_production.stock_initial %>
+</p>
+
+<p>
+  <strong>Stock end:</strong>
+  <%= @program_production.stock_end %>
+</p>
+
+<p>
+  <strong>Variation stock:</strong>
+  <%= @program_production.variation_stock %>
+</p>
+
+<p>
+  <strong>Program production:</strong>
+  <%= @program_production.program_production %>
+</p>
+
+<%= link_to 'Edit', edit_program_production_path(@program_production) %> |
+<%= link_to 'Back', program_productions_path %>

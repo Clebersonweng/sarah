@@ -1,0 +1,78 @@
+<%= form_for(cons_raw_material) do |f| %>
+  <% if cons_raw_material.errors.any? %>
+    <div id="error_explanation">
+        <h2><%= pluralize(cons_raw_material.errors.count, "error") %> prohibited this consumption_of_raw_material from being saved:</h2>
+
+        <ul>
+            <% cons_raw_material.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+        </ul>
+    </div>
+  <% end %>
+
+
+
+
+
+  <input type="text" name="cons_raw_material[program_production_id]" value="<%= @program_production%>"%>
+
+  <input type="text" id="area_plot" value="<%=@area_plot%>">
+
+  <label>Supply</label>
+  <%= select("insumos","supply_id", options_for_select(Supply.all.collect {|p| [ p.tradename, p.id, {"data-price-supply"=>p.price, "data-dosage-supply"=>p.dosage} ] }),:prompt => "----Supply---")%> 
+
+
+
+  <label>Dosis</label>
+  <input type="text" name="dosis" id="dosage">
+
+
+  <label>Precio</label>
+  <input type="text" name="" id="price">
+
+
+  <label>Total consumo kg/lt</label>
+  <input type="text" name="coquito" id="coquito"/>
+
+  <button  id="agregarProducto" >ADD</button>
+
+
+  <div id="detalhes-container">
+      <table id="tabla">
+          <thead>
+              <tr>
+                  <th width="20%">ID</th>
+                  <th width="20%">Supply</th>
+                  <th width="10%">Dosis</th>
+                  <th width="20%">Precio</th>
+                  <th width="20%">Consumo</th>
+                  <th width="20%">Subtotal</th>
+                  <th colspan="3"></th>
+              </tr>
+          </thead>
+
+          <tbody>
+
+
+
+          </tbody>
+
+      </table>
+      <label>TOTAL</label>
+      <input type="text" name="cons_raw_material[total]" id="coquito2">
+      
+      <div id="test">
+          
+      </div>
+  </div>
+
+
+
+
+
+  <div class="actions">
+      <%= f.submit %>
+  </div>
+<% end %>
+

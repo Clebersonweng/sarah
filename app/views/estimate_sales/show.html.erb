@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Farming plot:</strong>
+  <%= @estimate_sale.farming_plot %>
+</p>
+
+<p>
+  <strong>Estimate production:</strong>
+  <%= @estimate_sale.estimate_production %>
+</p>
+
+<p>
+  <strong>Total production:</strong>
+  <%= @estimate_sale.total_production %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @estimate_sale.price %>
+</p>
+
+<p>
+  <strong>Gross sale:</strong>
+  <%= @estimate_sale.gross_sale %>
+</p>
+
+<%= link_to 'Edit', edit_estimate_sale_path(@estimate_sale) %> |
+<%= link_to 'Back', estimate_sales_path %>

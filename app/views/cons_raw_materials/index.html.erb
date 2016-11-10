@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Cons Raw Materials</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Farming Plot</th>
+      <th>Total Production</th>
+      <th>Total</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cons_raw_materials.each do |cons_raw_material| %>
+      <tr>
+        <td><%= cons_raw_material.program_production.estimate_sale.farming_plot.name %></td>
+        <td><%= cons_raw_material.program_production.program_production %></td>
+        <td><%= cons_raw_material.total %></td>
+        <td><%= link_to 'Show', cons_raw_material %></td>
+        <td><%= link_to 'Edit', edit_cons_raw_material_path(cons_raw_material) %></td>
+        <td><%= link_to 'Destroy', cons_raw_material, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Cons Raw Material', new_cons_raw_material_path %>

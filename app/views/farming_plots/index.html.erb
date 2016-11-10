@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Farming Plots</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Area</th>
+            <th>Type of crop</th>
+            <th>Culture period start</th>
+            <th>Culture period end</th>
+            <th>Description</th>
+            <th colspan="3"></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @farming_plots.each do |farming_plot| %>
+          <tr>
+              <td><%= farming_plot.code %></td>
+              <td><%= farming_plot.name %></td>
+              <td><%= farming_plot.area %></td>
+              <td><%= farming_plot.type_of_crop.name %></td>
+              <td><%= farming_plot.culture_period_start %></td>
+              <td><%= farming_plot.culture_period_end %></td>
+              <td><%= farming_plot.description %></td>
+              <td><%= link_to 'Show', farming_plot %></td>
+              <td><%= link_to 'Edit', edit_farming_plot_path(farming_plot) %></td>
+              <td><%= link_to 'Destroy', farming_plot, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Farming Plot', new_farming_plot_path %>

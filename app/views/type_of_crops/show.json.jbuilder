@@ -1,0 +1,1 @@
+json.partial! "type_of_crops/type_of_crop", type_of_crop: @type_of_crop

@@ -1,0 +1,2 @@
+json.extract! program_production, :id, :estimate_sale_id, :stock_initial, :stock_end, :variation_stock, :program_production, :created_at, :updated_at
+json.url program_production_url(program_production, format: :json)

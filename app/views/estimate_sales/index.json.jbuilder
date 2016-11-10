@@ -1,0 +1,1 @@
+json.array! @estimate_sales, partial: 'estimate_sales/estimate_sale', as: :estimate_sale

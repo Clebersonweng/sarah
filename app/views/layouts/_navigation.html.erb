@@ -1,0 +1,182 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<div class="container-fluid">
+    <div class="navbar-header">
+        <button class="navbar-toggle collapsed" data-target="#sidebar-collapse" data-toggle="collapse" type="button">
+            <span class="sr-only">
+                Toggle navigation
+            </span>
+            <span class="icon-bar">
+            </span>
+            <span class="icon-bar">
+            </span>
+            <span class="icon-bar">
+            </span>
+        </button>
+        <a class="navbar-brand" href="#">
+            <span>
+                Sarah
+            </span>
+            Admin
+        </a>
+        <ul class="user-menu">
+            <li class="dropdown pull-right">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">
+                    <i class="fa fa-user"></i>
+                    
+                    <%= current_user.email %>
+                 
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <% if current_user.role.role=="admin"%>
+                       <li>
+                       <%= link_to "Sign up", new_user_registration_path, :class => 'fa fa-user'+" "  %>
+                       </li> 
+                   <%end%>
+                       <li class="divider"></li>
+                      
+                       <li>
+                       <%= link_to "Sign out", destroy_user_session_path, :method => 'delete' ,
+                       :class => "fa fa-fw fa-power-off" %>
+                       </li>
+                   
+               </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- /.container-fluid -->
+</nav>
+<div class="col-sm-3 col-lg-2 sidebar" id="sidebar-collapse">
+
+        <ul class="nav menu">
+            <li id="menu_home">
+                <a href="/">
+                    <svg class="glyph stroked dashboard-dial">
+                        <use xlink:href="#stroked-dashboard-dial">
+                        </use>
+                    </svg>
+                    Dashboard
+                </a>
+            </li>
+            <li id="menu_estimate_sales">
+                <a href="estimate_sales">
+                    <svg class="glyph stroked calendar">
+                        <use xlink:href="#stroked-calendar">
+
+                        </use>
+                    </svg>
+                    Estimate Sales
+                </a>
+            </li>
+            <li id="menu_farming_plots">
+                <a href="farming_plots">
+                    <svg class="glyph stroked line-graph">
+                        <use xlink:href="#stroked-line-graph">
+                        </use>
+                    </svg>
+                    Farming Plot
+                </a>
+            </li>
+            <li id="menu_type_of_crops">
+                <a href="type_of_crops">
+                    <svg class="glyph stroked table">
+                        <use xlink:href="#stroked-table">
+                        </use>
+                    </svg>
+                   Type Of Crops
+                </a>
+            </li>
+            <li id="menu_supplies">
+                <a href="supplies">
+                    <svg class="glyph stroked table">
+                        <use xlink:href="#stroked-table">
+                        </use>
+                    </svg>
+                   Supplies
+                </a>
+            </li>
+            
+            <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Manpower<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li id="menu_man_powers">
+                            <a href="man_powers"><i class="fa fa-fw fa-user"></i> Manpower Estimate</a>
+                        </li>
+                        <li id="menu_type_of_works">
+                            <a href="type_of_works"><i class="fa fa-fw fa-gear"></i> Type of Work</a>
+                        </li>
+                    </ul>
+            </li>
+            <!--dropdown para el usuario que tiene su propia maquinaria-->
+            <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Cost Operational<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li id="menu_cost_operational_have_machines">
+                            <a href="cost_operational_have_machines"><i class="fa fa-fw fa-user"></i> Cost Operational</a>
+                        </li>
+                        <li id="menu_maintenances">
+                            <a href="maintenances"><i class="fa fa-wrench"></i> Maintenances</a>
+                        </li>
+                         <li id="menu_machines">
+                            <a href="machines"><i class="fa fa-fw fa-gear"></i> Machines</a>
+                        </li>
+                    </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-minus-square" aria-hidden="true"></i> Program Production <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                         <li id="menu_program_productions">
+                            <a href="program_productions"><i class="fa fa-fw fa-gear"></i> Prog. Production</a>
+                        </li>
+                        <li id="menu_cons_raw_materials">
+                            <a href="cons_raw_materials"><i class="fa fa-fw fa-gear"></i> Raw material Consumption</a>
+                        </li>
+                       
+                        <li id="menu_manufac_indirect_exps">
+                            <a href="manufac_indirect_exps"><i class="fa fa-fw fa-gear"></i> Manufact. Indirect</a>
+                        </li>
+                        <li id="menu_overhead_expenses">
+                            <a href="overhead_expenses"><i class="fa fa-fw fa-gear"></i> Overhead</a>
+                        </li>
+                        <li id="menu_purchase_raw_materials">
+                            <a href="purchase_raw_materials"><i class="fa fa-fw fa-gear"></i> Purchase Raw Materials</a>
+                        </li>
+                        <li id="menu_manufac_indirect_exps">
+                            <a href="manufac_indirect_exps"><i class="fa fa-fw fa-gear"></i> Manufac. Indirect Expenses</a>
+                        </li>
+                        <li id="menu_purchase_raw_materials">
+                            <a href="purchase_raw_materials"><i class="fa fa-fw fa-gear"></i> Purchase Raw Materials</a>
+                        </li>
+                        <li id="menu_cost_operational_not_machines">
+                            <a href="cost_operational_not_machines"><i class="fa fa-fw fa-gear"></i> Cost Operational</a>
+                        </li>
+                        <li id="menu_maintenances">
+                            <a href="maintenances"><i class="fa fa-fw fa-gear"></i> Maintenances</a>
+                        </li>
+                       
+                        <li id="menu_supplies">
+                            <a href="supplies"><i class="fa fa-fw fa-gear"></i> Supplies</a>
+                        </li>
+                       
+                        
+                        
+                    </ul>
+                </li>
+                <li class="divider"></li>
+                <li>
+                            <a href=""><i class="fa fa-area-chart" aria-hidden="true"></i> Income Statement</a>
+                        </li>
+        </ul>
+</div>
+<!--/.sidebar-->
+<script>
+     var controllerName = "<%= params[:controller] || controller.name %>";
+    if(controllerName == "default" ){
+        $("#menu_home").addClass("active");
+    }else{
+        $("#menu_"+controllerName).addClass("active");
+    }
+    
+</script>
+

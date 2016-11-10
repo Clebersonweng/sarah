@@ -1,0 +1,2 @@
+module TypeOfCropsHelper
+end

@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Cons Raw Material Details</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cons raw material</th>
+      <th>Supply</th>
+      <th>Total unit</th>
+      <th>Subtotal</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cons_raw_material_details.each do |cons_raw_material_detail| %>
+      <tr>
+        <td><%= cons_raw_material_detail.cons_raw_material %></td>
+        <td><%= cons_raw_material_detail.supply %></td>
+        <td><%= cons_raw_material_detail.total_unit %></td>
+        <td><%= cons_raw_material_detail.subtotal %></td>
+        <td><%= link_to 'Show', cons_raw_material_detail %></td>
+        <td><%= link_to 'Edit', edit_cons_raw_material_detail_path(cons_raw_material_detail) %></td>
+        <td><%= link_to 'Destroy', cons_raw_material_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Cons Raw Material Detail', new_cons_raw_material_detail_path %>

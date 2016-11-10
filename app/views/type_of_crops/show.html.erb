@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @type_of_crop.code %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @type_of_crop.name %>
+</p>
+
+<p>
+  <strong>Variety:</strong>
+  <%= @type_of_crop.variety %>
+</p>
+
+<%= link_to 'Edit', edit_type_of_crop_path(@type_of_crop) %> |
+<%= link_to 'Back', type_of_crops_path %>

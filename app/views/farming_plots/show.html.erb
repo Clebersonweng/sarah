@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @farming_plot.code %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @farming_plot.name %>
+</p>
+
+<p>
+  <strong>Area:</strong>
+  <%= @farming_plot.area %>
+</p>
+
+<p>
+  <strong>Type of crop:</strong>
+  <%= @farming_plot.type_of_crop %>
+</p>
+
+<p>
+  <strong>Culture period start:</strong>
+  <%= @farming_plot.culture_period_start %>
+</p>
+
+<p>
+  <strong>Culture period end:</strong>
+  <%= @farming_plot.culture_period_end %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @farming_plot.description %>
+</p>
+
+<%= link_to 'Edit', edit_farming_plot_path(@farming_plot) %> |
+<%= link_to 'Back', farming_plots_path %>

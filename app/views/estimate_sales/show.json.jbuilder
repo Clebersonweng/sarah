@@ -1,0 +1,1 @@
+json.partial! "estimate_sales/estimate_sale", estimate_sale: @estimate_sale

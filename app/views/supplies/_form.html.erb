@@ -1,0 +1,52 @@
+<%= form_for(supply) do |f| %>
+  <% if supply.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(supply.errors.count, "error") %> prohibited this supply from being saved:</h2>
+
+      <ul>
+      <% supply.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :maker %>
+    <%= f.text_field :maker %>
+  </div>
+
+  <div class="field">
+    <%= f.label :unit_of_measurement_id,"U.M" %>
+   <%= f.select("unit_of_measurement_id", @unit_of_measurement_id)%>
+  </div>
+
+  <div class="field">
+    <%= f.label :tradename %>
+    <%= f.text_field :tradename %>
+  </div>
+
+  <div class="field">
+    <%= f.label :price %>
+    <%= f.text_field :price %>
+  </div>
+
+  <div class="field">
+    <%= f.label :dosage %>
+    <%= f.text_field :dosage %>
+  </div>
+
+  <div class="field">
+    <%= f.label :cost_per_hectare %>
+    <%= f.text_field :cost_per_hectare %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

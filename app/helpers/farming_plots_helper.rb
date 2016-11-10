@@ -1,0 +1,2 @@
+module FarmingPlotsHelper
+end

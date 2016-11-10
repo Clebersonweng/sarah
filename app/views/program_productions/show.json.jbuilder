@@ -1,0 +1,1 @@
+json.partial! "program_productions/program_production", program_production: @program_production

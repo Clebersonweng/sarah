@@ -1,0 +1,1 @@
+json.partial! "farming_plots/farming_plot", farming_plot: @farming_plot

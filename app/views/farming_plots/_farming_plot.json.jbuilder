@@ -1,0 +1,2 @@
+json.extract! farming_plot, :id, :code, :name, :area, :type_of_crop_id, :culture_period_start, :culture_period_end, :description, :created_at, :updated_at
+json.url farming_plot_url(farming_plot, format: :json)

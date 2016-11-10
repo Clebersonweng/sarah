@@ -1,0 +1,2 @@
+module ConsRawMaterialDetailsHelper
+end
