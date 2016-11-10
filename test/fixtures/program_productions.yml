@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  estimate_sale: one
+  stock_initial: 1.5
+  stock_end: 1.5
+  variation_stock: 1.5
+  program_production: 1.5
+
+two:
+  estimate_sale: two
+  stock_initial: 1.5
+  stock_end: 1.5
+  variation_stock: 1.5
+  program_production: 1.5

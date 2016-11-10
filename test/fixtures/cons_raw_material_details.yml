@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cons_raw_material: one
+  supply: one
+  total_unit: 1.5
+  subtotal: 1.5
+
+two:
+  cons_raw_material: two
+  supply: two
+  total_unit: 1.5
+  subtotal: 1.5

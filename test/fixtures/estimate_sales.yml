@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  farming_plot: one
+  estimate_production: 1.5
+  total_production: 1.5
+  price: 1.5
+  gross_sale: 1.5
+
+two:
+  farming_plot: two
+  estimate_production: 1.5
+  total_production: 1.5
+  price: 1.5
+  gross_sale: 1.5
