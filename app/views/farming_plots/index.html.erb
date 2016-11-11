@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 
 <h1>Farming Plots</h1>
 
@@ -9,6 +9,7 @@
             <th>Name</th>
             <th>Area</th>
             <th>Type of crop</th>
+            <th>Employee</th>
             <th>Culture period start</th>
             <th>Culture period end</th>
             <th>Description</th>
@@ -23,6 +24,7 @@
               <td><%= farming_plot.name %></td>
               <td><%= farming_plot.area %></td>
               <td><%= farming_plot.type_of_crop.name %></td>
+              <td><%= farming_plot.employee.name %></td>
               <td><%= farming_plot.culture_period_start %></td>
               <td><%= farming_plot.culture_period_end %></td>
               <td><%= farming_plot.description %></td>

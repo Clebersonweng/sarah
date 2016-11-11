@@ -1,0 +1,1 @@
+json.array! @man_powers, partial: 'man_powers/man_power', as: :man_power

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Type of work:</strong>
+  <%= @man_power_detail.type_of_work %>
+</p>
+
+<p>
+  <strong>Employee:</strong>
+  <%= @man_power_detail.employee %>
+</p>
+
+<p>
+  <strong>Subtotal:</strong>
+  <%= @man_power_detail.subtotal %>
+</p>
+
+<%= link_to 'Edit', edit_man_power_detail_path(@man_power_detail) %> |
+<%= link_to 'Back', man_power_details_path %>

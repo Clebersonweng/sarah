@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type_of_work: one
+  employee: 
+  subtotal: 1.5
+
+two:
+  type_of_work: two
+  employee: 
+  subtotal: 1.5

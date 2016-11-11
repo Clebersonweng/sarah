@@ -1,0 +1,2 @@
+class TypeOfWork < ApplicationRecord
+end

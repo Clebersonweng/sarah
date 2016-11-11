@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :type_of_works
+  resources :man_power_details
+  resources :man_powers
+  resources :employees
   root to: "home#index"
 
   resources :cons_raw_materials

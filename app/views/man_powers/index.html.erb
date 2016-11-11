@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Man Powers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Program production</th>
+      <th>Total hours needed</th>
+      <th>Total</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @man_powers.each do |man_power| %>
+      <tr>
+        <td><%= man_power.program_production %></td>
+        <td><%= man_power.total_hours_needed %></td>
+        <td><%= man_power.total %></td>
+        <td><%= link_to 'Show', man_power %></td>
+        <td><%= link_to 'Edit', edit_man_power_path(man_power) %></td>
+        <td><%= link_to 'Destroy', man_power, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Man Power', new_man_power_path %>

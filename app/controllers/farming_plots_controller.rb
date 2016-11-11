@@ -14,19 +14,20 @@ class FarmingPlotsController < ApplicationController
 
   # GET /farming_plots/new
   def new
+     get_params_plot
     @farming_plot = FarmingPlot.new
-    @type_of_crops = TypeOfCrop.all.collect { |type| [type.name, type.id]}
+   
   end
 
   # GET /farming_plots/1/edit
   def edit
-     @type_of_crops = TypeOfCrop.all.collect { |type| [type.name, type.id]}
+     get_params_plot
   end
 
   # POST /farming_plots
   # POST /farming_plots.json
   def create
-    @type_of_crops = TypeOfCrop.all.collect { |type| [type.name, type.id]}
+    get_params_plot
     @farming_plot = FarmingPlot.new(farming_plot_params)
 
     respond_to do |format|
@@ -43,7 +44,7 @@ class FarmingPlotsController < ApplicationController
   # PATCH/PUT /farming_plots/1
   # PATCH/PUT /farming_plots/1.json
   def update
-     @type_of_crops = TypeOfCrop.all.collect { |type| [type.name, type.id]}
+     get_params_plot
     respond_to do |format|
       if @farming_plot.update(farming_plot_params)
         flash[:notice] = "Successfull be update"
@@ -74,6 +75,10 @@ class FarmingPlotsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def farming_plot_params
-      params.require(:farming_plot).permit(:code, :name, :area, :type_of_crop_id, :culture_period_start, :culture_period_end, :description)
+      params.require(:farming_plot).permit(:code, :name, :area, :type_of_crop_id, :culture_period_start, :culture_period_end,:employee_id ,:description)
+    end
+    def get_params_plot
+       @type_of_crops = TypeOfCrop.all.collect { |type| [type.name, type.id]}
+      @employees = Employee.all.collect { |type| [type.name, type.id]}
     end
 end

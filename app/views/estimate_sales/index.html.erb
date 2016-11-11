@@ -1,33 +1,32 @@
-<p id="notice"><%= notice %></p>
 
 <h1>Estimate Sales</h1>
 
 <table>
-  <thead>
-    <tr>
-      <th>Farming plot</th>
-      <th>Estimate production</th>
-      <th>Total production</th>
-      <th>Price</th>
-      <th>Gross sale</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+    <thead>
+        <tr>
+            <th>Farming plot</th>
+            <th>Estimate production</th>
+            <th>Total production</th>
+            <th>Price</th>
+            <th>Gross sale</th>
+            <th colspan="3"></th>
+        </tr>
+    </thead>
 
-  <tbody>
-    <% @estimate_sales.each do |estimate_sale| %>
-      <tr>
-        <td><%= estimate_sale.farming_plot.name %></td>
-        <td><%= estimate_sale.estimate_production %></td>
-        <td><%= estimate_sale.total_production %></td>
-        <td><%= estimate_sale.price %></td>
-        <td><%= estimate_sale.gross_sale %></td>
-        <td><%= link_to 'Show', estimate_sale %></td>
-        <td><%= link_to 'Edit', edit_estimate_sale_path(estimate_sale) %></td>
-        <td><%= link_to 'Destroy', estimate_sale, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
+    <tbody>
+        <% @estimate_sales.each do |estimate_sale| %>
+          <tr>
+              <td><%= estimate_sale.farming_plot.name %></td>
+              <td><%= estimate_sale.estimate_production %></td>
+              <td><%= estimate_sale.total_production %></td>
+              <td><%= estimate_sale.price %></td>
+              <td><%= estimate_sale.gross_sale %></td>
+              <td><%= link_to 'Show', estimate_sale %></td>
+              <td><%= link_to 'Edit', edit_estimate_sale_path(estimate_sale) %></td>
+              <td><%= link_to 'Destroy', estimate_sale, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+    </tbody>
 </table>
 
 <br>

@@ -1,0 +1,32 @@
+<%= form_for(man_power_detail) do |f| %>
+  <% if man_power_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(man_power_detail.errors.count, "error") %> prohibited this man_power_detail from being saved:</h2>
+
+      <ul>
+      <% man_power_detail.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :type_of_work_id %>
+    <%= f.text_field :type_of_work_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :employee %>
+    <%= f.text_field :employee %>
+  </div>
+
+  <div class="field">
+    <%= f.label :subtotal %>
+    <%= f.text_field :subtotal %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

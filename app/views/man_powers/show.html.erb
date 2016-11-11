@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Program production:</strong>
+  <%= @man_power.program_production %>
+</p>
+
+<p>
+  <strong>Total hours needed:</strong>
+  <%= @man_power.total_hours_needed %>
+</p>
+
+<p>
+  <strong>Total:</strong>
+  <%= @man_power.total %>
+</p>
+
+<%= link_to 'Edit', edit_man_power_path(@man_power) %> |
+<%= link_to 'Back', man_powers_path %>

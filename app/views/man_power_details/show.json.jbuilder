@@ -1,0 +1,1 @@
+json.partial! "man_power_details/man_power_detail", man_power_detail: @man_power_detail

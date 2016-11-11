@@ -31,6 +31,11 @@
     <%= f.select("type_of_crop_id", @type_of_crops)%>
   </div>
 
+<div class="field">
+    <%= f.label :employee_id %>
+    <%= f.select("employee_id", @employees)%>
+  </div>
+
   <div class="field">
     <%= f.label :culture_period_start %>
     <%= f.date_select :culture_period_start %>

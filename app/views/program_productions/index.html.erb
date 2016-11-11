@@ -1,33 +1,33 @@
-<p id="notice"><%= notice %></p>
+
 
 <h1>Program Productions</h1>
 
 <table>
-  <thead>
-    <tr>
-      <th>Estimate sale</th>
-      <th>Stock initial</th>
-      <th>Stock end</th>
-      <th>Variation stock</th>
-      <th>Program production</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+    <thead>
+        <tr>
+            <th>Estimate sale</th>
+            <th>Stock initial</th>
+            <th>Stock end</th>
+            <th>Variation stock</th>
+            <th>Program production</th>
+            <th colspan="3"></th>
+        </tr>
+    </thead>
 
-  <tbody>
-    <% @program_productions.each do |program_production| %>
-      <tr>
-        <td><%= program_production.estimate_sale.farming_plot.name %></td>
-        <td><%= program_production.stock_initial %></td>
-        <td><%= program_production.stock_end %></td>
-        <td><%= program_production.variation_stock %></td>
-        <td><%= program_production.program_production %></td>
-        <td><%= link_to 'Show', program_production %></td>
-        <td><%= link_to 'Edit', edit_program_production_path(program_production) %></td>
-        <td><%= link_to 'Destroy', program_production, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
+    <tbody>
+        <% @program_productions.each do |program_production| %>
+          <tr>
+              <td><%= program_production.estimate_sale.farming_plot.name %></td>
+              <td><%= program_production.stock_initial %></td>
+              <td><%= program_production.stock_end %></td>
+              <td><%= program_production.variation_stock %></td>
+              <td><%= program_production.program_production %></td>
+              <td><%= link_to 'Show', program_production %></td>
+              <td><%= link_to 'Edit', edit_program_production_path(program_production) %></td>
+              <td><%= link_to 'Destroy', program_production, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+    </tbody>
 </table>
 
 <br>

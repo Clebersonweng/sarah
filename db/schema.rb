@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161107214145) do
+ActiveRecord::Schema.define(version: 20161111033626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,16 @@ ActiveRecord::Schema.define(version: 20161107214145) do
     t.index ["program_production_id"], name: "index_cons_raw_materials_on_program_production_id", using: :btree
   end
 
+  create_table "employees", force: :cascade do |t|
+    t.string   "name"
+    t.string   "lastname"
+    t.float    "salary"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_employees_on_user_id", using: :btree
+  end
+
   create_table "estimate_sales", force: :cascade do |t|
     t.integer  "farming_plot_id"
     t.float    "estimate_production"
@@ -55,7 +65,26 @@ ActiveRecord::Schema.define(version: 20161107214145) do
     t.string   "description"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.integer  "employee_id"
     t.index ["type_of_crop_id"], name: "index_farming_plots_on_type_of_crop_id", using: :btree
+  end
+
+  create_table "man_power_details", force: :cascade do |t|
+    t.integer "type_of_work_id"
+    t.integer "employee_id"
+    t.float   "hours_needed"
+    t.float   "subtotal"
+    t.index ["employee_id"], name: "index_man_power_details_on_employee_id", using: :btree
+    t.index ["type_of_work_id"], name: "index_man_power_details_on_type_of_work_id", using: :btree
+  end
+
+  create_table "man_powers", force: :cascade do |t|
+    t.integer  "program_production_id"
+    t.float    "total_hours_needed"
+    t.float    "total"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.index ["program_production_id"], name: "index_man_powers_on_program_production_id", using: :btree
   end
 
   create_table "program_productions", force: :cascade do |t|
@@ -96,6 +125,14 @@ ActiveRecord::Schema.define(version: 20161107214145) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "type_of_works", force: :cascade do |t|
+    t.string   "name"
+    t.float    "price_hours"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "unit_of_measurements", force: :cascade do |t|
     t.string   "name"
     t.string   "abbreviation"
@@ -124,11 +161,13 @@ ActiveRecord::Schema.define(version: 20161107214145) do
     t.index ["role_id"], name: "index_users_on_role_id", using: :btree
   end
 
-  add_foreign_key "cons_raw_material_details", "cons_raw_materials"
-  add_foreign_key "cons_raw_material_details", "supplies"
   add_foreign_key "cons_raw_materials", "program_productions"
+  add_foreign_key "employees", "users"
   add_foreign_key "estimate_sales", "farming_plots"
   add_foreign_key "farming_plots", "type_of_crops"
+  add_foreign_key "man_power_details", "employees"
+  add_foreign_key "man_power_details", "type_of_works"
+  add_foreign_key "man_powers", "program_productions"
   add_foreign_key "program_productions", "estimate_sales"
   add_foreign_key "supplies", "unit_of_measurements"
 end
