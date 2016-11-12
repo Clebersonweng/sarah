@@ -48,3 +48,4 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #autenticacion con devise login
 gem 'devise'
+#utilizado para json ser de forma mas facil

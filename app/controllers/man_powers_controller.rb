@@ -15,6 +15,10 @@ class ManPowersController < ApplicationController
   # GET /man_powers/new
   def new
     @man_power = ManPower.new
+    id_prog_p = ProgramProduction.last
+    @prog_production = id_prog_p
+    
+    #@mp = ConsRawMaterialDetail.where(cons_raw_material_id: @cons_raw_material.id)
   end
 
   # GET /man_powers/1/edit
@@ -54,6 +58,12 @@ class ManPowersController < ApplicationController
   # DELETE /man_powers/1
   # DELETE /man_powers/1.json
   def destroy
+     #mp = materia prima
+    @man_power = ManPower.find(params[:id])
+    @mp_detail = ConsRawMaterialDetail.where(man_power_id: @man_power.id)
+    @mp_detail.each do |detail|
+      detail.destroy
+    end
     @man_power.destroy
     respond_to do |format|
       format.html { redirect_to man_powers_url, notice: 'Man power was successfully destroyed.' }
@@ -69,6 +79,6 @@ class ManPowersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def man_power_params
-      params.require(:man_power).permit(:program_production_id, :total_hours_needed, :total)
+      params.require(:man_power).permit(:program_production_id, :total_hours_needed, :total,man_power_details_attributes: [:type_of_work_id, :employee, :subtotal])
     end
 end

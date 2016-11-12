@@ -29,19 +29,19 @@ class ConsRawMaterialsController < ApplicationController
   def edit
   end
 
-     #agrega de forma manual los datos de consumo
-    #p = ConsRawMaterial.new
-   # p.program_production_id = 1
-    #p.total = 496800
+  #agrega de forma manual los datos de consumo
+  #p = ConsRawMaterial.new
+  # p.program_production_id = 1
+  #p.total = 496800
     
-    #r = ConsRawMaterialDetail.new
-    #r.cons_raw_material_id = 1
-    #r.supply_id = 1
-    #r.total_unit = 20.00  
-   # r.subtotal = 496800
+  #r = ConsRawMaterialDetail.new
+  #r.cons_raw_material_id = 1
+  #r.supply_id = 1
+  #r.total_unit = 20.00  
+  # r.subtotal = 496800
     
-    #  p.save
-     # r.save
+  #  p.save
+  # r.save
   
   # POST /cons_raw_materials
   # POST /cons_raw_materials.json
@@ -77,6 +77,12 @@ class ConsRawMaterialsController < ApplicationController
   # DELETE /cons_raw_materials/1
   # DELETE /cons_raw_materials/1.json
   def destroy
+    #mp = materia prima
+    @cons_raw_material = ConsRawMaterial.find(params[:id])
+    @mp = ConsRawMaterialDetail.where(cons_raw_material_id: @cons_raw_material.id)
+    @mp.each do |book|
+      book.destroy
+    end
     @cons_raw_material.destroy
     respond_to do |format|
       format.html { redirect_to cons_raw_materials_url, notice: 'Cons raw material was successfully destroyed.' }

@@ -7,14 +7,16 @@
             Sarah - Presupuesto Agricola
         </title>
         <!--estos links abajo hacen que levante las librerias css y js-->
-        <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => "reload" %>
         <%= javascript_include_tag "application", "data-turbolinks-track" => "reload" %>
         <%= javascript_include_tag 'jquery_ujs' %>
         <%= csrf_meta_tags %>
-        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">  
-        </meta>  
-        </meta>
+        <%= stylesheet_link_tag "bootstrap.min.css" %>
+        <%= stylesheet_link_tag "datepicker3.css" %>
+        <%= stylesheet_link_tag "styles.css" %>
+        <!--icons lumino-->
+        
+       
+     
 
     </head>
     <body>
@@ -23,11 +25,11 @@
         <div class="container-fluid">
             <div class="row-fluid">
 
-                <div class="col-sm-8 col-sm-offset-2">
+                <div class="col-lg-10 col-sm-offset-2">
                     <%= render 'layouts/messages' %>
 
                     <script>
-                        <%= yield :js %>
+<%= yield :js %>
                     </script>
 
 

@@ -69,6 +69,6 @@ class ManPowerDetailsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def man_power_detail_params
-      params.require(:man_power_detail).permit(:type_of_work_id, :employee, :subtotal)
+      params.require(:man_power_detail).permit(:man_power_id, :type_of_work_id, :employee, :subtotal)
     end
 end

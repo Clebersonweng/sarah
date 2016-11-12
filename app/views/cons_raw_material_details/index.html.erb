@@ -16,7 +16,7 @@
   <tbody>
     <% @cons_raw_material_details.each do |cons_raw_material_detail| %>
       <tr>
-        <td><%= cons_raw_material_detail.cons_raw_material %></td>
+        <td><%= cons_raw_material_detail.cons_raw_material.id %></td>
         <td><%= cons_raw_material_detail.supply %></td>
         <td><%= cons_raw_material_detail.total_unit %></td>
         <td><%= cons_raw_material_detail.subtotal %></td>

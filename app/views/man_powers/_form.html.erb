@@ -1,32 +1,32 @@
 <%= form_for(man_power) do |f| %>
   <% if man_power.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(man_power.errors.count, "error") %> prohibited this man_power from being saved:</h2>
+        <h2><%= pluralize(man_power.errors.count, "error") %> prohibited this man_power from being saved:</h2>
 
-      <ul>
-      <% man_power.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+            <% man_power.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+        </ul>
     </div>
   <% end %>
-
+  
   <div class="field">
-    <%= f.label :program_production_id %>
-    <%= f.text_field :program_production_id %>
+      <%= f.label :program_production_id %>
+      <input type="text" name="man_power[program_production_id]" value="<%=@prog_production.id%>">
   </div>
 
   <div class="field">
-    <%= f.label :total_hours_needed %>
-    <%= f.text_field :total_hours_needed %>
+      <%= f.label :total_hours_needed %>
+      <%= f.text_field :total_hours_needed %>
   </div>
 
   <div class="field">
-    <%= f.label :total %>
-    <%= f.text_field :total %>
+      <%= f.label :total %>
+      <%= f.text_field :total %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+      <%= f.submit %>
   </div>
 <% end %>

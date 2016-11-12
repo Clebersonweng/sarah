@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161111033626) do
+ActiveRecord::Schema.define(version: 20161111153345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20161111033626) do
     t.integer "employee_id"
     t.float   "hours_needed"
     t.float   "subtotal"
+    t.integer "man_power_id"
     t.index ["employee_id"], name: "index_man_power_details_on_employee_id", using: :btree
     t.index ["type_of_work_id"], name: "index_man_power_details_on_type_of_work_id", using: :btree
   end

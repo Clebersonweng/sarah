@@ -1,34 +1,24 @@
-
-<h1>Estimate Sales</h1>
-
-<table>
-    <thead>
-        <tr>
-            <th>Farming plot</th>
-            <th>Estimate production</th>
-            <th>Total production</th>
-            <th>Price</th>
-            <th>Gross sale</th>
-            <th colspan="3"></th>
-        </tr>
-    </thead>
-
-    <tbody>
-        <% @estimate_sales.each do |estimate_sale| %>
-          <tr>
-              <td><%= estimate_sale.farming_plot.name %></td>
-              <td><%= estimate_sale.estimate_production %></td>
-              <td><%= estimate_sale.total_production %></td>
-              <td><%= estimate_sale.price %></td>
-              <td><%= estimate_sale.gross_sale %></td>
-              <td><%= link_to 'Show', estimate_sale %></td>
-              <td><%= link_to 'Edit', edit_estimate_sale_path(estimate_sale) %></td>
-              <td><%= link_to 'Destroy', estimate_sale, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          </tr>
-        <% end %>
-    </tbody>
-</table>
-
 <br>
 
-<%= link_to 'New Estimate Sale', new_estimate_sale_path %>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Estimate Sales</div>
+            <div class="panel-body">
+                <table data-toggle="table" data-url="estimate_sales"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+                    <thead>
+                        <tr>
+                            <th data-field="id" data-sortable="true" data-checkbox="true">Item ID</th>
+                            <th data-field="farming_plot_id" >Farming Plot</th> 
+                            <th data-field="estimate_production" >Estimate Production Has</th>                            
+                            <th data-field="total_production"  data-sortable="true">Total Production</th>
+                            <th data-field="price" data-sortable="true"> Price(KG)</th>
+                            <th data-field="gross_sale" data-sortable="true">Gross Sale</th>
+                        </tr>
+                    </thead>
+                    
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
