@@ -15,6 +15,7 @@ class ManPowersController < ApplicationController
 
   # GET /man_powers/new
   def new
+    get_variables
     @man_power = ManPower.new
     id_prog_p = ProgramProduction.last
     @prog_production = id_prog_p
@@ -24,11 +25,13 @@ class ManPowersController < ApplicationController
 
   # GET /man_powers/1/edit
   def edit
+    get_variables
   end
 
   # POST /man_powers
   # POST /man_powers.json
   def create
+    get_variables
     @man_power = ManPower.new(man_power_params)
 
     respond_to do |format|
@@ -81,5 +84,9 @@ class ManPowersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def man_power_params
       params.require(:man_power).permit(:program_production_id, :total_hours_needed, :total,man_power_details_attributes: [:type_of_work_id,:hours_needed, :employee_id, :subtotal])
+    end
+    def get_variables
+      @employee = Employee.all.collect{ |type|[type.name, type.id]}
+      @type_of_work = TypeOfWork.all.collect{ |type|[type.name, type.id]}
     end
 end

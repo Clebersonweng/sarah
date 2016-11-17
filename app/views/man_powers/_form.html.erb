@@ -10,31 +10,65 @@
         </ul>
     </div>
   <% end %>
-  
+
   <div class="field">
       <%= f.label :program_production_id %>
       <input type="text" name="man_power[program_production_id]" value="<%=@prog_production.id%>">
   </div>
 
-  <div class="field">
-      <%= f.label :total_hours_needed %>
-      <%= f.text_field :total_hours_needed %>
+ 
+
+
+  <label>Tipo de Trabajo</label>
+
+  <%= select("work","type_of_work_id", options_for_select(TypeOfWork.all.collect {|p| [ p.name, p.id,  ] }),:prompt => "----CHOOSE---")%> 
+
+  <label>Employee</label>
+
+  <%= select("emp","employee_id", options_for_select(Employee.all.collect {|p| [ p.name, p.id, {"data-salary"=>p.salary } ] }),:prompt => "----CHOOSE---")%> 
+
+  <label>Hours Needed</label>
+  <input type="text" name="hours_needed" id="hours_needed">
+
+  <button  id="agregarManoDeObra" >AGREGAR</button>
+
+
+  <div id="detalhes-container">
+      <table id="tabla">
+          <thead>
+              <tr>
+                 
+                  <th width="20%"> tipo de trabajo</th>
+                  <th width="10%">funcionario</th>
+                  <th width="20%">horas necesarias</th>                  
+                  <th width="20%">Subtotal</th>
+                  <th colspan="3"></th>
+              </tr>
+          </thead>
+
+          <tbody>
+
+
+
+          </tbody>
+
+      </table>
+
+
+
+      <div id="addFilas">
+          
+      </div>
+ <div class="field">
+     
+      <%= f.hidden_field  :total_hours_needed %>
   </div>
 
-  <div class="field">
-      <%= f.label :total %>
-      <%= f.text_field :total %>
-  </div>
-<label>Tipo de Trabajo</label>
-  <input type="text" name="man_power[man_power_details_attributes][0][type_of_work_id]" id="dosage">
-  <label>Employee</label>
-   <input type="text" name="man_power[man_power_details_attributes][0][employee_id]" id="dosage">
-   <label>Hours Needed</label>
-   <input type="text" name="man_power[man_power_details_attributes][0][hours_needed]" id="dosage">
-   <label>Subtotal </label>
-    <input type="text" name="man_power[man_power_details_attributes][0][subtotal]" id="dosage">
-    
-  <div class="actions">
-      <%= f.submit %>
-  </div>
-<% end %>
+      <div class="field">
+          <%= f.label :total %>
+          <%= f.text_field :total  %>
+      </div>
+      <div class="actions">
+          <%= f.submit %>
+      </div>
+    <% end %>
