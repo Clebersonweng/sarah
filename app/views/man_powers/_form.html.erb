@@ -25,7 +25,15 @@
       <%= f.label :total %>
       <%= f.text_field :total %>
   </div>
-
+<label>Tipo de Trabajo</label>
+  <input type="text" name="man_power[man_power_details_attributes][0][type_of_work_id]" id="dosage">
+  <label>Employee</label>
+   <input type="text" name="man_power[man_power_details_attributes][0][employee_id]" id="dosage">
+   <label>Hours Needed</label>
+   <input type="text" name="man_power[man_power_details_attributes][0][hours_needed]" id="dosage">
+   <label>Subtotal </label>
+    <input type="text" name="man_power[man_power_details_attributes][0][subtotal]" id="dosage">
+    
   <div class="actions">
       <%= f.submit %>
   </div>

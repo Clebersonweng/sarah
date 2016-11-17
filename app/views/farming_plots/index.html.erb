@@ -1,41 +1,42 @@
 
 
-<h1>Farming Plots</h1>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Farming PLot</div>
+            <div class="panel-body">
+                <table data-toggle="table" data-url="farming_plots"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+                    <thead>
+                        <tr>
+                            <th data-field="id" data-checkbox="true">Item ID</th>
+                            <th data-field="code" >Code</th> 
+                            <th data-field="name" >Name</th>                            
+                            <th data-field="area"  data-sortable="true">Area</th>
+                            <th data-field="type_of_crop_id" > Type of crop</th>
+                            <th data-field="employee_id">Employee</th>
+                            <th data-field="culture_period_start" data-sortable="true">Culture period start</th>
+                            <th data-field="culture_period_end" data-sortable="true">Culture period end</th>
+                            <th data-field="description">Description</th>
 
-<table>
-    <thead>
-        <tr>
-            <th>Code</th>
-            <th>Name</th>
-            <th>Area</th>
-            <th>Type of crop</th>
-            <th>Employee</th>
-            <th>Culture period start</th>
-            <th>Culture period end</th>
-            <th>Description</th>
-            <th colspan="3"></th>
-        </tr>
-    </thead>
-
-    <tbody>
-        <% @farming_plots.each do |farming_plot| %>
-          <tr>
-              <td><%= farming_plot.code %></td>
-              <td><%= farming_plot.name %></td>
-              <td><%= farming_plot.area %></td>
-              <td><%= farming_plot.type_of_crop.name %></td>
-              <td><%= farming_plot.employee.name %></td>
-              <td><%= farming_plot.culture_period_start %></td>
-              <td><%= farming_plot.culture_period_end %></td>
-              <td><%= farming_plot.description %></td>
-              <td><%= link_to 'Show', farming_plot %></td>
-              <td><%= link_to 'Edit', edit_farming_plot_path(farming_plot) %></td>
-              <td><%= link_to 'Destroy', farming_plot, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          </tr>
-        <% end %>
-    </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Farming Plot', new_farming_plot_path %>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @farming_plots.each do |farm| %>
+                          <tr>
+                              <td><%= farm.id%></td>
+                              <td><%= farm.code %></td>
+                              <td><%= farm.name %></td>
+                              <td><%= farm.area %></td>
+                              <td><%= farm.type_of_crop.name %></td>
+                              <td><%= farm.employee.name %></td>
+                              <td><%= farm.culture_period_start %></td>
+                              <td><%= farm.culture_period_end %></td>
+                              <td><%= farm.description %></td>
+                          </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

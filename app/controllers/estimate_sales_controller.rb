@@ -1,19 +1,12 @@
 class EstimateSalesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_estimate_sale, only: [:show, :edit, :update, :destroy]
   respond_to :html, :xml, :json
   # GET /estimate_sales
   # GET /estimate_sales.json
-  def index
-    @mp = EstimateSale.all
-   respond_to do |format|
-    format.html
-    format.json { render json: @mp.as_json(include: [:farming_plot])}
-  end
-    
-    
-    
-    
-  #@estimate_sales = EstimateSale.all 
+   def index
+    @estimate_sales = EstimateSale.all
+     #@estimate_sales = EstimateSale.all 
   #respond_to do |format|
   # format.html # index.html.erb
   # format.json { render json: @estimate_sales }

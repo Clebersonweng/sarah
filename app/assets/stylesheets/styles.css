@@ -452,7 +452,7 @@ a.bg-danger:hover {
 }
 
 .nav-tabs li a:hover {
-	background: #fff;
+	background: blue;
 }
 
 .nav-tabs li a,

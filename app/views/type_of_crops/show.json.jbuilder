@@ -1,1 +1,2 @@
-json.partial! "type_of_crops/type_of_crop", type_of_crop: @type_of_crop
+json.(@type_of_crop, :id, :name, :create_at)
+json.farming_plots(@type_of_crop.farming_plots, :id, :name)

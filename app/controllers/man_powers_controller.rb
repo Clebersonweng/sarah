@@ -1,4 +1,5 @@
 class ManPowersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_man_power, only: [:show, :edit, :update, :destroy]
 
   # GET /man_powers
@@ -79,6 +80,6 @@ class ManPowersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def man_power_params
-      params.require(:man_power).permit(:program_production_id, :total_hours_needed, :total,man_power_details_attributes: [:type_of_work_id, :employee, :subtotal])
+      params.require(:man_power).permit(:program_production_id, :total_hours_needed, :total,man_power_details_attributes: [:type_of_work_id,:hours_needed, :employee_id, :subtotal])
     end
 end

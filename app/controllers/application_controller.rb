@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+  include ActionController::ImplicitRender
+  include ActionController::Helpers
+  include ActionController::Caching 
   protect_from_forgery with: :exception
   
   layout :layout_by_resource
@@ -8,8 +11,8 @@ class ApplicationController < ActionController::Base
     if devise_controller?
       "login"
     else
-     "bootstrap"
-   end
+      "bootstrap"
+    end
   end
 
 end

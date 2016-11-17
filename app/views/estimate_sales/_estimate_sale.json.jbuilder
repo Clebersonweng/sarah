@@ -1,2 +1,19 @@
-json.extract! estimate_sale, :id, :farming_plot_id, :estimate_production, :total_production, :price, :gross_sale, :created_at, :updated_at
-json.url estimate_sale_url(estimate_sale, format: :json)
+json.estimate_sale  @estimate_sales do |estimate|
+  json.farming_plot_id estimate.farming_plot_id
+  json.estimate_production  estimate.estimate_production
+  json.total_production estimate.total_production
+  json.price estimate.price
+  json.gross_sale estimate.gross_sale
+
+
+  json.estimate_sales estimate_sale.farming_plot do |review|
+    json.name review.name
+ 
+
+
+
+
+
+end
+
+

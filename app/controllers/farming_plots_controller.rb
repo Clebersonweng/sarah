@@ -1,10 +1,15 @@
 class FarmingPlotsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_farming_plot, only: [:show, :edit, :update, :destroy]
 
   # GET /farming_plots
   # GET /farming_plots.json
   def index
     @farming_plots = FarmingPlot.all
+    # respond_to do |format|
+    #  format.html
+    #  format.json { render :json => @farming_plots.to_json(:include => { :type_of_crop => { :only => :name } })}
+    #end
   end
 
   # GET /farming_plots/1
@@ -14,14 +19,14 @@ class FarmingPlotsController < ApplicationController
 
   # GET /farming_plots/new
   def new
-     get_params_plot
+    get_params_plot
     @farming_plot = FarmingPlot.new
    
   end
 
   # GET /farming_plots/1/edit
   def edit
-     get_params_plot
+    get_params_plot
   end
 
   # POST /farming_plots
@@ -44,7 +49,7 @@ class FarmingPlotsController < ApplicationController
   # PATCH/PUT /farming_plots/1
   # PATCH/PUT /farming_plots/1.json
   def update
-     get_params_plot
+    get_params_plot
     respond_to do |format|
       if @farming_plot.update(farming_plot_params)
         flash[:notice] = "Successfull be update"
@@ -68,17 +73,17 @@ class FarmingPlotsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_farming_plot
-      @farming_plot = FarmingPlot.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_farming_plot
+    @farming_plot = FarmingPlot.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def farming_plot_params
-      params.require(:farming_plot).permit(:code, :name, :area, :type_of_crop_id, :culture_period_start, :culture_period_end,:employee_id ,:description)
-    end
-    def get_params_plot
-       @type_of_crops = TypeOfCrop.all.collect { |type| [type.name, type.id]}
-      @employees = Employee.all.collect { |type| [type.name, type.id]}
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def farming_plot_params
+    params.require(:farming_plot).permit(:code, :name, :area, :type_of_crop_id, :culture_period_start, :culture_period_end,:employee_id ,:description)
+  end
+  def get_params_plot
+    @type_of_crops = TypeOfCrop.all.collect { |type| [type.name, type.id]}
+    @employees = Employee.all.collect { |type| [type.name, type.id]}
+  end
 end

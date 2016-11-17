@@ -1,4 +1,5 @@
 class ProgramProductionsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_program_production, only: [:show, :edit, :update, :destroy]
 
   # GET /program_productions

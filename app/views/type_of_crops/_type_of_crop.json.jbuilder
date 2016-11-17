@@ -1,2 +1,3 @@
-json.extract! type_of_crop, :id, :code, :name, :variety, :created_at, :updated_at
-json.url type_of_crop_url(type_of_crop, format: :json)
+json.type_of_crop @type_of_crops do |artist|
+  json.(artist, :name_with_label)
+end json.(type_of_crop, :id, :name)

@@ -14,13 +14,17 @@
         <%= stylesheet_link_tag "datepicker3.css" %>
         <%= stylesheet_link_tag "styles.css" %>
         <!--icons lumino-->
-        
-       
-     
+
+        <%=javascript_include_tag "bootstrap.min.js"%>
+        <style rel="stylesheet">
+            #subs { margin-top: 2%; }
+        </style>
 
     </head>
     <body>
-        <header>  <%=render 'layouts/navigation' %></header>
+        <header> 
+            <%=render 'layouts/navigation' %>
+        </header>
         <!--/.row-->
         <div class="container-fluid">
             <div class="row-fluid">

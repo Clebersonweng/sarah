@@ -3,8 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/ultimate/NetBeansProjects/sarah/app/controllers/man_powers_controller.rb</file>
-            <file>file:/home/ultimate/NetBeansProjects/sarah/app/models/man_power.rb</file>
+            <file>file:/home/ultimate/NetBeansProjects/sarah/log/development.log</file>
+            <file>file:/home/ultimate/NetBeansProjects/sarah/app/controllers/farming_plots_controller.rb</file>
+            <file>file:/home/ultimate/NetBeansProjects/sarah/app/views/farming_plots/show.json.jbuilder</file>
         </group>
     </open-files>
 </project-private>

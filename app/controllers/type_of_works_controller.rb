@@ -1,4 +1,5 @@
 class TypeOfWorksController < ApplicationController
+ before_action :authenticate_user!
   before_action :set_type_of_work, only: [:show, :edit, :update, :destroy]
 
   # GET /type_of_works

@@ -1,6 +1,7 @@
 class ConsRawMaterialsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_cons_raw_material, only: [:show, :edit, :update, :destroy]
-
+  
   # GET /cons_raw_materials
   # GET /cons_raw_materials.json
   def index

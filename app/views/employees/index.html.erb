@@ -1,33 +1,23 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Employees</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Lastname</th>
-      <th>Salary</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @employees.each do |employee| %>
-      <tr>
-        <td><%= employee.name %></td>
-        <td><%= employee.lastname %></td>
-        <td><%= employee.salary %></td>
-        <td><%= employee.user.email %></td>
-        <td><%= link_to 'Show', employee %></td>
-        <td><%= link_to 'Edit', edit_employee_path(employee) %></td>
-        <td><%= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Employee', new_employee_path %>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Employees</div>
+            <div class="panel-body">
+                <table data-toggle="table" data-url="employees"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+                    <thead>
+                        <tr>
+                            <th data-field="id" data-sortable="true" data-checkbox="true">Item ID</th>
+                            <th data-field="name" >Name</th> 
+                            <th data-field="lastname" >Lastname</th>                            
+                            <th data-field="salary"  data-sortable="true">Salary</th>
+                            <th data-field="user_id" data-sortable="true"> User</th>
+                            
+                        </tr>
+                    </thead>
+                    
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

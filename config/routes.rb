@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :type_of_works
   resources :man_power_details
   resources :man_powers
-  resources :employees
+  resources :employees 
   root to: "home#index"
 
   resources :cons_raw_materials
@@ -18,10 +18,10 @@ Rails.application.routes.draw do
   resources :estimate_sales do
     resources :program_productions
   end
-  resources  :type_of_crops do
-    resources :farming_plots
-  end
-  
+  #resources  :type_of_crops do
+  #  resources :farming_plots
+  #end
+  resources :farming_plots, only: [:index]
   #resources :cons_raw_materials do
    # resources :cons_raw_material_details
  # end
