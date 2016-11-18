@@ -30,7 +30,7 @@
   <div class="form-group">
   <%= f.label :own_machine,class: "control-label col-xs-2 col-xs-offset-1" %>
    <div class="col-md-8">
-   <%= check_box_tag(:own_machine)%>
+   <%=f.check_box :own_machine, {}, false%>
    </div>
   </div>
   <div class="control-group col-xs-offset-4">

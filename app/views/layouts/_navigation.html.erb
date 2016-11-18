@@ -31,7 +31,10 @@
                         <% if current_user.role.role=="admin"%>
                           <li>
                               <%= link_to "Sign up", new_user_registration_path, :class => 'fa fa-user'+" "  %>
+                              <%= link_to "Change password", edit_user_registration_path,:class => 'fa fa-user' %>
                           </li> 
+                        <%else%>
+                          <%= link_to "Change password", edit_user_registration_path,:class => 'fa fa-user' %>
                         <%end%>
                         <li class="divider"></li>
 

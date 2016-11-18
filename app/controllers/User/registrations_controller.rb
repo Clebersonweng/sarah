@@ -1,12 +1,12 @@
 class User::RegistrationsController < Devise::RegistrationsController
-# before_action :configure_sign_up_params, only: [:create]
-# before_action :configure_account_update_params, only: [:update]
+  #before_action :configure_sign_up_params, only: [:create]
+  #before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-   def new
-     super
-     @roles = Role.all.collect {|p| [p.role,p.id]}
-   end
+  def new
+    super
+    @roles = Role.all.collect {|p| [p.role,p.id]}
+  end
 
   # POST /resource
   # def create
@@ -37,18 +37,21 @@ class User::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  #protected
 
   # If you have extra params to permit, append them to the sanitizer.
-   def configure_sign_up_params
-     devise_parameter_sanitizer.for(:sign_up), { |u| u.permit(:email, :password, :role, :own_machine)
-end
-   end
+  #private
+
+  #def sign_up_params
+  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation, :own_machine, :role])
+  #end
+
+  
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
-  # end
+  #def account_update_params
+  #  devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation,:current_password, :own_machine, :role])
+  #end
 
   # The path used after sign up.
   # def after_sign_up_path_for(resource)
