@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Implements</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Model</th>
+      <th>Oper time</th>
+      <th>Machine</th>
+      <th>Coef cccr</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @implements.each do |implement| %>
+      <tr>
+        <td><%= implement.name %></td>
+        <td><%= implement.model %></td>
+        <td><%= implement.oper_time %></td>
+        <td><%= implement.machine %></td>
+        <td><%= implement.coef_cccr %></td>
+        <td><%= link_to 'Show', implement %></td>
+        <td><%= link_to 'Edit', edit_implement_path(implement) %></td>
+        <td><%= link_to 'Destroy', implement, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Implement', new_implement_path %>

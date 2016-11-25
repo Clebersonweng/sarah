@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Brand:</strong>
+  <%= @machine.brand %>
+</p>
+
+<p>
+  <strong>Model:</strong>
+  <%= @machine.model %>
+</p>
+
+<p>
+  <strong>Hp:</strong>
+  <%= @machine.hp %>
+</p>
+
+<p>
+  <strong>Consumption:</strong>
+  <%= @machine.consumption %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @machine.price %>
+</p>
+
+<p>
+  <strong>Year purchase:</strong>
+  <%= @machine.year_purchase %>
+</p>
+
+<%= link_to 'Edit', edit_machine_path(@machine) %> |
+<%= link_to 'Back', machines_path %>

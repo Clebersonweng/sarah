@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161111153345) do
+ActiveRecord::Schema.define(version: 20161125014257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "brands", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "cons_raw_material_details", force: :cascade do |t|
     t.integer  "cons_raw_material_id"
@@ -32,6 +39,28 @@ ActiveRecord::Schema.define(version: 20161111153345) do
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.index ["program_production_id"], name: "index_cons_raw_materials_on_program_production_id", using: :btree
+  end
+
+  create_table "cost_oper_machine_details", force: :cascade do |t|
+    t.integer  "cost_oper_machine_id"
+    t.integer  "machine_id"
+    t.float    "amount"
+    t.float    "fuel"
+    t.float    "lubricant"
+    t.float    "repair_and_maintenance"
+    t.float    "subtotal"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["cost_oper_machine_id"], name: "index_cost_oper_machine_details_on_cost_oper_machine_id", using: :btree
+    t.index ["machine_id"], name: "index_cost_oper_machine_details_on_machine_id", using: :btree
+  end
+
+  create_table "cost_oper_machines", force: :cascade do |t|
+    t.integer  "farming_plot_id"
+    t.float    "total"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["farming_plot_id"], name: "index_cost_oper_machines_on_farming_plot_id", using: :btree
   end
 
   create_table "employees", force: :cascade do |t|
@@ -69,6 +98,31 @@ ActiveRecord::Schema.define(version: 20161111153345) do
     t.index ["type_of_crop_id"], name: "index_farming_plots_on_type_of_crop_id", using: :btree
   end
 
+  create_table "implements", force: :cascade do |t|
+    t.string   "name"
+    t.string   "model"
+    t.float    "oper_time"
+    t.integer  "machine_id"
+    t.float    "coef_cccr"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["machine_id"], name: "index_implements_on_machine_id", using: :btree
+  end
+
+  create_table "machines", force: :cascade do |t|
+    t.integer  "brand_id"
+    t.integer  "model_id"
+    t.float    "hp"
+    t.float    "consumption"
+    t.float    "price"
+    t.date     "year_purchase"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.float    "coeficient_cccr"
+    t.index ["brand_id"], name: "index_machines_on_brand_id", using: :btree
+    t.index ["model_id"], name: "index_machines_on_model_id", using: :btree
+  end
+
   create_table "man_power_details", force: :cascade do |t|
     t.integer "type_of_work_id"
     t.integer "employee_id"
@@ -86,6 +140,14 @@ ActiveRecord::Schema.define(version: 20161111153345) do
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.index ["program_production_id"], name: "index_man_powers_on_program_production_id", using: :btree
+  end
+
+  create_table "models", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "brand_id"
   end
 
   create_table "program_productions", force: :cascade do |t|
@@ -163,9 +225,15 @@ ActiveRecord::Schema.define(version: 20161111153345) do
   end
 
   add_foreign_key "cons_raw_materials", "program_productions"
+  add_foreign_key "cost_oper_machine_details", "cost_oper_machines"
+  add_foreign_key "cost_oper_machine_details", "machines"
+  add_foreign_key "cost_oper_machines", "farming_plots"
   add_foreign_key "employees", "users"
   add_foreign_key "estimate_sales", "farming_plots"
   add_foreign_key "farming_plots", "type_of_crops"
+  add_foreign_key "implements", "machines"
+  add_foreign_key "machines", "brands"
+  add_foreign_key "machines", "models"
   add_foreign_key "man_power_details", "employees"
   add_foreign_key "man_power_details", "type_of_works"
   add_foreign_key "man_powers", "program_productions"

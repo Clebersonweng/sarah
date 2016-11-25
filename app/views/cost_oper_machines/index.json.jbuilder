@@ -1,0 +1,1 @@
+json.array! @cost_oper_machines, partial: 'cost_oper_machines/cost_oper_machine', as: :cost_oper_machine

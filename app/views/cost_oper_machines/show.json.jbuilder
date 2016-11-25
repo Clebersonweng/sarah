@@ -1,0 +1,1 @@
+json.partial! "cost_oper_machines/cost_oper_machine", cost_oper_machine: @cost_oper_machine

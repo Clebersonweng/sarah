@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  model: MyString
+  oper_time: 1.5
+  machine: one
+  coef_cccr: 1.5
+
+two:
+  name: MyString
+  model: MyString
+  oper_time: 1.5
+  machine: two
+  coef_cccr: 1.5

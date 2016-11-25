@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Farming plot:</strong>
+  <%= @cost_oper_machine.farming_plot %>
+</p>
+
+<p>
+  <strong>Total:</strong>
+  <%= @cost_oper_machine.total %>
+</p>
+
+<%= link_to 'Edit', edit_cost_oper_machine_path(@cost_oper_machine) %> |
+<%= link_to 'Back', cost_oper_machines_path %>

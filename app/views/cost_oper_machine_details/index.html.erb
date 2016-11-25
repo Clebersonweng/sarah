@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Cost Oper Machine Details</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cost oper machine</th>
+      <th>Machine</th>
+      <th>Amount</th>
+      <th>Fuel</th>
+      <th>Lubricant</th>
+      <th>Repair and maintenance</th>
+      <th>Subtotal</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cost_oper_machine_details.each do |cost_oper_machine_detail| %>
+      <tr>
+        <td><%= cost_oper_machine_detail.cost_oper_machine %></td>
+        <td><%= cost_oper_machine_detail.machine %></td>
+        <td><%= cost_oper_machine_detail.amount %></td>
+        <td><%= cost_oper_machine_detail.fuel %></td>
+        <td><%= cost_oper_machine_detail.lubricant %></td>
+        <td><%= cost_oper_machine_detail.repair_and_maintenance %></td>
+        <td><%= cost_oper_machine_detail.subtotal %></td>
+        <td><%= link_to 'Show', cost_oper_machine_detail %></td>
+        <td><%= link_to 'Edit', edit_cost_oper_machine_detail_path(cost_oper_machine_detail) %></td>
+        <td><%= link_to 'Destroy', cost_oper_machine_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Cost Oper Machine Detail', new_cost_oper_machine_detail_path %>

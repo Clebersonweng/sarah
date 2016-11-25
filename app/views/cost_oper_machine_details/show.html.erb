@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Cost oper machine:</strong>
+  <%= @cost_oper_machine_detail.cost_oper_machine %>
+</p>
+
+<p>
+  <strong>Machine:</strong>
+  <%= @cost_oper_machine_detail.machine %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @cost_oper_machine_detail.amount %>
+</p>
+
+<p>
+  <strong>Fuel:</strong>
+  <%= @cost_oper_machine_detail.fuel %>
+</p>
+
+<p>
+  <strong>Lubricant:</strong>
+  <%= @cost_oper_machine_detail.lubricant %>
+</p>
+
+<p>
+  <strong>Repair and maintenance:</strong>
+  <%= @cost_oper_machine_detail.repair_and_maintenance %>
+</p>
+
+<p>
+  <strong>Subtotal:</strong>
+  <%= @cost_oper_machine_detail.subtotal %>
+</p>
+
+<%= link_to 'Edit', edit_cost_oper_machine_detail_path(@cost_oper_machine_detail) %> |
+<%= link_to 'Back', cost_oper_machine_details_path %>

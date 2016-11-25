@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @implement.name %>
+</p>
+
+<p>
+  <strong>Model:</strong>
+  <%= @implement.model %>
+</p>
+
+<p>
+  <strong>Oper time:</strong>
+  <%= @implement.oper_time %>
+</p>
+
+<p>
+  <strong>Machine:</strong>
+  <%= @implement.machine %>
+</p>
+
+<p>
+  <strong>Coef cccr:</strong>
+  <%= @implement.coef_cccr %>
+</p>
+
+<%= link_to 'Edit', edit_implement_path(@implement) %> |
+<%= link_to 'Back', implements_path %>

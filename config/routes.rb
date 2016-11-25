@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :cost_oper_machine_details
+  resources :cost_oper_machines
+  resources :implements
+  resources :machines
+  resources :models
+  resources :brands
   resources :type_of_works
   resources :man_power_details
   resources :man_powers

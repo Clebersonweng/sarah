@@ -1,7 +1,7 @@
 class FarmingPlot < ApplicationRecord
   belongs_to :type_of_crop
   belongs_to :employee
-  has_many :estimate_sales
+  has_many :estimate_sales, :dependent => :destroy
   
   validate :expiration_date_cannot_be_in_the_past_start, :expiration_date_cannot_be_in_the_past_end
   validates_presence_of :code, :name, :area, :type_of_crop_id, :culture_period_start, :culture_period_end
