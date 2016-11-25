@@ -1,37 +1,48 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Machines</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Brand</th>
-      <th>Model</th>
-      <th>Hp</th>
-      <th>Consumption</th>
-      <th>Price</th>
-      <th>Year purchase</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3 align="center">Machines</h3></div>
+            <%=render 'layouts/submenu' %>
+            <div class="panel-body">
+                <table data-toggle="table" data-url="machine"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+                    <thead>
+                        <tr>
+                            <th data-field="id" data-checkbox="true">Item ID</th>
+                            <th data-field="brands.name">Brand</th>
+                            <th data-field="model">Model</th>
+                            <th data-field="hp">Hp</th>
+                            <th data-field="consumption">Coef. Consumption</th>
+                            <th data-field="price">Price</th>
+                            <th data-field="year_purchase">Year purchase</th>
+                            <th>action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @machines.each do |machine| %>
+                          <tr>
+                              <td><%= machine.id %></td>
+                              <td><%= machine.brand.name %></td>
+                              <td><%= machine.model.name %></td>
+                              <td><%= machine.hp %></td>
+                              <td><%= machine.consumption %></td>
+                              <td><%= machine.price %></td>
+                              <td><%= machine.year_purchase %></td>
+                              <td class="col-md-1">
+                                  <%= link_to edit_machine_path(machine) do %>
+                                    <i class="fa fa-2x fa-edit"></i>
+                                  <% end %>
+                                  <%= link_to    machine, method: :delete, data: { confirm: 'Are you sure?' }  do%>
+                                    <i class="fa fa-2x fa-minus"></i>
+                                  <% end %>
+                              </td>
 
-  <tbody>
-    <% @machines.each do |machine| %>
-      <tr>
-        <td><%= machine.brand %></td>
-        <td><%= machine.model %></td>
-        <td><%= machine.hp %></td>
-        <td><%= machine.consumption %></td>
-        <td><%= machine.price %></td>
-        <td><%= machine.year_purchase %></td>
-        <td><%= link_to 'Show', machine %></td>
-        <td><%= link_to 'Edit', edit_machine_path(machine) %></td>
-        <td><%= link_to 'Destroy', machine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Machine', new_machine_path %>
+                          </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
