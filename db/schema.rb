@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161125014257) do
+ActiveRecord::Schema.define(version: 20161129185047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,6 +106,9 @@ ActiveRecord::Schema.define(version: 20161125014257) do
     t.float    "coef_cccr"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "brand"
+    t.integer  "year"
+    t.float    "price"
     t.index ["machine_id"], name: "index_implements_on_machine_id", using: :btree
   end
 

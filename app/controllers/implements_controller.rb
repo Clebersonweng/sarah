@@ -69,6 +69,6 @@ class ImplementsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def implement_params
-      params.require(:implement).permit(:name, :model, :oper_time, :machine_id, :coef_cccr)
+      params.require(:implement).permit(:name, :model, :oper_time, :machine_id, :coef_cccr, :year, :brand, :price)
     end
 end
