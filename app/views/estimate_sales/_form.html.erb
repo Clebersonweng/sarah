@@ -1,42 +1,41 @@
-<%= form_for(estimate_sale) do |f| %>
-  <% if estimate_sale.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(estimate_sale.errors.count, "error") %> prohibited this estimate_sale from being saved:</h2>
+</br>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3 align="center">Estimate Sale</h3>
+                <%=render 'layouts/submenu' %>
+            </div>
 
-      <ul>
-      <% estimate_sale.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+            <div class="panel-body">
+                <%=form_for @estimate_sale, url: estimate_sales_path,:html => { class: 'form-horizontal' } do |f| %>
+                    <div class="col-sm-6 col-sm-offset-2">
+                        <div class="form-group">                   
+                            <%= f.label :farming_plot_id,class: "control-label col-sm-2 col-sm-offset-1" %>
+                              <div class="col-sm-4">
+                                  <%= f.select :farming_plot_id, options_for_select(@farming_plots),{},{required: 'true', autofocus: 'true',prompt: "----CHOOSE", class: 'form-control'}%> 
+                              </div> 
 
-   <div class="field">
-    <%= f.label :farming_plot_id %>
-      <%= select("estimate_sale", "farming_plot_id",options_for_select(FarmingPlot.all.collect {|p| [ p.name, p.id, {"data-area-parcela"=>p.area} ] }),:prompt => "----SELECT---")%> 
-  </div>
+                              <div class="field">
+                                  <%= f.label :estimate_production %>
+                                  <%= f.text_field :estimate_production %>
+                              </div>
 
-  <div class="field">
-    <%= f.label :estimate_production %>
-    <%= f.text_field :estimate_production %>
-  </div>
+                              <div class="field">
+                                  <%= f.label :total_production %>
+                                  <%= f.text_field :total_production %>
+                              </div>
 
-  <div class="field">
-    <%= f.label :total_production %>
-    <%= f.text_field :total_production %>
-  </div>
+                              <div class="field">
+                                  <%= f.label :price %>
+                                  <%= f.text_field :price %>
+                              </div>
 
-  <div class="field">
-    <%= f.label :price %>
-    <%= f.text_field :price %>
-  </div>
+                              <div class="field">
+                                  <%= f.label :gross_sale %>
+                                  <%= f.text_field :gross_sale %>
+                              </div>
 
-  <div class="field">
-    <%= f.label :gross_sale %>
-    <%= f.text_field :gross_sale %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+                              <div class="actions">
+                                  <%= f.submit %>
+                              </div>
+                            <% end %>

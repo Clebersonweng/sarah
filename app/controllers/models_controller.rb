@@ -14,16 +14,19 @@ class ModelsController < ApplicationController
 
   # GET /models/new
   def new
+    get_params_model
     @model = Model.new
   end
 
   # GET /models/1/edit
   def edit
+    get_params_model
   end
 
   # POST /models
   # POST /models.json
   def create
+    get_params_model
     @model = Model.new(model_params)
 
     respond_to do |format|
@@ -40,6 +43,7 @@ class ModelsController < ApplicationController
   # PATCH/PUT /models/1
   # PATCH/PUT /models/1.json
   def update
+    get_params_model
     respond_to do |format|
       if @model.update(model_params)
         format.html { redirect_to @model, notice: 'Model was successfully updated.' }
@@ -54,6 +58,8 @@ class ModelsController < ApplicationController
   # DELETE /models/1
   # DELETE /models/1.json
   def destroy
+    get_params_model
+    @model = Model.find(params[:id])
     @model.destroy
     respond_to do |format|
       format.html { redirect_to models_url, notice: 'Model was successfully destroyed.' }
@@ -70,5 +76,8 @@ class ModelsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def model_params
       params.require(:model).permit(:name,:brand_id, :description)
+    end
+    def get_params_model
+      @brands = Brand.all.collect{|type| [type.name, type.id]}
     end
 end

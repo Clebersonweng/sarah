@@ -71,4 +71,8 @@ class CostOperMachinesController < ApplicationController
     def cost_oper_machine_params
       params.require(:cost_oper_machine).permit(:farming_plot_id, :total)
     end
+    def get_cost_oper_machine_params
+     @farming_plots = FarmingPlot.all.collect { |p| [ p.name, p.id, {"data-area"=> p.area} ] }
+     @machines = Machines.all.collect { |type| [type.brand.name, type.id]}
+    end
 end

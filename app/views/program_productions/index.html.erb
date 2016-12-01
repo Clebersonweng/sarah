@@ -21,7 +21,7 @@
               <td><%= program_production.stock_initial %></td>
               <td><%= program_production.stock_end %></td>
               <td><%= program_production.variation_stock %></td>
-              <td><%= program_production.program_production %></td>
+              <td><%= number_to_currency program_production.program_production %></td>
               <td><%= link_to 'Show', program_production %></td>
               <td><%= link_to 'Edit', edit_program_production_path(program_production) %></td>
               <td><%= link_to 'Destroy', program_production, method: :delete, data: { confirm: 'Are you sure?' } %></td>

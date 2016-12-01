@@ -17,7 +17,7 @@
           <tr>
               <td><%= man_power.program_production.program_production %></td>
               <td><%= man_power.total_hours_needed %></td>
-              <td><%= man_power.total %></td>
+              <td><%=number_to_currency man_power.total %></td>
               
             </tr>
           <% end %>

@@ -27,7 +27,7 @@
                               <td><%= machine.model.name %></td>
                               <td><%= machine.hp %></td>
                               <td><%= machine.consumption %></td>
-                              <td><%= machine.price %></td>
+                              <td><%= number_to_currency machine.price %></td>
                               <td><%= machine.year_purchase %></td>
                               <td class="col-md-1">
                                   <%= link_to edit_machine_path(machine) do %>

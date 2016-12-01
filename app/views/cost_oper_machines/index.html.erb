@@ -6,7 +6,10 @@
   <thead>
     <tr>
       <th>Farming plot</th>
-      <th>Total</th>
+      <th>Machines And Implements</th>
+      <th> Detail</th>
+      <th>Time Operative</th>
+      <th>Subtotal</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,13 +17,11 @@
   <tbody>
     <% @cost_oper_machines.each do |cost_oper_machine| %>
       <tr>
-        <td><%= cost_oper_machine.farming_plot %></td>
+        <td><%= cost_oper_machine.farming_plot.name %></td>
         <td><%= cost_oper_machine.total %></td>
-        <td><%= link_to 'Show', cost_oper_machine %></td>
-        <td><%= link_to 'Edit', edit_cost_oper_machine_path(cost_oper_machine) %></td>
-        <td><%= link_to 'Destroy', cost_oper_machine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+           </tr>
     <% end %>
+           
   </tbody>
 </table>
 

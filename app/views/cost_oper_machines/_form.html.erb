@@ -1,27 +1,60 @@
-<%= form_for(cost_oper_machine) do |f| %>
-  <% if cost_oper_machine.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(cost_oper_machine.errors.count, "error") %> prohibited this cost_oper_machine from being saved:</h2>
 
-      <ul>
-      <% cost_oper_machine.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+</br>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3 align="center">Costo Operative</h3>
+                <%=render 'layouts/submenu' %>
+            </div>
+            <div class="panel-body">
+                <%=form_for @cost_oper_machine, url: cost_oper_machines_path,:html => { class: 'form-horizontal' } do |f| %>
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <%= f.label :farming_plot_id,class: "control-label col-sm-2 col-sm-offset-1" %>
+                              <div class="col-sm-4">
+                                  <%= f.collection_select :farming_plot, FarmingPlot.all, :id, :name, {prompt: "Select a category"}, {class: "form-control"} %>
+                              
+                              </div>  
+                                <div class="row">
+                                    <div class="col-xs-4 col-xs-offset-1">
+                                        <label>Machine</label>
+                                        <%= select("machine","machine_id", options_for_select(Machine.all.collect {|p| [ p.get_all_names, p.id, {"data-consumption"=>p.consumption} ] }),:prompt => "----CHOOSE---")%> 
 
-  <div class="field">
-    <%= f.label :farming_plot_id %>
-    <%= f.text_field :farming_plot_id %>
-  </div>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <label>Implement</label>
+                                        <%= select("implement","implement_id", options_for_select(Implement.all.collect {|p| [ p.get_all_names, p.id, {"data-oper_time"=>p.oper_time} ] }),:prompt => "----CHOOSE---")%> 
 
-  <div class="field">
-    <%= f.label :total %>
-    <%= f.text_field :total %>
-  </div>
+                                    </div>
+                                    <button type="text">ADD</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="detalhes-container table-responsive">
+                            <table id="tabla" class=" table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Farming plot</th>
+                                        <th>machine_id</th> 
+                                        <th>amount</th>, 
+                                        <th>fuel</th> 
+                                        <th>lubricant</th>
+                                        <th>repair_and_maintenance</th>
+                                        <th>Time Operative</th>
+                                        <th>Subtotal</th>
+                                        <th colspan="3"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!--agrego de forma dinamica-->
+                                </tbody>
+                            </table>
+                            <div id="addFilas">
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+                            </div>
+                          <%end%>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>

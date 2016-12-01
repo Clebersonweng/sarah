@@ -28,11 +28,11 @@ class BrandsController < ApplicationController
 
     respond_to do |format|
       if @brand.save
-        format.html { redirect_to @brand, notice: 'Brand was successfully created.' }
-        format.json { render :show, status: :created, location: @brand }
+        flash[:notice] = "Successfull be create"
+        format.html { redirect_to  action:"index"}
       else
-        format.html { render :new }
-        format.json { render json: @brand.errors, status: :unprocessable_entity }
+        flash[:alert] = "Unsuccessfull be create"
+        format.html { redirect_to  action:"edit"}
       end
     end
   end
@@ -54,6 +54,7 @@ class BrandsController < ApplicationController
   # DELETE /brands/1
   # DELETE /brands/1.json
   def destroy
+    @brand = Brand.find(params[:id])
     @brand.destroy
     respond_to do |format|
       format.html { redirect_to brands_url, notice: 'Brand was successfully destroyed.' }
@@ -62,13 +63,13 @@ class BrandsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_brand
-      @brand = Brand.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_brand
+    @brand = Brand.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def brand_params
-      params.require(:brand).permit(:name, :description)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def brand_params
+    params.require(:brand).permit(:name, :description)
+  end
 end

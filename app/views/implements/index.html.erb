@@ -1,35 +1,52 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3 align="center">Implements</h3>
+                <%=render 'layouts/submenu' %>
+            </div>
+            <div class="panel-body">
+                <table data-toggle="table" data-url="implement"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+                    <thead>
+                        <tr>
+                            <th data-field="id" data-sortable="true" data-checkbox="true">Item ID</th>
+                            <th data-field="name">Name</th> 
+                            <th data-field="brand">Brand</th> 
+                            <th data-field="model">Model</th>
+                            <th data-field="oper_time">Operative Time</th>
+                            <th data-field="coef_cccr">Coef. Maint.</th>
+                            <th data-field="machine">Machine</th>
+                            <th data-field="year">Year</th>
+                            <th data-field="price">Price</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @implements.each do |implement| %>
+                          <tr>
+                              <td><%= implement.id %></td>
+                              <td><%= implement.name %></td>
+                              <td><%= implement.brand %></td>
+                              <td><%= implement.model %></td>
+                              <td><%= implement.oper_time %></td>
+                              <td><%= implement.coef_cccr%></td>
+                              <td><%= implement.machine.model.name %></td>
+                              <td><%= implement.year %></td>
+                              <td><%= number_to_currency implement.price %></td>
 
-<h1>Implements</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Model</th>
-      <th>Oper time</th>
-      <th>Machine</th>
-      <th>Coef cccr</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @implements.each do |implement| %>
-      <tr>
-        <td><%= implement.name %></td>
-        <td><%= implement.model %></td>
-        <td><%= implement.oper_time %></td>
-        <td><%= implement.machine %></td>
-        <td><%= implement.coef_cccr %></td>
-        <td><%= link_to 'Show', implement %></td>
-        <td><%= link_to 'Edit', edit_implement_path(implement) %></td>
-        <td><%= link_to 'Destroy', implement, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+                              <td class="col-md-1">
+                                  <%= link_to edit_implement_path(implement) do %>
+                                    <i class="fa fa-2x fa-edit"></i>
+                                  <% end %>
+                                  <%= link_to implement, method: :delete, data: { confirm: 'Are you sure?' }  do%>
+                                    <i class="fa fa-2x fa-minus"></i>
+                                  <% end %>
+                              </td>
+                          </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 <br>
-
-<%= link_to 'New Implement', new_implement_path %>

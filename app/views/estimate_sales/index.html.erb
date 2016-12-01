@@ -23,10 +23,10 @@
                           <tr>
                               <td><%= sales.id%></td>
                               <td><%= sales.farming_plot.name%></td>
-                              <td><%= sales.estimate_production %></td>
-                              <td><%= sales.total_production %></td>
-                              <td><%= sales.price %></td>
-                              <td><%= sales.gross_sale %></td>
+                              <td><%= number_to_currency sales.estimate_production %></td>
+                              <td><%= number_to_currency sales.total_production %></td>
+                              <td><%= number_to_currency sales.price %></td>
+                              <td><%= number_to_currency sales.gross_sale %></td>
                               
 
                             </tr>

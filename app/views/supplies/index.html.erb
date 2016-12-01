@@ -2,7 +2,9 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
-            <div class="panel-heading">Supplies</div>
+            <div class="panel-heading"><h3 align="center">Supplies</h3>
+                <%=render 'layouts/submenu' %>
+            </div>
             <div class="panel-body">
                 <table data-toggle="table" data-url="supplies"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="tradename" data-sort-order="desc">
                     <thead>
@@ -25,9 +27,9 @@
                               <td><%= supply.maker%></td>
                               <td><%= supply.unit_of_measurement.abbreviation%></td>
                               <td><%= supply.tradename%></td>
-                              <td><%= supply.price%></td>
+                              <td><%= number_to_currency supply.price%></td>
                               <td><%= supply.dosage%></td>
-                              <td><%= supply.cost_per_hectare%></td>
+                              <td><%= number_to_currency supply.cost_per_hectare%></td>
                               <td><%= supply.description%></td>
 
                           </tr>
