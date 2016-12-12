@@ -103,17 +103,18 @@ $("#agregarCostOper").on("click",function(event) {
           // $("#coquito2").val(sum.toFixed(2)); 
           
           
-          //verifico si la maquinaria es un tractor entonces muestro el select de implemento
-          if($("#machine_machine_id option:selected").text() === "TRACTOR" ){
-            alert("hola mundo");
-            $("#implement_implement_id").show();
-            $("#machine_machine_id").on("change", function(event){
-                  event.preventDefault();
-                  $("#implement_implement_id").hide();
-              });
-        }
+          
 });
     
+        //verifico si la maquinaria es un tractor entonces muestro el select de implemento
+            $('#machine_machine_id').on("change",function(){
+            var nameMachine = $("#machine_machine_id option:selected").data("name");
+                if(nameMachine == 'TRACTOR'){ // or this.value == 'volvo'
+                  $('#divImplement').show();
+                }else{
+                $('#divImplement').hide();
+                }
+             });
         
 
 

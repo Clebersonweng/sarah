@@ -24,7 +24,7 @@
                             <label for="amount">Amount</label>                            
                             <input id="amount" class="form-control"/>
                         </div>
-                        <div class="form-group col-xs-4 col-sm-4" >
+                        <div id="divImplement" class="form-group col-xs-4 col-sm-4" style="display: none">
                             <label for="implement">Implement</label>
                             <%= select("implement","implement_id", options_for_select(@implements),{required: 'true', autofocus: 'true', include_blank: '', class: 'form-control'})%>
                           </div>

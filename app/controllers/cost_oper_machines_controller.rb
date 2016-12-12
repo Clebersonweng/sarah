@@ -77,7 +77,7 @@ class CostOperMachinesController < ApplicationController
   end
   def get_cost_oper_machine_params
     @farming_plots = FarmingPlot.all.collect { |p| [ p.name, p.id, {"data-area"=> p.area} ] }
-    @machines = Machine.all.collect { |type| [type.get_all_names, type.id, {"data-hp"=> type.hp, "data-consumption" => type.consumption, "data-coef_cccr" => type.coeficient_cccr, "time-oper" => type.time_oper, "data-price" => type.price}]}
+    @machines = Machine.all.collect { |type| [type.get_all_names, type.id, {"data-hp"=> type.hp, "data-consumption" => type.consumption, "data-coef_cccr" => type.coeficient_cccr, "time-oper" => type.time_oper, "data-price" => type.price, "data-name" => type.name}]}
     @implements = Implement.all.collect {|p| [ p.get_all_names, p.id, {"data-oper_time"=>p.oper_time, "data-coef_cccr" => p.coef_cccr, "data-price" => p.price} ] }
     @fuels = Fuel.all.collect {|p| [p.name, p.id, {"data-price"=>p.price}]}
   end
