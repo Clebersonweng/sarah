@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :fuels
   resources :cost_oper_machine_details
   resources :cost_oper_machines
   resources :implements

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161130184003) do
+ActiveRecord::Schema.define(version: 20161211131257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,7 +51,9 @@ ActiveRecord::Schema.define(version: 20161130184003) do
     t.float    "subtotal"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.integer  "fuel_id"
     t.index ["cost_oper_machine_id"], name: "index_cost_oper_machine_details_on_cost_oper_machine_id", using: :btree
+    t.index ["fuel_id"], name: "index_cost_oper_machine_details_on_fuel_id", using: :btree
     t.index ["machine_id"], name: "index_cost_oper_machine_details_on_machine_id", using: :btree
   end
 
@@ -98,6 +100,14 @@ ActiveRecord::Schema.define(version: 20161130184003) do
     t.index ["type_of_crop_id"], name: "index_farming_plots_on_type_of_crop_id", using: :btree
   end
 
+  create_table "fuels", force: :cascade do |t|
+    t.string   "name"
+    t.float    "price"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "implements", force: :cascade do |t|
     t.string   "name"
     t.string   "model"
@@ -123,6 +133,7 @@ ActiveRecord::Schema.define(version: 20161130184003) do
     t.datetime "updated_at",      null: false
     t.float    "coeficient_cccr"
     t.string   "name"
+    t.float    "time_oper"
     t.index ["brand_id"], name: "index_machines_on_brand_id", using: :btree
     t.index ["model_id"], name: "index_machines_on_model_id", using: :btree
   end
@@ -230,6 +241,7 @@ ActiveRecord::Schema.define(version: 20161130184003) do
 
   add_foreign_key "cons_raw_materials", "program_productions"
   add_foreign_key "cost_oper_machine_details", "cost_oper_machines"
+  add_foreign_key "cost_oper_machine_details", "fuels"
   add_foreign_key "cost_oper_machine_details", "machines"
   add_foreign_key "cost_oper_machines", "farming_plots"
   add_foreign_key "employees", "users"

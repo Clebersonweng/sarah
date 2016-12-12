@@ -1,57 +1,59 @@
 <%= form_for(farming_plot) do |f| %>
   <% if farming_plot.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(farming_plot.errors.count, "error") %> prohibited this farming_plot from being saved:</h2>
+        <h2><%= pluralize(farming_plot.errors.count, "error") %> prohibited this farming_plot from being saved:</h2>
 
-      <ul>
-      <% farming_plot.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+            <% farming_plot.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+        </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :code %>
-    <%= f.text_field :code %>
+  <div class="form-group">
+      <%= f.label :code %>
+      <%= f.text_field :code %>
   </div>
 
   <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
   </div>
 
   <div class="field">
-    <%= f.label :area %>
-    <%= f.text_field :area %>
+      <%= f.label :area %>
+      <%= f.text_field :area %>
   </div>
 
   <div class="field">
-    <%= f.label :type_of_crop_id %>
-    <%= f.select("type_of_crop_id", @type_of_crops)%>
-  </div>
+      <%= f.label :type_of_crop_id, class: "control-label col-sm-2 col-sm-offset-1" %>
+        <div class="col-sm-5">
+            <%= f.select :type_of_crop_id, options_for_select(@type_of_crops),{},{required: 'true', autofocus: 'true',prompt: "----CHOOSE----", class: 'form-control'}%> 
+          </div>                             
+      </div>
 
-<div class="field">
-    <%= f.label :employee_id %>
-    <%= f.select("employee_id", @employees)%>
-  </div>
+      <div class="field">
+          <%= f.label :employee_id %>
+          <%= f.select("employee_id", @employees)%>
+      </div>
 
-  <div class="field">
-    <%= f.label :culture_period_start %>
-    <%= f.date_select :culture_period_start %>
-  </div>
+      <div class="field">
+          <%= f.label :culture_period_start %>
+          <%= f.date_select :culture_period_start %>
+      </div>
 
-  <div class="field">
-    <%= f.label :culture_period_end %>
-    <%= f.date_select :culture_period_end %>
-  </div>
+      <div class="field">
+          <%= f.label :culture_period_end %>
+          <%= f.date_select :culture_period_end %>
+      </div>
 
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_field :description %>
-  </div>
+      <div class="field">
+          <%= f.label :description %>
+          <%= f.text_field :description %>
+      </div>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+      <div class="actions">
+          <%= f.submit %>
+      </div>
+    <% end %>

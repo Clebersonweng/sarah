@@ -14,16 +14,19 @@ class MachinesController < ApplicationController
 
   # GET /machines/new
   def new
+    get_machine_params
     @machine = Machine.new
   end
 
   # GET /machines/1/edit
   def edit
+    get_machine_params
   end
 
   # POST /machines
   # POST /machines.json
   def create
+    get_machine_params
     @machine = Machine.new(machine_params)
 
     respond_to do |format|
@@ -40,6 +43,7 @@ class MachinesController < ApplicationController
   # PATCH/PUT /machines/1
   # PATCH/PUT /machines/1.json
   def update
+    get_machine_params
     respond_to do |format|
       if @machine.update(machine_params)
         format.html { redirect_to @machine, notice: 'Machine was successfully updated.' }
@@ -62,13 +66,18 @@ class MachinesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_machine
-      @machine = Machine.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_machine
+    get_machine_params
+    @machine = Machine.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def machine_params
-      params.require(:machine).permit(:name, :brand_id, :model_id, :hp, :consumption, :price, :year_purchase)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def machine_params
+    params.require(:machine).permit(:name, :brand_id, :model_id, :hp, :consumption, :price, :year_purchase, :coeficient_cccr, :time_oper)
+  end
+  def get_machine_params
+    @brands = Brand.all.map {|c| [c.name, c.id] }
+    @models = Model.all.collect {|type|[type.name, type.id]}
+  end
 end

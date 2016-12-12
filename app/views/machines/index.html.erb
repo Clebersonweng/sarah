@@ -1,5 +1,3 @@
-
-
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
@@ -10,6 +8,7 @@
                     <thead>
                         <tr>
                             <th data-field="id" data-checkbox="true">Item ID</th>
+                            <th data-field="name" data-sortable="true">Name</th>
                             <th data-field="brands.name">Brand</th>
                             <th data-field="model">Model</th>
                             <th data-field="hp">Hp</th>
@@ -23,6 +22,7 @@
                         <% @machines.each do |machine| %>
                           <tr>
                               <td><%= machine.id %></td>
+                              <td><%= machine.name%></td>
                               <td><%= machine.brand.name %></td>
                               <td><%= machine.model.name %></td>
                               <td><%= machine.hp %></td>

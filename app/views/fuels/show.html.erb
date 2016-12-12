@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @fuel.name %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @fuel.price %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @fuel.description %>
+</p>
+
+<%= link_to 'Edit', edit_fuel_path(@fuel) %> |
+<%= link_to 'Back', fuels_path %>
