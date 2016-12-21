@@ -1,6 +1,6 @@
 class ConsRawMaterialDetailsController < ApplicationController
   before_action :set_cons_raw_material_detail, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
   # GET /cons_raw_material_details
   # GET /cons_raw_material_details.json
   def index
@@ -62,13 +62,13 @@ class ConsRawMaterialDetailsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_cons_raw_material_detail
-      @cons_raw_material_detail = ConsRawMaterialDetail.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_cons_raw_material_detail
+    @cons_raw_material_detail = ConsRawMaterialDetail.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def cons_raw_material_detail_params
-      params.require(:cons_raw_material_detail).permit(:cons_raw_material_id, :supply_id, :total_unit, :subtotal)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def cons_raw_material_detail_params
+    params.require(:cons_raw_material_detail).permit(:cons_raw_material_id, :supply_id, :total_unit, :subtotal)
+  end
 end

@@ -40,7 +40,7 @@ class EstimateSalesController < ApplicationController
         flash[:notice] = "Successfull be create"
         format.html { redirect_to  action:"index"}
       else
-        flash[:alert] = "Successfull be create"
+        flash[:alert] = "Unsuccessfull be create"
         format.html { redirect_to  action:"edit"}
       end
     end
@@ -55,7 +55,7 @@ class EstimateSalesController < ApplicationController
         flash[:notice] = "Successfull be update"
         format.html { redirect_to  action:"index"}
       else
-        flash[:notice] = "Successfull be create"
+        flash[:notice] = "Unsuccessfull be create"
         format.html { redirect_to  action:"edit"}
       end
     end
@@ -64,7 +64,7 @@ class EstimateSalesController < ApplicationController
   # DELETE /estimate_sales/1
   # DELETE /estimate_sales/1.json
   def destroy
-    @estimate_sale = FarmingPlot.find(params[:id])
+    @estimate_sale = EstimateSale.find(params[:id])
     @estimate_sale.destroy
     respond_to do |format|
       flash[:notice] = "Successfull be destroyed"

@@ -1,6 +1,6 @@
 class CostOperMachinesController < ApplicationController
   before_action :set_cost_oper_machine, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
   # GET /cost_oper_machines
   # GET /cost_oper_machines.json
   def index
@@ -77,8 +77,7 @@ class CostOperMachinesController < ApplicationController
   end
   def get_cost_oper_machine_params
     @farming_plots = FarmingPlot.all.collect { |p| [ p.name, p.id, {"data-area"=> p.area} ] }
-    @machines = Machine.all.collect { |type| [type.get_all_names, type.id, {"data-hp"=> type.hp, "data-consumption" => type.consumption, "data-coef_cccr" => type.coeficient_cccr, "time-oper" => type.time_oper, "data-price" => type.price, "data-name" => type.name}]}
+    @machines = Machine.all.collect { |type| [type.get_all_names, type.id, {"data-hp"=> type.hp, "data-consumption" => type.consumption, "data-coef_cccr" => type.coeficient_cccr, "data-time_oper" => type.time_oper, "data-price" => type.price, "data-name" => type.name, "data-price_fuel" => type.fuel.price }]}
     @implements = Implement.all.collect {|p| [ p.get_all_names, p.id, {"data-oper_time"=>p.oper_time, "data-coef_cccr" => p.coef_cccr, "data-price" => p.price} ] }
-    @fuels = Fuel.all.collect {|p| [p.name, p.id, {"data-price"=>p.price}]}
   end
 end

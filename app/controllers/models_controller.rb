@@ -1,6 +1,6 @@
 class ModelsController < ApplicationController
   before_action :set_model, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
   # GET /models
   # GET /models.json
   def index
@@ -68,16 +68,16 @@ class ModelsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_model
-      @model = Model.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_model
+    @model = Model.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def model_params
-      params.require(:model).permit(:name,:brand_id, :description)
-    end
-    def get_params_model
-      @brands = Brand.all.collect{|type| [type.name, type.id]}
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def model_params
+    params.require(:model).permit(:name,:brand_id, :description)
+  end
+  def get_params_model
+    @brands = Brand.all.collect{|type| [type.name, type.id]}
+  end
 end

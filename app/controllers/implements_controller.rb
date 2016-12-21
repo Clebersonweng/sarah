@@ -1,6 +1,6 @@
 class ImplementsController < ApplicationController
   before_action :set_implement, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
   # GET /implements
   # GET /implements.json
   def index

@@ -1,6 +1,6 @@
 class MachinesController < ApplicationController
   before_action :set_machine, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
   # GET /machines
   # GET /machines.json
   def index
@@ -46,8 +46,8 @@ class MachinesController < ApplicationController
     get_machine_params
     respond_to do |format|
       if @machine.update(machine_params)
-        format.html { redirect_to @machine, notice: 'Machine was successfully updated.' }
-        format.json { render :show, status: :ok, location: @machine }
+        flash[:notice] = "Successfull be update"
+        format.html { redirect_to  action:"index"}
       else
         format.html { render :edit }
         format.json { render json: @machine.errors, status: :unprocessable_entity }
@@ -74,10 +74,11 @@ class MachinesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def machine_params
-    params.require(:machine).permit(:name, :brand_id, :model_id, :hp, :consumption, :price, :year_purchase, :coeficient_cccr, :time_oper)
+    params.require(:machine).permit(:name, :brand_id, :model_id, :hp, :consumption, :price, :year_purchase, :coeficient_cccr, :time_oper, :fuel_id)
   end
   def get_machine_params
-    @brands = Brand.all.map {|c| [c.name, c.id] }
+    @brands = Brand.all.collect {|c| [c.name, c.id] }
     @models = Model.all.collect {|type|[type.name, type.id]}
+    @fuels = Fuel.all.collect {|p| [p.name, p.id, {"data-price"=>p.price}]}
   end
 end

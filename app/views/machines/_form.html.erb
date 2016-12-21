@@ -12,13 +12,13 @@
                         <div class="form-group">
                             <%= f.label :name ,class: "control-label col-sm-2 col-sm-offset-1"%>
                               <div class="col-sm-5">
-                                  <%= f.text_field :name, autofocus: true , class: "form-control", onblur: "this.value=this.value.toUpperCase()"%>
+                                  <%= f.text_field :name, autofocus: true,placeholder: "TRACTOR", class: "form-control", onblur: "this.value=this.value.toUpperCase()"%>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <%= f.label :brand_id ,class: "control-label col-sm-2 col-sm-offset-1"%>
                                   <div class="col-sm-5">
-                                      <%= select(:brand_id, :id, @brands, class: "form-control")  %>    
+                                      <%= f.select(:brand_id, @brands, class: "form-control")  %>    
                                     </div>
                                 </div>
 
@@ -31,13 +31,13 @@
                                     <div class="form-group">
                                         <%= f.label :hp ,class: "control-label col-sm-2 col-sm-offset-1"%>
                                           <div class="col-sm-5">
-                                              <%= f.text_field :hp, class: 'form-control'%> 
+                                              <%= f.text_field :hp, placeholder: "ej: 85", class: 'form-control'%> 
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <%= f.label :consumption, "Coef. Consumption", class: "control-label col-sm-2 col-sm-offset-1"%>
                                               <div class="col-sm-5">
-                                                  <%= f.text_field :consumption, class: 'form-control'%> 
+                                                  <%= f.text_field :consumption,placeholder: " ej: 0.12", class: 'form-control'%> 
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -55,31 +55,34 @@
                                                     <div class="form-group">
                                                         <%= f.label :time_oper ,class: "control-label col-sm-2 col-sm-offset-1"%>
                                                           <div class="col-sm-5">
-                                                              <%= f.text_field :time_oper, class: 'form-control'%> 
+                                                              <%= f.text_field :time_oper, class: "form-control"  %>    
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <%= f.label :year_purchase ,class: "control-label col-sm-2 col-sm-offset-1"%>
+                                                            <%= f.label :fuel_id ,class: "control-label col-sm-2 col-sm-offset-1"%>
                                                               <div class="col-sm-5">
-                                                                  <%= f.text_field :year_purchase, class: 'form-control'%> 
-                                                                </div>
-                                                            </div>
+                                                                  <%= select("machine","fuel_id", options_for_select(@fuels))%>                                  
+                                                              </div>
+                                                          </div>
+                                                          <div class="form-group">
+                                                              <%= f.label :year_purchase ,class: "control-label col-sm-2 col-sm-offset-1"%>
+                                                                <div class="col-sm-5">
+                                                                    <%= f.text_field :year_purchase, class: "form-control"  %>    
+                                                                  </div>
+                                                              </div>
 
-
-
-                                                            <div class="control-group col-sm-offset-4">
-
-                                                                <div class="controls">
-                                                                    <button type="submit" class="btn btn-primary">Guardar</button>
-                                                                    <button type="reset" class="btn btn-danger">Borrar</button>
-                                                                </div>
-
-                                                            </div></div>
-                                                      <% end %>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </div>
-                                      <script>
-                                          $('#machine_consumption').popover();
-                                      </script>
+                                                              <div class="control-group col-sm-offset-4">
+                                                                  <div class="controls">
+                                                                      <button type="submit" class="btn btn-primary">Guardar</button>
+                                                                      <button type="reset" class="btn btn-danger">Borrar</button>
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                        <% end %>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <script>
+                                            $('#machine_consumption').popover();
+                                        </script>

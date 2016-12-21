@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161211131257) do
+ActiveRecord::Schema.define(version: 20161212193132) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,9 +51,7 @@ ActiveRecord::Schema.define(version: 20161211131257) do
     t.float    "subtotal"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
-    t.integer  "fuel_id"
     t.index ["cost_oper_machine_id"], name: "index_cost_oper_machine_details_on_cost_oper_machine_id", using: :btree
-    t.index ["fuel_id"], name: "index_cost_oper_machine_details_on_fuel_id", using: :btree
     t.index ["machine_id"], name: "index_cost_oper_machine_details_on_machine_id", using: :btree
   end
 
@@ -134,7 +132,9 @@ ActiveRecord::Schema.define(version: 20161211131257) do
     t.float    "coeficient_cccr"
     t.string   "name"
     t.float    "time_oper"
+    t.integer  "fuel_id"
     t.index ["brand_id"], name: "index_machines_on_brand_id", using: :btree
+    t.index ["fuel_id"], name: "index_machines_on_fuel_id", using: :btree
     t.index ["model_id"], name: "index_machines_on_model_id", using: :btree
   end
 
@@ -241,7 +241,6 @@ ActiveRecord::Schema.define(version: 20161211131257) do
 
   add_foreign_key "cons_raw_materials", "program_productions"
   add_foreign_key "cost_oper_machine_details", "cost_oper_machines"
-  add_foreign_key "cost_oper_machine_details", "fuels"
   add_foreign_key "cost_oper_machine_details", "machines"
   add_foreign_key "cost_oper_machines", "farming_plots"
   add_foreign_key "employees", "users"
@@ -249,6 +248,7 @@ ActiveRecord::Schema.define(version: 20161211131257) do
   add_foreign_key "farming_plots", "type_of_crops"
   add_foreign_key "implements", "machines"
   add_foreign_key "machines", "brands"
+  add_foreign_key "machines", "fuels"
   add_foreign_key "machines", "models"
   add_foreign_key "man_power_details", "employees"
   add_foreign_key "man_power_details", "type_of_works"

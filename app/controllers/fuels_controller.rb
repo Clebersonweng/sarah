@@ -1,6 +1,6 @@
 class FuelsController < ApplicationController
   before_action :set_fuel, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
   # GET /fuels
   # GET /fuels.json
   def index
@@ -62,13 +62,13 @@ class FuelsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_fuel
-      @fuel = Fuel.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_fuel
+    @fuel = Fuel.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def fuel_params
-      params.require(:fuel).permit(:name, :price, :description)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def fuel_params
+    params.require(:fuel).permit(:name, :price, :description)
+  end
 end

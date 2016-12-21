@@ -14,7 +14,10 @@
                             <th data-field="hp">Hp</th>
                             <th data-field="consumption">Coef. Consumption</th>
                             <th data-field="price">Price</th>
-                            <th data-field="year_purchase">Year purchase</th>
+                            <th data-field="coeficient_cccr">Coef. Maint. y Repair.</th>
+                            <th data-field="time_oper">Time Oper</th>
+                            <th data-field="fuel.name">Fuel</th>
+                            <th data-field="year_purchase">Year Purchase</th>
                             <th>action</th>
                         </tr>
                     </thead>
@@ -28,6 +31,9 @@
                               <td><%= machine.hp %></td>
                               <td><%= machine.consumption %></td>
                               <td><%= number_to_currency machine.price %></td>
+                              <td><%= machine.coeficient_cccr %></td>
+                              <td><%= machine.time_oper %></td>
+                              <td><%= machine.fuel.name %></td>
                               <td><%= machine.year_purchase %></td>
                               <td class="col-md-1">
                                   <%= link_to edit_machine_path(machine) do %>

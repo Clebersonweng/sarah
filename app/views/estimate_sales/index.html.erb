@@ -16,6 +16,7 @@
                             <th data-field="total_production">Total Production</th>
                             <th data-field="price"> Price(KG)</th>
                             <th data-field="gross_sale" data-sortable="true">Gross Sale</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -27,7 +28,14 @@
                               <td><%= number_to_currency sales.total_production %></td>
                               <td><%= number_to_currency sales.price %></td>
                               <td><%= number_to_currency sales.gross_sale %></td>
-                              
+                              <td class="col-md-1">
+                                  <%= link_to edit_estimate_sale_path(sales) do %>
+                                    <i class="fa fa-2x fa-edit"></i>
+                                  <% end %>
+                                  <%= link_to    sales, method: :delete, data: { confirm: 'Are you sure?' }  do%>
+                                    <i class="fa fa-2x fa-minus"></i>
+                                  <% end %>
+                              </td>
 
                             </tr>
                           <% end %>

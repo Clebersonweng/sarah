@@ -1,5 +1,5 @@
 class TypeOfWorksController < ApplicationController
- before_action :authenticate_user!
+  before_action :authenticate_user!
   before_action :set_type_of_work, only: [:show, :edit, :update, :destroy]
 
   # GET /type_of_works
@@ -63,13 +63,13 @@ class TypeOfWorksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_type_of_work
-      @type_of_work = TypeOfWork.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_type_of_work
+    @type_of_work = TypeOfWork.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def type_of_work_params
-      params.require(:type_of_work).permit(:name, :price_hours, :description)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def type_of_work_params
+    params.require(:type_of_work).permit(:name, :price_hours, :description)
+  end
 end

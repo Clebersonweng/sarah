@@ -1,14 +1,19 @@
 class User < ApplicationRecord
-  has_many :employees
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  has_many :employees, :dependent => :destroy
+  devise :timeoutable, :timeout_in => 30.minutes
+ 
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable
   belongs_to :role, optional:true
   before_create :set_default_role
   validates_inclusion_of :own_machine, :in => [true, false]
-  # or 
-  # before_validation :set_default_role 
+  
+  validates :email, uniqueness: true
+  validates :password, length: { in: 6..20 }
+  
+  
+  
+  
 
   private
   def set_default_role
