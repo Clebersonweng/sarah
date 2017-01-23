@@ -28,8 +28,29 @@ $(document).ready(function() {
     var totalCostRepairMechinePerTimeOper;
     // RYM - reparacion y mantenimiento
     var agregarProducto = function(nameMachine, amount, nameFuel, nameImplement, lubricant, totalTimeOper, RYM, subtotal) {
-        return "<tr>" + "<td>" + nameMachine + "</td>" + "<td>" + amount + "</td>" + "<td>" + nameFuel + "</td>" + "<td>" + nameImplement + "</td>" + "<td>" + lubricant + "</td>" + "<td>" + RYM + "</td>" + "<td>" + totalTimeOper + "</td>" + "<td class='subtotal'>" + subtotal + "</td>" + "<td style='text-align: center'>" + "<a href='#'" + "id='quitar'>" + "<i class='icon-minus'></i>" + "</a>" + "</td>" + "</tr>";
+        return "<tr>" + 
+                    "<td>" + nameMachine + "</td>" +
+                     "<td>" + amount + "</td>" + 
+                     "<td>" + nameFuel + "</td>" +
+                     "<td>" + nameImplement + "</td>" + 
+                     "<td>" + lubricant + "</td>" 
+                    + "<td>" + RYM + "</td>" +
+                     "<td>" + totalTimeOper + "</td>" + 
+                    "<td class='subtotal'>" + subtotal + "</td>" + "<td style='text-align: center'>" + "<a href='#'" + "id='quitar'>" + "<i class='icon-minus'></i>" + "</a>" + "</td>" +
+                "</tr>";
     };
+    var addTotal = function(total){
+        return "<tr>" + 
+                    "<td>"  + "</td>" +
+                     "<td>"  + "</td>" + 
+                     "<td>"  + "</td>" +
+                     "<td>"  + "</td>" + 
+                     "<td>"  + "</td>" 
+                    + "<td>"  + "</td>" +
+                     "<td>"  + "</td>" + 
+                    "<td class='total'>" + total + "</td>" + "<td style='text-align: center'>" + "<a href='#'" + "id='quitar'>" + "<i class='icon-minus'></i>" + "</a>" + "</td>" + 
+                "</tr>";
+    }
     var calcularTotalTiempoOperativo = function(tiempoOper, tamanhoArea){
         result = tiempoOper * tamanhoArea;
         return result;
@@ -107,15 +128,18 @@ $("#agregarCostOper").on("click", function(event) {
     var subtotalSinMultAmount = totalFuelPerTotalTimeOper + totalLubPerTotalTimeOper + totalRepairMachineAndImplPerTotalTimeOper;
  //subtotal multip cantidad de veces que se ejecuto la tarea
     subtotal = subtotalSinMultAmount * amount;
-    var html = agregarProducto(machine, implement, amount, costFuelPorHours, lubricant, totalTimeOper, totalSumRepairMachineAndImplementPerHours, subtotal);
+    var chargeTable = agregarProducto(machine, implement, amount, costFuelPorHours, lubricant, totalTimeOper.toFixed(2), totalSumRepairMachineAndImplementPerHours, subtotal);
  // carga los trs en la tabla
-    $("#detalhes-container tbody:first").append(html);
+    $("#detalhes-container tbody:first").append(chargeTable);
     // addFormField(producto.val(),consumo.val(),subtotal.toFixed(2));
     // resetea los campos despues de  cada add
     //incrementa al agregar cada fila
-    // count++;
-    // sum+=subtotal;  
-    // $("#coquito2").val(sum.toFixed(2)); 
+     count++;
+     sum+=subtotal; 
+ //$("#tabla").find('tfoot>tr>th#TOTAL').append($('<td><b>'+" <input value="+sum+"/>'" + '</b></td>'));
+   $("#TOTAL").text(sum.toFixed(2));   
+    //var addTableTotal = addTotal(sum.toFixed(2));
+    //$("#detalhes-container tbody:first").append(addTableTotal);
 });
 //verifico si la maquinaria es un tractor entonces muestro el select de implemento
 $('#machine_machine_id').on("change", function() {
@@ -125,7 +149,9 @@ $('#machine_machine_id').on("change", function() {
     } else {
         $('#divImplement').hide();
     }
-}); $("#quitar").on("click", function(event) {
+}); 
+
+$("#quitar").on("click", function(event) {
     event.preventDefault();
     $(this).parent().parent().remove();
 });
