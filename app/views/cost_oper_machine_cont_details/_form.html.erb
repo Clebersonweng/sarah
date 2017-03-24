@@ -1,0 +1,35 @@
+<%= form_for(cost_oper_machine_cont_detail) do |f| %>
+  <% if cost_oper_machine_cont_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(cost_oper_machine_cont_detail.errors.count, "error") %> prohibited this cost_oper_machine_cont_detail from being saved:</h2>
+
+      <ul>
+      <% cost_oper_machine_cont_detail.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :type_of_service_id %>
+    <%= f.text_field :type_of_service_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :amount %>
+    <%= f.text_field :amount %>
+  </div>
+<div class="field">
+    <%= f.label :unit_of_measurement_id %>
+    <%= f.text_field :unit_of_measurement_id %>
+  </div>
+  <div class="field">
+    <%= f.label :subtotal %>
+    <%= f.text_field :subtotal %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

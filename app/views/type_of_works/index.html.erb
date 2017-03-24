@@ -1,31 +1,42 @@
-<p id="notice"><%= notice %></p>
+</br>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3 align="center">Type Of Work</h3></div>
+            <%=render 'layouts/submenu' %>
+            <div class="panel-body">
+                <table data-toggle="table" data-url="type_of_work"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+                    <thead>
+                        <tr>
+                            <th data-field="id" data-checkbox="true">Item ID</th>
+                            <th data-field="code" data-sortable="true">Name</th> 
+                            <th data-field="type_of_crop_id"data-sortable="true" > Price Per Hours</th>
+                           <th data-field="type_of_crop_id" > Description</th>
+                            <th>action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @type_of_works.each do |types| %>
+                          <tr>
+                              <td><%= types.id%></td>
+                              <td><%= types.name %></td>
+                              <td><%= types.price_hours %></td>
+                              <td><%= types.description %></td>
+                             
+                              <td class="col-md-1">
+                                  <%= link_to edit_type_of_work_path(types) do %>
+                                    <i class="fa fa-2x fa-edit"></i>
+                                  <% end %>
+                                  <%= link_to    types, method: :delete, data: { confirm: 'Are you sure?' }  do%>
+                                    <i class="fa fa-2x fa-minus"></i>
+                                  <% end %>
+                              </td>
 
-<h1>Type Of Works</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Price hours</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @type_of_works.each do |type_of_work| %>
-      <tr>
-        <td><%= type_of_work.name %></td>
-        <td><%= type_of_work.price_hours %></td>
-        <td><%= type_of_work.description %></td>
-        <td><%= link_to 'Show', type_of_work %></td>
-        <td><%= link_to 'Edit', edit_type_of_work_path(type_of_work) %></td>
-        <td><%= link_to 'Destroy', type_of_work, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Type Of Work', new_type_of_work_path %>
+                          </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</

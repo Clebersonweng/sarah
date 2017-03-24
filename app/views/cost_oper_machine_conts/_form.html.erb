@@ -1,0 +1,75 @@
+
+</br>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3 align="center">Outsourced Machines</h3>
+                <%=render 'layouts/submenu' %>
+            </div>
+            <div class="panel-body">
+                <%=form_for @cost_oper_machine_cont, url: cost_oper_machine_conts_path,:html => { class: 'form-inline' } do |f| %>
+                    <div class="col-sm-12">
+                        </br>
+                        <div class="row">
+                            <div class="form-group col-xs-4 col-sm-4">
+                                <%= f.label :farming_plot_id%>  
+                                 <%= f.select :farming_plot_id, options_for_select(@farming_plots),{},{required: 'true', autofocus: 'true',prompt: "----CHOOSE", class: 'form-control'}%> 
+                            
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="form-group col-xs-4 col-sm-4">
+                                   <%= f.label :type_of_service_id %>  
+                                   <%= select("type_of_service_id", @cost_oper_machine_cont, options_for_select(@type_of_services),{required: 'true', autofocus: 'true',prompt: "----CHOOSE", class: 'form-control'})%> 
+
+                                 </div>
+                              <div class="form-group col-xs-2 col-sm-2">                               
+                                    <label for="amount">Price</label>                            
+                                    <input id="amount" class="form-control"/>
+                                </div>
+                                <div class="form-group col-xs-2 col-sm-2">                               
+                                    <label for="amount">Amount made</label>                            
+                                    <input id="amount" class="form-control"/>
+                                </div>
+                                <div class="form-group col-xs-2 col-sm-2">                               
+                                    <label for="amount">U.M</label>                            
+                                    <input id="amount" class="form-control"/>
+                                </div>
+                                  </br>
+                                  <div class="form-group col-xs-offset-1">                               
+                                      <a href="#" class="btn btn-default" id="agregarCostOper">ADD</a>
+                                  </div>
+                              </div>
+                          </div>
+                          </br>
+                          <div id="detalhes-container">
+                              <table id="tabla" class=" table ">
+                                  <thead>
+                                      <tr>                                        
+                                          <th>Machine</th> 
+                                          <th>Implement</th> 
+                                          <th>amount</th>, 
+                                         <th>Total Time Oper.</th>
+                                          <th>Subtotal</th>
+                                          <th colspan="3"></th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <!--agrego de forma dinamica-->
+
+                                  </tbody>
+                                  <tfoot> <tr>                                         
+                                          <th id="15">Total</th>
+                                          <th></th><th></th><th></th><th></th><th></th><th></th><th id="TOTAL"></th>
+                                      </tr>
+                                  </tfoot>
+                              </table>
+                              <div id="addFilas">
+
+                              </div>
+                            <%end%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

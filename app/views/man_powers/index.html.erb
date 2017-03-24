@@ -1,29 +1,41 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Man Powers</h1>
+</br>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3 align="center">Man Power</h3></div>
+            <%=render 'layouts/submenu' %>
+            <div class="panel-body">
+                <table data-toggle="table" data-url="man_power"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+                    <thead>
+                        <tr>
+                            <th data-field="id" data-checkbox="true">Item ID</th>
+                            <th data-field="program_production" data-sortable="true" >Program Production</th> 
+                            <th data-field="total_hours_needed" >Total Hours Needed</th> 
+                            <th data-field="stock_end" >Total</th>  
 
-<table>
-    <thead>
-        <tr>
-            <th>Program production</th>
-            <th>Total hours needed</th>
-            <th>Total</th>
-            <th colspan="3"></th>
-        </tr>
-    </thead>
+                            <th>action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @man_powers.each do |man_power| %>
+                          <tr>
+                              <td><%= man_power.id%></td>
+                              <td><%= man_power.program_production.program_production %></td>
+                              <td><%= man_power.total_hours_needed %></td>
+                              <td><%=number_to_currency man_power.total %></td>
+                              <td class="col-md-1">
+                                  <%= link_to edit_man_power_path(man_power) do %>
+                                    <i class="fa fa-2x fa-edit"></i>
+                                  <% end %>
 
-    <tbody>
-        <% @man_powers.each do |man_power| %>
-          <tr>
-              <td><%= man_power.program_production.program_production %></td>
-              <td><%= man_power.total_hours_needed %></td>
-              <td><%=number_to_currency man_power.total %></td>
-              
-            </tr>
-          <% end %>
-      </tbody>
-  </table>
+                              </td>
 
-  <br>
-
-  <%= link_to 'New Man Power', new_man_power_path %>
+                          </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

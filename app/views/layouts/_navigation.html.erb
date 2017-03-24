@@ -112,9 +112,22 @@
                 </li>
             </ul>
         </li>
+        
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Outsourced machinery<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li id="menu_type_of_services">
+                    <a href="../type_of_services"><i class="fa fa-fw fa-gear"></i> Type of Service</a>
+                </li>
+                <li id="menu_man_powers">
+                    <a href="../cost_oper_machine_conts"><i class="fa fa-fw fa-gear"></i> Outsourced machines</a>
+                </li>
+                
+            </ul>
+        </li>
         <!--dropdown para el usuario que tiene su propia maquinaria-->
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Cost Operational<b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Cost Operational Own Machine<b class="caret"></b></a>
             <ul class="dropdown-menu">
                  <li id="menu_brands">
                     <a href="../brands"><i class="fa fa-fw fa-gear"></i> Brands</a>
@@ -191,6 +204,12 @@
     }else{
     $("#menu_"+controllerName).addClass("active");
     }
-
+    
+    $(document).ready (function(){
+            $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
+    $("#success-alert").slideUp(500);
+});  
+           
+    });
 </script>
 

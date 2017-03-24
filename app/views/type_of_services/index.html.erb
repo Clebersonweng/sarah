@@ -1,10 +1,10 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="panel panel-default">
-            <div class="panel-heading"><h3 align="center">Fuels</h3></div>
+            <div class="panel-heading"><h3 align="center">Type Of Services</h3></div>
             <%=render 'layouts/submenu' %>
             <div class="panel-body">
-                <table data-toggle="table" data-url="fuels"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+                <table data-toggle="table" data-url="type_of_services"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
                     <thead>
                         <tr>
                             <th data-field="id" data-checkbox="true">Item ID</th>
@@ -15,17 +15,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% @fuels.each do |fuel| %>
+                        <% @type_of_services.each do |type_service| %>
                           <tr>
-                              <td><%= fuel.id%></td>
-                              <td><%= fuel.name %></td>
-                              <td><%= fuel.price %></td>
-                              <td><%= fuel.description %></td>                              
+                              <td><%= type_service.id%></td>
+                              <td><%= type_service.name %></td>
+                              <td><%= type_service.price %></td>
+                              <td><%= type_service.description %></td>                              
                               <td class="col-md-1">
-                                  <%= link_to edit_fuel_path(fuel) do %>
+                                  <%= link_to edit_type_of_service_path(type_service) do %>
                                     <i class="fa fa-2x fa-edit"></i>
                                   <% end %>
-                                  <%= link_to    fuel, method: :delete, data: { confirm: 'Are you sure?' }  do%>
+                                  <%= link_to    type_service, method: :delete, data: { confirm: 'Are you sure?' }  do%>
                                     <i class="fa fa-2x fa-minus"></i>
                                   <% end %>
                               </td>

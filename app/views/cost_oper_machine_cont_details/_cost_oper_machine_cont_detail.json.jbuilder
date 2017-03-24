@@ -1,0 +1,2 @@
+json.extract! cost_oper_machine_cont_detail, :id, :type_of_service_id, :amount, :subtotal, :created_at, :updated_at
+json.url cost_oper_machine_cont_detail_url(cost_oper_machine_cont_detail, format: :json)

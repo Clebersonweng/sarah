@@ -1,0 +1,47 @@
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3 align="Machinery Outsourced"></h3></div>
+            <%=render 'layouts/submenu' %>
+            <div class="panel-body">
+                <table data-toggle="table" data-url="cost_oper_machine_conts"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+                    <thead>
+                        <tr>
+                            <th data-field="id" data-checkbox="true">Item ID</th>
+                            <th data-field="code" >Farming Plot</th> 
+                            <th data-field="name" >Type Of Service</th>                            
+                            <th data-field="area"  data-sortable="true">U.M</th>
+                            <th data-field="description">Total</th>
+                            <th>action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @cost_oper_machine_conts.each do |machine_out| %>
+                          <tr>
+                              <td><%= machine_out.id%></td>
+                              <td><%= machine_out.code %></td>
+                              <td><%= machine_out.name %></td>
+                              <td><%= machine_out.area %></td>
+                              <td><%= machine_out.type_of_crop.name %></td>
+                              <td><%= farm.employee.name %></td>
+                              <td><%= farm.culture_period_start %></td>
+                              <td><%= farm.culture_period_end %></td>
+                              <td><%= farm.description %></td>
+                              <td class="col-md-1">
+                                  <%= link_to edit_cost_oper_machine_cont_path(machine_out) do %>
+                                    <i class="fa fa-2x fa-edit"></i>
+                                  <% end %>
+                                  <%= link_to    machine_out, method: :delete, data: { confirm: 'Are you sure?' }  do%>
+                                    <i class="fa fa-2x fa-minus"></i>
+                                  <% end %>
+                              </td>
+
+                          </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

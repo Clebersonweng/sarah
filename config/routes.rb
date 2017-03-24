@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :cost_oper_machine_cont_details
+  resources :type_of_services
+  resources :cost_oper_machine_conts
   resources :fuels
   resources :cost_oper_machine_details
   resources :cost_oper_machines

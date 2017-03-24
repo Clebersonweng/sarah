@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161212193132) do
+ActiveRecord::Schema.define(version: 20170317004455) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,25 @@ ActiveRecord::Schema.define(version: 20161212193132) do
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.index ["program_production_id"], name: "index_cons_raw_materials_on_program_production_id", using: :btree
+  end
+
+  create_table "cost_oper_machine_cont_details", force: :cascade do |t|
+    t.integer  "type_of_service_id"
+    t.float    "amount"
+    t.float    "subtotal"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "unit_of_measurement_id"
+    t.index ["type_of_service_id"], name: "index_cost_oper_machine_cont_details_on_type_of_service_id", using: :btree
+    t.index ["unit_of_measurement_id"], name: "index_cost_oper_machine_cont_details_on_unit_of_measurement_id", using: :btree
+  end
+
+  create_table "cost_oper_machine_conts", force: :cascade do |t|
+    t.integer  "farming_plot_id"
+    t.float    "total"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["farming_plot_id"], name: "index_cost_oper_machine_conts_on_farming_plot_id", using: :btree
   end
 
   create_table "cost_oper_machine_details", force: :cascade do |t|
@@ -203,6 +222,16 @@ ActiveRecord::Schema.define(version: 20161212193132) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "type_of_services", force: :cascade do |t|
+    t.string   "name"
+    t.float    "price"
+    t.text     "description"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "unit_of_measurement_id"
+    t.index ["unit_of_measurement_id"], name: "index_type_of_services_on_unit_of_measurement_id", using: :btree
+  end
+
   create_table "type_of_works", force: :cascade do |t|
     t.string   "name"
     t.float    "price_hours"
@@ -240,6 +269,9 @@ ActiveRecord::Schema.define(version: 20161212193132) do
   end
 
   add_foreign_key "cons_raw_materials", "program_productions"
+  add_foreign_key "cost_oper_machine_cont_details", "type_of_services"
+  add_foreign_key "cost_oper_machine_cont_details", "unit_of_measurements"
+  add_foreign_key "cost_oper_machine_conts", "farming_plots"
   add_foreign_key "cost_oper_machine_details", "cost_oper_machines"
   add_foreign_key "cost_oper_machine_details", "machines"
   add_foreign_key "cost_oper_machines", "farming_plots"
@@ -255,4 +287,5 @@ ActiveRecord::Schema.define(version: 20161212193132) do
   add_foreign_key "man_powers", "program_productions"
   add_foreign_key "program_productions", "estimate_sales"
   add_foreign_key "supplies", "unit_of_measurements"
+  add_foreign_key "type_of_services", "unit_of_measurements"
 end

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Type of service:</strong>
+  <%= @cost_oper_machine_cont_detail.type_of_service %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @cost_oper_machine_cont_detail.amount %>
+</p>
+
+<p>
+  <strong>Subtotal:</strong>
+  <%= @cost_oper_machine_cont_detail.subtotal %>
+</p>
+
+<%= link_to 'Edit', edit_cost_oper_machine_cont_detail_path(@cost_oper_machine_cont_detail) %> |
+<%= link_to 'Back', cost_oper_machine_cont_details_path %>

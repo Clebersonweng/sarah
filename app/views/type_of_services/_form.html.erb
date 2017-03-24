@@ -1,0 +1,35 @@
+<%= form_for(type_of_service) do |f| %>
+  <% if type_of_service.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(type_of_service.errors.count, "error") %> prohibited this type_of_service from being saved:</h2>
+
+      <ul>
+      <% type_of_service.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :price %>
+    <%= f.text_field :price %>
+  </div>
+<div class="field">
+    <%= f.label :unit_of_measurement_id %>
+    <%= f.select :unit_of_measurement_id, options_for_select(@unit_measurements)%>
+  </div>
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

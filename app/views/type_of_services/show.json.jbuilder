@@ -1,0 +1,1 @@
+json.partial! "type_of_services/type_of_service", type_of_service: @type_of_service

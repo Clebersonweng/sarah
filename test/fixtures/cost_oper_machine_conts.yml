@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  farming_plot_id: one
+  total: 1.5
+
+two:
+  farming_plot_id: two
+  total: 1.5
