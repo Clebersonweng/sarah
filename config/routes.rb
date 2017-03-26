@@ -33,7 +33,8 @@ Rails.application.routes.draw do
   #  resources :farming_plots
   #end
   resources :farming_plots, only: [:index]
-  #resources :cons_raw_materials do
-   # resources :cons_raw_material_details
- # end
+  
+  resources :cost_oper_machines do
+    resources :cost_oper_machine_details
+  end
 end

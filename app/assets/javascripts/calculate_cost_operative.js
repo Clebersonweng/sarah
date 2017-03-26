@@ -42,13 +42,13 @@ $(document).ready(function() {
 
      function addNuevasFilas(machine,implement, amount, fuel, lubricant, RYM, subtotal) {
    $("#addFilas").append(
-        "<input type='text' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][machine_id]' id='txt' value="+machine+">"+
-        "<input type='text' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][amount]' id='txt1' value="+amount+">"+
-        "<input type='text' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][lubricant]' id='txt2' value="+lubricant+'>'+      
-        "<input type='text' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][repair_and_maintenance]' id='txt2' value="+RYM+'>'+
-        "<input type='text' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][subtotal]' id='txt2' value="+subtotal+'>'+
-        "<input type='text' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][fuel]' id='txt2' value="+fuel+'>'+
-         "<input type='text' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][implement_id]' id='txt' value="+implement+">"
+        "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][machine_id]' id='txt' value="+machine+">"+
+        "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][amount]' id='txt1' value="+amount+">"+
+        "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][lubricant]' id='txt2' value="+lubricant+'>'+      
+        "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][repair_and_maintenance]' id='txt2' value="+RYM+'>'+
+        "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][subtotal]' id='txt2' value="+subtotal+'>'+
+        "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][fuel]' id='txt2' value="+fuel+'>'+
+         "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][implement_id]' id='txt' value="+implement+">"
 
         );
     }

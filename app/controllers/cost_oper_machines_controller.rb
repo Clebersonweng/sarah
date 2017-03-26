@@ -4,7 +4,7 @@ class CostOperMachinesController < ApplicationController
   # GET /cost_oper_machines
   # GET /cost_oper_machines.json
   def index
-    @cost_oper_machines = CostOperMachine.all
+    @cost_oper_machines = CostOperMachine.all     
   end
 
   # GET /cost_oper_machines/1
@@ -26,8 +26,6 @@ class CostOperMachinesController < ApplicationController
   # POST /cost_oper_machines
   # POST /cost_oper_machines.json
   def create
-    logger.debug "This is from debug"
-     logger.info "This is from info"
     get_cost_oper_machine_params
     @cost_oper_machine = CostOperMachine.new(cost_oper_machine_params)
     #render :text => @cost_oper_machine.inspect

@@ -27,8 +27,8 @@
 
 
                                 <% cost_own_machine.cost_oper_machine_details.each do |details| %>
-                                  <td><%= details.machine_id %></td>
-                                  <td><%= details.implement_id %></td>
+                                  <td><%= details.machine.brand.name %></td>
+                                  <td><%= details.implement.name %></td>
                                   <td><%= details.fuel %></td>
                                   <td><%= details.lubricant %></td>
                                   <td><%= details.repair_and_maintenance %></td>
