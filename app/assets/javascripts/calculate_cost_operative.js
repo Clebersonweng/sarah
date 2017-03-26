@@ -39,6 +39,20 @@ $(document).ready(function() {
                     "<td class='subtotal'>" + subtotal + "</td>" + "<td style='text-align: center'>" + "<a href='#'" + "id='quitar'>" + "<i class='icon-minus'></i>" + "</a>" + "</td>" +
                 "</tr>";
     };
+
+     function addNuevasFilas(machine,implement, amount, fuel, lubricant, RYM, subtotal) {
+   $("#addFilas").append(
+        "<input type='text' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][machine_id]' id='txt' value="+machine+">"+
+        "<input type='text' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][amount]' id='txt1' value="+amount+">"+
+        "<input type='text' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][lubricant]' id='txt2' value="+lubricant+'>'+      
+        "<input type='text' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][repair_and_maintenance]' id='txt2' value="+RYM+'>'+
+        "<input type='text' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][subtotal]' id='txt2' value="+subtotal+'>'+
+        "<input type='text' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][fuel]' id='txt2' value="+fuel+'>'+
+         "<input type='text' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][implement_id]' id='txt' value="+implement+">"
+
+        );
+    }
+
     var addTotal = function(total){
         return "<tr>" + 
                     "<td>"  + "</td>" +
@@ -55,9 +69,7 @@ $(document).ready(function() {
         result = tiempoOper * tamanhoArea;
         return result;
     };
-    function addFormField(idSup, totalUnit, subtotal) {
-        $("#test").append("<input type='text' size='20' name='cons_raw_material[cons_raw_material_details_attributes][" + count + "][supply_id]' id='txt' value=" + idSup + ">" + "<input type='text' size='20' name='cons_raw_material[cons_raw_material_details_attributes][" + count + "][total_unit]' id='txt1' value=" + totalUnit + ">" + "<input type='text' size='20' name='cons_raw_material[cons_raw_material_details_attributes][" + count + "][subtotal]' id='txt2' value=" + subtotal + '>');
-    }
+   
     /**calculo de gastos con reparacion y mantenimiento,
              se realiza tomando del valor a nuevo de la maquina y multiplicando por el coeficiente*/
     function calculateCostMachine() {
@@ -79,10 +91,14 @@ $(document).ready(function() {
      $('#cost_oper_machine_farming_plot_id').on("change", function() {
         areaPlot = $("#cost_oper_machine_farming_plot_id option:selected").data("area");
      });
+
+
     function calcularRymDeImplemento(priceImplement, coefCccrImplement, timeOperative) {
         totalCostRepairImplPerHours = parseFloat(priceImplement) * parseFloat(coefCccrImplement);
         return totalCostRepairImplPerHours;
     }
+
+
     $('#implement_implement_id').on("change", function() {
         implement = $("#implement_implement_id option:selected").text();
         coefCccrImplement = $("#implement_implement_id option:selected").data("coef_cccr");
@@ -109,18 +125,25 @@ $(document).ready(function() {
             }       
     }); 
     
+
+/*aqui agrego todos los detalles de costo operativo y agrego fila por fila sumando y presentando el total operativo 
+para el usuario que tiene maquinaria propia
+*/
+
 $("#agregarCostOper").on("click", function(event) {
     event.preventDefault();
     var totalTimeOperImpl = calcularTotalTiempoOperativo(timeOper, areaPlot);
     machine = $("#machine_machine_id option:selected").text();//mostrar en el td   
-    
+    machineValue = $("#machine_machine_id option:selected").val(); //tomar el value para guardar en la bd
+    implementValue = $("#implement_implement_id option:selected").val();
     /**toma la cantidad de veces que realizo la tarea para multiplicar por 
      el gasto de combustible, lubricante y rym */
     amount = $("#amount").val();
+    var lubricantValue = lubricant;
     // realizo la sumatoria de mantenimiento y repacion de la maquinaria y su implemento de cada fila cargada
     var totalSumRepairMachineAndImplementPerHours = totalCostRepairImplPerHours + totalCostRepairMachinePerHours;
     
-//subtotal = ((totalFuel*total de tiempo oper para esta parcela) + lubricant + repair machine and implement) * area plot
+//subtotal = ((totalFuel*total de tiempo oper para esta parcela) + lubricant + repair machine and implement) * area parcela
     var totalFuelPerTotalTimeOper = (parseFloat(costFuelPorHours) * parseFloat(totalTimeOper));
     var totalLubPerTotalTimeOper = parseFloat(lubricant) * parseFloat(totalTimeOper);
     var totalRepairMachineAndImplPerTotalTimeOper = ((parseFloat(totalCostRepairMachinePerHours) + parseFloat(totalCostRepairImplPerHours)) * parseFloat(totalTimeOper));
@@ -128,19 +151,22 @@ $("#agregarCostOper").on("click", function(event) {
     var subtotalSinMultAmount = totalFuelPerTotalTimeOper + totalLubPerTotalTimeOper + totalRepairMachineAndImplPerTotalTimeOper;
  //subtotal multip cantidad de veces que se ejecuto la tarea
     subtotal = subtotalSinMultAmount * amount;
-    var chargeTable = agregarProducto(machine, implement, amount, costFuelPorHours, lubricant, totalTimeOper.toFixed(2), totalSumRepairMachineAndImplementPerHours, subtotal);
+    var chargeTable = agregarProducto(machine, implement, amount, costFuelPorHours, lubricant, totalTimeOper.toFixed(2), totalSumRepairMachineAndImplementPerHours.toFixed(2), subtotal);
  // carga los trs en la tabla
     $("#detalhes-container tbody:first").append(chargeTable);
-    // addFormField(producto.val(),consumo.val(),subtotal.toFixed(2));
+    addNuevasFilas (machineValue,implementValue, amount, costFuelPorHours, lubricantValue, totalSumRepairMachineAndImplementPerHours.toFixed(2), subtotal);//agrego cada fila
     // resetea los campos despues de  cada add
     //incrementa al agregar cada fila
      count++;
      sum+=subtotal; 
- //$("#tabla").find('tfoot>tr>th#TOTAL').append($('<td><b>'+" <input value="+sum+"/>'" + '</b></td>'));
-   $("#TOTAL").text(sum.toFixed(2));   
-    //var addTableTotal = addTotal(sum.toFixed(2));
-    //$("#detalhes-container tbody:first").append(addTableTotal);
+    
+   $("#TOTAL").text(sum.toFixed(2));  
+   $("#InputTotal").val(sum.toFixed(2));  
+   
+
+    
 });
+
 //verifico si la maquinaria es un tractor entonces muestro el select de implemento
 $('#machine_machine_id').on("change", function() {
     var nameMachine = $("#machine_machine_id option:selected").data("name");

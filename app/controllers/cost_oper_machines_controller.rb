@@ -26,16 +26,18 @@ class CostOperMachinesController < ApplicationController
   # POST /cost_oper_machines
   # POST /cost_oper_machines.json
   def create
+    logger.debug "This is from debug"
+     logger.info "This is from info"
     get_cost_oper_machine_params
     @cost_oper_machine = CostOperMachine.new(cost_oper_machine_params)
-
+    #render :text => @cost_oper_machine.inspect
     respond_to do |format|
       if @cost_oper_machine.save
         format.html { redirect_to @cost_oper_machine, notice: 'Cost oper machine was successfully created.' }
         format.json { render :show, status: :created, location: @cost_oper_machine }
       else
         format.html { render :new }
-        format.json { render json: @cost_oper_machine.errors, status: :unprocessable_entity }
+        #format.json { render json: @cost_oper_machine.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -73,7 +75,7 @@ class CostOperMachinesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def cost_oper_machine_params
-    params.require(:cost_oper_machine).permit(:farming_plot_id, :total, cost_oper_machine_details_attributes: [ :machine_id, :amount, :fuel, :lubricant, :repair_and_maintenance, :subtotal])
+    params.require(:cost_oper_machine).permit(:farming_plot_id, :total, cost_oper_machine_details_attributes: [ :machine_id,:implement_id, :amount, :fuel, :lubricant, :repair_and_maintenance, :subtotal])
   end
   def get_cost_oper_machine_params
     @farming_plots = FarmingPlot.all.collect { |p| [ p.name, p.id, {"data-area"=> p.area} ] }

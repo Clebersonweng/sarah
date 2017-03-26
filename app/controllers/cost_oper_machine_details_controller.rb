@@ -69,6 +69,6 @@ class CostOperMachineDetailsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cost_oper_machine_detail_params
-      params.require(:cost_oper_machine_detail).permit(:cost_oper_machine_id, :machine_id, :amount, :fuel, :lubricant, :repair_and_maintenance, :subtotal)
+      params.require(:cost_oper_machine_detail).permit(:cost_oper_machine_id, :machine_id,:implement_id, :amount, :fuel, :lubricant, :repair_and_maintenance, :subtotal)
     end
 end

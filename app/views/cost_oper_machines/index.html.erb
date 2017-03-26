@@ -5,17 +5,17 @@
             <%=render 'layouts/submenu' %>
 
             <div class="panel-body">
-                <table data-toggle="table" data-url="cost_oper_machines"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+                <table data-toggle="table" data-url="cost_oper_machine"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
                     <thead>
                         <tr>
                             <th data-field="id" data-checkbox="true">Item ID</th>
-                            <th data-field="name" data-sortable="true" >Farming Plot</th> 
-                            <th data-field="type_of_service" >Type Of Service</th>  
-                            <th data-field="price" >Price</th> 
-                            <th data-field="amount"> Amount</th>
-                            <th data-field="time_oper" >U.M</th>                            
-                            <th data-field="subtotal"> Subtotal</th>
-                            <th data-field="description"  data-sortable="true">Description</th>                            
+                            <th data-field="farming_plot" data-sortable="true" >Farming Plot</th> 
+                            <th data-field="machine_id" >Machine</th>  
+                            <th data-field="implement_id" >Implement</th> 
+                            <th data-field="fuel"> Fuel</th>
+                            <th data-field="lubricant" >Lubricant</th>
+                            <th data-field="repair_and_maintenance" >Rep & Maint.</th>
+                            <th data-field="total"> Total</th>                                                      
                             <th>action</th>
                         </tr>
                     </thead>
@@ -24,8 +24,17 @@
                           <tr>
                               <td><%= cost_own_machine.id %></td>
                               <td><%= cost_own_machine.farming_plot.name%></td>
-                             <!--aqui vai a tabela dinamica do jquery-->
 
+
+                                <% cost_own_machine.cost_oper_machine_details.each do |details| %>
+                                  <td><%= details.machine_id %></td>
+                                  <td><%= details.implement_id %></td>
+                                  <td><%= details.fuel %></td>
+                                  <td><%= details.lubricant %></td>
+                                  <td><%= details.repair_and_maintenance %></td>
+                                <% end %>
+                              <!--aqui vai a tabela dinamica do jquery-->
+                              <td><%= cost_own_machine.total %></td>
                               <td class="col-md-1">
                                   <%= link_to edit_cost_oper_machine_path(cost_own_machine) do %>
                                     <i class="fa fa-2x fa-edit"></i>

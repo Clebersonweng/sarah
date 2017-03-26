@@ -1,52 +1,54 @@
 <%= form_for(cost_oper_machine_detail) do |f| %>
   <% if cost_oper_machine_detail.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(cost_oper_machine_detail.errors.count, "error") %> prohibited this cost_oper_machine_detail from being saved:</h2>
+        <h2><%= pluralize(cost_oper_machine_detail.errors.count, "error") %> prohibited this cost_oper_machine_detail from being saved:</h2>
 
-      <ul>
-      <% cost_oper_machine_detail.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+            <% cost_oper_machine_detail.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+        </ul>
     </div>
   <% end %>
 
   <div class="field">
-    <%= f.label :cost_oper_machine_id %>
-    <%= f.text_field :cost_oper_machine_id %>
+      <%= f.label :cost_oper_machine_id %>
+      <%= f.text_field :cost_oper_machine_id %>
   </div>
 
   <div class="field">
-    <%= f.label :machine_id %>
-    <%= f.text_field :machine_id %>
+      <%= f.label :machine_id %>
+      <%= f.text_field :machine_id %>
+  </div>
+  <div class="field">
+      <%= f.label :implement_id %>
+      <%= f.text_field :implement_id %>
+  </div>
+  <div class="field">
+      <%= f.label :fuel_id %>
+      <%= f.text_field :fuel_id %>
+  </div>
+  <div class="field">
+      <%= f.label :amount %>
+      <%= f.text_field :amount %>
+  </div>
+
+   <div class="field">
+      <%= f.label :lubricant %>
+      <%= f.text_field :lubricant %>
   </div>
 
   <div class="field">
-    <%= f.label :amount %>
-    <%= f.text_field :amount %>
+      <%= f.label :repair_and_maintenance %>
+      <%= f.text_field :repair_and_maintenance %>
   </div>
 
   <div class="field">
-    <%= f.label :fuel %>
-    <%= f.text_field :fuel %>
-  </div>
-
-  <div class="field">
-    <%= f.label :lubricant %>
-    <%= f.text_field :lubricant %>
-  </div>
-
-  <div class="field">
-    <%= f.label :repair_and_maintenance %>
-    <%= f.text_field :repair_and_maintenance %>
-  </div>
-
-  <div class="field">
-    <%= f.label :subtotal %>
-    <%= f.text_field :subtotal %>
+      <%= f.label :subtotal %>
+      <%= f.text_field :subtotal %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+      <%= f.submit %>
   </div>
 <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170317004455) do
+ActiveRecord::Schema.define(version: 20170326141029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,13 +64,15 @@ ActiveRecord::Schema.define(version: 20170317004455) do
     t.integer  "cost_oper_machine_id"
     t.integer  "machine_id"
     t.float    "amount"
-    t.float    "fuel"
     t.float    "lubricant"
     t.float    "repair_and_maintenance"
     t.float    "subtotal"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.integer  "implement_id"
+    t.float    "fuel"
     t.index ["cost_oper_machine_id"], name: "index_cost_oper_machine_details_on_cost_oper_machine_id", using: :btree
+    t.index ["implement_id"], name: "index_cost_oper_machine_details_on_implement_id", using: :btree
     t.index ["machine_id"], name: "index_cost_oper_machine_details_on_machine_id", using: :btree
   end
 
@@ -273,6 +275,7 @@ ActiveRecord::Schema.define(version: 20170317004455) do
   add_foreign_key "cost_oper_machine_cont_details", "unit_of_measurements"
   add_foreign_key "cost_oper_machine_conts", "farming_plots"
   add_foreign_key "cost_oper_machine_details", "cost_oper_machines"
+  add_foreign_key "cost_oper_machine_details", "implements"
   add_foreign_key "cost_oper_machine_details", "machines"
   add_foreign_key "cost_oper_machines", "farming_plots"
   add_foreign_key "employees", "users"
