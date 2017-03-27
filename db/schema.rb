@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170326141029) do
+ActiveRecord::Schema.define(version: 20170327011755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,11 +45,9 @@ ActiveRecord::Schema.define(version: 20170326141029) do
     t.integer  "type_of_service_id"
     t.float    "amount"
     t.float    "subtotal"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "unit_of_measurement_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.index ["type_of_service_id"], name: "index_cost_oper_machine_cont_details_on_type_of_service_id", using: :btree
-    t.index ["unit_of_measurement_id"], name: "index_cost_oper_machine_cont_details_on_unit_of_measurement_id", using: :btree
   end
 
   create_table "cost_oper_machine_conts", force: :cascade do |t|
@@ -272,7 +270,6 @@ ActiveRecord::Schema.define(version: 20170326141029) do
 
   add_foreign_key "cons_raw_materials", "program_productions"
   add_foreign_key "cost_oper_machine_cont_details", "type_of_services"
-  add_foreign_key "cost_oper_machine_cont_details", "unit_of_measurements"
   add_foreign_key "cost_oper_machine_conts", "farming_plots"
   add_foreign_key "cost_oper_machine_details", "cost_oper_machines"
   add_foreign_key "cost_oper_machine_details", "implements"

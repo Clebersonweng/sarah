@@ -58,6 +58,7 @@ class CostOperMachinesController < ApplicationController
   # DELETE /cost_oper_machines/1
   # DELETE /cost_oper_machines/1.json
   def destroy
+    @cost_oper_machine =  CostOperMachine.find(params [:id])
     @cost_oper_machine.destroy
     respond_to do |format|
       format.html { redirect_to cost_oper_machines_url, notice: 'Cost oper machine was successfully destroyed.' }

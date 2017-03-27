@@ -73,11 +73,11 @@ class CostOperMachineContsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def cost_oper_machine_cont_params
-    params.require(:cost_oper_machine_cont).permit(:farming_plot_id, :total)
+    params.require(:cost_oper_machine_cont).permit(:farming_plot_id, :total,cost_oper_machine_cont_details_attributes: [:type_of_service_id,:amount,:unit_of_measurement_id, :subtotal])
   end
   def get_cost_machines_params
     @farming_plots = FarmingPlot.all.collect {|p| [ p.name, p.id ] }
-    @type_of_services = TypeOfService.all.collect {|p| [ p.name, p.id ] } 
+    @type_services = TypeOfService.all.collect {|p| [ p.name, p.id ,{"data-price"=> p.price}] } 
     @unit_measure = UnitOfMeasurement.all.collect { |p| [p.name, p.id ]}
   end
 end
