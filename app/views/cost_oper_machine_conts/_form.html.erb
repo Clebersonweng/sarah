@@ -1,4 +1,16 @@
 
+<% if cost_oper_machine_cont.errors.any? %>
+  <div id="error_explanation">
+      <h2><%= pluralize(cost_oper_machine_cont.errors.count, "error") %> prohibited this man_power from being saved:</h2>
+
+      <ul>
+          <% cost_oper_machine_cont.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+      </ul>
+  </div>
+<% end %>
+</br>
 </br>
 <div class="row">
     <div class="col-sm-12">
@@ -28,7 +40,7 @@
                                         <label for="amount">Amount</label>                            
                                         <input id="amount" class="form-control"/>
                                     </div>                                    
-              
+
                                     <div class="form-group col-xs-2 col-sm-2">                               
                                         <a href="#" class="btn btn-default" id="agregarCostOper">ADD</a>
                                     </div>
@@ -40,7 +52,8 @@
                             <table id="tabla" class=" table ">
                                 <thead>
                                     <tr>                                        
-                                        <th>Type Of Service</th> 
+                                        <th>Type Of Service</th>
+                                        <th>U.M</th>
                                         <th>Precio</th>
                                         <th>amount</th> 
                                         <th>Subtotal</th>
@@ -53,17 +66,23 @@
                                 </tbody>
                                 <tfoot> <tr>                                         
                                         <th id="15">Total</th>
-                                        <th></th><th></th><th id="TOTAL"></th>
+                                        <th></th><th></th><th></th><th id="TOTAL"></th>
                                     </tr>
                                 </tfoot>
 
                             </table>
+                            
                             <div id="addFilas">
 
                             </div>
+                             <input type="text" name="cost_oper_machine_cont[total]" id="InputTotal"/>
+                            <div class="controls pull-right">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="reset" class="btn btn-danger">Cancel</button>
+                            </div>
                           <%end%>
                       </div>
-                      <input type="text" name="cost_oper_machine_conts[total]" id="totalValue"/>
+                     
                   </div>
               </div>
           </div>

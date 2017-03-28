@@ -69,6 +69,6 @@ class CostOperMachineContDetailsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cost_oper_machine_cont_detail_params
-      params.require(:cost_oper_machine_cont_detail).permit(:type_of_service_id, :amount,:unit_of_measurement_id, :subtotal)
+      params.require(:cost_oper_machine_cont_detail).permit(:type_of_service_id, :amount, :subtotal)
     end
 end

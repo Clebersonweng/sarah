@@ -4,9 +4,11 @@ $(document).ready(function() {
     var typeOfservice;
     var amount;
     var priceTypeOfService;
-    var agregarProducto = function(type_service, price, amount, subtotal) {
+    var UmedTypeOfService;
+    var addNewCost = function(type_service, Um, price, amount, subtotal) {
         return "<tr>" + 
                     "<td>" + type_service + "</td>" +
+                    "<td>" + Um + "</td>" +
                     "<td>" + price + "</td>" +
                      "<td>" + amount + "</td>" +  
                     "<td class='subtotal'>" + subtotal + "</td>" + "<td style='text-align: center'>" + "<a href='#'" + "id='quitar'>" + "<i class='icon-minus'></i>" + "</a>" + "</td>" +
@@ -15,9 +17,9 @@ $(document).ready(function() {
 
      function addNuevasFilas(type_service,amount, subtotal) {
    $("#addFilas").append(
-        "<input type='hidden' size='20' name='cost_oper_machine_cont[cost_oper_machine_cont_details_attributes]["+count+"][type_of_service]' id='txt' value="+type_service+">"+
-        "<input type='hidden' size='20' name='cost_oper_machine_cont[cost_oper_machine_cont_details_attributes]["+count+"][amount]' id='txt1' value="+amount+">"+
-        "<input type='hidden' size='20' name='cost_oper_machine_cont[cost_oper_machine_cont_details_attributes]["+count+"][subtotal]' id='txt1' value="+subtotal+">"    
+        "<input type='text' size='20' name='cost_oper_machine_cont[cost_oper_machine_cont_details_attributes]["+count+"][type_of_service_id]' id='txt' value="+type_service+">"+
+        "<input type='text' size='20' name='cost_oper_machine_cont[cost_oper_machine_cont_details_attributes]["+count+"][amount]' id='txt1' value="+amount+">"+
+        "<input type='text' size='20' name='cost_oper_machine_cont[cost_oper_machine_cont_details_attributes]["+count+"][subtotal]' id='txt1' value="+subtotal+">"    
         );
     }
 
@@ -25,8 +27,9 @@ $(document).ready(function() {
         return "<tr>" + 
                     
                      "<td>"  + "</td>" + 
-                     "<td>"  + "</td>" 
-                    + "<td>"  + "</td>" +
+                     "<td>"  + "</td>" +
+                     "<td>"  + "</td>" +
+                     "<td>"  + "</td>" +
                      "<td>"  + "</td>" + 
                     "<td class='total'>" + total + "</td>" + "<td style='text-align: center'>" + "<a href='#'" + "id='quitar'>" + "<i class='icon-minus'></i>" + "</a>" + "</td>" + 
                 "</tr>";
@@ -42,16 +45,20 @@ $("#agregarCostOper").on("click", function(event) {
     event.preventDefault();
 
     typeOfservice = $("#type_service_type_of_service_id option:selected");//mostrar en el td  
-    priceTypeOfService = $("#type_service_type_of_service_id option:selected").data("price");     
+    priceTypeOfService = $("#type_service_type_of_service_id option:selected").data("price"); 
+    UmedTypeOfService = $("#type_service_type_of_service_id option:selected").data("u_measure"); 
     amount = $("#amount").val();
-    
-    
+
     subtotal = priceTypeOfService * amount;
-    var chargeTable = agregarProducto(typeOfservice.text(),priceTypeOfService, amount, subtotal.toFixed(2));
+
+    var newRow = addNewCost(typeOfservice.text(),UmedTypeOfService, priceTypeOfService, amount, subtotal.toFixed(2));
  // carga los trs en la tabla
-    $("#detalhes-container tbody:first").append(chargeTable);
-    //addNuevasFilas ( totalSumRepairMachineAndImplementPerHours.toFixed(2), subtotal);//agrego cada fila
+
+    $("#detalhes-container tbody:first").append(newRow);
+    addNuevasFilas ( typeOfservice.val(), amount, subtotal.toFixed(2));//agrego cada fila
     // resetea los campos despues de  cada add
+
+
     //incrementa al agregar cada fila
      count++;
      sum+=subtotal; 

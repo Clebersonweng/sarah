@@ -5,7 +5,7 @@
             <div class="panel-heading"><h3 align="Machinery Outsourced"></h3></div>
             <%=render 'layouts/submenu' %>
             <div class="panel-body">
-                <table data-toggle="table" data-url="cost_oper_machine_conts"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+                <table data-toggle="table" data-url="cost_oper_machine_cont"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
                     <thead>
                         <tr>
                             <th data-field="id" data-checkbox="true">Item ID</th>
@@ -19,15 +19,14 @@
                     <tbody>
                         <% @cost_oper_machine_conts.each do |machine_out| %>
                           <tr>
-                              <td><%= machine_out.id%></td>
-                              <td><%= machine_out.code %></td>
-                              <td><%= machine_out.name %></td>
-                              <td><%= machine_out.area %></td>
-                              <td><%= machine_out.type_of_crop.name %></td>
-                              <td><%= farm.employee.name %></td>
-                              <td><%= farm.culture_period_start %></td>
-                              <td><%= farm.culture_period_end %></td>
-                              <td><%= farm.description %></td>
+                              <td><%= machine_out.id%></td>                             
+                              <td><%= machine_out.farming_plot.name%></td>   
+                              <% machine_out.cost_oper_machine_cont_details.each do |details| %>
+                                <td><%= details.type_of_service.name %></td> 
+                                 <td><%= details.type_of_service.unit_of_measurement.name %></td> 
+                              <% end %>
+
+                              <td><%= machine_out.total %></td>
                               <td class="col-md-1">
                                   <%= link_to edit_cost_oper_machine_cont_path(machine_out) do %>
                                     <i class="fa fa-2x fa-edit"></i>

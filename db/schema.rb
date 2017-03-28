@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170327011755) do
+ActiveRecord::Schema.define(version: 20170328011532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,8 +45,10 @@ ActiveRecord::Schema.define(version: 20170327011755) do
     t.integer  "type_of_service_id"
     t.float    "amount"
     t.float    "subtotal"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "cost_oper_machine_cont_id"
+    t.index ["cost_oper_machine_cont_id"], name: "idx_c_oper_machine_and_idx_details", using: :btree
     t.index ["type_of_service_id"], name: "index_cost_oper_machine_cont_details_on_type_of_service_id", using: :btree
   end
 
