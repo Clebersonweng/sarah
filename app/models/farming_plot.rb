@@ -1,14 +1,26 @@
 class FarmingPlot < ApplicationRecord
   belongs_to :type_of_crop
-  belongs_to :employee
-  has_many :estimate_sales, :dependent => :destroy
-  has_many :cost_oper_machines, :dependent => :destroy
-  has_many :cost_oper_machine_conts, :dependent => :destroy
+  belongs_to :person
+  has_many :estimate_sales, :dependent => :destroy 
   
-  validate :expiration_date_cannot_be_in_the_past_start, :expiration_date_cannot_be_in_the_past_end
-  validates_presence_of :code, :name, :area, :type_of_crop_id, :culture_period_start, :culture_period_end
+ # validate :expiration_date_cannot_be_in_the_past_start, :expiration_date_cannot_be_in_the_past_end
+  #validates_presence_of :code, :name, :area, :type_of_crop_id, :culture_period_start, :culture_period_end
  
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   private
   def expiration_date_cannot_be_in_the_past_start
     errors.add(:culture_period_start, "can't be in the past") if

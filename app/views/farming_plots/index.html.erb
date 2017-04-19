@@ -4,7 +4,7 @@
     <div class="col-sm-12">
         <div class="panel panel-default">
             <div class="panel-heading"><h3 align="center">Farming PLot</h3></div>
-            <%=render 'layouts/submenu' %>
+              <%=render 'layouts/submenu' %>
             <div class="panel-body">
                 <table data-toggle="table" data-url="farming_plots"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
                     <thead>
@@ -14,9 +14,7 @@
                             <th data-field="name" >Name</th>                            
                             <th data-field="area"  data-sortable="true">Area</th>
                             <th data-field="type_of_crop_id" > Type of crop</th>
-                            <th data-field="employee_id">Employee</th>
-                            <th data-field="culture_period_start" data-sortable="true">Culture period start</th>
-                            <th data-field="culture_period_end" data-sortable="true">Culture period end</th>
+                            <th data-field="people_id">Manager</th>                           
                             <th data-field="description">Description</th>
                             <th>action</th>
                         </tr>
@@ -29,9 +27,7 @@
                               <td><%= farm.name %></td>
                               <td><%= farm.area %></td>
                               <td><%= farm.type_of_crop.name %></td>
-                              <td><%= farm.employee.name %></td>
-                              <td><%= farm.culture_period_start %></td>
-                              <td><%= farm.culture_period_end %></td>
+                              <td><%= farm.person.name %></td>
                               <td><%= farm.description %></td>
                               <td class="col-md-1">
                                   <%= link_to edit_farming_plot_path(farm) do %>

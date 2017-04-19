@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Manu indi expense:</strong>
+  <%= @manu_indi_expense_det.manu_indi_expense %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @manu_indi_expense_det.name %>
+</p>
+
+<p>
+  <strong>Isfixed:</strong>
+  <%= @manu_indi_expense_det.isFixed %>
+</p>
+
+<p>
+  <strong>Subtotal:</strong>
+  <%= @manu_indi_expense_det.subtotal %>
+</p>
+
+<%= link_to 'Edit', edit_manu_indi_expense_det_path(@manu_indi_expense_det) %> |
+<%= link_to 'Back', manu_indi_expense_dets_path %>

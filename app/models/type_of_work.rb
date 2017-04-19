@@ -1,3 +1,3 @@
 class TypeOfWork < ApplicationRecord
-  belongs_to :man_power_detail
+  has_many :man_power_details
 end

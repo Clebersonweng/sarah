@@ -1,0 +1,1 @@
+json.partial! "mark_spending_dets/mark_spending_det", mark_spending_det: @mark_spending_det

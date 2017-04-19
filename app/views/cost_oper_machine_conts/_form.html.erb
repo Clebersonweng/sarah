@@ -24,25 +24,25 @@
                         </br>
                         <div class="row">
                             <div class="form-group col-xs-6 col-sm-6">
-                                <%= f.label :farming_plot_id%>  
-                                <%= f.select :farming_plot_id, options_for_select(@farming_plots),{},{required: 'true', autofocus: 'true',prompt: "----CHOOSE", class: 'form-control'}%> 
-
+                                <%= f.label :program_production_id%>  
+                               
                               </div>
+                            <input value="<%  @farma %>"/>
                           </div>
                           <div class="row"></br>
                               <div class="form-group col-xs-10">
-                                  <div class="form-group col-xs-2 col-sm-2">
+                                  <div class="form-group col-xs-4 col-sm-4">
                                       <label>Type Of Service  </label>
                                       <%= select("type_service","type_of_service_id", options_for_select(@type_services), {}, {required: 'true', class: "form-control", include_blank: ''})%>                        
                                     </div>
 
-                                    <div class="form-group col-xs-2 col-sm-2">                               
+                                    <div class="form-group col-xs-3 col-sm-3">                               
                                         <label for="amount">Amount</label>                            
                                         <input id="amount" class="form-control"/>
                                     </div>                                    
 
-                                    <div class="form-group col-xs-2 col-sm-2">                               
-                                        <a href="#" class="btn btn-default" id="agregarCostOper">ADD</a>
+                                    <div class="form-group col-xs-1 col-sm-1">                               
+                                        <a href="#" class="btn btn-default" id="agregarCostOperOuts">ADD</a>
                                     </div>
                                 </div>
                             </div>
@@ -77,8 +77,8 @@
                             </div>
                              <input type="text" name="cost_oper_machine_cont[total]" id="InputTotal"/>
                             <div class="controls pull-right">
-                                <button type="submit" class="btn btn-primary">Save</button>
-                                <button type="reset" class="btn btn-danger">Cancel</button>
+                                <button type="submit" class="btn btn-primary" >Save</button>
+                                <button type="reset" class="btn btn-danger" id="cancel">Cancel</button>
                             </div>
                           <%end%>
                       </div>

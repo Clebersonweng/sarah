@@ -1,0 +1,42 @@
+<%= form_for(supply_detail) do |f| %>
+  <% if supply_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(supply_detail.errors.count, "error") %> prohibited this supply_detail from being saved:</h2>
+
+      <ul>
+      <% supply_detail.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :supply %>
+    <%= f.text_field :supply %>
+  </div>
+
+  <div class="field">
+    <%= f.label :product_id %>
+    <%= f.text_field :product_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :quantity_needed %>
+    <%= f.text_field :quantity_needed %>
+  </div>
+
+  <div class="field">
+    <%= f.label :float %>
+    <%= f.text_field :float %>
+  </div>
+
+  <div class="field">
+    <%= f.label :subtotal %>
+    <%= f.text_field :subtotal %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

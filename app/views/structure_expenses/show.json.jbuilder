@@ -1,0 +1,1 @@
+json.partial! "structure_expenses/structure_expense", structure_expense: @structure_expense

@@ -1,0 +1,2 @@
+module ManuIndiExpenseDetsHelper
+end

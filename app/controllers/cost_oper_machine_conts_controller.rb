@@ -1,5 +1,8 @@
 class CostOperMachineContsController < ApplicationController
-  before_action :set_cost_oper_machine_cont, only: [:show, :edit, :update, :destroy]
+  #
+  # Costo operativo 
+  #
+  before_action :set_cost_oper_machine_cont, only: [:show, :edit, :update, :destroy]  
   before_action :authenticate_user!
   # GET /cost_oper_machine_conts
   # GET /cost_oper_machine_conts.json
@@ -15,9 +18,39 @@ class CostOperMachineContsController < ApplicationController
   # GET /cost_oper_machine_conts/new
   def new
     get_cost_machines_params
-    @cost_oper_machine_cont = CostOperMachineCont.new    
+    @cost_oper_machine_cont = CostOperMachineCont.new
+    @cost_oper_machine_cont = CostOperMachineCont.new(params[:idPrograma])
+    
+    #if(@cost_oper_machine_cont.farming_plot_id.present?)
+    # farmingPlot  = CostOperMachineCont.find(params[:idPrograma])
+    #end
+    #if(@cost_oper_machine_cont.farming_plot_id.present?)
+    # farmingPlot  = CostOperMachineCont.find_by_id(params[:id])
+    #@farma = farmingPlot
+    #puts "It works 1"
+    #end
+   
+    #id_program_production = ProgramProduction.last
+    # plot = ProgramProduction.find(id_program_production).estimate_sale.farming_plot
+    #@area_plot = plot.area
+    #@program_production = id_program_production.id
   end
-
+  def traer_programaProduccion() 
+    #@cost_oper_machine_cont = CostOperMachineCont.new 
+    if(@cost_oper_machine_cont.farming_plot_id.present?)
+      farmingPlot  = CostOperMachineCont.find(params[:idPrograma])
+      @farma = farmingPlot
+      if request.xhr?
+        render :text => farmingPlot.to_s 
+      end    
+    end
+    #@sepultura = @difunto.sepultura(:first)
+    # @sepultura_nueva = Sepultura.where("cod_sepultura<>?",@sepultura.cod_sepultura)
+ 
+    respond_to do |format|
+      format.html { redirect_to cost_oper_machine_conts_url, notice: 'No pudo calcular el valor de la parcela.' }
+    end
+  end
   # GET /cost_oper_machine_conts/1/edit
   def edit
     get_cost_machines_params
@@ -69,14 +102,15 @@ class CostOperMachineContsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_cost_oper_machine_cont
     @cost_oper_machine_cont = CostOperMachineCont.find(params[:id])
+   # @traerPrograma = CostOperMachineCont.find(params[:idPrograma])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def cost_oper_machine_cont_params
-    params.require(:cost_oper_machine_cont).permit(:farming_plot_id, :total,cost_oper_machine_cont_details_attributes: [:cost_oper_machine_cont, :type_of_service_id,:amount, :subtotal])
+    params.require(:cost_oper_machine_cont).permit(:program_production_id, :total,cost_oper_machine_cont_details_attributes: [:cost_oper_machine_cont, :type_of_service_id,:amount, :subtotal])
   end
   def get_cost_machines_params
-    @farming_plots = FarmingPlot.all.collect {|p| [ p.name, p.id ] }
+   # @programs = CostOperMachineCont.program_production.collect {|p| [ p.program_production, p.id ] }
     @type_services = TypeOfService.all.collect {|p| [ p.name, p.id ,{"data-price"=> p.price, "data-u_measure"=>p.unit_of_measurement.name}] } 
     @unit_measure = UnitOfMeasurement.all.collect { |p| [p.name, p.id ]}
   end

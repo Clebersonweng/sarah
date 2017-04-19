@@ -1,0 +1,42 @@
+<%= form_for(manu_indi_expense) do |f| %>
+  <% if manu_indi_expense.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(manu_indi_expense.errors.count, "error") %> prohibited this manu_indi_expense from being saved:</h2>
+
+      <ul>
+      <% manu_indi_expense.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :program_production %>
+    <%= f.text_field :program_production %>
+  </div>
+
+  <div class="field">
+    <%= f.label :chart_of_account_id %>
+    <%= f.text_field :chart_of_account_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :total_fixed %>
+    <%= f.text_field :total_fixed %>
+  </div>
+
+  <div class="field">
+    <%= f.label :total_variable %>
+    <%= f.text_field :total_variable %>
+  </div>
+
+  <div class="field">
+    <%= f.label :totalFixedAndVariable %>
+    <%= f.text_field :totalFixedAndVariable %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,1 @@
+json.partial! "stru_expense_dets/stru_expense_det", stru_expense_det: @stru_expense_det

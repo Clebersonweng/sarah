@@ -1,0 +1,1 @@
+json.array! @structure_expenses, partial: 'structure_expenses/structure_expense', as: :structure_expense

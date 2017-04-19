@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Structure expense:</strong>
+  <%= @stru_expense_det.structure_expense %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @stru_expense_det.name %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @stru_expense_det.amount %>
+</p>
+
+<p>
+  <strong>Subtotal:</strong>
+  <%= @stru_expense_det.subtotal %>
+</p>
+
+<%= link_to 'Edit', edit_stru_expense_det_path(@stru_expense_det) %> |
+<%= link_to 'Back', stru_expense_dets_path %>

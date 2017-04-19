@@ -1,42 +1,31 @@
+<p id="notice"><%= notice %></p>
 
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-heading"><h3 align="center">Supplies</h3>
-                <%=render 'layouts/submenu' %>
-            </div>
-            <div class="panel-body">
-                <table data-toggle="table" data-url="supplies"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="tradename" data-sort-order="desc">
-                    <thead>
-                        <tr>
-                            <th data-field="id" data-sortable="true" data-checkbox="true">Item ID</th>
-                            <th data-field="maker" >Maker</th> 
-                            <th data-field="unit_of_measurement" >U.M</th>                            
-                            <th data-field="tradename"  data-sortable="true">Tradename</th>
-                            <th data-field="price" data-sortable="true"> Price</th>
-                            <th data-field="dosage" >Dosage</th>
-                            <th data-field="cost_per_hectare" >Cost per hectare</th>
-                            <th data-field="description" >Description</th>
+<h1>Supplies</h1>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% @supplies.each do |supply| %>
-                          <tr>
-                              <td><%= supply.id%></td>
-                              <td><%= supply.maker%></td>
-                              <td><%= supply.unit_of_measurement.abbreviation%></td>
-                              <td><%= supply.tradename%></td>
-                              <td><%= number_to_currency supply.price%></td>
-                              <td><%= supply.dosage%></td>
-                              <td><%= number_to_currency supply.cost_per_hectare%></td>
-                              <td><%= supply.description%></td>
+<table>
+  <thead>
+    <tr>
+      <th>Programproduction</th>
+      <th>Chartofaccount</th>
+      <th>Total</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
 
-                          </tr>
-                        <% end %>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
+  <tbody>
+    <% @supplies.each do |supply| %>
+      <tr>
+        <td><%= supply.programProduction %></td>
+        <td><%= supply.chartOfAccount %></td>
+        <td><%= supply.total %></td>
+        <td><%= link_to 'Show', supply %></td>
+        <td><%= link_to 'Edit', edit_supply_path(supply) %></td>
+        <td><%= link_to 'Destroy', supply, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Supply', new_supply_path %>

@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Mark Spending Dets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Mark spending</th>
+      <th>Name</th>
+      <th>Amount</th>
+      <th>Descr</th>
+      <th>Is fixed</th>
+      <th>Subtotal</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @mark_spending_dets.each do |mark_spending_det| %>
+      <tr>
+        <td><%= mark_spending_det.mark_spending %></td>
+        <td><%= mark_spending_det.name %></td>
+        <td><%= mark_spending_det.amount %></td>
+        <td><%= mark_spending_det.descr %></td>
+        <td><%= mark_spending_det.is_fixed %></td>
+        <td><%= mark_spending_det.subtotal %></td>
+        <td><%= link_to 'Show', mark_spending_det %></td>
+        <td><%= link_to 'Edit', edit_mark_spending_det_path(mark_spending_det) %></td>
+        <td><%= link_to 'Destroy', mark_spending_det, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Mark Spending Det', new_mark_spending_det_path %>

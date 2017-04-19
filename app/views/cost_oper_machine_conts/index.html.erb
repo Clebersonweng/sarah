@@ -20,7 +20,7 @@
                         <% @cost_oper_machine_conts.each do |machine_out| %>
                           <tr>
                               <td><%= machine_out.id%></td>                             
-                              <td><%= machine_out.farming_plot.name%></td>   
+                              <td><%= # machine_out.program_production.estimate_sale.price%></td>   
                               <% machine_out.cost_oper_machine_cont_details.each do |details| %>
                                 <td><%= details.type_of_service.name %></td> 
                                  <td><%= details.type_of_service.unit_of_measurement.name %></td> 

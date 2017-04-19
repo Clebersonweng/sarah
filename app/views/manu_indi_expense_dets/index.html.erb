@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Manu Indi Expense Dets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Manu indi expense</th>
+      <th>Name</th>
+      <th>Isfixed</th>
+      <th>Subtotal</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @manu_indi_expense_dets.each do |manu_indi_expense_det| %>
+      <tr>
+        <td><%= manu_indi_expense_det.manu_indi_expense %></td>
+        <td><%= manu_indi_expense_det.name %></td>
+        <td><%= manu_indi_expense_det.isFixed %></td>
+        <td><%= manu_indi_expense_det.subtotal %></td>
+        <td><%= link_to 'Show', manu_indi_expense_det %></td>
+        <td><%= link_to 'Edit', edit_manu_indi_expense_det_path(manu_indi_expense_det) %></td>
+        <td><%= link_to 'Destroy', manu_indi_expense_det, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Manu Indi Expense Det', new_manu_indi_expense_det_path %>

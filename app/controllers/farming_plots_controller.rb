@@ -80,10 +80,11 @@ class FarmingPlotsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def farming_plot_params
-    params.require(:farming_plot).permit(:code, :name, :area, :type_of_crop_id, :culture_period_start, :culture_period_end,:employee_id ,:description)
+    params.require(:farming_plot).permit(:code, :name, :area, :type_of_crop_id,:person_id ,:description)
   end
   def get_params_plot
     @type_of_crops = TypeOfCrop.all.collect { |type| [type.name, type.id]}
-    @employees = Employee.all.collect { |type| [type.name, type.id]}
+    @person = Person.all.collect { |type| [type.name, type.id]}
+    @charts = ChartOfAccount.all.collect {|type| [type.name, type.id]}
   end
 end

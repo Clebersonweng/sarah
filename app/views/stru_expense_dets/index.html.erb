@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Stru Expense Dets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Structure expense</th>
+      <th>Name</th>
+      <th>Amount</th>
+      <th>Subtotal</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stru_expense_dets.each do |stru_expense_det| %>
+      <tr>
+        <td><%= stru_expense_det.structure_expense %></td>
+        <td><%= stru_expense_det.name %></td>
+        <td><%= stru_expense_det.amount %></td>
+        <td><%= stru_expense_det.subtotal %></td>
+        <td><%= link_to 'Show', stru_expense_det %></td>
+        <td><%= link_to 'Edit', edit_stru_expense_det_path(stru_expense_det) %></td>
+        <td><%= link_to 'Destroy', stru_expense_det, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Stru Expense Det', new_stru_expense_det_path %>

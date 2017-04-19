@@ -50,6 +50,7 @@ class EstimateSalesController < ApplicationController
   # PATCH/PUT /estimate_sales/1.json
   def update
     get_estimate_sale_params
+    
     respond_to do |format|
       if @estimate_sale.update(estimate_sale_params)
         flash[:notice] = "Successfull be update"
@@ -80,9 +81,11 @@ class EstimateSalesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def estimate_sale_params
-    params.require(:estimate_sale).permit(:farming_plot_id, :estimate_production, :total_production, :price, :gross_sale)
+    params.require(:estimate_sale).permit(:farming_plot_id,:chart_of_account_id, :estimate_production, :total_production, :price, :gross_sale)
   end
   def get_estimate_sale_params
     @farming_plots = FarmingPlot.all.collect {|p| [ p.name, p.id, {"data-area-parcela"=>p.area} ] }
+    @charts = ChartOfAccount.all.collect {|type|[type.name, type.id]}
+   # @farm = EstimateSale.farming_plot.find(:estimate_sale_farming_plot_id)
   end
 end

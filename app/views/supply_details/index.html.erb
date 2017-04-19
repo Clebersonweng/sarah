@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Supply Details</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Supply</th>
+      <th>Product</th>
+      <th>Quantity needed</th>
+      <th>Float</th>
+      <th>Subtotal</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @supply_details.each do |supply_detail| %>
+      <tr>
+        <td><%= supply_detail.supply %></td>
+        <td><%= supply_detail.product %></td>
+        <td><%= supply_detail.quantity_needed %></td>
+        <td><%= supply_detail.float %></td>
+        <td><%= supply_detail.subtotal %></td>
+        <td><%= link_to 'Show', supply_detail %></td>
+        <td><%= link_to 'Edit', edit_supply_detail_path(supply_detail) %></td>
+        <td><%= link_to 'Destroy', supply_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Supply Detail', new_supply_detail_path %>

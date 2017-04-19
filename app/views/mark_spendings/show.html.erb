@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Estimate sale:</strong>
+  <%= @mark_spending.estimate_sale %>
+</p>
+
+<p>
+  <strong>Chart of account:</strong>
+  <%= @mark_spending.chart_of_account %>
+</p>
+
+<p>
+  <strong>Total:</strong>
+  <%= @mark_spending.total %>
+</p>
+
+<%= link_to 'Edit', edit_mark_spending_path(@mark_spending) %> |
+<%= link_to 'Back', mark_spendings_path %>

@@ -1,0 +1,1 @@
+json.array! @stru_expense_dets, partial: 'stru_expense_dets/stru_expense_det', as: :stru_expense_det

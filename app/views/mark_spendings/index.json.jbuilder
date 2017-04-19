@@ -1,0 +1,1 @@
+json.array! @mark_spendings, partial: 'mark_spendings/mark_spending', as: :mark_spending

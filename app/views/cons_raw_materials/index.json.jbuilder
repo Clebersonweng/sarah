@@ -1,1 +1,0 @@
-json.array! @cons_raw_materials, partial: 'cons_raw_materials/cons_raw_material', as: :cons_raw_material

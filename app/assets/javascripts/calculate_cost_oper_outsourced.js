@@ -5,6 +5,7 @@ $(document).ready(function() {
     var amount;
     var priceTypeOfService;
     var UmedTypeOfService;
+    var Umed;
     var addNewCost = function(type_service, Um, price, amount, subtotal) {
         return "<tr>" + 
                     "<td>" + type_service + "</td>" +
@@ -34,14 +35,58 @@ $(document).ready(function() {
                     "<td class='total'>" + total + "</td>" + "<td style='text-align: center'>" + "<a href='#'" + "id='quitar'>" + "<i class='icon-minus'></i>" + "</a>" + "</td>" + 
                 "</tr>";
     }
-  
-   
+    //para enviar para el controller via ajax para poder traer el total de produccion para esta parcela
+    jQuery('#cost_oper_machine_cont_farming_plot_id').change(function() {
+ 
+        var id = $('#cost_oper_machine_cont_farming_plot_id').val();
+        $.ajax({
+            url: '?idPrograma='+id,
+            async: true,
+            complete: function() {},
+             success: function(data, textStatus, xhr) {
+                        alert("data es:"+id);
+                      },
+               error: function() {
+                        alert("Ajax error!")
+                      }
+          });
+        return false;
+    });
+ function chama(){
+    url = '/cost_oper_machine_cont/me_chama'; 
+    new Ajax.Request(url, {onComplete: function(transport){ alert(transport.responseText); } });
+  }
+    /**verifico si la u.m es bolsa, ha, hs y calculo de acuerdo a esto el subtotal*/
+    $('#type_service_type_of_service_id').on("change", function() { 
 
-/*aqui agrego todos los detalles de costo operativo de maquinaria tercerizada, determino el tipo de servicio anterior en el formulario
-* y aqui solo agrego el tipo de servicio la cantidad de vezes realizada, la cual me calcula el total pago de servicios de terceros realizados
-*/
+     Umed =  $("#type_service_type_of_service_id option:selected").data("u_measure"); 
+    alert(Umed);
+        switch (Umed) { 
+                case 'BOLSA': 
+                        alert('Soy una bolsa!');
+                        break;
+                case 'HORAS': 
+                        alert('Soy Horas!');
+                        break;
+                case 'HECTAREAS': 
+                        alert('Soy Hectareas!');
+                        break;		
+                case 'TONELADAS': 
+                        alert('Soy Toneladas');
+                        break;
+                default:
+                        alert('No es una unidad de medida aceptada!');
+        }  
+    });
+    /**Calcular el total multiplicado por el area de la parcela*/
 
-$("#agregarCostOper").on("click", function(event) {
+
+
+    /*aqui agrego todos los detalles de costo operativo de maquinaria tercerizada, determino el tipo de servicio anterior en el formulario
+    * y aqui solo agrego el tipo de servicio la cantidad de vezes realizada, la cual me calcula el total pago de servicios de terceros realizados
+    */
+
+$("#agregarCostOperOuts").on("click", function(event) {
     event.preventDefault();
 
     typeOfservice = $("#type_service_type_of_service_id option:selected");//mostrar en el td  

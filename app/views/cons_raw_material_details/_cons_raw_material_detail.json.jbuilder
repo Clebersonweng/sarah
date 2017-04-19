@@ -1,2 +1,0 @@
-json.extract! cons_raw_material_detail, :id, :cons_raw_material_id, :supply_id, :total_unit, :subtotal, :created_at, :updated_at
-json.url cons_raw_material_detail_url(cons_raw_material_detail, format: :json)

@@ -1,5 +1,7 @@
 class EstimateSale < ApplicationRecord
-  has_one :program_production
   belongs_to :farming_plot
-  validates_presence_of :estimate_production, :price, :gross_sale 
+  belongs_to :chart_of_account
+  has_one :program_production
+  has_one :cost_oper_machine
+  validates_presence_of :estimate_production, :price, :gross_sale
 end

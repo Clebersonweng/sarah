@@ -3,9 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/ultimate/NetBeansProjects/sarah/app/views/cost_oper_machine_conts/_form.html.erb</file>
             <file>file:/home/ultimate/NetBeansProjects/sarah/log/development.log</file>
-            <file>file:/home/ultimate/NetBeansProjects/sarah/app/assets/javascripts/calculate_cost_oper_outsourced.js</file>
+            <file>file:/home/ultimate/NetBeansProjects/sarah/app/controllers/supplies_controller.rb</file>
+            <file>file:/home/ultimate/NetBeansProjects/sarah/app/views/supplies/_form.html.erb</file>
         </group>
     </open-files>
 </project-private>

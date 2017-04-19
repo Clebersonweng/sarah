@@ -1,1 +1,2 @@
-json.extract! supply, :id, :maker, :unit_of_measurement.name, :tradename, :price, :dosage, :cost_per_hectare, :description
+json.extract! supply, :id, :programProduction_id, :chartOfAccount_id, :total, :created_at, :updated_at
+json.url supply_url(supply, format: :json)

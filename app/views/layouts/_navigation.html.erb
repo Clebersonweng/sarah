@@ -24,9 +24,9 @@
                         <i class="fa fa-user"></i>
                         <% if current_user.blank?%>
                           redirect_to home
-                      <%elsif%>
-                         <%= current_user.email %>
-                      <%end%>
+                        <%elsif%>
+                          <%= current_user.email %>
+                        <%end%>
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu" role="menu">
@@ -112,7 +112,7 @@
                 </li>
             </ul>
         </li>
-        
+
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Outsourced machinery<b class="caret"></b></a>
             <ul class="dropdown-menu">
@@ -122,23 +122,23 @@
                 <li id="menu_man_powers">
                     <a href="../cost_oper_machine_conts"><i class="fa fa-fw fa-gear"></i> Outsourced machines</a>
                 </li>
-                
+
             </ul>
         </li>
         <!--dropdown para el usuario que tiene su propia maquinaria-->
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Cost Operational Own Machine<b class="caret"></b></a>
             <ul class="dropdown-menu">
-                 <li id="menu_brands">
+                <li id="menu_brands">
                     <a href="../brands"><i class="fa fa-fw fa-gear"></i> Brands</a>
                 </li>
-                 <li id="menu_models">
+                <li id="menu_models">
                     <a href="../models"><i class="fa fa-fw fa-gear"></i> Models</a>
                 </li>
-                 <li id="menu_machines">
+                <li id="menu_machines">
                     <a href="../machines"><i class="fa fa-fw fa-gear"></i> Machines</a>
                 </li>
-                 <li id="menu_implements">
+                <li id="menu_implements">
                     <a href="../implements"><i class="fa fa-fw fa-gear"></i> Implements</a>
                 </li>
                 <li id="menu_cost_oper_machines">
@@ -149,43 +149,22 @@
                 </li>
             </ul>
         </li>
-        
+
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-minus-square" aria-hidden="true"></i> Program Production <b class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li id="menu_program_productions">
                     <a href="../program_productions"><i class="fa fa-fw fa-gear"></i> Prog. Production</a>
-                </li>
-                <li id="menu_cons_raw_materials">
-                    <a href="../cons_raw_materials"><i class="fa fa-fw fa-gear"></i> Raw material Consumption</a>
-                </li>
-
+                </li>         
                 <li id="menu_manufac_indirect_exps">
                     <a href="../manufac_indirect_exps"><i class="fa fa-fw fa-gear"></i> Manufact. Indirect</a>
                 </li>
-                <li id="menu_overhead_expenses">
-                    <a href="../overhead_expenses"><i class="fa fa-fw fa-gear"></i> Overhead</a>
+                <li id="menu_products">
+                    <a href="../products"><i class="fa fa-fw fa-gear"></i> Products</a>
                 </li>
-                <li id="menu_purchase_raw_materials">
-                    <a href="../purchase_raw_materials"><i class="fa fa-fw fa-gear"></i> Purchase Raw Materials</a>
+                <li id="menu_man_powers">
+                    <a href="../man_powers"><i class="fa fa-fw fa-gear"></i> Man Power</a>
                 </li>
-                <li id="menu_manufac_indirect_exps">
-                    <a href="../manufac_indirect_exps"><i class="fa fa-fw fa-gear"></i> Manufac. Indirect Expenses</a>
-                </li>
-                <li id="menu_purchase_raw_materials">
-                    <a href="../purchase_raw_materials"><i class="fa fa-fw fa-gear"></i> Purchase Raw Materials</a>
-                </li>
-                <li id="menu_cost_operational_not_machines">
-                    <a href="../cost_oper_mach_cont"><i class="fa fa-fw fa-gear"></i> Cost Operational</a>
-                </li>
-                <li id="menu_maintenances">
-                    <a href="../maintenances"><i class="fa fa-fw fa-gear"></i> Maintenances</a>
-                </li>
-
-                <li id="menu_supplies">
-                    <a href="../supplies"><i class="fa fa-fw fa-gear"></i> Supplies</a>
-                </li>
-
 
 
             </ul>
@@ -204,12 +183,12 @@
     }else{
     $("#menu_"+controllerName).addClass("active");
     }
-    
+
     $(document).ready (function(){
-            $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
+    $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
     $("#success-alert").slideUp(500);
-});  
-           
+    });  
+
     });
 </script>
 

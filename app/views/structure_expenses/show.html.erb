@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Program production:</strong>
+  <%= @structure_expense.program_production %>
+</p>
+
+<p>
+  <strong>Chart of account:</strong>
+  <%= @structure_expense.chart_of_account %>
+</p>
+
+<p>
+  <strong>Total:</strong>
+  <%= @structure_expense.total %>
+</p>
+
+<%= link_to 'Edit', edit_structure_expense_path(@structure_expense) %> |
+<%= link_to 'Back', structure_expenses_path %>

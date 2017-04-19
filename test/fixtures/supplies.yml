@@ -1,19 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  maker: MyString
-  unit_of_measurement: one
-  tradename: MyString
-  price: 1.5
-  dosage: 1.5
-  cost_per_hectare: 1.5
-  description: MyText
+  programProduction: one
+  chartOfAccount: one
+  total: 1.5
 
 two:
-  maker: MyString
-  unit_of_measurement: two
-  tradename: MyString
-  price: 1.5
-  dosage: 1.5
-  cost_per_hectare: 1.5
-  description: MyText
+  programProduction: two
+  chartOfAccount: two
+  total: 1.5

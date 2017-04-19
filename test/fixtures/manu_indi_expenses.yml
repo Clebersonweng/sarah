@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  program_production: 
+  chart_of_account: one
+  total_fixed: 1.5
+  total_variable: 1.5
+  totalFixedAndVariable: 1.5
+
+two:
+  program_production: 
+  chart_of_account: two
+  total_fixed: 1.5
+  total_variable: 1.5
+  totalFixedAndVariable: 1.5

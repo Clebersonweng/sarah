@@ -1,12 +1,10 @@
 class SuppliesController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_supply, only: [:show, :edit, :update, :destroy]
 
   # GET /supplies
   # GET /supplies.json
   def index
     @supplies = Supply.all
-   
   end
 
   # GET /supplies/1
@@ -17,7 +15,6 @@ class SuppliesController < ApplicationController
   # GET /supplies/new
   def new
     @supply = Supply.new
-    @unit_of_measurement = UnitOfMeasurement.all.collect{|type| [type.name, type.id]}
   end
 
   # GET /supplies/1/edit
@@ -65,13 +62,17 @@ class SuppliesController < ApplicationController
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
-  def set_supply
-    @supply = Supply.find(params[:id])
-  end
+    # Use callbacks to share common setup or constraints between actions.
+    def set_supply
+      @supply = Supply.find(params[:id])
+    end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def supply_params
-    params.require(:supply).permit(:maker, :unit_of_measurement_id, :tradename, :price, :dosage, :cost_per_hectare, :description)
-  end
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def supply_params
+      params.require(:supply).permit(:program_production_id, :chart_of_account_id, :total)
+    end
+    def get_other_params
+      @charts = ChartOfAccount.all.collect{|c| [c.name, c.id]}
+      @programs = ProgramProduction.all.collect{|c| [c.program_production, c.id]}
+    end
 end

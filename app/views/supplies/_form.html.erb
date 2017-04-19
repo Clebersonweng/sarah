@@ -12,38 +12,21 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :maker %>
-    <%= f.text_field :maker %>
+    <%= f.label :program_production_id %>
+    <%= f.select(:program_production_id, options_for_select(@programs, :selected => f.object.program_production_id),:class => "form-control", :include_blank => true) %>
+                          
   </div>
 
-  <div class="field">
-    <%= f.label :unit_of_measurement_id,"U.M" %>
-   <%= f.select("unit_of_measurement_id", @unit_of_measurement)%>
-  </div>
+  <div class="form-group">                   
+                            <%= f.label :chart_of_account_id,class: "control-label col-sm-2 col-sm-offset-1" %>
+                              <div class="col-sm-4">
+                                  <%= f.select(:chart_of_account_id, options_for_select(@charts, :selected => f.object.chart_of_account_id),:class => "form-control", :include_blank => true) %>
+                              </div> 
+                          </div>
 
   <div class="field">
-    <%= f.label :tradename %>
-    <%= f.text_field :tradename %>
-  </div>
-
-  <div class="field">
-    <%= f.label :price %>
-    <%= f.text_field :price %>
-  </div>
-
-  <div class="field">
-    <%= f.label :dosage %>
-    <%= f.text_field :dosage %>
-  </div>
-
-  <div class="field">
-    <%= f.label :cost_per_hectare %>
-    <%= f.text_field :cost_per_hectare %>
-  </div>
-
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description %>
+    <%= f.label :total %>
+    <%= f.text_field :total %>
   </div>
 
   <div class="actions">

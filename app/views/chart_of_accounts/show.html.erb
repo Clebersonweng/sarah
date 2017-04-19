@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @chart_of_account.code %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @chart_of_account.name %>
+</p>
+
+<%= link_to 'Edit', edit_chart_of_account_path(@chart_of_account) %> |
+<%= link_to 'Back', chart_of_accounts_path %>

@@ -1,0 +1,47 @@
+<%= form_for(mark_spending_det) do |f| %>
+  <% if mark_spending_det.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(mark_spending_det.errors.count, "error") %> prohibited this mark_spending_det from being saved:</h2>
+
+      <ul>
+      <% mark_spending_det.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :mark_spending_id %>
+    <%= f.text_field :mark_spending_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :amount %>
+    <%= f.text_field :amount %>
+  </div>
+
+  <div class="field">
+    <%= f.label :descr %>
+    <%= f.text_area :descr %>
+  </div>
+
+  <div class="field">
+    <%= f.label :is_fixed %>
+    <%= f.check_box :is_fixed %>
+  </div>
+
+  <div class="field">
+    <%= f.label :subtotal %>
+    <%= f.text_field :subtotal %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

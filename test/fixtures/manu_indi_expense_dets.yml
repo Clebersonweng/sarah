@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  manu_indi_expense: one
+  name: MyString
+  isFixed: false
+  subtotal: 1.5
+
+two:
+  manu_indi_expense: two
+  name: MyString
+  isFixed: false
+  subtotal: 1.5

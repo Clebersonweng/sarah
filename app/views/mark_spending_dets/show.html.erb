@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Mark spending:</strong>
+  <%= @mark_spending_det.mark_spending %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @mark_spending_det.name %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @mark_spending_det.amount %>
+</p>
+
+<p>
+  <strong>Descr:</strong>
+  <%= @mark_spending_det.descr %>
+</p>
+
+<p>
+  <strong>Is fixed:</strong>
+  <%= @mark_spending_det.is_fixed %>
+</p>
+
+<p>
+  <strong>Subtotal:</strong>
+  <%= @mark_spending_det.subtotal %>
+</p>
+
+<%= link_to 'Edit', edit_mark_spending_det_path(@mark_spending_det) %> |
+<%= link_to 'Back', mark_spending_dets_path %>

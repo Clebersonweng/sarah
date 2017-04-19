@@ -1,0 +1,1 @@
+json.partial! "manu_indi_expenses/manu_indi_expense", manu_indi_expense: @manu_indi_expense

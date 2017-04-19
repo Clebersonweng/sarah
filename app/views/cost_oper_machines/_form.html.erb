@@ -26,63 +26,66 @@
                                 <%= f.label :farming_plot_id%>                                 
                                 <%= select("cost_oper_machine","farming_plot_id", options_for_select(@farming_plots),{}, {required: 'true', class: "form-control", include_blank: ''})%>                                  
                               </div>
-                          </div>
+                          </div></br>
                           <div class="row">
-                              <div class="form-group col-xs-4 col-sm-4">
-                                  <label>Machine</label>
-                                  <%= select("machine","machine_id", options_for_select(@machines), {}, {required: 'true', class: "form-control", include_blank: ''})%>                        
-                                </div>
-                                <div class="form-group col-xs-2 col-sm-2">                               
-                                    <label for="amount">Amount made</label>                            
-                                    <input id="amount" class="form-control"/>
-                                </div>
-                                <div id="divImplement" class="form-group col-xs-3 col-sm-3 col-xs-offset-1" style="display: none">
-                                    <label for="implement">Implement</label>
-                                    <%= select("implement","implement_id", options_for_select(@implements), {}, {required: 'true', autofocus: 'true', include_blank: '', class: 'form-control'})%>
-                                  </div>
-                                  </br>
-                                  <div class="form-group col-xs-offset-1">                               
-                                      <a href="#" class="btn btn-default" id="agregarCostOper">ADD</a>
-                                  </div>
-                              </div>
-                          </div>
-                          </br>
-                          <div id="detalhes-container">
-                              <table id="tabla" class=" table ">
-                                  <thead>
-                                      <tr>                                        
-                                          <th>Machine</th> 
-                                          <th>Implement</th> 
-                                          <th>amount</th>, 
-                                          <th>fuel (hs)</th> 
-                                          <th>lubricant(hs)</th>
-                                          <th>repair_and_maintenance(hs)</th>
-                                          <th>Total Time Oper.</th>
-                                          <th>Subtotal</th>
-                                          <th colspan="3"></th>
-                                      </tr>
-                                  </thead>
-                                  <tbody>
-                                      <!--agrego de forma dinamica-->
+                              <div class="form-group col-xs-10">
+                                  <div class="form-group col-xs-4 col-sm-4">
+                                      <label>Machine</label>
+                                      <%= select("machine","machine_id", options_for_select(@machines), {}, {required: 'true', class: "form-control", include_blank: ''})%>                        
+                                    </div>
+                                    <div id="divImplement" class="form-group col-xs-4 col-sm-4" style="display: none">
+                                        <label for="implement">Implement</label>
+                                        <%= select("implement","implement_id", options_for_select(@implements), {}, {required: 'true', autofocus: 'true', include_blank: '', class: 'form-control'})%>
+                                      </div>
 
-                                  </tbody>
-                                  <tfoot> <tr>                                         
-                                          <th id="15">Total</th>
-                                          <th></th><th></th><th></th><th></th><th></th><th></th><th id="TOTAL"></th>
-                                      </tr>
-                                  </tfoot>
-                              </table>
-                              <div id="addFilas">
+                                      <div class="form-group col-xs-3 col-sm-3">                               
+                                          <label for="amount">Amount made</label>                            
+                                          <input id="amount" class="form-control"/>
+                                      </div>
 
+
+                                      <div class="form-group col-xs-1 col-sm-1">                               
+                                          <a href="#" class="btn btn-default" id="agregarCostOper">ADD</a>
+                                      </div>
+                                  </div>
                               </div>
-                              <input type="hidden" name="cost_oper_machine[total]" id="InputTotal" />
-                              <div class="controls pull-right">
-                                  <button type="submit" class="btn btn-primary">Save</button>
-                                  <button type="reset" class="btn btn-danger">Cancel</button>
-                              </div>
-                            <%end%>
+                              </br>
+                              <div id="detalhes-container">
+                                  <table id="tabla" class=" table ">
+                                      <thead>
+                                          <tr>                                        
+                                              <th>Machine</th> 
+                                              <th>Implement</th> 
+                                              <th>amount</th>, 
+                                              <th>fuel (hs)</th> 
+                                              <th>lubricant(hs)</th>
+                                              <th>repair_and_maintenance(hs)</th>
+                                              <th>Total Time Oper.</th>
+                                              <th>Subtotal</th>
+                                              <th colspan="3"></th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          <!--agrego de forma dinamica-->
+
+                                      </tbody>
+                                      <tfoot> <tr>                                         
+                                              <th id="15">Total</th>
+                                              <th></th><th></th><th></th><th></th><th></th><th></th><th id="TOTAL"></th>
+                                          </tr>
+                                      </tfoot>
+                                  </table>
+                                  <div id="addFilas">
+
+                                  </div>
+                                  <input type="hidden" name="cost_oper_machine[total]" id="InputTotal" />
+                                  <div class="controls pull-right">
+                                      <button type="submit" class="btn btn-primary">Save</button>
+                                      <button type="reset" class="btn btn-danger" id="cancel">Cancel</button>
+                                  </div>
+                                <%end%>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>

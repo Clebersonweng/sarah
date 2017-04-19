@@ -33,9 +33,10 @@ $(document).ready(function() {
                      "<td>" + amount + "</td>" + 
                      "<td>" + nameFuel + "</td>" +
                      "<td>" + nameImplement + "</td>" + 
-                     "<td>" + lubricant + "</td>" 
-                    + "<td>" + RYM + "</td>" +
+                     "<td>" + lubricant + "</td>" +
                      "<td>" + totalTimeOper + "</td>" + 
+                     "<td>" + RYM + "</td>" +
+                    
                     "<td class='subtotal'>" + subtotal + "</td>" + "<td style='text-align: center'>" + "<a href='#'" + "id='quitar'>" + "<i class='icon-minus'></i>" + "</a>" + "</td>" +
                 "</tr>";
     };
@@ -176,6 +177,15 @@ $('#machine_machine_id').on("change", function() {
         $('#divImplement').hide();
     }
 }); 
+
+/** Limpio la tabla cargada al hacer click en cancel */
+$("#cancel").on("click", function(event) {
+    event.preventDefault();
+    $( "#tabla tbody tr" ).each( function(){
+        this.parentNode.removeChild( this ); 
+    });
+});
+
 
 $("#quitar").on("click", function(event) {
     event.preventDefault();

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  estimate_sale: one
+  chart_of_account: one
+  total: 1.5
+
+two:
+  estimate_sale: two
+  chart_of_account: two
+  total: 1.5

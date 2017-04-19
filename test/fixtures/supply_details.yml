@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  supply: 
+  product: one
+  quantity_needed: MyString
+  float: MyString
+  subtotal: 1.5
+
+two:
+  supply: 
+  product: two
+  quantity_needed: MyString
+  float: MyString
+  subtotal: 1.5

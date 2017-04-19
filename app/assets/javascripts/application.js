@@ -20,10 +20,4 @@
 //= require lumino.glyphs
 
 
-$(function() {
-  
-  $("#type_of_crop_search input").keyup(function() {
-    $.get($("#type_of_crop_search").attr("action"), $("#type_of_crop_search").serialize(), null, "script");
-    return false;
-  });
-});
+

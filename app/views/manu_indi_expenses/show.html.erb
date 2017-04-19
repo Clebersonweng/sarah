@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Program production:</strong>
+  <%= @manu_indi_expense.program_production %>
+</p>
+
+<p>
+  <strong>Chart of account:</strong>
+  <%= @manu_indi_expense.chart_of_account %>
+</p>
+
+<p>
+  <strong>Total fixed:</strong>
+  <%= @manu_indi_expense.total_fixed %>
+</p>
+
+<p>
+  <strong>Total variable:</strong>
+  <%= @manu_indi_expense.total_variable %>
+</p>
+
+<p>
+  <strong>Totalfixedandvariable:</strong>
+  <%= @manu_indi_expense.totalFixedAndVariable %>
+</p>
+
+<%= link_to 'Edit', edit_manu_indi_expense_path(@manu_indi_expense) %> |
+<%= link_to 'Back', manu_indi_expenses_path %>

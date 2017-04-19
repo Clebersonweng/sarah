@@ -17,7 +17,7 @@ class SuppliesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create supply" do
     assert_difference('Supply.count') do
-      post supplies_url, params: { supply: { cost_per_hectare: @supply.cost_per_hectare, description: @supply.description, dosage: @supply.dosage, maker: @supply.maker, price: @supply.price, tradename: @supply.tradename, unit_of_measurement_id: @supply.unit_of_measurement_id } }
+      post supplies_url, params: { supply: { chartOfAccount_id: @supply.chartOfAccount_id, programProduction_id: @supply.programProduction_id, total: @supply.total } }
     end
 
     assert_redirected_to supply_url(Supply.last)
@@ -34,7 +34,7 @@ class SuppliesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update supply" do
-    patch supply_url(@supply), params: { supply: { cost_per_hectare: @supply.cost_per_hectare, description: @supply.description, dosage: @supply.dosage, maker: @supply.maker, price: @supply.price, tradename: @supply.tradename, unit_of_measurement_id: @supply.unit_of_measurement_id } }
+    patch supply_url(@supply), params: { supply: { chartOfAccount_id: @supply.chartOfAccount_id, programProduction_id: @supply.programProduction_id, total: @supply.total } }
     assert_redirected_to supply_url(@supply)
   end
 

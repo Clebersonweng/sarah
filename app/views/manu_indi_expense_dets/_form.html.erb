@@ -1,0 +1,37 @@
+<%= form_for(manu_indi_expense_det) do |f| %>
+  <% if manu_indi_expense_det.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(manu_indi_expense_det.errors.count, "error") %> prohibited this manu_indi_expense_det from being saved:</h2>
+
+      <ul>
+      <% manu_indi_expense_det.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :manu_indi_expense_id %>
+    <%= f.text_field :manu_indi_expense_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :isFixed %>
+    <%= f.check_box :isFixed %>
+  </div>
+
+  <div class="field">
+    <%= f.label :subtotal %>
+    <%= f.text_field :subtotal %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
