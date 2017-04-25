@@ -1,35 +1,35 @@
 <%= form_for(supply) do |f| %>
   <% if supply.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(supply.errors.count, "error") %> prohibited this supply from being saved:</h2>
+        <h2><%= pluralize(supply.errors.count, "error") %> prohibited this supply from being saved:</h2>
 
-      <ul>
-      <% supply.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+            <% supply.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+        </ul>
     </div>
   <% end %>
 
   <div class="field">
-    <%= f.label :program_production_id %>
-    <%= f.select(:program_production_id, options_for_select(@programs, :selected => f.object.program_production_id),:class => "form-control", :include_blank => true) %>
-                          
+      <%= f.label :program_production_id %>
+      <%@idUltimoPrograma%>
+
   </div>
 
   <div class="form-group">                   
-                            <%= f.label :chart_of_account_id,class: "control-label col-sm-2 col-sm-offset-1" %>
-                              <div class="col-sm-4">
-                                  <%= f.select(:chart_of_account_id, options_for_select(@charts, :selected => f.object.chart_of_account_id),:class => "form-control", :include_blank => true) %>
-                              </div> 
-                          </div>
+      <%= f.label :chart_of_account_id,class: "control-label col-sm-2 col-sm-offset-1" %>
+        <div class="col-sm-4">
+            <%= f.select(:chart_of_account_id, options_for_select(@charts),:class => "form-control", :include_blank => true) %>
+        </div> 
+    </div>
 
-  <div class="field">
-    <%= f.label :total %>
-    <%= f.text_field :total %>
-  </div>
+    <div class="field">
+        <%= f.label :total %>
+        <%= f.text_field :total %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+    <div class="actions">
+        <%= f.submit %>
+    </div>
+  <% end %>

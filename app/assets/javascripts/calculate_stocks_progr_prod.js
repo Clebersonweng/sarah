@@ -9,6 +9,7 @@ $(document)
         var total_production =0;
       /**tomo el area de la parcela para multiplicar por la estimacion de produccion,
         segun el precio  determinando el ingreso bruto de las ventas**/
+
       $("#program_production_stock_initial").change(function(){        
            stock_end = $("#program_production_stock_end").val();
            stock_start = $("#program_production_stock_initial").val();

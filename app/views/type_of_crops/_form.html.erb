@@ -1,21 +1,50 @@
-<%= form_for(type_of_crop, html: { class: 'form-horizontal' }) do |f| %>
 
-  <div class="field">
-      <%= f.label :code %>
-      <%= f.text_field :code %>
-  </div>
+</br>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3 align="center"> Tipo de Cultivo</h3>
+                <%=render 'layouts/submenu' %>
+            </div>
 
-  <div class="field">
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-  </div>
+            <div class="panel-body">
+                <%=form_for @type_of_crop, url: type_of_crops_path(@type_of_crop),:html => { class: 'form-horizontal' }, :method => :POST do |f| %>
+                    <div class="col-sm-6 col-sm-offset-2">
+                        <div class="form-group">  
+                            <%= f.label :code, class: "control-label col-sm-2 col-sm-offset-1"%>
+                              <div class="col-sm-2">
+                                  <%= f.text_field :code,autofocus: true , class: "form-control"   %>
+                                  <%= f.object.errors[:code].to_sentence if f.object.errors[:code] %>
+                                </div>
+                            </div>
 
-  <div class="field">
-      <%= f.label :variety %>
-      <%= f.text_field :variety %>
-  </div>
+                            <div class="form-group">  
+                                <%= f.label :name,class: "control-label col-sm-2 col-sm-offset-1" %>
+                                  <div class="col-sm-4">
+                                      <%= f.text_field :name,autofocus: true , class: "form-control" ,onblur: "this.value=this.value.toUpperCase()"  %>
+                                      <p class="help-block"> <%= f.object.errors[:name].to_sentence if f.object.errors[:name] %></p>
+                                    </div>
+                                </div>
 
-  <div class="actions">
-      <%= f.submit %>
-  </div>
-<% end %>
+                                <div class="form-group">  
+                                    <%= f.label :variety,class: "control-label col-sm-2 col-sm-offset-1"  %>
+                                      <div class="col-sm-4">                                         
+                                          <%= f.text_field :variety,autofocus: true , class: "form-control"  %>                                                
+                                        </div>
+                                    </div>
+
+
+                                    <div class="control-group col-sm-offset-4">
+                                        <div class="controls">
+                                            <button type="reset" class="btn btn-danger btn-space">Cancel</button>
+                                            
+                                            <button type="submit" class="btn btn-primary">Save</button>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                              <% end %>
+                          </div>
+                      </div>
+                  </div>

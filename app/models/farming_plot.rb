@@ -2,6 +2,10 @@ class FarmingPlot < ApplicationRecord
   belongs_to :type_of_crop
   belongs_to :person
   has_many :estimate_sales, :dependent => :destroy 
+  has_many :cost_oper_machine_conts
+  validates_presence_of :code, :name,:area, :type_of_crop, :person
+  validates :name, length: { minimum: 3 }
+  validates :code, uniqueness: true
   
  # validate :expiration_date_cannot_be_in_the_past_start, :expiration_date_cannot_be_in_the_past_end
   #validates_presence_of :code, :name, :area, :type_of_crop_id, :culture_period_start, :culture_period_end

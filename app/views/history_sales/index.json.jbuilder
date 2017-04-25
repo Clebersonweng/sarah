@@ -1,0 +1,1 @@
+json.array! @history_sales, partial: 'history_sales/history_sale', as: :history_sale

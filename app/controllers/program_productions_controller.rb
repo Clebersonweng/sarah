@@ -15,27 +15,35 @@ class ProgramProductionsController < ApplicationController
 
   # GET /program_productions/new
   def new
+     
     @program_production = ProgramProduction.new
-    #@get_last_estimate_and_farming_plot = EstimateSale.all.collect{|type| [type.farming_plot_id.name, type.id]}
+    id_ventas = EstimateSale.last()
+    venta = EstimateSale.find(id_ventas)
+    @ventasId = venta.id
+    
+     
   end
 
   # GET /program_productions/1/edit
   def edit
+    id_ventas = EstimateSale.last()
+    venta = EstimateSale.find(id_ventas)
+    @ventasId = venta.id
   end
 
   # POST /program_productions
   # POST /program_productions.json
   def create
-    
+    get_other_params
     @program_production = ProgramProduction.create(program_production_params)
 
     respond_to do |format|
       if @program_production.save
-        format.html { redirect_to @program_production, notice: 'Program production was successfully created.' }
-        format.json { render :show, status: :created, location: @program_production }
+        flash[:notice] = "Successfull be create"
+        format.html { redirect_to  action:"index"}
       else
-        format.html { render :new }
-        format.json { render json: @program_production.errors, status: :unprocessable_entity }
+        flash[:alert] = "Unsuccessfull be create"
+        format.html { redirect_to  action:"edit"}
       end
     end
   end
@@ -45,8 +53,8 @@ class ProgramProductionsController < ApplicationController
   def update
     respond_to do |format|
       if @program_production.update(program_production_params)
-        format.html { redirect_to @program_production, notice: 'Program production was successfully updated.' }
-        format.json { render :show, status: :ok, location: @program_production }
+        format.html { redirect_to @program_production, notice: 'Person was successfully created.' }
+        format.json { render :show, status: :created, location: @program_production }
       else
         format.html { render :edit }
         format.json { render json: @program_production.errors, status: :unprocessable_entity }
@@ -65,13 +73,16 @@ class ProgramProductionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_program_production
-      @program_production = ProgramProduction.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_program_production
+    @program_production = ProgramProduction.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def program_production_params
-      params.require(:program_production).permit(:estimate_sale_id, :stock_initial, :stock_end, :variation_stock, :program_production)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def program_production_params
+    params.require(:program_production).permit(:estimate_sale_id, :stock_initial, :stock_end, :variation_stock, :program_production)
+  end
+  def get_other_params
+    # @sales = EstimateSale.last()
+  end
 end

@@ -6152,6 +6152,10 @@ button.close {
     display: none !important;
   }
 }
+//espacio entre los botones
+.btn-space {
+    margin-right: 15px;
+}
 /*# sourceMappingURL=bootstrap.css.map */
 
 /*agregado popup para el campo de implementos*/

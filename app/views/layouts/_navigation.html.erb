@@ -80,29 +80,49 @@
             <% end %>
         </li>
         <li id="menu_type_of_crops">
-            <a href="../type_of_crops">
+            <%= link_to "../type_of_crops", :controller => "type_of_crops", :action => "index" do  %>
+              <svg class="glyph stroked table">
+              <use xlink:href="#stroked-table">
+              </use>
+              </svg>
+              Type Of Crops
+              </a>
+            <%end%>
+        </li>
+        <li id="menu_structure_expenses">
+            <a href="../structure_expenses">
                 <svg class="glyph stroked table">
                 <use xlink:href="#stroked-table">
                 </use>
                 </svg>
-                Type Of Crops
+                Gastos de Estructura
             </a>
         </li>
-        <li id="menu_supplies">
-            <a href="../supplies">
+        <li id="menu_manu_indi_expenses">
+            <a href="../manu_indi_expenses">
                 <svg class="glyph stroked table">
                 <use xlink:href="#stroked-table">
                 </use>
                 </svg>
-                Supplies
+                Gastos Ind. de Fabr
+            </a>
+        </li>
+
+        <li id="menu_chart_of_accounts">
+            <a href="../chart_of_accounts">
+                <svg class="glyph stroked table">
+                <use xlink:href="#stroked-table">
+                </use>
+                </svg>
+                Chart Of Account
             </a>
         </li>
 
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Manpower<b class="caret"></b></a>
             <ul class="dropdown-menu">
-                <li id="menu_employees">
-                    <a href="../employees"><i class="fa fa-fw fa-gear"></i> Employees</a>
+                <li id="menu_people">
+                    <a href="../people"><i class="fa fa-fw fa-gear"></i> People</a>
                 </li>
                 <li id="menu_man_powers">
                     <a href="../man_powers"><i class="fa fa-fw fa-user"></i> Manpower Estimate</a>
@@ -156,15 +176,26 @@
                 <li id="menu_program_productions">
                     <a href="../program_productions"><i class="fa fa-fw fa-gear"></i> Prog. Production</a>
                 </li>         
-                <li id="menu_manufac_indirect_exps">
-                    <a href="../manufac_indirect_exps"><i class="fa fa-fw fa-gear"></i> Manufact. Indirect</a>
-                </li>
+
                 <li id="menu_products">
                     <a href="../products"><i class="fa fa-fw fa-gear"></i> Products</a>
                 </li>
                 <li id="menu_man_powers">
                     <a href="../man_powers"><i class="fa fa-fw fa-gear"></i> Man Power</a>
                 </li>
+
+
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-minus-square" aria-hidden="true"></i> Insumos <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li id="menu_program_productions">
+                    <a href="../products"><i class="fa fa-fw fa-gear"></i> Productos</a>
+                </li>         
+                <li id="menu_program_productions">
+                    <a href="../insumos"><i class="fa fa-fw fa-gear"></i> Insumos</a>
+                </li> 
 
 
             </ul>

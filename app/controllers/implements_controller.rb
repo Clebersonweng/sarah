@@ -26,6 +26,7 @@ class ImplementsController < ApplicationController
   # POST /implements
   # POST /implements.json
   def create
+    get_params_implements
     @implement = Implement.new(implement_params)
 
     respond_to do |format|

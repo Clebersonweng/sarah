@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :employees, :dependent => :destroy
+  has_many :person, :dependent => :destroy
   devise :timeoutable, :timeout_in => 30.minutes
  
   devise :database_authenticatable, :registerable,

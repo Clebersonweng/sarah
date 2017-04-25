@@ -17,27 +17,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% @cost_oper_machine_conts.each do |machine_out| %>
-                          <tr>
-                              <td><%= machine_out.id%></td>                             
-                              <td><%= # machine_out.program_production.estimate_sale.price%></td>   
-                              <% machine_out.cost_oper_machine_cont_details.each do |details| %>
-                                <td><%= details.type_of_service.name %></td> 
-                                 <td><%= details.type_of_service.unit_of_measurement.name %></td> 
-                              <% end %>
-
-                              <td><%= machine_out.total %></td>
-                              <td class="col-md-1">
-                                  <%= link_to edit_cost_oper_machine_cont_path(machine_out) do %>
-                                    <i class="fa fa-2x fa-edit"></i>
-                                  <% end %>
-                                  <%= link_to    machine_out, method: :delete, data: { confirm: 'Are you sure?' }  do%>
-                                    <i class="fa fa-2x fa-minus"></i>
-                                  <% end %>
-                              </td>
-
-                          </tr>
-                        <% end %>
+                       
                     </tbody>
                 </table>
             </div>

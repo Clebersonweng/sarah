@@ -1,52 +1,82 @@
-<%= form_for(product) do |f| %>
-  <% if product.errors.any? %>
-    <div id="error_explanation">
+
+<% if product.errors.any? %>
+  <div id="error_explanation">
       <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
 
       <ul>
-      <% product.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+          <% product.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
       </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :maker %>
-    <%= f.text_field :maker %>
-  </div>
-
-  <div class="field">
-    <%= f.label :unit_of_measurement_id,"U.M" %>
-   <%= f.select("unit_of_measurement_id", @unit_of_measurement)%>
-  </div>
-
-  <div class="field">
-    <%= f.label :tradename %>
-    <%= f.text_field :tradename %>
-  </div>
-
-  <div class="field">
-    <%= f.label :price %>
-    <%= f.text_field :price %>
-  </div>
-
-  <div class="field">
-    <%= f.label :dosage %>
-    <%= f.text_field :dosage %>
-  </div>
-
-  <div class="field">
-    <%= f.label :cost_per_hectare %>
-    <%= f.text_field :cost_per_hectare %>
-  </div>
-
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
   </div>
 <% end %>
+</br>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3 align="center">Product</h3>
+                <%=render 'layouts/submenu' %>
+            </div>
+
+            <div class="panel-body">
+                <%=form_for @product, url: products_path,:html => { class: 'form-horizontal' } do |f| %>
+                    <div class="col-sm-6 col-sm-offset-2">
+                        <div class="form-group">                   
+                            <%= f.label :maker,class: "control-label col-sm-2 col-sm-offset-1" %>
+                              <div class="col-sm-4">
+                                  <%= f.text_field :maker,  autofocus: true , class: "form-control" %>
+                                </div> 
+                            </div>
+                            <div class="form-group">                   
+                                <%= f.label :unit_of_measurement_id,class: "control-label col-sm-2 col-sm-offset-1" %>
+                                  <div class="col-sm-4">
+                                      <%= f.select(:unit_of_measurement_id, options_for_select(@unit_of_measurement, :selected => f.object.unit_of_measurement_id),:class => "form-control", :include_blank => true) %>
+                                  </div> 
+                              </div>
+                              <div class="form-group">                   
+                                  <%= f.label :tradename,class: "control-label col-sm-2 col-sm-offset-1" %>
+                                    <div class="col-sm-4">
+                                        <%= f.text_field :tradename,  autofocus: true , class: "form-control" %> 
+                                      </div> 
+                                  </div>
+                                  <div class="form-group">                   
+                                      <%= f.label :price,class: "control-label col-sm-2 col-sm-offset-1" %>
+                                        <div class="col-sm-4">
+                                            <%= f.text_field :price,  autofocus: true , class: "form-control" %>   
+                                          </div> 
+                                      </div>
+
+                                      <div class="form-group">                   
+                                          <%= f.label :dosage,class: "control-label col-sm-2 col-sm-offset-1" %>
+                                            <div class="col-sm-4">
+                                                <%= f.text_field :dosage,  autofocus: true , class: "form-control" %>   
+                                              </div> 
+                                          </div>
+                                          <div class="form-group">                   
+                                              <%= f.label :cost_per_hectare,class: "control-label col-sm-2 col-sm-offset-1" %>
+                                                <div class="col-sm-4">
+                                                    <%= f.text_field :cost_per_hectare,  autofocus: true , class: "form-control" %>   
+                                                  </div> 
+                                              </div>
+                                              <div class="form-group">                   
+                                                  <%= f.label :description,class: "control-label col-sm-2 col-sm-offset-1" %>
+                                                    <div class="col-sm-4">
+                                                        <%= f.text_area :description,  autofocus: true , class: "form-control" %>  
+                                                      </div> 
+                                                  </div>
+                                                  <div class="control-group col-sm-offset-3">
+
+                                                      <div class="controls">                                             
+                                                          <button type="reset" class="btn btn-danger">Cancel</button>
+                                                          <button type="submit" class="btn btn-primary">Save</button>
+                                                      </div>
+
+                                                  </div>
+                                                <% end %>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+

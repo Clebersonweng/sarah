@@ -1,0 +1,2 @@
+class HistorySale < ApplicationRecord
+end

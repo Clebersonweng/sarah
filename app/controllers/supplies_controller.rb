@@ -14,16 +14,27 @@ class SuppliesController < ApplicationController
 
   # GET /supplies/new
   def new
+    get_other_params
     @supply = Supply.new
+    @program_production = ProgramProduction.new
+    id_lastProgram = ProgramProduction.last()
+    programId = ProgramProduction.find(id_lastProgram)
+    @idUltimoPrograma = programId.id
   end
 
   # GET /supplies/1/edit
   def edit
+    get_other_params
+    @program_production = ProgramProduction.new
+    id_ventas = EstimateSale.last()
+    venta = EstimateSale.find(id_ventas)
+    @ventasId = venta.id
   end
 
   # POST /supplies
   # POST /supplies.json
   def create
+    get_other_params
     @supply = Supply.new(supply_params)
 
     respond_to do |format|

@@ -1,15 +1,4 @@
 
-  <% if farming_plot.errors.any? %>
-    <div id="error_explanation">
-        <h2><%= pluralize(farming_plot.errors.count, "error") %> prohibited this man_power from being saved:</h2>
-
-        <ul>
-            <% farming_plot.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-        </ul>
-    </div>
-  <% end %>
 </br>
 <div class="row">
     <div class="col-sm-12">
@@ -23,8 +12,9 @@
                     <div class="col-sm-6 col-sm-offset-2">
                         <div class="form-group">  
                             <%= f.label :code, class: "control-label col-sm-2 col-sm-offset-1"%>
-                              <div class="col-sm-4">
+                              <div class="col-sm-2">
                                   <%= f.text_field :code,autofocus: true , class: "form-control"   %>
+                                   <p class="help-block"> <%= f.object.errors[:code].to_sentence if f.object.errors[:code] %></p>
                                 </div>
                             </div>
 
@@ -32,16 +22,18 @@
                                 <%= f.label :name,class: "control-label col-sm-2 col-sm-offset-1" %>
                                   <div class="col-sm-4">
                                       <%= f.text_field :name,autofocus: true , class: "form-control" ,onblur: "this.value=this.value.toUpperCase()"  %>
+                                      <p class="help-block"> <%= f.object.errors[:name].to_sentence if f.object.errors[:name] %></p>
                                     </div>
                                 </div>
 
                                 <div class="form-group">  
                                     <%= f.label :area,class: "control-label col-sm-2 col-sm-offset-1"  %>
-                                      <div class="col-sm-2">
+                                      <div class="col-sm-4">
                                           <div class="input-group">
                                               <%= f.text_field :area,autofocus: true , class: "form-control"  %>
-                                                <span class="input-group-addon" id="basic-addon2">Ha</span>
+                                                <span class="input-group-addon" id="basic-addon2">Ha</span>                                                 
                                             </div>
+                                          <p class="help-block"> <%= f.object.errors[:area].to_sentence if f.object.errors[:area] %></p>
                                         </div>
                                     </div>
 
@@ -49,13 +41,15 @@
                                         <%= f.label :type_of_crop_id, class: "control-label col-sm-2 col-sm-offset-1" %>
                                           <div class="col-sm-4">
                                               <%= f.select :type_of_crop_id, options_for_select(@type_of_crops, :selected => f.object.type_of_crop_id,:class => "form-control", :include_blank => true) %>
+                                              <p class="help-block"> <%= f.object.errors[:type_of_crop_id].to_sentence if f.object.errors[:type_of_crop_id] %></p>
                                           </div>                             
                                       </div>
 
                                       <div class="form-group">  
                                           <%= f.label  "Encargado",class: "control-label col-sm-2 col-sm-offset-1"  %>
                                             <div class="col-sm-4">
-                                                <%= f.select :person_id, options_for_select(@person, :selected => f.object.person_id,:class => "form-control", :include_blank => true) %>                      
+                                                <%= f.select :person_id, options_for_select(@person, :selected => f.object.person_id,:class => "form-control", :include_blank => true) %>  
+                                                 <p class="help-block"> <%= f.object.errors[:person_id].to_sentence if f.object.errors[:person_id] %></p>
                                             </div>
                                         </div>
 
@@ -70,7 +64,7 @@
 
                                             <div class="control-group col-sm-offset-3">
                                                 <div class="controls">
-                                                    <button type="reset" class="btn btn-danger">Cancel</button>
+                                                    <button type="reset" class="btn btn-danger btn-space">Cancel</button>
                                                     <button type="submit" class="btn btn-primary">Save</button>
 
                                                   <% end %>

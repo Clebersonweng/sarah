@@ -83,10 +83,10 @@ class ManPowersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def man_power_params
-      params.require(:man_power).permit(:program_production_id, :total_hours_needed, :total,man_power_details_attributes: [:type_of_work_id,:hours_needed, :employee_id, :subtotal])
+      params.require(:man_power).permit(:program_production_id, :total_hours_needed, :total,man_power_details_attributes: [:type_of_work_id,:hours_needed, :people_id, :subtotal])
     end
     def get_variables
-      @employee = Employee.all.collect{ |type|[type.name, type.id]}
+      @employee = Person.all.collect{ |type|[type.name, type.id]}
       @type_of_work = TypeOfWork.all.collect{ |type|[type.name, type.id]}
     end
 end

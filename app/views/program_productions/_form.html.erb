@@ -1,45 +1,82 @@
-<%= form_for(program_production) do |f| %>
-  <% if program_production.errors.any? %>
-    <div id="error_explanation">
+
+<% if program_production.errors.any? %>
+  <div id="error_explanation">
       <h2><%= pluralize(program_production.errors.count, "error") %> prohibited this program_production from being saved:</h2>
 
       <ul>
-      <% program_production.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+          <% program_production.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
       </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-   <%= f.label :estimate_sale_id %>
-   <%= select("program_production", "estimate_sale_id",options_for_select(EstimateSale.all.collect {|p| [ p.farming_plot.name, p.id, {"data-total-production"=>p.total_production} ] }))%> 
- </div>
-
-
- <div class="field">
-    <%= f.label :stock_end %>
-    <%= f.text_field :stock_end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :stock_initial %>
-    <%= f.text_field :stock_initial %>
-  </div>
-
- 
-
-  <div class="field">
-    <%= f.label :variation_stock %>
-    <%= f.text_field :variation_stock %>
-  </div>
-
-  <div class="field">
-    <%= f.label :program_production %>
-    <%= f.text_field :program_production %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
   </div>
 <% end %>
+</br>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3 align="center">Program Production</h3>
+                <%=render 'layouts/submenu' %>
+            </div>
+
+            <div class="panel-body">
+                <%=form_for @program_production, url: program_productions_path,:html => { class: 'form-horizontal' } do |f| %>
+                    <div class="col-sm-6 col-sm-offset-2">                                     
+
+
+                        <div class="form-group">                   
+                            <input type="hidden" id="program_production_estimate_sale_id" name="program_production[estimate_sale_id]" value="<%=@ventasId%>"/> 
+                        </div>
+                        <div class="form-group"> 
+                            <label class="control-label col-sm-2 col-sm-offset-1">Ventas </label>
+                              <div class="col-sm-3">    
+                                  <input class="form-control" disabled />
+                                </div>
+                            </div>
+                        <div class="form-group"> 
+                            <%= f.label :stock_end, class: "control-label col-sm-2 col-sm-offset-1" %>
+                              <div class="col-sm-3">    
+                                  <%= f.text_field :stock_end,  autofocus: true , class: "form-control" %>
+                                </div>
+                            </div>
+                            <div class="form-group"> 
+                                <%= f.label :stock_initial, class: "control-label col-sm-2 col-sm-offset-1" %>
+                                  <div class="col-sm-4">
+                                      <%= f.text_field :stock_initial,  autofocus: true , class: "form-control" %>
+                                    </div>
+                                </div>
+
+                                <div class="form-group"> 
+                                    <%= f.label :variation_stock, class: "control-label col-sm-2 col-sm-offset-1"%>
+                                      <div class="col-sm-4">
+                                          <div class="input-group">
+                                              <%= f.text_field :variation_stock,  autofocus: true , class: "form-control" %>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group"> 
+                                        <%= f.label :program_production, class: "control-label col-sm-2 col-sm-offset-1" %>
+                                          <div class="col-sm-4">
+                                              <div class="input-group">
+                                                  <%= f.text_field :program_production,  autofocus: true , class: "form-control" %>
+                                                    <span class="input-group-addon" id="basic-addon2">Kg</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="control-group col-sm-offset-3">
+
+                                            <div class="controls">                                             
+                                                <button type="reset" class="btn btn-danger">Cancel</button>
+                                                <button type="submit" class="btn btn-primary">Save</button>
+                                            </div>
+
+                                        </div>
+                                      <% end %>
+
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>

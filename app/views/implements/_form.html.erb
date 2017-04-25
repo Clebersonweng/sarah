@@ -1,4 +1,15 @@
 
+  <% if implement.errors.any? %>
+    <div id="error_explanation">
+        <h2><%= pluralize(implement.errors.count, "error") %> prohibited this man_power from being saved:</h2>
+
+        <ul>
+            <% implement.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+        </ul>
+    </div>
+  <% end %>
 </br>
 <div class="row">
     <div class="col-sm-12">
@@ -39,7 +50,8 @@
                                         <div class="form-group">
                                             <%= f.label :machine_id ,class: "control-label col-sm-2 col-sm-offset-1"%>
                                               <div class="col-sm-5">
-                                                  <%= f.select :machine_id, options_for_select(@machines)%>
+                                                  <%= f.select(:machine_id, options_for_select(@machines, :selected => f.object.machine_id),:class => "form-control", :include_blank => true) %>
+                            
                                                 </div>
                                             </div>
                                             <div class="form-group">

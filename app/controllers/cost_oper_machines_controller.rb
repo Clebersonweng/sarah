@@ -74,11 +74,12 @@ class CostOperMachinesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def cost_oper_machine_params
-    params.require(:cost_oper_machine).permit(:farming_plot_id, :total, cost_oper_machine_details_attributes: [ :machine_id,:implement_id, :amount, :fuel, :lubricant, :repair_and_maintenance, :subtotal])
+    params.require(:cost_oper_machine).permit(:farming_plot_id, :total, cost_oper_machine_details_attributes: [ :machine_id,:implement_id,:chart_of_account, :amount, :fuel, :lubricant, :repair_and_maintenance, :subtotal])
   end
   def get_cost_oper_machine_params
     @farming_plots = FarmingPlot.all.collect { |p| [ p.name, p.id, {"data-area"=> p.area} ] }
     @machines = Machine.all.collect { |type| [type.get_all_names, type.id, {"data-hp"=> type.hp, "data-consumption" => type.consumption, "data-coef_cccr" => type.coeficient_cccr, "data-time_oper" => type.time_oper, "data-price" => type.price, "data-name" => type.name, "data-price_fuel" => type.fuel.price }]}
     @implements = Implement.all.collect {|p| [ p.get_all_names, p.id, {"data-oper_time"=>p.oper_time, "data-coef_cccr" => p.coef_cccr, "data-price" => p.price} ] }
+     @charts = ChartOfAccount.all.collect {|p| [ p.name, p.id, ] }
   end
 end

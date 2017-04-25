@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>History Sales</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Period</th>
+      <th>Date</th>
+      <th>Quantity</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @history_sales.each do |history_sale| %>
+      <tr>
+        <td><%= history_sale.period %></td>
+        <td><%= history_sale.date %></td>
+        <td><%= history_sale.quantity %></td>
+        <td><%= link_to 'Show', history_sale %></td>
+        <td><%= link_to 'Edit', edit_history_sale_path(history_sale) %></td>
+        <td><%= link_to 'Destroy', history_sale, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New History Sale', new_history_sale_path %>

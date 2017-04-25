@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Period:</strong>
+  <%= @history_sale.period %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @history_sale.date %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @history_sale.quantity %>
+</p>
+
+<%= link_to 'Edit', edit_history_sale_path(@history_sale) %> |
+<%= link_to 'Back', history_sales_path %>

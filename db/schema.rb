@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170414050230) do
+ActiveRecord::Schema.define(version: 20170424001605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,8 +63,10 @@ ActiveRecord::Schema.define(version: 20170414050230) do
   create_table "cost_oper_machines", force: :cascade do |t|
     t.integer  "farming_plot_id"
     t.float    "total"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "chart_of_account_id"
+    t.index ["chart_of_account_id"], name: "index_cost_oper_machines_on_chart_of_account_id", using: :btree
     t.index ["farming_plot_id"], name: "index_cost_oper_machines_on_farming_plot_id", using: :btree
   end
 
@@ -102,6 +104,14 @@ ActiveRecord::Schema.define(version: 20170414050230) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "history_sales", force: :cascade do |t|
+    t.serial   "period",     null: false
+    t.date     "date"
+    t.float    "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "implements", force: :cascade do |t|
     t.string   "name"
     t.string   "model"
@@ -110,6 +120,9 @@ ActiveRecord::Schema.define(version: 20170414050230) do
     t.float    "coef_cccr"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "brand"
+    t.date     "year"
+    t.float    "price"
     t.index ["machine_id"], name: "index_implements_on_machine_id", using: :btree
   end
 
@@ -120,9 +133,14 @@ ActiveRecord::Schema.define(version: 20170414050230) do
     t.float    "consumption"
     t.float    "price"
     t.date     "year_purchase"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "name"
+    t.float    "coeficient_cccr"
+    t.string   "time_oper"
+    t.integer  "fuel_id"
     t.index ["brand_id"], name: "index_machines_on_brand_id", using: :btree
+    t.index ["fuel_id"], name: "index_machines_on_fuel_id", using: :btree
     t.index ["model_id"], name: "index_machines_on_model_id", using: :btree
   end
 
@@ -297,8 +315,10 @@ ActiveRecord::Schema.define(version: 20170414050230) do
     t.string   "name"
     t.float    "price"
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "unit_of_measurement_id"
+    t.index ["unit_of_measurement_id"], name: "index_type_of_services_on_unit_of_measurement_id", using: :btree
   end
 
   create_table "type_of_works", force: :cascade do |t|
@@ -342,6 +362,7 @@ ActiveRecord::Schema.define(version: 20170414050230) do
   add_foreign_key "cost_oper_machine_conts", "farming_plots"
   add_foreign_key "cost_oper_machine_details", "cost_oper_machines"
   add_foreign_key "cost_oper_machine_details", "machines"
+  add_foreign_key "cost_oper_machines", "chart_of_accounts"
   add_foreign_key "cost_oper_machines", "farming_plots"
   add_foreign_key "estimate_sales", "chart_of_accounts"
   add_foreign_key "estimate_sales", "farming_plots"
@@ -349,6 +370,7 @@ ActiveRecord::Schema.define(version: 20170414050230) do
   add_foreign_key "farming_plots", "type_of_crops"
   add_foreign_key "implements", "machines"
   add_foreign_key "machines", "brands"
+  add_foreign_key "machines", "fuels"
   add_foreign_key "machines", "models"
   add_foreign_key "man_power_details", "people", column: "people_id"
   add_foreign_key "man_power_details", "type_of_works"
@@ -369,4 +391,5 @@ ActiveRecord::Schema.define(version: 20170414050230) do
   add_foreign_key "supplies", "chart_of_accounts"
   add_foreign_key "supplies", "program_productions"
   add_foreign_key "supply_details", "products"
+  add_foreign_key "type_of_services", "unit_of_measurements"
 end

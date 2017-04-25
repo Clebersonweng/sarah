@@ -1,29 +1,40 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Chart Of Accounts</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @chart_of_accounts.each do |chart_of_account| %>
-      <tr>
-        <td><%= chart_of_account.code %></td>
-        <td><%= chart_of_account.name %></td>
-        <td><%= link_to 'Show', chart_of_account %></td>
-        <td><%= link_to 'Edit', edit_chart_of_account_path(chart_of_account) %></td>
-        <td><%= link_to 'Destroy', chart_of_account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
 <br>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3 align="center">Plan de Cuentas</h3>
+                <%=render 'layouts/submenu' %>
+            </div>
+            <div class="panel-body">
+                <table data-toggle="table" data-url="chart_of_accounts"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+                    <thead>
+                        <tr>
+                            <th data-field="id"  data-checkbox="true">Item ID</th>
+                            <th data-field="code" data-sortable="true">Codigo contable</th> 
+                            <th data-field="name" data-sortable="true">Descripcion</th>                                          
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @chart_of_accounts.each do |charts| %>
+                          <tr>
+                              <td><%= charts.id%></td>
+                              <td><%= charts.code%></td>
+                              <td><%= charts.name%></td>
+                              <td class="col-md-1">
+                                  <%= link_to edit_chart_of_account_path(charts) do %>
+                                    <i class="fa fa-2x fa-edit"></i>
+                                  <% end %>
+                                  <%= link_to    charts, method: :delete, data: { confirm: 'Are you sure?' }  do%>
+                                    <i class="fa fa-2x fa-minus"></i>
+                                  <% end %>
+                              </td>
 
-<%= link_to 'New Chart Of Account', new_chart_of_account_path %>
+                            </tr>
+                          <% end %>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+  </d

@@ -1,4 +1,5 @@
 class ChartOfAccountsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_chart_of_account, only: [:show, :edit, :update, :destroy]
 
   # GET /chart_of_accounts
@@ -62,13 +63,13 @@ class ChartOfAccountsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_chart_of_account
-      @chart_of_account = ChartOfAccount.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_chart_of_account
+    @chart_of_account = ChartOfAccount.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def chart_of_account_params
-      params.require(:chart_of_account).permit(:code, :name)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def chart_of_account_params
+    params.require(:chart_of_account).permit(:code, :name)
+  end
 end

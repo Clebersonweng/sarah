@@ -1,24 +1,19 @@
 class TypeOfCropsController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_type_of_crop, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
   # GET /type_of_crops
   # GET /type_of_crops.json
   def index
-    @type_of_crops = TypeOfCrop.all
-    respond_to do |format|
-      format.html
-      format.json { render :json => @type_of_crops}
-    end
+    @type_of_crops = TypeOfCrop.all    
   end
 
   # GET /type_of_crops/1
   # GET /type_of_crops/1.json
   def show
-    @supplies = TypeOfCrop.find(params[:id])
+    @types_crops = TypeOfCrop.find(params[:id])
     respond_to do |format|
       format.html
-      format.json { render json: @supplies}
+      format.json { render json: @types_crops}
     end
   end
 
@@ -30,19 +25,33 @@ class TypeOfCropsController < ApplicationController
 
   # GET /type_of_crops/1/edit
   def edit
+    @type_of_crop = TypeOfCrop.find(params[:id]);
+    @code = @type_of_crop.code;
+    @name = @type_of_crop.name;
+    @variety = @type_of_crop.variety;
   end
 
   # POST /type_of_crops
   # POST /type_of_crops.json
-  def create
-    @type_of_crop = TypeOfCrop.new(type_of_crop_params)
-
+  def create   
+   
+    @code = params[:type_of_crop][:code];
+    @name = params[:type_of_crop][:name];
+    @variety = params[:type_of_crop][:variety];
+    #Creamos el objeto con los valores a ingresar.
+    @type_of_crop = TypeOfCrop.new({
+        :code => @code,
+        :name => @name,
+        :variety => @variety
+      });
+        
     respond_to do |format|
       if @type_of_crop.save
         flash[:notice] = "Successfull be create"
         format.html { redirect_to  action:"index"}
       else
         flash[:alert] = "Unsuccessfull be create"
+        format.html { render :new }
       end
     end
   end
@@ -50,14 +59,19 @@ class TypeOfCropsController < ApplicationController
   # PATCH/PUT /type_of_crops/1
   # PATCH/PUT /type_of_crops/1.json
   def update
-    respond_to do |format|
-      if @type_of_crop.update(type_of_crop_params)       
-        flash[:notice] = "Successfull be create"
-        format.html { redirect_to  action:"index"}
-      else
-        flash[:alert] = "Error unsuccessful be create"
-        format.html { redirect_to  action:"index"}
-      end
+    @code = params[:type_of_crop]["code"];
+    @name = params[:type_of_crop]["name"];
+    @variety = params[:type_of_crop]["variety"];
+   
+    @type_of_crop = TypeOfCrop.find(params[:id]);
+    @type_of_crop.code = @code;
+    @type_of_crop.name = @name;
+    @type_of_crop.variety = @variety
+    if @type_of_crop.save()
+     format.html { redirect_to  action:"index"}
+    else
+     flash[:alert] = "Unsuccessfull be create"
+        format.html { render :edit }
     end
   end
 

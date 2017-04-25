@@ -25,7 +25,7 @@
 
   <label>Employee</label>
 
-  <%= select("emp","employee_id", options_for_select(Employee.all.collect {|p| [ p.name, p.id, {"data-salary"=>p.salary } ] }),:prompt => "----CHOOSE---")%> 
+  <%= select("emp","employee_id", options_for_select(Person.all.collect {|p| [ p.name, p.id, {"data-salary"=>p.salary } ] }),:prompt => "----CHOOSE---")%> 
 
   <label>Hours Needed</label>
   <input type="text" name="hours_needed" id="hours_needed">

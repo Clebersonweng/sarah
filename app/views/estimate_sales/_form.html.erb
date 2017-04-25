@@ -15,61 +15,61 @@
                                   <%= f.select(:chart_of_account_id, options_for_select(@charts, :selected => f.object.chart_of_account_id),:class => "form-control", :include_blank => true) %>
                               </div> 
                           </div>
-                        <div class="form-group">                   
-                            <%= f.label :farming_plot_id,class: "control-label col-sm-2 col-sm-offset-1" %>
-                              <div class="col-sm-4">
-                                  <%= f.select(:farming_plot_id, options_for_select(@farming_plots, :selected => f.object.farming_plot_id),:class => "form-control", :include_blank => true) %>
-                              </div> 
-                          </div>
-                          <div class="form-group"> 
-                              <%= f.label :estimate_production, class: "control-label col-sm-2 col-sm-offset-1" %>
-                                <div class="col-sm-3">                                     
-                                    <div class="input-group">
-                                        <%= f.text_field :estimate_production,  autofocus: true , class: "form-control" %>
-                                          <span class="input-group-addon" id="basic-addon2">kgxHa</span>
-                                      </div>
-                                  </div>
-                              </div>
+                          <div class="form-group">                   
+                              <%= f.label :farming_plot_id,class: "control-label col-sm-2 col-sm-offset-1" %>
+                                <div class="col-sm-4">
+                                    <%= f.select(:farming_plot_id, options_for_select(@farming_plots, :selected => f.object.farming_plot_id),:class => "form-control", :include_blank => true) %>
+                                </div> 
+                            </div>
+                            <div class="form-group"> 
+                                <%= f.label :estimate_production, class: "control-label col-sm-2 col-sm-offset-1" %>
+                                  <div class="col-sm-3">                                     
+                                      <div class="input-group">
+                                          <%= f.text_field :estimate_production,  autofocus: true , class: "form-control" %>
+                                            <span class="input-group-addon" id="basic-addon2">kgxHa</span>
+                                        </div>
+                                    </div>
+                                </div>
 
-                              <div class="form-group"> 
-                                  <%= f.label :total_production, class: "control-label col-sm-2 col-sm-offset-1" %>
-                                    <div class="col-sm-4">
-                                        <%= f.text_field :total_production,  autofocus: true , class: "form-control", :disabled => true %>
-                                      </div>
-                                  </div>
+                                <div class="form-group"> 
+                                    <%= f.label :total_production, class: "control-label col-sm-2 col-sm-offset-1" %>
+                                      <div class="col-sm-4">
+                                          <%= f.text_field :total_production,  autofocus: true , class: "form-control", :disabled => true %>
+                                        </div>
+                                    </div>
 
-                                  <div class="form-group"> 
-                                      <%= f.label :price, class: "control-label col-sm-2 col-sm-offset-1"%>
-                                        <div class="col-sm-4">
-                                            <div class="input-group">
-                                            <%= f.text_field :price,  autofocus: true , class: "form-control" %>
-                                              <span class="input-group-addon" id="basic-addon2">GsxKg</span>
-                                          </div>
-                                      </div>
-                                  </div>
+                                    <div class="form-group"> 
+                                        <%= f.label :price, class: "control-label col-sm-2 col-sm-offset-1"%>
+                                          <div class="col-sm-4">
+                                              <div class="input-group">
+                                                  <%= f.text_field :price,  autofocus: true , class: "form-control" %>
+                                                    <span class="input-group-addon" id="basic-addon2">GsxKg</span>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                  <div class="form-group"> 
-                                      <%= f.label :gross_sale, class: "control-label col-sm-2 col-sm-offset-1" %>
-                                        <div class="col-sm-4">
-                                            <div class="input-group">
-                                                <%= f.text_field :gross_sale,  autofocus: true , class: "form-control" %>
-                                                  <span class="input-group-addon" id="basic-addon2">Gs</span>
-                                              </div>
-                                          </div>
-                                      </div>
+                                        <div class="form-group"> 
+                                            <%= f.label :gross_sale, class: "control-label col-sm-2 col-sm-offset-1" %>
+                                              <div class="col-sm-4">
+                                                  <div class="input-group">
+                                                      <%= f.text_field :gross_sale,  autofocus: true , class: "form-control" %>
+                                                        <span class="input-group-addon" id="basic-addon2">Gs</span>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                      <div class="control-group col-sm-offset-3">
+                                            <div class="control-group col-sm-offset-3">
 
-                                          <div class="controls">                                             
-                                              <button type="reset" class="btn btn-danger">Cancel</button>
-                                               <button type="submit" class="btn btn-primary">Save</button>
-                                          </div>
+                                                <div class="controls">                                             
+                                                    <button type="reset" class="btn btn-danger">Cancel</button>
+                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                </div>
 
-                                      </div>
-                                    <% end %>
-
+                                            </div>
+                                          <% end %>
+                                        
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </div>

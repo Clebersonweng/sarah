@@ -107,7 +107,7 @@ class CostOperMachineContsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def cost_oper_machine_cont_params
-    params.require(:cost_oper_machine_cont).permit(:program_production_id, :total,cost_oper_machine_cont_details_attributes: [:cost_oper_machine_cont, :type_of_service_id,:amount, :subtotal])
+    params.require(:cost_oper_machine_cont).permit(:farming_plot_id, :total,cost_oper_machine_cont_details_attributes: [:cost_oper_machine_cont, :type_of_service_id,:amount, :subtotal])
   end
   def get_cost_machines_params
    # @programs = CostOperMachineCont.program_production.collect {|p| [ p.program_production, p.id ] }
