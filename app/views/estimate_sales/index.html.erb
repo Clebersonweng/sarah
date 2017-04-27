@@ -27,7 +27,7 @@
                               <td><%= number_to_currency sales.estimate_production %></td>
                               <td><%= number_to_currency sales.total_production %></td>
                               <td><%= number_to_currency sales.price %></td>
-                              <td><%= number_to_currency sales.gross_sale %></td>
+                              <td><%=  number_to_currency(sales.gross_sale, precision: 2)  %></td>
                               <td class="col-md-1">
                                   <%= link_to edit_estimate_sale_path(sales) do %>
                                     <i class="fa fa-2x fa-edit"></i>

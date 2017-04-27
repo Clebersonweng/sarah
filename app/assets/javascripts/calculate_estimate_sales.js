@@ -20,5 +20,41 @@ $(document)
          
 
       });
+      $('#openHistory').click("click",function(event){
+        event.preventDefault();
+	$('#myModal2').modal({show:true})
+            $("tbody tr input[type=checkbox]").on("change", function() {
+                 if($(this).prop('checked'))
+                var boxes = $("tbody tr td:nth-child(3)").text();               
+              alert(boxes);
+            });
+                
+           
+        
+         
+        });
+    $('#machine_consumption').popover({ 
+           html : true,
+           title: "This is a test",
+           content: "<b>hello popover world</b>"
+         }).popover('show');
+
+         /*comienzo para tirar valor de historico de ventas*/
+         /*$.ajax({
+            url: 'history_sale_url',
+            type: 'POST',
+            dataType: 'JSON',
+            data: { "date":date, "quantity":quantity }
+            success: function(data){
+              alert("dfdf");
+              $("#estimate_sale_estimate_production").append('data.quantity');
+            }
+            error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.Message);
+                }   
+          });*/
+
+        
         
 });

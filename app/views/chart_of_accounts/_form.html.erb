@@ -1,40 +1,13 @@
-<%= form_for(chart_of_account) do |f| %>
-  <% if chart_of_account.errors.any? %>
-    <div id="error_explanation">
-        <h2><%= pluralize(chart_of_account.errors.count, "error") %> prohibited this chart_of_account from being saved:</h2>
-
-        <ul>
-            <% chart_of_account.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-        </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-      <%= f.label :code %>
-      <%= f.text_field :code %>
-  </div>
-
-  <div class="field">
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-  </div>
-
-  <div class="actions">
-      <%= f.submit %>
-  </div>
-<% end %>
 </br>
 <div class="row">
     <div class="col-sm-12">
         <div class="panel panel-default">
-            <div class="panel-heading"><h3 align="center">Estimate Sale</h3>
+            <div class="panel-heading"><h3 align="center">Plan De Cuentas</h3>
                 <%=render 'layouts/submenu' %>
             </div>
 
             <div class="panel-body">
-                <%=form_for @estimate_sale, url: estimate_sales_path,:html => { class: 'form-horizontal' } do |f| %>
+                <%=form_for @chart_of_account, url: chart_of_accounts_path,:html => { class: 'form-horizontal' } do |f| %>
                     <div class="col-sm-6 col-sm-offset-2">
                         <div class="form-group"> 
                             <%= f.label :code, class: "control-label col-sm-2 col-sm-offset-1" %>
@@ -46,8 +19,7 @@
                             <div class="form-group"> 
                                 <%= f.label :name, class: "control-label col-sm-2 col-sm-offset-1"%>
                                   <div class="col-sm-4">                                      
-                                          <%= f.text_field :name,  autofocus: true , class: "form-control" %>
-                                                                              
+                                          <%= f.text_field :name,  autofocus: true , class: "form-control" %>                                                                              
                                     </div>
                                 </div>                                   
 

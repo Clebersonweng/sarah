@@ -27,6 +27,7 @@ class EstimateSalesController < ApplicationController
   # GET /estimate_sales/1/edit
   def edit
     get_estimate_sale_params
+    
   end
 
   # POST /estimate_sales
@@ -81,11 +82,12 @@ class EstimateSalesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def estimate_sale_params
-    params.require(:estimate_sale).permit(:farming_plot_id,:chart_of_account_id, :estimate_production, :total_production, :price, :gross_sale)
+    params.require(:estimate_sale).permit(:farming_plot_id,:chart_of_account_id, :estimate_production,:date, :total_production, :price, :gross_sale)
   end
   def get_estimate_sale_params
     @farming_plots = FarmingPlot.all.collect {|p| [ p.name, p.id, {"data-area-parcela"=>p.area} ] }
     @charts = ChartOfAccount.all.collect {|type|[type.name, type.id]}
+    @history_sales = HistorySale.all.collect {|type| [type.quantity, type.id, {"data-date"=>type.date} ] }
    # @farm = EstimateSale.farming_plot.find(:estimate_sale_farming_plot_id)
   end
 end
