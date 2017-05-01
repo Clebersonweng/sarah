@@ -17,7 +17,7 @@ $(document)
         to = 1/cte;
         timeOperative = to.toFixed(4);
         $("#implement_oper_time").val(timeOperative);
-        });
+     });
 
     /**limpiar los campos cargados al hacer click en salir*/
     $('#exit').on("click",function(event){

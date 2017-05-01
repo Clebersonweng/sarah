@@ -63,7 +63,7 @@ Rails.application.routes.draw do
 
   resources :estimate_sales
 
-  
+  resources :unit_of_measurements
   
   devise_for :users
  

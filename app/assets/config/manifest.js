@@ -1,3 +1,11 @@
 //= link_tree ../images
-//= link_directory ../javascripts .js
-//= link_directory ../stylesheets .css
+//= link_directory ../assets/javascripts .js
+//= link_directory ../assets/stylesheets .css
+//= link_directory  ../assets/fonts      .otf
+//= link_directory  ../assets/fonts      .svg
+//= link_directory  ../assets/fonts      .ttf
+//= link_directory  ../assets/fonts      .woff
+//= link_directory  ../assets/fonts      .woff?v=4.2.0
+//= link_directory  ../assets/fonts      .ttf?v=4.2.0 
+
+

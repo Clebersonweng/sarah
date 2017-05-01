@@ -20,6 +20,7 @@ class ProgramProductionsController < ApplicationController
     id_ventas = EstimateSale.last()
     venta = EstimateSale.find(id_ventas)
     @ventasId = venta.id
+    @ventas = venta.total_production
     
      
   end

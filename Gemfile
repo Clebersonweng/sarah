@@ -50,3 +50,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 #utilizado para json ser de forma mas facil
 gem "font-awesome-rails"
+#utilizado para buscar no select
+gem "select2-rails"

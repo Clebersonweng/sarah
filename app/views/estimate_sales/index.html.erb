@@ -1,47 +1,48 @@
 <br>
-
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-heading"><h3 align="center">Estimate Sales</h3>
-                <%=render 'layouts/submenu' %>
-            </div>
-            <div class="panel-body">
-                <table data-toggle="table" data-url="estimate_sales"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
-                    <thead>
-                        <tr>
-                            <th data-field="id" data-sortable="true" data-checkbox="true">Item ID</th>
-                            <th data-field="farming_plot_id" >Farming Plot</th> 
-                            <th data-field="estimate_production" >Estimate Production Has</th>                            
-                            <th data-field="total_production">Total Production</th>
-                            <th data-field="price"> Price(KG)</th>
-                            <th data-field="gross_sale" data-sortable="true">Gross Sale</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% @estimate_sales.each do |sales| %>
-                          <tr>
-                              <td><%= sales.id%></td>
-                              <td><%= sales.farming_plot.name%></td>
-                              <td><%= number_to_currency sales.estimate_production %></td>
-                              <td><%= number_to_currency sales.total_production %></td>
-                              <td><%= number_to_currency sales.price %></td>
-                              <td><%=  number_to_currency(sales.gross_sale, precision: 2)  %></td>
-                              <td class="col-md-1">
-                                  <%= link_to edit_estimate_sale_path(sales) do %>
-                                    <i class="fa fa-2x fa-edit"></i>
-                                  <% end %>
-                                  <%= link_to    sales, method: :delete, data: { confirm: 'Are you sure?' }  do%>
-                                    <i class="fa fa-2x fa-minus"></i>
-                                  <% end %>
-                              </td>
-
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h3 align="center">Estimate Sales</h3>
+                    <%=render 'layouts/submenu' %>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-responsive" data-toggle="table" data-url="estimate_sales"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+                        <thead>
+                            <tr>
+                                <th data-field="id" data-sortable="true" data-checkbox="true">Item ID</th>
+                                <th data-field="farming_plot_id" >Farming Plot</th> 
+                                <th data-field="estimate_production" >Estimate Production Has</th>                            
+                                <th data-field="total_production">Total Production</th>
+                                <th data-field="price"> Price(KG)</th>
+                                <th data-field="gross_sale" data-sortable="true">Gross Sale</th>
+                                <th>Action</th>
                             </tr>
-                          <% end %>
-                      </tbody>
-                  </table>
-              </div>
-          </div>
-      </div>
-  </div>
+                        </thead>
+                        <tbody>
+                            <% @estimate_sales.each do |sales| %>
+                              <tr>
+                                  <td><%= sales.id%></td>
+                                  <td><%= sales.farming_plot.name%></td>
+                                  <td><%= number_to_currency sales.estimate_production %></td>
+                                  <td><%= number_to_currency sales.total_production %></td>
+                                  <td><%= number_to_currency sales.price %></td>
+                                  <td><%=  number_to_currency(sales.gross_sale, precision: 2)  %></td>
+                                  <td class="col-xs-1">
+                                      <%= link_to edit_estimate_sale_path(sales) do %>
+                                        <i class="fa fa-2x fa-edit"></i>
+                                      <% end %>
+                                      <%= link_to    sales, method: :delete, data: { confirm: 'Are you sure?' }  do%>
+                                        <i class="fa fa-2x fa-minus"></i>
+                                      <% end %>
+                                  </td>
+
+                              </tr>
+                            <% end %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

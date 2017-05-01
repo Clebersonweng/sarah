@@ -1,32 +1,57 @@
-<%= form_for(fuel) do |f| %>
-  <% if fuel.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(fuel.errors.count, "error") %> prohibited this fuel from being saved:</h2>
+<div class="panel-heading clearfix ">
+    <h5 class="panel-title pull-left" style="padding-top: 7.5px;"> Combustible </h5>   
+</div>
+<div class="panel-body">
+    <%=form_for @fuel, url: fuels_path,:html => { class: 'form-horizontal' } do |f| %>
+        <div class="col-sm-6 col-xs-10">
+            <div class="form-group">  
+                <%= f.label :name,class: "control-label col-sm-2" %>
+                  <div class="col-sm-4">
+                      <%= f.text_field :name,autofocus: true , class: "form-control " ,onblur: "this.value=this.value.toUpperCase()"  %>
+                        <p class="help-block"> <%= f.object.errors[:name].to_sentence if f.object.errors[:name] %></p>
+                    </div>
+                </div>
 
-      <ul>
-      <% fuel.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+                <div class="form-group">  
+                    <%= f.label :price,class: "control-label col-sm-2"  %>
+                      <div class="col-sm-4">                                         
+                          <%= f.text_field :price,autofocus: true , class: "form-control"  %>                                                
+                        </div>
+                    </div>
+                    <div class="form-group">  
+                        <%= f.label :description,class: "control-label col-sm-2"  %>
+                          <div class="col-sm-4">                                         
+                              <%= f.text_area :description,autofocus: true , class: "form-control"  %>                                                
+                            </div>
+                        </div>
 
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
+                        <div class="col-sm-6 col-sm-offset-2">
 
-  <div class="field">
-    <%= f.label :price %>
-    <%= f.text_field :price %>
-  </div>
+                            <% if controller.action_name == "edit" ||  controller.action_name == "update" %>
+                              <button type="reset" id="btn_cancel_crop"class="btn btn-danger btn-space" >Cancelar</button>
+                            <%else%>
+                              <button type="reset" class="btn btn-danger btn-space">Cancelar</button>
+                            <% end%>
+                            <% if controller.action_name == "new"  ||  controller.action_name == "create"%>
+                              <button type="submit" class="btn btn-primary">Guardar</button>
+                            <%else%>
+                              <button type="submit" class="btn btn-primary">Actualizar</button>
+                            <% end%>
 
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </div>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+
+                        </div>
+                    </div>
+
+                  <% end %>
+              </div>
+
+
+
+
+
+
+
+
+
+

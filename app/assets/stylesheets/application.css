@@ -16,3 +16,6 @@
 /*
  *= require font-awesome
  */
+
+@import "bootstrap.min";
+@import "font-awesome/css/font-awesome.min";

@@ -12,8 +12,8 @@ class TypeOfCropsController < ApplicationController
   def show
     @types_crops = TypeOfCrop.find(params[:id])
     respond_to do |format|
-      format.html
-      format.json { render json: @types_crops}
+      format.html { redirect_to  action:"index"}
+      #format.json { render json: @types_crops}
     end
   end
 
@@ -67,11 +67,14 @@ class TypeOfCropsController < ApplicationController
     @type_of_crop.code = @code;
     @type_of_crop.name = @name;
     @type_of_crop.variety = @variety
-    if @type_of_crop.save()
-     format.html { redirect_to  action:"index"}
-    else
-     flash[:alert] = "Unsuccessfull be create"
-        format.html { render :edit }
+    respond_to do |format|
+      if @type_of_crop.save
+        format.html { redirect_to @type_of_crop, notice: 'Stru expense det was successfully created.' }
+        #format.json { render :show, status: :created, location: @stru_expense_det }
+      else
+        format.html { render :new }
+        #format.json { render json: @type_of_crop.errors, status: :unprocessable_entity }
+      end
     end
   end
 

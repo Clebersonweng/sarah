@@ -1,43 +1,41 @@
-<br>
+    <div class="panel-heading clearfix ">
+        <h5 class="panel-title pull-left" style="padding-top: 7.5px;">Tipo de Cultivo</h5>
+        <div class="input-group col-xs-4 col-md-2 pull-right">
+            <input type="text" id="" class="form-control input-medium" placeholder=" buscar">
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table  table-hover table-striped" table-condensed data-toggle="table" data-url="type_of_crops"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+                <thead>
+                    <tr>
+                        <th data-field="id" data-sortable="true" data-checkbox="true">Item ID</th>
+                        <th data-field="code" >Codigo</th> 
+                        <th data-field="name" >Nombre</th>                            
+                        <th data-field="variety"  data-sortable="true">Variedad</th> 
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @type_of_crops.each do |types| %>
+                      <tr>
+                          <td><%= types.id%></td>
+                          <td><%= types.code%></td>
+                          <td><%= types.name %></td>
+                          <td><%= types.variety%></td>                           
+                          <td class="col-md-1">
+                              <%= link_to edit_type_of_crop_path(types) do %>
+                                <i class="fa fa-2x fa-edit"></i>
+                              <% end %>
+                              <%= link_to    types, method: :delete, data: { confirm: 'Are you sure?' }  do%>
+                                <i class="fa fa-2x fa-minus"></i>
+                              <% end %>
+                          </td>
 
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-heading"><h3 align="center">Type Of Crop</h3>
-                <%=render 'layouts/submenu' %>
-            </div>
-            <div class="panel-body">
-                <table data-toggle="table" data-url="type_of_crop"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
-                    <thead>
-                        <tr>
-                            <th data-field="id" data-sortable="true" data-checkbox="true">Item ID</th>
-                            <th data-field="code" >Code</th> 
-                            <th data-field="name" >Name</th>                            
-                            <th data-field="variety"  data-sortable="true">Variety</th> 
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% @type_of_crops.each do |types| %>
-                          <tr>
-                              <td><%= types.id%></td>
-                              <td><%= types.code%></td>
-                              <td><%= types.name %></td>
-                              <td><%= types.variety%></td>                           
-                              <td class="col-md-1">
-                                  <%= link_to edit_type_of_crop_path(types) do %>
-                                    <i class="fa fa-2x fa-edit"></i>
-                                  <% end %>
-                                  <%= link_to    types, method: :delete, data: { confirm: 'Are you sure?' }  do%>
-                                    <i class="fa fa-2x fa-minus"></i>
-                                  <% end %>
-                              </td>
-
-                          </tr>
-                        <% end %>
-                    </tbody>
-                </table>
-            </div>
+                      </tr>
+                    <% end %>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
