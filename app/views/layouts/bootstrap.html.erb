@@ -11,14 +11,20 @@
         <%= stylesheet_link_tag "sb-admin.css" %>
         <%= stylesheet_link_tag "font-awesome.min.css" %>
         <%= stylesheet_link_tag "personalize.css" %>
+        <%= stylesheet_link_tag "dataTables.responsive.css" %>
 
         <%= javascript_include_tag "application", "data-turbolinks-track" => "reload" %>
+        <%= javascript_include_tag "jquery-1.11.1.min.js" %>
         <%= javascript_include_tag 'jquery_ujs' %>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <%=javascript_include_tag "bootstrap.min.js"%>
         <%=javascript_include_tag "utils.js"%>
+        <%=javascript_include_tag "jquery.dataTables.min.js"%>
+        <%= javascript_include_tag "dataTables.responsive.js" %>
+        <%= javascript_include_tag "dataTables.bootstrap.min" %>
         <%= csrf_meta_tags %>
 
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        
         <!--icons lumino-->
 
 

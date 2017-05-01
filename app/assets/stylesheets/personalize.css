@@ -4,4 +4,12 @@
     width: 100%; 
     
 }
-
+.dataTables_filter{
+    display: none;
+}
+.dataTables_length{
+    display: none;
+}
+.dataTables_info{
+     display: none;
+}

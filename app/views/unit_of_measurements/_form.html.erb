@@ -1,1 +1,58 @@
+<div class="panel-heading clearfix ">
+    <h5 class="panel-title pull-left" style="padding-top: 7.5px;"> Unidad de Medida </h5>   
+</div>
+<div class="panel-body">
+    <%=form_for @unit_of_measurement, url: unit_of_measurements_path,:html => { class: 'form-horizontal' } do |f| %>
+        <div class="col-sm-6 col-xs-10">
+            <div class="form-group">  
+                <%= f.label :name,class: "control-label col-sm-2" %>
+                  <div class="col-sm-4">
+                      <%= f.text_field :name,autofocus: true , class: "form-control " ,onblur: "this.value=this.value.toUpperCase()"  %>
+                        <p class="help-block"> <%= f.object.errors[:name].to_sentence if f.object.errors[:name] %></p>
+                    </div>
+                </div>
+
+                <div class="form-group">  
+                    <%= f.label :abbreviation,class: "control-label col-sm-2"  %>
+                      <div class="col-sm-4">                                         
+                          <%= f.text_field :abbreviation,autofocus: true , class: "form-control"  %>                                                
+                        </div>
+                    </div>
+                    <div class="form-group">  
+                        <%= f.label :coefficient,class: "control-label col-sm-2"  %>
+                          <div class="col-sm-4">                                         
+                              <%= f.text_area :coefficient,autofocus: true , class: "form-control"  %>                                                
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-sm-offset-2">
+
+                            <% if controller.action_name == "edit" ||  controller.action_name == "update" %>
+                              <button type="reset" id="btn_cancel_crop"class="btn btn-danger btn-space" >Cancelar</button>
+                            <%else%>
+                              <button type="reset" class="btn btn-danger btn-space">Cancelar</button>
+                            <% end%>
+                            <% if controller.action_name == "new"  ||  controller.action_name == "create"%>
+                              <button type="submit" class="btn btn-primary">Guardar</button>
+                            <%else%>
+                              <button type="submit" class="btn btn-primary">Actualizar</button>
+                            <% end%>
+
+
+
+                        </div>
+                    </div>
+
+                  <% end %>
+              </div>
+
+
+
+
+
+
+
+
+
+
 

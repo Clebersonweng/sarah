@@ -1,1 +1,40 @@
+    <div class="panel-heading clearfix ">
+        <h5 class="panel-title pull-left" style="padding-top: 7.5px;">Unidad de Medida</h5>
+        <div class="input-group col-xs-4 col-md-2 pull-right">
+            <input type="text" id="" class="form-control input-medium" placeholder=" buscar">
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table  table-hover table-striped table-condensed " data-toggle="table" data-url=""  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+                <thead>
+                    <tr>
+                        
+                        <th data-field="name" >Nombre</th> 
+                        <th data-field="abbreviation" >Abreviacion</th>                                      
+                        <th class="text-right">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @unit_of_measurements.each do |units| %>
+                      <tr>
+                          
+                          <td><%= units.name%></td>
+                          <td><%= units.abbreviation %></td>                       
+                          <td class="text-right">
+                              <%= link_to edit_unit_of_measurement_path(units) do %>
+                                <i class="fa fa-2x fa-edit"></i>
+                              <% end %>
+                              <%= link_to    units, method: :delete, data: { confirm: 'Are you sure?' }  do%>
+                                <i class="fa fa-2x fa-minus"></i>
+                              <% end %>
+                          </td>
+
+                      </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
