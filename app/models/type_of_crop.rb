@@ -1,10 +1,8 @@
 class TypeOfCrop < ApplicationRecord
-  has_many :farming_plots,  :dependent => :destroy
-  validates_presence_of :name, :presence => {message: "Debe agregar un nombre"}
-  validates_presence_of :code, :presence => {message: "Debe agregar un codigo "}
-  validates :name, length: { minimum: 3 }, :presence => {message: "Debet tener al menos tres digitos"}
-  validates :code, uniqueness: true,  :presence => {message: "El codigo no puede repetirse"}
+  has_many :estimate_sales
   
+  validates :name, length: { minimum: 3, maximum: 50}, format: { with: /\A[a-zA-Z]+\z/}
+  validates :code, uniqueness: true, length: { maximum: 7 } 
   before_create :add_zeros_to_code
   
   def name_with_label
@@ -14,10 +12,15 @@ class TypeOfCrop < ApplicationRecord
   
   
   private
-  def add_zeros_to_code
-   
-    self.code ||= TypeOfCrop.find_by_code('0')#code.rjust(2, '0')
-    puts self.code
+  def add_zeros_to_code 
+    codigo = TypeOfCrop.maximum(:code) #5
+    nuevoCodigo = codigo.to_i + 1 
+    nuevoCodigo = nuevoCodigo.to_s.rjust(7, '0')  # => '00005'
+    self.code = nuevoCodigo   
   end
   
 end
+#def set_account_number
+ #   nuevoCodigo = TypeOfCrop.maximum(:code)
+#    self.code = nuevoCodigo.to_i + 1
+ # end

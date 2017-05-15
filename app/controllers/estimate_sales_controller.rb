@@ -1,7 +1,6 @@
 class EstimateSalesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_estimate_sale, only: [:show, :edit, :update, :destroy]
-  respond_to :html, :xml, :json
   # GET /estimate_sales
   # GET /estimate_sales.json
   def index
@@ -17,10 +16,13 @@ class EstimateSalesController < ApplicationController
   # GET /estimate_sales/1.json
   def show
   end
-
+  
+  
+  
   # GET /estimate_sales/new
   def new
     get_estimate_sale_params
+    @history_sales = HistorySale.all
     @estimate_sale = EstimateSale.new
   end
 

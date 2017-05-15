@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :history_sales
   root to: "home#index"
-  
+  #match 'history_sales' => 'type_of_crops/history_sales', :via => :post
   
   #get 'new_type_of_crops', controller: 'type_of_crops', action: 'new' # nuevo tipo
   #get 'type_of_crops/:id', controller: 'type_of_crops', action: 'show', as: 'type_of_crop'# → recupera o contato com o identificador passado

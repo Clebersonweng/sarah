@@ -1,52 +1,43 @@
-<div class="panel-heading clearfix ">
-    <h5 class="panel-title pull-left" style="padding-top: 7.5px;">Tipo de Cultivo</h5>   
-</div>
+
 <div class="panel-body">
-    <%= form_for(@type_of_crop, html: {class: 'form-horizontal'}) do |f| %>
+    <%= form_for(@type_of_crop,html: {class: 'form-horizontal', :"data-toggle"=>"validator"}) do |f| %>
         <div class="col-sm-6 col-xs-10">
+
             <div class="form-group">  
-                <%= f.label :code, class: "control-label col-sm-1"%>
-                  <div class="col-sm-2">
-                      <%= f.text_field :code,autofocus: true , class: "form-control"   %>
-                        <%= f.object.errors[:code].to_sentence if f.object.errors[:code] %>
+                <%= f.label :name,"Nombre:",class: "control-label col-sm-2" %>
+                  <div class="col-sm-4">
+                      <%= f.text_field :name,autofocus: true , class: "form-control " ,onkeyup: "this.value=this.value.toUpperCase()",:"data-error"=>"El nombre no puedo ser vacio,solo permite letras",:pattern => "[a-zA-Z]+", :maxlength => "20", :required => true %>
+                        <div class="help-block"> <%= f.object.errors[:name].to_sentence if f.object.errors[:name] %></div>
+                        <div class="help-block with-errors"></div>
                     </div>
                 </div>
 
                 <div class="form-group">  
-                    <%= f.label :name,class: "control-label col-sm-1" %>
-                      <div class="col-sm-4">
-                          <%= f.text_field :name,autofocus: true , class: "form-control " ,onblur: "this.value=this.value.toUpperCase()"  %>
-                            <p class="help-block"> <%= f.object.errors[:name].to_sentence if f.object.errors[:name] %></p>
+                    <%= f.label :variety, "variedad:",class: "control-label col-sm-2"  %>
+                      <div class="col-sm-4">                                         
+                          <%= f.text_area :variety,autofocus: true , class: "form-control"  %>                                                
                         </div>
                     </div>
 
-                    <div class="form-group">  
-                        <%= f.label :variety,class: "control-label col-sm-1"  %>
-                          <div class="col-sm-4">                                         
-                              <%= f.text_field :variety,autofocus: true , class: "form-control"  %>                                                
-                            </div>
-                        </div>
 
+                    <div class="col-sm-6 col-sm-offset-2">                                                              
+                        <% if controller.action_name == "edit" ||  controller.action_name == "update" %>
+                          <%= link_to "../../type_of_crops", :controller => "type_of_crops", :action => "index", :type => "button", :class =>"btn btn-danger" do  %>                              
+                            Cancelar                       
+                          <%end%>  
+                        <%else%>
+                          <button type="reset" class="btn btn-danger btn-space" >Cancelar</button>
 
-                        <div class="col-sm-6 col-sm-offset-1">
-                                                              
-                                <% if controller.action_name == "edit" ||  controller.action_name == "update" %>
-                                  <button type="reset" id="btn_cancel_crop"class="btn btn-danger btn-space" >Cancelar</button>
-                                <%else%>
-                                  <button type="reset" class="btn btn-danger btn-space">Cancelar</button>
-                                <% end%>
-                                <% if controller.action_name == "new"  ||  controller.action_name == "create"%>
-                                  <button type="submit" class="btn btn-primary">Guardar</button>
-                                <%else%>
-                                  <button type="submit" class="btn btn-primary">Actualizar</button>
-                                <% end%>
-
-
-                            
-                        </div>
+                        <% end%>
+                        <% if controller.action_name == "new"  ||  controller.action_name == "create"%>
+                          <button type="submit" class="btn btn-primary">Guardar</button>
+                        <%else%>
+                          <button type="submit" class="btn btn-primary">Actualizar</button>
+                        <% end%>                           
                     </div>
+                </div>
 
-                  <% end %>
-              </div>
+              <% end %>
+          </div>
 
 

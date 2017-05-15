@@ -52,3 +52,5 @@ gem 'devise'
 gem "font-awesome-rails"
 #utilizado para buscar no select
 gem "select2-rails"
+
+gem "responders"

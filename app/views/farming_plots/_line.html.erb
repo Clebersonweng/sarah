@@ -1,0 +1,16 @@
+<% @farming_plots.each do |farm| %>
+  <tr>                      
+      <td><%= farm.code %></td>
+      <td><%= farm.name %></td>
+      <td><%= farm.area %></td>
+      <td><%= farm.type_of_crop.name %></td>
+      <td><%= farm.person.name %></td>
+      <td class="hidden-xs"><%= farm.description %></td>
+      <td class="text-right">
+          <%= link_to edit_farming_plot_path(farm), class: "btn btn-primary" do %>
+              <i class="fa fa-1x fa-pencil"></i>
+            <% end %>                            
+            <a type="button" class="btn_md_crop btn btn-primary" data-id_cultivo="<%= types.id %>"><i class="fa fa-1x fa-trash"></i></a>
+        </td>
+    </tr>
+  <% end %>

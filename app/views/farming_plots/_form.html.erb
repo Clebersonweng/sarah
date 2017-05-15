@@ -1,62 +1,50 @@
-<div class="panel-heading clearfix ">
-    <h5 class="panel-title pull-left" style="padding-top: 7.5px;"> Parcela Agricola </h5>   
-</div>
 <div class="panel-body">
     <%=form_for @farming_plot, url: farming_plots_path,:html => { class: 'form-horizontal' } do |f| %>
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-8">
                 <div class="form-group">  
-                    <%= f.label :code, class: "control-label col-sm-2"%>
-                      <div class="col-sm-3">
+                    <%= f.label :code,"Codigo:",class: "control-label col-sm-1"%>
+                      <div class="col-sm-2">
                           <%= f.text_field :code,autofocus: true , class: "form-control"   %>
                             <p class="help-block"> <%= f.object.errors[:code].to_sentence if f.object.errors[:code] %></p>
                         </div>
-                    </div>
 
-                    <div class="form-group">  
-                        <%= f.label :name,class: "col-sm-2 control-label" %>
-                          <div class="col-sm-6">
+                        <%= f.label :name,"Nombre:",class: "col-sm-1 control-label" %>
+                          <div class="col-sm-3">
                               <%= f.text_field :name,autofocus: true , class: "form-control" ,onblur: "this.value=this.value.toUpperCase()"  %>
-                                <p class="help-block"> <%= f.object.errors[:name].to_sentence if f.object.errors[:name] %></p>
+                                <div class="help-block"> <%= f.object.errors[:name].to_sentence if f.object.errors[:name] %></div>
                             </div>
                         </div>
-
                         <div class="form-group">  
-                            <%= f.label :area,class: "control-label col-sm-2"  %>
-                              <div class="col-sm-6">
+                            <%= f.label :area,"Area:",class: "control-label col-sm-1"  %> 
+                              <div class="col-sm-2">
                                   <div class="input-group">
                                       <%= f.text_field :area,autofocus: true , class: "form-control"  %>
-                                        <span class="input-group-addon" id="basic-addon2">Ha</span>                                                 
+                                        <span class="input-group-addon" id="basic-addon2">Ha</span> 
+                                        <p class="help-block"> <%= f.object.errors[:area].to_sentence if f.object.errors[:area] %></p>   
                                     </div>
-                                    <p class="help-block"> <%= f.object.errors[:area].to_sentence if f.object.errors[:area] %></p>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">  
-                                <%= f.label :type_of_crop_id, class: "col-sm-2 control-label" %>
-                                  <div class="col-sm-4">
+                                <%= f.label :type_of_crop_id,"Cultivo:", class: "col-sm-1 control-label" %>
+                                  <div class="col-sm-3">
                                       <%= f.select :type_of_crop_id, options_for_select(@type_of_crops, f.object.type_of_crop_id), {}, { :class => 'form-control' } %>
                                       <p class="help-block"> <%= f.object.errors[:type_of_crop_id].to_sentence if f.object.errors[:type_of_crop_id] %></p>
                                   </div>                             
                               </div>
 
                               <div class="form-group">  
-                                  <%= f.label  "Encargado",class: "col-sm-2 control-label"  %>
-                                    <div class="col-sm-4">
+                                  <%= f.label  "Encargado:",class: "col-sm-1 control-label"  %>
+                                    <div class="col-sm-2">
                                         <%= f.select :person_id, options_for_select(@person, f.object.person_id), {}, { :class => 'form-control' } %>
                                         <p class="help-block"> <%= f.object.errors[:person_id].to_sentence if f.object.errors[:person_id] %></p>
                                     </div>
-                                </div>
-                                <div class="form-group">  
-                                    <%= f.label :description,class: "col-sm-2 control-label"  %>
-                                      <div class="col-sm-4">
+                                    <%= f.label :description,class: "col-sm-1 control-label"  %>
+                                      <div class="col-sm-3">
                                           <%= f.text_area :description,autofocus: true , class: "form-control" %>
                                         </div>
                                     </div>
                                     <div class="col-sm-6 col-sm-offset-2">
                                         <% if controller.action_name == "edit" ||  controller.action_name == "update" %>
-                                          <button type="reset" id="btn_cancel_crop"class="btn btn-danger btn-space" >Cancelar</button>
+                                          <button type="text" id="btn_cancel"class="btn btn-danger btn-space" >Cancelar</button>
                                         <%else%>
                                           <button type="reset" class="btn btn-danger btn-space">Cancelar</button>
                                         <% end%>

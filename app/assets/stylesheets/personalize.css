@@ -2,14 +2,40 @@
     vertical-align: 100%;
     height: 100%;
     width: 100%; 
-    
+
 }
-.dataTables_filter{
-    display: none;
+.nav_left_sarah {
+    background-color: #31708f !important;
 }
-.dataTables_length{
-    display: none;
+.nav_top_sarah {
+    background-color: #31708f !important;
 }
-.dataTables_info{
-     display: none;
+.mouse_over_left_menu {
+    background-color: #105c60 !important;
+}
+
+
+.nav-tabs>li.active>a{
+    color: #000;
+    border: -1px !important;
+    background-color: #fff;
+}
+.panel-sarah 
+{
+    padding: 0px 0px;
+    border-color: #d6d7d8;
+}
+.tabs_sarah
+{
+    border-bottom: 0px solid #ddd;
+    margin-right: -5px; 
+    line-height: 0px; 
+    border: -2px solid transparent;
+}
+.alert_sarah 
+{
+    position:absolute;
+    width : 100%;
+    z-index :1050;
+    border-radius : 3px;
 }

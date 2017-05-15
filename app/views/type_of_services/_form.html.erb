@@ -1,35 +1,69 @@
-<%= form_for(type_of_service) do |f| %>
+
   <% if type_of_service.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(type_of_service.errors.count, "error") %> prohibited this type_of_service from being saved:</h2>
+        <h2><%= pluralize(type_of_service.errors.count, "error") %> prohibited this type_of_service from being saved:</h2>
 
-      <ul>
-      <% type_of_service.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+            <% type_of_service.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+        </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+  <div class="panel-heading clearfix ">
+      <h5 class="panel-title pull-left" style="padding-top: 7.5px;">Tipo de Servicio</h5>   
   </div>
+  <div class="panel-body">
+      <%= form_for(@type_of_service, html: {class: 'form-horizontal'}) do |f| %>
+          <div class="col-sm-6 col-xs-12">
+              <div class="form-group">  
+                  <%= f.label :name,class: "control-label col-sm-1" %>
+                    <div class="col-sm-4">
+                        <%= f.text_field :name,autofocus: true , class: "form-control " ,onblur: "this.value=this.value.toUpperCase()"  %>
+                          <div class="help-block"> <%= f.object.errors[:name].to_sentence if f.object.errors[:name] %></div>
+                      </div>
+                  </div>
 
-  <div class="field">
-    <%= f.label :price %>
-    <%= f.text_field :price %>
-  </div>
-<div class="field">
-    <%= f.label :unit_of_measurement_id %>
-    <%= f.select :unit_of_measurement_id, options_for_select(@unit_measurements)%>
-  </div>
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </div>
+                  <div class="form-group">  
+                      <%= f.label :price,class: "control-label col-sm-1"  %>
+                        <div class="col-sm-4">                                         
+                            <%= f.text_field :price,autofocus: true , class: "form-control"  %>
+                              <div class="help-block"> <%= f.object.errors[:price].to_sentence if f.object.errors[:price] %></div>
+                          </div>
+                      </div>
+                      <div class="form-group">  
+                          <%= f.label "U M", class:"control-label col-sm-1"  %>
+                            <div class="col-sm-4">                                         
+                                <%= f.text_field :unit_of_measurement_id,autofocus: true , class: "form-control"  %> 
+                                  <div class="help-block"> <%= f.object.errors[:unit_of_measurement_id].to_sentence if f.object.errors[:unit_of_measurement_id] %></div>
+                              </div>
+                          </div>
+                          <div class="form-group">  
+                              <%= f.label "Descrip.",class: "control-label col-sm-1"  %>
+                                <div class="col-sm-4">                                         
+                                    <%= f.text_field :description,autofocus: true , class: "form-control"  %> 
+                                     <div class="help-block"> <%= f.object.errors[:description].to_sentence if f.object.errors[:description] %></div>
+                                  </div>
+                              </div>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+                              <div class="col-sm-6 col-sm-offset-1">
+                                  <% if controller.action_name == "edit" ||  controller.action_name == "update" %>
+                                    <button type="reset" id="btn_cancel_crop"class="btn btn-danger btn-space" >Cancelar</button>
+                                  <%else%>
+                                    <button type="reset" class="btn btn-danger btn-space">Cancelar</button>
+                                  <% end%>
+                                  <% if controller.action_name == "new"  ||  controller.action_name == "create"%>
+                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                  <%else%>
+                                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                                  <% end%>
+
+
+                              </div>
+                          </div>
+                          <div class="col-sm-6 col-xs-6"></div>
+                        <% end %>
+                    </div>
+
+

@@ -1,10 +1,13 @@
 class TypeOfCropsController < ApplicationController
   before_action :set_type_of_crop, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  
+  
   # GET /type_of_crops
   # GET /type_of_crops.json
   def index
-    @type_of_crops = TypeOfCrop.all    
+    @type_of_crops = TypeOfCrop.all
+    @controller_name = "Tipo de cultivo" 
   end
 
   # GET /type_of_crops/1
@@ -34,24 +37,15 @@ class TypeOfCropsController < ApplicationController
   # POST /type_of_crops
   # POST /type_of_crops.json
   def create   
-   
-    @code = params[:type_of_crop][:code];
-    @name = params[:type_of_crop][:name];
-    @variety = params[:type_of_crop][:variety];
-    #Creamos el objeto con los valores a ingresar.
-    @type_of_crop = TypeOfCrop.new({
-        :code => @code,
-        :name => @name,
-        :variety => @variety
-      });
-        
+    @type_of_crop = TypeOfCrop.new(type_of_crop_params)
+
     respond_to do |format|
       if @type_of_crop.save
-        flash[:notice] = "Successfull be create"
-        format.html { redirect_to  action:"index"}
+        format.html { redirect_to @type_of_crop, notice: 'Fue guardado exitosamente.' }
+        format.json { render :show, status: :created, location: @type_of_crop }
       else
-        flash[:alert] = "Unsuccessfull be create"
         format.html { render :new }
+        format.json { render json: @implement.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -69,24 +63,31 @@ class TypeOfCropsController < ApplicationController
     @type_of_crop.variety = @variety
     respond_to do |format|
       if @type_of_crop.save
-        format.html { redirect_to @type_of_crop, notice: 'Stru expense det was successfully created.' }
-        #format.json { render :show, status: :created, location: @stru_expense_det }
+        flash[:notice] = "Se guardo exitosamente."
+        format.html { redirect_to  action:"index"}
       else
-        format.html { render :new }
-        #format.json { render json: @type_of_crop.errors, status: :unprocessable_entity }
+        flash[:alert] = "Ocurrio un error al guardar"
+        format.html { redirect_to  action:"edit"}
       end
     end
   end
-
+  
   # DELETE /type_of_crops/1
   # DELETE /type_of_crops/1.json
   def destroy
-    @type_of_crop = TypeOfCrop.find(params[:id])
-    @type_of_crop.destroy
+    @type_of_crop = TypeOfCrop.find(params[:id]) 
+    
     respond_to do |format|
-      flash[:notice] = "Successfull be destroyed"
-      format.html { redirect_to  action:"index"}
-    end
+      if @type_of_crop.destroy
+        #format.html { redirect_to @type_of_crop, notice: 'Se actualizo exitosamente!' }        
+        res = 1
+        format.json  { render :json => res }
+        #format.json { status: :created, location: @type_of_crop }
+      else
+        res = 0
+        format.json  { render :json => res }
+      end
+    end  
   end
 
   private

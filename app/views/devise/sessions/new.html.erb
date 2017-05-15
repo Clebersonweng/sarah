@@ -1,35 +1,35 @@
 <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'form-horizontal' }) do |f|  %>
 
-  <div class="form-group">
-    <%= f.label :email,class: "control-label col-xs-2 col-xs-offset-1" %>
-    <div class="col-md-8">
-      <%= f.email_field :email, autofocus: true , class: "form-control"%>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :password,class: "control-label col-xs-2 col-xs-offset-1" %>
-    <div class="col-md-8">
-       <%= f.password_field :password, autocomplete: "off" , class: "form-control"%>
-    </div>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
     <div class="form-group">
+        <%= f.label :email,class: "control-label col-xs-2 col-xs-offset-1" %>
+          <div class="col-md-8">
+              <%= f.email_field :email, autofocus: true , class: "form-control"%>
+            </div>
+        </div>
 
-      <%= f.check_box :remember_me , class: "control-label col-xs-2 col-xs-offset-1"%>
-      <%= f.label :remember_me%>
-    </div>
-  <% end -%>
-<div class="control-group col-xs-offset-4">
-  
-   <div class="controls">
-    <button type="submit" class="btn btn-primary">Ingresar</button>
-    <button type="reset" class="btn btn-danger">Cancelar</button>
-    </div>
- 
-  </div>
-<% end %>
+        <div class="form-group">
+            <%= f.label :password,class: "control-label col-xs-2 col-xs-offset-1" %>
+              <div class="col-md-8">
+                  <%= f.password_field :password, autocomplete: "off" , class: "form-control"%>
+                </div>
+            </div>
+
+            <% if devise_mapping.rememberable? -%>
+              <div class="form-group">
+
+                  <%= f.check_box :remember_me , class: "control-label col-xs-2 col-xs-offset-1"%>
+                    <%= f.label :remember_me%>
+                </div>
+              <% end -%>
+              <div class="control-group col-xs-offset-4">
+
+                  <div class="controls">
+                      <button type="submit" class="btn btn-primary">Ingresar</button>
+                      <button type="reset" class="btn btn-danger">Cancelar</button>
+                  </div>
+
+              </div>
+            <% end %>
 
 
 

@@ -3,8 +3,8 @@ ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
   first_tag_end_index = html_tag.index('>')
 
   if class_attr_index.nil? || first_tag_end_index > class_attr_index
-    html_tag.insert(class_attr_index + 7, 'error ')
+    html_tag.insert(class_attr_index + 7, 'alert alert-error error ')
   else
-    html_tag.insert(first_tag_end_index, ' class="error"')
+    html_tag.insert(first_tag_end_index, ' class="alert alert-error"')
   end
 end

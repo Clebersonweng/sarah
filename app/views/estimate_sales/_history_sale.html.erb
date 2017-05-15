@@ -1,13 +1,12 @@
-<div class="container">
-    <div class="row">
-        <div id="myModal2" class="modal fade" tabindex="-1" role="dialog">
+
+        <div id="md_historyProd" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">×</button>
                         <h3>Historico de Ventas</h3>
                     </div>
-                    <div class="modal-body">
+                   
                         <div class="modal-body">
                             <table data-toggle="table"  data-url="../history_sales"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="false" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
                                 <thead>
@@ -18,14 +17,16 @@
 
                                     </tr>
                                 </thead>
-                                <tbody id="history_sales">
+                                <tbody >
+                                   <!--Cargado via json-->
                                 </tbody>
                             </table>                       
-                    </div>
-                         <div class="modal-footer">
+                        </div>
+                        <div class="modal-footer">
                             <button class="btn btn-success" data-dismiss="modal">Save</button>
                             <button class="btn"type="reset" id="exitHistory" data-dismiss="modal">Exit</button>
                         </div>
+                   
                 </div>
-            </div>
-        </div>  
+            </div>  
+

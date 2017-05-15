@@ -1,10 +1,12 @@
-<div class="row">
-    <div class="col-sm-12">
-        <div class="panel panel-default">
-            <div class="panel-heading"><h3 align="center">Type Of Services</h3></div>
-            <%=render 'layouts/submenu' %>
-            <div class="panel-body">
-                <table data-toggle="table" data-url="type_of_service"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+<div class="panel-heading clearfix ">
+    <h5 class="panel-title pull-left" style="padding-top: 7.5px;"> Tipo de Servicio</h5>
+    <div class="input-group col-xs-4 col-md-2 pull-right">
+        <input id="filter_type_service" type="search"  class="form-control input-sm" placeholder=" buscar">
+    </div>
+</div>
+<div class="panel-body">
+        <div class="table-responsive">
+                <table  id="tb_type_crop"class="table  table-hover table-striped" data-toggle="table" data-url="type_of_service" >
                     <thead>
                         <tr>
                             <th data-field="id" data-checkbox="true">Item ID</th>
@@ -36,5 +38,4 @@
                 </table>
             </div>
         </div>
-    </div>
-</div>
+   

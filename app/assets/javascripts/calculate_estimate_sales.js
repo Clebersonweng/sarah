@@ -17,18 +17,11 @@ $(document).ready(function() {
     });
 
     $('#openHistory').click("click", function(event) {
-        event.preventDefault();
-        $('#myModal2').modal({
+        event.preventDefault();        
+        $('#md_historyProd').modal({
             show: true
-        })
-        $("tbody tr input[type=checkbox]").on("change", function() {
-            var $this = $(this);
-            $this.closest('tr').each(function() {
-                var quantity = $(this).find("td:nth-child(3)").text();
-                $("#estimate_sale_estimate_production").val(quantity);
-                
-            });
         });
+        charge_history_prod();
     });
    
     /**limpiar los campos cargados al hacer click en salir*/
@@ -41,19 +34,31 @@ $(document).ready(function() {
 
 
 
-    /*comienzo para tirar valor de historico de ventas*/
-    /*$.ajax({
-       url: 'history_sale_url',
-       type: 'POST',
-       dataType: 'JSON',
-       data: { "date":date, "quantity":quantity }
-       success: function(data){
-         alert("dfdf");
-         $("#estimate_sale_estimate_production").append('data.quantity');
-       }
-       error: function (xhr, status, error) {
-               var err = eval("(" + xhr.responseText + ")");
-               alert(err.Message);
-           }   
-     });*/
+            /*comienzo para tirar valor de historico de ventas*/
+            /*$.ajax({
+               url: 'history_sale_url',
+               type: 'POST',
+               dataType: 'JSON',
+               data: { "date":date, "quantity":quantity }
+               success: function(data){
+                 alert("dfdf");
+                 $("#estimate_sale_estimate_production").append('data.quantity');
+               }
+               error: function (xhr, status, error) {
+                       var err = eval("(" + xhr.responseText + ")");
+                       alert(err.Message);
+                   }   
+             });*/
 });
+
+var charge_history_prod = function ()
+{
+    $("tbody tr input[type=checkbox]").on("change", function() {
+        var $this = $(this);
+        $this.closest('tr').each(function() {
+            var quantity = $(this).find("td:nth-child(3)").text();
+            $("#estimate_sale_estimate_production").val(quantity);
+
+        });
+    });
+}

@@ -12,11 +12,7 @@
  *
  *= require_tree .
  *= require_self
- */
-/*
- *= require font-awesome
+ *= require "bootstrap.min"
+ *= require "font-awesome.min"
  */
 
-@import "bootstrap.min";
-@import "font-awesome/css/font-awesome.min";
-@import "dataTables.responsive.css";

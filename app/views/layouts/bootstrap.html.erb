@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -7,53 +6,41 @@
             Sarah - Presupuesto Agricola
         </title>
         <!--estos links abajo hacen que levante las librerias css y js-->
-        <%= stylesheet_link_tag "bootstrap.min.css" %>
-        <%= stylesheet_link_tag "sb-admin.css" %>
-        <%= stylesheet_link_tag "font-awesome.min.css" %>
-        <%= stylesheet_link_tag "personalize.css" %>
-        <%= stylesheet_link_tag "dataTables.responsive.css" %>
 
         <%= javascript_include_tag "application", "data-turbolinks-track" => "reload" %>
-        <%= javascript_include_tag "jquery-1.11.1.min.js" %>
-        <%= javascript_include_tag 'jquery_ujs' %>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-        <%=javascript_include_tag "bootstrap.min.js"%>
-        <%=javascript_include_tag "utils.js"%>
-        <%=javascript_include_tag "jquery.dataTables.min.js"%>
-        <%= javascript_include_tag "dataTables.responsive.js" %>
-        <%= javascript_include_tag "dataTables.bootstrap.min" %>
+        <%= stylesheet_link_tag "application", media: 'all', 'data-turbolinks-track' => true %>
         <%= csrf_meta_tags %>
-
-        
-        <!--icons lumino-->
-
-
     </head>
     <body>
         <div id="wrapper">
             <header> 
                 <%=render 'layouts/navigation' %>
             </header>
-            <!--/.row-->
-
             <div id="page-wrapper">                
                 <div class="container-fluid">                    
                     <div class="col-md-12 col-xs-12 ">
-                        <div class="panel panel-default">                            
-                            <% if controller.controller_name != "home" %>                                               
-                              <%= render 'layouts/submenu' %>
-                            <%end%>                         
+                        <div class="panel panel-primary panel-sarah">                            
+                            <% if controller.controller_name != "home" && controller.action_name != "edit"%> 
+                              <div class="panel-heading clearfix panel-sarah">  <h5 class="panel-title col-lg-offset-3 text-left"></h5>
+                                  <%= render 'layouts/submenu' %>
+                              </div>                              
+                            <%end%>
                             <%= render 'layouts/messages' %>
+                            <br>
+                            <div class="col-xs-6 col-lg-6">
+                                <div id="alerta" class="alert alert-dismissible alert_sarah hide" role="alert">
+                                    <span></span>
+                                </div>
+                            </div>
                             <%= yield %>
-
                         </div>          
 
                     </div>
-
                 </div>
-                </body>
-                <script>
+            </div>
+    </body>
+    <script>
 <%= yield :js %>
-                </script>
-                </html>
-                <!--/.main-->
+    </script>
+</html>
+<!--/.main-->

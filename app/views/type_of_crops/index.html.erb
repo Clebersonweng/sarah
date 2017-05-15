@@ -1,41 +1,39 @@
-    <div class="panel-heading clearfix ">
-        <h5 class="panel-title pull-left" style="padding-top: 7.5px;">Tipo de Cultivo</h5>
-        <div class="input-group col-xs-4 col-md-2 pull-right">
-            <input id="filter_type_crop" type="search" id="" class="form-control input-sm" placeholder=" buscar">
-        </div>
-    </div>
-<div class="panel-body">
+    <div class="panel-body">
         <div class="table-responsive">
-            <table class="table  table-hover table-striped" id="tb_type_crop" table-condensed data-toggle="table" data-url="type_of_crops"  data-show-refresh="true" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+            <table class="table  table-hover table-striped table-condensed display" id="tabela" showToggle data-toggle="table" data-search="true" data-toolbar="toolbar1" data-show-toggle="true" data-url="type_of_crops" data-show-refresh="true" data-pagination="true" onlyInfoPagination="false" data-sort-name="name" data-sort-order="desc">
                 <thead>
                     <tr>
-                        <th data-field="id" data-sortable="true" data-checkbox="true">Item ID</th>
-                        <th data-field="code" >Codigo</th> 
-                        <th data-field="name" >Nombre</th>                            
-                        <th data-field="variety"  data-sortable="true">Variedad</th> 
-                        <th>Action</th>
+                       <th data-field="code" data-sortable="true" class="searchable">Codigo</th> 
+                        <th data-field="name" data-sortable="true">Nombre</th>                            
+                        <th data-field="variety" class="hidden-xs">Variedad</th> 
+                        <th class="text-right">Accion</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% @type_of_crops.each do |types| %>
-                      <tr>
-                          <td><%= types.id%></td>
-                          <td><%= types.code%></td>
-                          <td><%= types.name %></td>
-                          <td><%= types.variety%></td>                           
-                          <td class="col-md-1">
-                              <%= link_to edit_type_of_crop_path(types) do %>
-                                <i class="fa fa-2x fa-edit"></i>
-                              <% end %>
-                              <%= link_to    types, method: :delete, data: { confirm: 'Are you sure?' }  do%>
-                                <i class="fa fa-2x fa-minus"></i>
-                              <% end %>
-                          </td>
-
-                      </tr>
-                    <% end %>
+                    <%= render "index"%>
                 </tbody>
             </table>
         </div>
+        <!--##############################################################################-->
+        <div id="md_cultivo" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                        <h3>Eliminar Tipo De cultivo</h3>
+                    </div>
+
+                    <div class="modal-body">
+                        <p>Esta seguro que desea eliminar?</p>
+                        </table>                       
+                    </div>
+                    <div class="modal-footer">                
+                        <button class="btn"type="reset" id="exitHistory" data-dismiss="modal">Salir</button>
+                        <button class="btn btn-danger" id="btn_md_confirm"  data-dismiss="modal">Eliminar</button>
+                    </div>
+
+                </div>
+            </div>  
+        </div>
     </div>
-</div>
+

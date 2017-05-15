@@ -13,10 +13,9 @@
 
 //= require jquery
 //= require jquery_ujs
-//= require jquery-1.11.1.min
-//= require turbolinks
-//= require bootstrap.min
-//= require dataTables.responsive
+//= require bootstrap.min 
+//= bootstrap-table
 //= require_tree .
+
 
 
