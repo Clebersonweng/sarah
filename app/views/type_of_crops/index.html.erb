@@ -1,39 +1,38 @@
-    <div class="panel-body">
-        <div class="table-responsive">
-            <table class="table  table-hover table-striped table-condensed display" id="tabela" showToggle data-toggle="table" data-search="true" data-toolbar="toolbar1" data-show-toggle="true" data-url="type_of_crops" data-show-refresh="true" data-pagination="true" onlyInfoPagination="false" data-sort-name="name" data-sort-order="desc">
-                <thead>
-                    <tr>
-                       <th data-field="code" data-sortable="true" class="searchable">Codigo</th> 
-                        <th data-field="name" data-sortable="true">Nombre</th>                            
-                        <th data-field="variety" class="hidden-xs">Variedad</th> 
-                        <th class="text-right">Accion</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <%= render "index"%>
-                </tbody>
-            </table>
-        </div>
-        <!--##############################################################################-->
-        <div id="md_cultivo" class="modal fade" tabindex="-1" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">×</button>
-                        <h3>Eliminar Tipo De cultivo</h3>
-                    </div>
-
-                    <div class="modal-body">
-                        <p>Esta seguro que desea eliminar?</p>
-                        </table>                       
-                    </div>
-                    <div class="modal-footer">                
-                        <button class="btn"type="reset" id="exitHistory" data-dismiss="modal">Salir</button>
-                        <button class="btn btn-danger" id="btn_md_confirm"  data-dismiss="modal">Eliminar</button>
-                    </div>
-
-                </div>
-            </div>  
-        </div>
+<div class="panel-body">
+    <div class="table-responsive">
+        <table class="table  table-hover table-striped table-condensed display" id="tabela" data-toggle="table" data-search="true" data-toolbar="toolbar1" data-show-toggle="true" data-url="type_of_crops" data-show-refresh="true" data-pagination="true" onlyInfoPagination="false" data-sort-name="name" data-sort-order="code">
+            <thead>
+                <tr>
+                    <th data-field="code" data-sortable="true" class="searchable">Codigo</th> 
+                    <th data-field="name" data-sortable="true">Nombre</th>                            
+                    <th data-field="variety" class="hidden-xs">Variedad</th> 
+                    <th class="text-right">Accion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%= render "index"%>
+            </tbody>
+        </table>
     </div>
+    <!--##############################################################################-->
+    <div id="md_cultivo" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h3>Eliminar Tipo De cultivo</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Esta seguro que desea eliminar?</p>
+                    </table>                       
+                </div>
+                <div class="modal-footer">                
+                    <button class="btn"type="reset" id="exit" data-dismiss="modal">Salir</button>
+                    <button class="btn btn-danger" id="btn_md_confirm"  data-dismiss="modal">Eliminar</button>
+                </div>
+            </div>
+        </div>  
+    </div>
+
+</div>
 

@@ -166,7 +166,7 @@
             return 'Search';
         },
         formatNoMatches: function () {
-            return 'No encontro datos con estos caracteres';
+            return '<p class="text-center">No cuenta datos</p>';
         },
         formatRefresh: function () {
             return 'Refresh';
@@ -589,13 +589,10 @@
         if (this.options.search) {
             html = [];
             html.push(             
-                '<div class="search input-group input-group-md">',
-                    sprintf('<input class="form-control" type="text" placeholder="buscar" autofocus>',
-                        this.options.formatSearch()),
-                   '<span class="input-group-addon">',
-                        ' <i class="fa fa-search"></i>',
-                    '</span>',
-             '</div>');
+                '<div class="search input-group">',
+                    sprintf("<span class='input-group-addon'><i class='fa fa-search'></i></span><input class='form-control' type='text' placeholder='buscar' autofocus>",
+                            this.options.formatSearch()),
+                '</div>');
 
             this.$toolbar.append(html.join(''));
             $search = this.$toolbar.find('.search input');

@@ -31,6 +31,7 @@
     margin-right: -5px; 
     line-height: 0px; 
     border: -2px solid transparent;
+    border-radius: 0px 0px 0 0;
 }
 .alert_sarah 
 {
@@ -38,4 +39,8 @@
     width : 100%;
     z-index :1050;
     border-radius : 3px;
+}
+.hand 
+{
+    cursor:pointer;
 }

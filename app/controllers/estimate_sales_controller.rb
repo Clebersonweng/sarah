@@ -8,7 +8,7 @@ class EstimateSalesController < ApplicationController
     #@estimate_sales = EstimateSale.all 
     #respond_to do |format|
     # format.html # index.html.erb
-    # format.json { render json: @estimate_sales }
+    # render json: @estimate_sales 
     # end
   end
 
@@ -40,11 +40,13 @@ class EstimateSalesController < ApplicationController
 
     respond_to do |format|
       if @estimate_sale.save
-        flash[:notice] = "Successfull be create"
-        format.html { redirect_to  action:"index"}
+        format.js
+        #flash[:notice] = "Successfull be create"
+        #format.html { redirect_to  action:"index"}
       else
-        flash[:alert] = "Unsuccessfull be create"
-        format.html { redirect_to  action:"edit"}
+        format.js
+        #flash[:alert] = "Unsuccessfull be create"
+        #format.html { redirect_to  action:"edit"}
       end
     end
   end
@@ -69,10 +71,12 @@ class EstimateSalesController < ApplicationController
   # DELETE /estimate_sales/1.json
   def destroy
     @estimate_sale = EstimateSale.find(params[:id])
-    @estimate_sale.destroy
     respond_to do |format|
-      flash[:notice] = "Successfull be destroyed"
-      format.html { redirect_to  action:"index"}
+      if @estimate_sale.destroy        
+        format.json { render :show, status: :created, location: @estimate_sale }
+      else
+        format.json { render json: @estimate_sale.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -84,12 +88,14 @@ class EstimateSalesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def estimate_sale_params
-    params.require(:estimate_sale).permit(:farming_plot_id,:chart_of_account_id, :estimate_production,:date, :total_production, :price, :gross_sale)
+    params.require(:estimate_sale).permit(:code,:type_of_crop_id,:farming_plot_id,:chart_of_account_id, :estimate_production,:date, :total_production, :price, :gross_sale)
   end
   def get_estimate_sale_params
     @farming_plots = FarmingPlot.all.collect {|p| [ p.name, p.id, {"data-area-parcela"=>p.area} ] }
     @charts = ChartOfAccount.all.collect {|type|[type.name, type.id]}
     @history_sales = HistorySale.all.collect {|type| [type.quantity, type.id, {"data-date"=>type.date} ] }
-   # @farm = EstimateSale.farming_plot.find(:estimate_sale_farming_plot_id)
+    @type_of_crops = TypeOfCrop.all.collect {|p| [ p.name, p.id ] }
+
+    # @farm = EstimateSale.farming_plot.find(:estimate_sale_farming_plot_id)
   end
 end

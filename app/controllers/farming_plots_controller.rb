@@ -37,7 +37,7 @@ class FarmingPlotsController < ApplicationController
 
     respond_to do |format|
       if @farming_plot.save
-        flash[:notice] = "Successfull be create"
+        flash[:notice] = "Creado exitosamente."
         format.html { redirect_to  action:"index"}
       else
         format.html { render :new }
@@ -52,7 +52,7 @@ class FarmingPlotsController < ApplicationController
     get_params_plot
     respond_to do |format|
       if @farming_plot.update(farming_plot_params)
-        flash[:notice] = "Successfull be update"
+        flash[:notice] = "Actualizado exitosamente."
         format.html { redirect_to  action:"index"}
       else
         format.html { render :edit }
@@ -64,12 +64,20 @@ class FarmingPlotsController < ApplicationController
   # DELETE /farming_plots/1
   # DELETE /farming_plots/1.json
   def destroy
-    @farming_plot = FarmingPlot.find(params[:id])
-    @farming_plot.destroy
+    @farming_plot = FarmingPlot.find(params[:id])    
     respond_to do |format|
-      flash[:notice] = "Successfull be destroyed"
-      format.html { redirect_to  action:"index"}
-    end
+      if @farming_plot.destroy
+        #format.html { redirect_to @type_of_crop, notice: 'Se actualizo exitosamente!' }        
+       # res = 1
+        #format.json  { render :json => res }
+        format.js
+        #format.json { status: :created, location: @type_of_crop }
+      else
+       # res = 0
+        #format.json  { render :json => res }
+        format.js
+      end
+    end  
   end
 
   private
@@ -80,7 +88,7 @@ class FarmingPlotsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def farming_plot_params
-    params.require(:farming_plot).permit(:code, :name, :area, :type_of_crop_id,:person_id ,:description)
+    params.require(:farming_plot).permit(:code, :name, :area,:person_id ,:description)
   end
   def get_params_plot
     @type_of_crops = TypeOfCrop.all.collect { |type| [type.name, type.id]}

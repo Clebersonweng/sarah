@@ -18,14 +18,9 @@ $(document).ready(function ()
 
     $('.fa.fa-2x.fa-minus').on("click", function (event) {
         event.preventDefault();
-        $('#md_controllerName').modal({
-            show: true
-        });
-
+        $('#md_controllerName').modal('show');
     });
-    $("#btn_cancel").on("click", function () {
-        $(location).attr('href');
-    });
+   
 
     /*boton click lista de cultivo para abrir modal de eliminar*/
     $(".btn_md_crop.btn.btn-primary").on("click", function (event) {
@@ -63,7 +58,7 @@ var delete_crop = function (n_id) {
                     alert_sarah("Eliminado con exito!", "success");
                 } else if (respuesta_json === 0)
                 {
-                    alert_sarah("Ocurrio un error al eliminar!", "error");
+                    alert_sarah("Ocurrio un error al eliminar!", "danger");
                 }
             }
         });

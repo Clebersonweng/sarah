@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170515153358) do
+ActiveRecord::Schema.define(version: 20170520153215) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,8 +80,11 @@ ActiveRecord::Schema.define(version: 20170515153358) do
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.date     "date"
+    t.string   "code"
+    t.integer  "type_of_crop_id"
     t.index ["chart_of_account_id"], name: "index_estimate_sales_on_chart_of_account_id", using: :btree
     t.index ["farming_plot_id"], name: "index_estimate_sales_on_farming_plot_id", using: :btree
+    t.index ["type_of_crop_id"], name: "index_estimate_sales_on_type_of_crop_id", using: :btree
   end
 
   create_table "farming_plots", force: :cascade do |t|
@@ -365,6 +368,7 @@ ActiveRecord::Schema.define(version: 20170515153358) do
   add_foreign_key "cost_oper_machines", "farming_plots"
   add_foreign_key "estimate_sales", "chart_of_accounts"
   add_foreign_key "estimate_sales", "farming_plots"
+  add_foreign_key "estimate_sales", "type_of_crops"
   add_foreign_key "farming_plots", "people"
   add_foreign_key "implements", "machines"
   add_foreign_key "machines", "brands"

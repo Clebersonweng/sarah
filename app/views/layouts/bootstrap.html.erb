@@ -1,3 +1,4 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <html>
     <head>
         <meta charset="utf-8">
@@ -9,6 +10,8 @@
 
         <%= javascript_include_tag "application", "data-turbolinks-track" => "reload" %>
         <%= stylesheet_link_tag "application", media: 'all', 'data-turbolinks-track' => true %>
+        <%= stylesheet_link_tag "personalize.css"%>
+
         <%= csrf_meta_tags %>
     </head>
     <body>
@@ -23,24 +26,28 @@
                             <% if controller.controller_name != "home" && controller.action_name != "edit"%> 
                               <div class="panel-heading clearfix panel-sarah">  <h5 class="panel-title col-lg-offset-3 text-left"></h5>
                                   <%= render 'layouts/submenu' %>
-                              </div>                              
-                            <%end%>
-                            <%= render 'layouts/messages' %>
-                            <br>
-                            <div class="col-xs-6 col-lg-6">
-                                <div id="alerta" class="alert alert-dismissible alert_sarah hide" role="alert">
-                                    <span></span>
-                                </div>
-                            </div>
-                            <%= yield %>
-                        </div>          
+                              </div> 
+                            <% elsif controller.controller_name != "home" %>
+                                <div class="panel-heading clearfix">  
+                                    <h1 class="panel-title text-center">Editar</h1>                   
+                                </div> 
+                              <% end %>
+                              <%= render 'layouts/messages' %>
+                              <br>
+                              <div class="col-xs-6 col-lg-6">
+                                  <div id="alerta" class="alert alert-dismissible alert_sarah hide" role="alert">
+                                      <span></span>
+                                  </div>
+                              </div>
+                              <%= yield %>
+                          </div>          
 
-                    </div>
-                </div>
-            </div>
-    </body>
-    <script>
-<%= yield :js %>
-    </script>
-</html>
-<!--/.main-->
+                      </div>
+                  </div>
+              </div>
+      </body>
+      <script>
+  <%= yield :js %>
+      </script>
+  </html>
+  <!--/.main-->

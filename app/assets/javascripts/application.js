@@ -16,6 +16,3 @@
 //= require bootstrap.min 
 //= bootstrap-table
 //= require_tree .
-
-
-
