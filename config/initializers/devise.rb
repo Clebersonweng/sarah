@@ -6,7 +6,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = 'e240a66c2e50f2b76fe1fc16090c30e3ab4cf4372514d0c3d1d681b373a46fd300a20ea342c9351457011bd21e84fbdfdd8b50cf95ebef325b0e2d123b977978'
+  config.secret_key = 'e240a66c2e50f2b76fe1fc16090c30e3ab4cf4372514d0c3d1d681b373a46fd300a20ea342c9351457011bd21e84fbdfdd8b50cf95ebef325b0e2d123b977978'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -111,7 +111,7 @@ Devise.setup do |config|
   # config.pepper = '9b8cfceb553e2f3faf2688e9f96ffa67efdec553d3cd2a08d1a0ba778772b2e6107ae67c20fd66d46e1ebf4b1fa06d14ffe0899133a0591034332d2d987f13b8'
 
   # Send a notification email when the user's password is changed
-  # config.send_password_change_notification = false
+   config.send_password_change_notification = true
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -164,7 +164,7 @@ Devise.setup do |config|
   # ==> Configuration for :timeoutable
   # The time you want to timeout the user session without activity. After this
   # time the user will be asked for credentials again. Default is 30 minutes.
-   config.timeout_in = 1.minutes
+   config.timeout_in = 30.minutes
 
   # ==> Configuration for :lockable
   # Defines which strategy will be used to lock an account.

@@ -166,7 +166,7 @@
             return 'Search';
         },
         formatNoMatches: function () {
-            return '<p class="text-center">No cuenta datos</p>';
+            return '<p class="text-center">No cuenta con datos</p>';
         },
         formatRefresh: function () {
             return 'Refresh';
@@ -393,6 +393,7 @@
         this.$container.off('click', 'th').on('click', 'th', function (event) {
             if (that.options.sortable && $(this).data().sortable) {
                 that.onSort(event);
+                  open_modal(""); //recarga evento delete modal
             }
         });
 
@@ -433,7 +434,6 @@
             name = this.options.sortName,
             order = this.options.sortOrder === 'desc' ? -1 : 1,
             index = $.inArray(this.options.sortName, this.header.fields);
-
         if (index !== -1) {
             this.data.sort(function (a, b) {
                 var aa = a[name],
@@ -459,6 +459,7 @@
                     return order * -1;
                 }
                 return order;
+               open_modal(""); //recarga evento delete modal
             });
         }
     };
@@ -486,6 +487,7 @@
         }
         this.initSort();
         this.initBody();
+        open_modal(""); //recarga evento delete modal
     };
 
     BootstrapTable.prototype.initToolbar = function () {
@@ -512,6 +514,7 @@
                 this.options.formatRefresh()),
                 '<i class="glyphicon glyphicon-refresh icon-refresh"></i>',
                 '</button>');
+                open_modal(""); //recarga evento delete modal
         }
 
         if (this.options.showToggle) {
@@ -557,6 +560,7 @@
         if (this.options.showRefresh) {
             this.$toolbar.find('button[name="refresh"]')
                 .off('click').on('click', $.proxy(this.refresh, this));
+           open_modal(""); //recarga evento delete modal
         }
 
         if (this.options.showToggle) {
@@ -602,6 +606,7 @@
                     that.onSearch(event);
                 }, 200); // 500ms
             });
+            open_modal(""); //recarga evento delete modal
         }
     };
 
@@ -619,6 +624,7 @@
         this.options.pageNumber = 1;
         this.initSearch();
         this.updatePagination();
+        open_modal(""); //recarga evento delete modal
     };
 
     BootstrapTable.prototype.initSearch = function () {
@@ -642,6 +648,7 @@
                         typeof value === 'number') &&
                         (value + '').toLowerCase().indexOf(s) !== -1) {
                         return true;
+                       open_modal(""); //recarga evento delete modal
                     }
                 }
                 return false;
@@ -651,7 +658,7 @@
 
     BootstrapTable.prototype.initPagination = function () {
         this.$pagination = this.$container.find('.fixed-table-pagination');
-
+        open_modal(""); //recarga evento delete modal
         if (!this.options.pagination) {
             return;
         }
@@ -798,6 +805,7 @@
         }
 
         this.initPagination();
+        open_modal(""); //recarga evento delete modal
         if (this.options.sidePagination === 'server') {
             this.initServer();
         } else {
@@ -965,7 +973,7 @@
 
         // show no records
         if (!html.length) {
-            html.push('<tr class="no-records-found">',
+            html.push('<tr class="no contiene fila para muestra">',
                 sprintf('<td colspan="%s">%s</td>', this.header.fields.length, this.options.formatNoMatches()),
                 '</tr>');
         }
@@ -985,6 +993,7 @@
                 if (that.header.clickToSelects[$tr.children().index($(this))]) {
                     $tr.find(sprintf('[name="%s"]',
                         that.options.selectItemName)).trigger('click');
+                          open_modal(""); //recarga evento delete modal
                 }
             }
         });
@@ -1050,6 +1059,7 @@
 
         this.updateSelected();
         this.resetView();
+        open_modal(""); //recarga evento delete modal
     };
 
     BootstrapTable.prototype.initServer = function (silent) {
@@ -1211,6 +1221,7 @@
         this.initSearch();
         this.initPagination();
         this.initBody();
+        open_modal(""); //recarga evento delete modal
 
         if (this.options.showColumns) {
             var $items = this.$toolbar.find('.keep-open input').prop('disabled', false);
@@ -1272,6 +1283,7 @@
         this.initSearch();
         this.initPagination();
         this.initBody();
+        open_modal(""); //recarga evento delete modal
     };
 
     BootstrapTable.prototype.append = function (data) {
@@ -1307,6 +1319,7 @@
         this.initSearch();
         this.initPagination();
         this.initBody(true);
+        open_modal(""); //recarga evento delete modal
     };
 
     BootstrapTable.prototype.updateRow = function (params) {
@@ -1385,6 +1398,7 @@
         if (params && params.url) {
             this.options.url = params.url;
             this.options.pageNumber = 1;
+            open_modal(""); //recarga evento delete modal
         }
         this.initServer(params && params.silent);
     };

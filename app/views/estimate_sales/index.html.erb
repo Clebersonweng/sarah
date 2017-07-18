@@ -1,38 +1,43 @@
 <div class="panel-body">
     <div class="table-responsive">
-        <table class="table table-responsive" data-toggle="table" data-url="estimate_sales"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="code" data-sort-order="code">
+        <table id="table_estimate_sales" class="table table-condensed table-hover table-responsive" data-toggle="table" data-url="estimate_sale" data-response-handler="responseHandler"  data-show-columns="true" data-search="true"  data-pagination="true" data-sort-name="code" data-sort-order="asc">
             <thead>
                 <tr>
-                    <th data-field="code" data-sortable="true">Codigo</th>
-                    <th data-field="farming_plot_id" >Parcela agrícola</th> 
-                    <th data-field="farming_plot_id" >Tipo de cultivo</th> 
+                    <th data-field="code">Codigo</th>
+                     <th data-field="date" class="text-center">Periodo</th>
+                    <th data-field="farming_plot_id">Parcela agrícola</th> 
+                    <th data-field="type_of_crop_id.name">Tipo de cultivo</th> 
                     <th data-field="estimate_production" >Est. produc x ha</th>                            
                     <th data-field="total_production">Total prod.</th>
                     <th data-field="price"> Precio(KG)</th>
-                    <th data-field="gross_sale" data-sortable="true">Ingreso Bruto</th>
+                    <th data-field="gross_sale">Ingreso Bruto</th>
                     <th class="text-right">Acción</th>
                 </tr>
             </thead>
             <tbody>
                 <% @estimate_sales.each do |sales| %>
-                  <tr>
+                  <tr id="tr_<%=sales.id%>" >
                       <td><%= sales.code%></td>
-                      <td><%= sales.farming_plot.name%></td>
-                      <td><%= sales.type_of_crop.name%></td>
-                      <td><%= number_to_currency sales.estimate_production %></td>
-                      <td><%= number_to_currency sales.total_production %></td>
-                      <td><%= number_to_currency sales.price %></td>
-                      <td><%=  number_to_currency(sales.gross_sale, precision: 2)  %></td>
-                      <td class="pull-right">                     
+                        <td><%= sales.full_periods.to_s %></td>
+                      <td><%= sales.farming_plot.name %></td>
+                      <td><%= sales.type_of_crop.name %></td>
+                       <td><%= number_with_precision(sales.estimate_production, :precision => 0, :delimiter => '.' ) %></td>
+                       
+                      <td><%= number_with_precision( sales.total_production, :precision => 0, :delimiter => '.' ) %></td>
+                      <td><%= number_with_precision( sales.price, :precision => 0, :delimiter => '.' ) %></td>
+                      <td><%= number_with_precision(sales.gross_sale, :precision => 0, :delimiter => '.' ) %></td>
+                      <td class="text-right data-icons">                     
                           <%= link_to edit_estimate_sale_path(sales), class: "btn btn-primary" do %>
                               <i class="fa fa-1x fa-pencil"></i>
-                            <% end %>                            
-                            <a type="button" class="btn_md_crop btn btn-primary" data-id_cultivo="<%= sales.id %>"><i class="fa fa-1x fa-trash"></i></a>                       
+                            <% end %>   
+                            <a type="button" class="btn btn-primary btn_delete_estimate_sales" data-toggle="modal" data-id="<%= sales.id %>"><i class="fa fa-1x fa-trash"></i></a>                       
                         </td>
 
                     </tr>
                   <% end %>
               </tbody>                        
           </table>
-      </div>
+      </div> 
+    <input type="hidden" id="controller" value="<%= controller_name%>">
   </div>
+ 

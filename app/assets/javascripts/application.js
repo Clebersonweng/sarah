@@ -15,4 +15,5 @@
 //= require jquery_ujs
 //= require bootstrap.min 
 //= bootstrap-table
+//= require bootstrapValidator.min
 //= require_tree .

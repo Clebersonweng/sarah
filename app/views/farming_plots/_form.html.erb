@@ -1,17 +1,18 @@
 <div class="panel-body">
-    <%=form_for( @farming_plot, html: {class: 'form-horizontal', :"data-toggle"=>"validator"}) do |f| %>
-        <div class="row">
-            <div class="col-sm-10">
+    <%=form_for( @farming_plot, html: {class: 'form-horizontal', id:'form_farming_plot'}) do |f| %>
+        <div class="row-fluid">
+            <div class="col-sm-12 col-xs-12">
                 <div class="form-group">  
                     <%= f.label :code,"Codigo:",class: "control-label col-sm-1"%>
                       <div class="col-sm-2">
                           <%= f.text_field :code, class: "form-control", :placeholder =>"automatico", :readonly => true %>
                             <p class="help-block"> <%= f.object.errors[:code].to_sentence if f.object.errors[:code] %></p>
                         </div>
-
+                    </div>
+                    <div class="form-group">  
                         <%= f.label :name,"Nombre:",class: "col-sm-1 control-label" %>
                           <div class="col-sm-2">
-                              <%= f.text_field :name,autofocus: true , class: "form-control" ,onblur: "this.value=this.value.toUpperCase()" ,:pattern => "[a-zA-Z-0-9 ]+", :"data-error"=>"Verifique si el dato esta correcto.", :maxlength => "20", :required => true  %>
+                              <%= f.text_field :name,autofocus: true , class: "form-control" ,onblur: "this.value=this.value.toUpperCase()" ,:pattern => "[a-zA-Z-0-9 ]+", :"data-error"=>"Verifique si el dato esta correcto.", :maxlength => "40", :required => true  %>
                                 <div class="help-block"> <%= f.object.errors[:name].to_sentence if f.object.errors[:name] %></div>
                             </div>
                         </div>
@@ -23,8 +24,9 @@
                                         <span class="input-group-addon" id="basic-addon2">Ha</span>                                         
                                     </div>
                                     <p class="help-block"> <%= f.object.errors[:area].to_sentence if f.object.errors[:area] %></p>   
-                                </div>                                                           
-
+                                </div>  
+                            </div> 
+                            <div class="form-group">  
                                 <%= f.label  "Encargado:",class: "col-sm-1 control-label"  %>
                                   <div class="col-sm-2">
                                       <%= f.select :person_id, options_for_select(@person, f.object.person_id), {}, { :class => 'form-control' ,:required => true}%>
@@ -34,13 +36,13 @@
                               </div>
                               <div class="form-group">  
                                   <%= f.label :description,class: "col-sm-1 control-label"  %>
-                                    <div class="col-sm-5">
+                                    <div class="col-sm-2">
                                         <%= f.text_area :description,autofocus: true , class: "form-control" %>
                                       </div>
                                   </div>
 
 
-                                  <div class="col-sm-6 col-sm-offset-2">
+                                  <div class="col-sm-4 col-sm-offset-1">
                                       <% if controller.action_name == "edit" ||  controller.action_name == "update" %>
                                         <%= link_to "../../farming_plots", :controller => "farming_plots", :action => "index", :type => "button", :class =>"btn btn-danger" do  %>                              
                                           Cancelar                       

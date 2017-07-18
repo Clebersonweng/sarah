@@ -1,67 +1,63 @@
-var id_cultivo;
+var _id;
 $(document).ready(function ()
 {
+
+    validations_type_of_crops();
     //$('#numOrden,#cantidad').validaCleber('0123456789');
-    
-    $('#type_crop').validator().on('submit', function (e) {
-        if (e.isDefaultPrevented()) {
-            // handle the invalid form...
-        } else {
-            // everything looks good!
-        }
-    })
-
-    $("#success-alert").fadeTo(2000, 500).slideUp(500, function () {
-        $("#success-alert").slideUp(500);
-    });
-
-
-    $('.fa.fa-2x.fa-minus').on("click", function (event) {
-        event.preventDefault();
-        $('#md_controllerName').modal('show');
-    });
-   
-
-    /*boton click lista de cultivo para abrir modal de eliminar*/
-    $(".btn_md_crop.btn.btn-primary").on("click", function (event) {
-        event.preventDefault();
-        id_cultivo = $(this).data('id_cultivo');
-        delete_crop(id_cultivo);
-    });
 
     $(".pull-left.pagination-detail").hide();
 
     $("input").on("focusout", function () {
         return false
     });
-
-// fin de carga de la pagina
+    controlador = $("#controller").val();
+    pos_charge_table_type_of_crops();
+    pos_reset_button();
+    
 });
-
-
-var delete_crop = function (n_id) {
-    $('#md_cultivo').modal({
-        show: true
-    });
-    $("#btn_md_confirm").on("click", function (event)
+function pos_charge_table_type_of_crops()
+{
+    $("#table_type_of_crops tr").on("mouseenter", function ()
     {
-        $.ajax({
-            type: "POST",
-            url: "/type_of_crops/" + n_id,
-            dataType: "json",
-            data: {"_method": "delete"},
-            success: function (msg) {
-                var respuesta_json = jQuery.parseJSON(JSON.stringify(msg));
-                if (respuesta_json === 1)
-                {
-                    $('#tr_' + n_id).remove();
-                    alert_sarah("Eliminado con exito!", "success");
-                } else if (respuesta_json === 0)
-                {
-                    alert_sarah("Ocurrio un error al eliminar!", "danger");
+        //controlador = $("#controller").val();
+        open_modal(controlador);
+    });
+}
+function validations_type_of_crops()
+{
+    $('#form_type_of_crop').bootstrapValidator
+            ({
+                framework: 'bootstrap',
+                icon: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    "type_of_crop[name]": {
+                        validators: {
+                            notEmpty: {
+                                message: 'Este campo es obligatorio'
+                            },
+                            stringLength: {
+                                min: 3,
+                                max: 50,
+                                message: 'El nombre no puede ser menor que 3 y mayor que 50 caracteresl'
+                            },
+                            regexp: {
+                                regexp: /^[a-zA-Z0-9_ ]+$/,
+                                message: 'El nombre debe consistir en caracteres alfanumericos'
+                            }
+                        }
+                    }
                 }
-            }
-        });
-        event.preventDefault();
+            });
+}
+function pos_reset_button()
+{
+    $("#cancelar").on("click", function ()
+    {
+        var bv = $("#form_type_of_crop").data('bootstrapValidator');
+        bv.updateStatus('type_of_crop[name]', 'INVALID');
     });
 }

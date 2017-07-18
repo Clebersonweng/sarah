@@ -1,34 +1,78 @@
-var id_farm;
+
 $(document).ready(function ()
-{
-    /*boton click lista de parcela para abrir modal de eliminar*/
-    btn_evt_charge_modal();
-
+{     
+   $("#btn_md_confirm").on("click", function ()
+    {
+        if (typeof _id != "undefined")
+        {
+            delete_modal(controlador, _id);
+            console.log("clicko");
+        }
+    });
+    controlador = $("#controller").val();
+    pos_charge_table_farming_plots();
+    form_farming_plot_validates();
 });
-
-function btn_evt_charge_modal() {
-    $(".btn_md_parcela").on("click", function (event) {
-        event.preventDefault();
-        id_farm = $(this).data('id_parcela');
-        delete_farm_plot(id_farm);
-        $('#md_farming_plot').modal('show');
+function pos_charge_table_farming_plots()
+{
+    $("#table_farming_plots tr").on("mouseenter", function ()
+    {   
+     open_modal(controlador);
     });
 }
-function delete_farm_plot(n_id) {
-
-    $("#btn_md_confirm").on("click", function (e)
-    {
-        $("#ajax-loader").removeClass('hide');
-        $.ajax({
-            type: "POST",
-            url: "/farming_plots/" + n_id,
-            data: {"_method": "delete"},
-            complete: function (msg) {
-                alert_sarah("Eliminado con exito!", "success");
-                $("#ajax-loader").addClass('hide');
+function form_farming_plot_validates()
+{
+    $('#form_farming_plot').bootstrapValidator({
+        framework: 'bootstrap',
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            'farming_plot[name]': {
+                validators: {
+                    notEmpty: {
+                        message: 'Este campo es obligatorio'
+                    },
+                    stringLength: {
+                        min: 1,
+                        max: 9,
+                        message: 'El campo debe contener entre 1 y 9 numeros'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9 ]+$/,
+                        message: 'Debe contener numeros y letras'
+                    }
+                }
+            },
+            'farming_plot[area]': {
+                validators: {
+                    notEmpty: {
+                        message: 'Este campo es obligatorio'
+                    },
+                    stringLength: {
+                        min: 1,
+                        max: 9,
+                        message: 'El campo debe contener entre 1 y 9 numeros'
+                    },
+                    regexp: {
+                        regexp: /^[0-9.]+$/,
+                        message: 'Debe contener solamente numeros'
+                    }
+                }
+            },
+            'farming_plot[person_id]': {
+                validators: {
+                    notEmpty: {
+                        message: 'Este campo es obligatorio'
+                    }
+                }
             }
-        });
+            
+        }
     });
+           
 }
 /**
  var delete_parcela = function (n_id) {

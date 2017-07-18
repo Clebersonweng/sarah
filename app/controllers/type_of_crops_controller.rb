@@ -80,12 +80,14 @@ class TypeOfCropsController < ApplicationController
     respond_to do |format|
       if @type_of_crop.destroy
         #format.html { redirect_to @type_of_crop, notice: 'Se actualizo exitosamente!' }        
-        res = 1
-        format.json  { render :json => res }
+        #res = 1
+        #format.json  { render :json => res }
         #format.json { status: :created, location: @type_of_crop }
+         format.js
       else
-        res = 0
-        format.json  { render :json => res }
+        #res = 0
+        #format.json  { render :json => res }
+         format.js
       end
     end  
   end

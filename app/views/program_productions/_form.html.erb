@@ -1,82 +1,62 @@
-
-<% if program_production.errors.any? %>
-  <div id="error_explanation">
-      <h2><%= pluralize(program_production.errors.count, "error") %> prohibited this program_production from being saved:</h2>
-
-      <ul>
-          <% program_production.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-      </ul>
-  </div>
-<% end %>
-</br>
-<div class="row">
-    <div class="col-sm-12">
-        <div class="panel panel-default">
-            <div class="panel-heading"><h3 align="center">Program Production</h3>
-                <%=render 'layouts/submenu' %>
+<div class="panel-body">
+    <%=form_for( @program_production, html: {class: 'form-horizontal',id: "form_program_production", remote:true}) do |f| %>
+        <div class="col-sm-12 col-md-8 col-xs-12">                                     
+            <div class="form-group">                   
+                <input type="hidden" id="program_production_estimate_sale_id" name="program_production[estimate_sale_id]" value="<%=@ventasId%>"/> 
             </div>
+            <div class="form-group"> 
+                <label class="control-label col-sm-2">Ventas </label>
+                <div class="col-sm-10 col-lg-4 col-xs-12">    
+                    <input class="form-control" value="<%=@ventas%>" disabled/>
+                </div>
+            </div>
+            <div class="form-group"> 
+                <%= f.label :stock_end, class: "control-label col-sm-2" %>
+                  <div class="col-sm-10 col-lg-4 col-xs-12">    
+                      <%= f.text_field :stock_end,  autofocus: true , class: "form-control",:pattern => "[0-9]+",:"data-error"=>"Este campo no puede estar en blanco",:required => true %>
+                    </div>
+                     <span class="help-block"> <%= f.object.errors[:stock_end].to_sentence if f.object.errors[:stock_end] %></span>
 
-            <div class="panel-body">
-                <%=form_for @program_production, url: program_productions_path,:html => { class: 'form-horizontal' } do |f| %>
-                    <div class="col-sm-6 col-sm-offset-2">                                     
+                </div>
+                <div class="form-group"> 
+                    <%= f.label :stock_initial, class: "control-label col-sm-2 " %>
+                      <div class="col-sm-10 col-lg-4 col-xs-12">
+                          <%= f.text_field :stock_initial,  autofocus: true , class: "form-control",:pattern => "[0-9]+",:"data-error"=>"Este campo no puede estar en blanco",:required => true  %>
+                        </div>
+                        <span class="help-inline"> <%= f.object.errors[:stock_initial].to_sentence if f.object.errors[:stock_initial] %></span>
+                    </div>
 
-
-                        <div class="form-group">                   
-                            <input type="hidden" id="program_production_estimate_sale_id" name="program_production[estimate_sale_id]" value="<%=@ventasId%>"/> 
+                    <div class="form-group"> 
+                        <%= f.label :variation_stock, class: "control-label col-sm-2 "%>
+                          <div class="col-sm-10 col-lg-4 col-xs-12">                             
+                              <%= f.text_field :variation_stock,  autofocus: true ,:pattern => "[0-9]+",:"data-error"=>"Este campo no puede estar en blanco", class: "form-control",:required => true %>                               
+                            </div>
                         </div>
                         <div class="form-group"> 
-                            <label class="control-label col-sm-2 col-sm-offset-1">Ventas </label>
-                              <div class="col-sm-3">    
-                                  <input class="form-control" value="<%=@ventas%>" disabled/>
-                                </div>
-                            </div>
-                        <div class="form-group"> 
-                            <%= f.label :stock_end, class: "control-label col-sm-2 col-sm-offset-1" %>
-                              <div class="col-sm-3">    
-                                  <%= f.text_field :stock_end,  autofocus: true , class: "form-control" %>
-                                </div>
-                            </div>
-                            <div class="form-group"> 
-                                <%= f.label :stock_initial, class: "control-label col-sm-2 col-sm-offset-1" %>
-                                  <div class="col-sm-4">
-                                      <%= f.text_field :stock_initial,  autofocus: true , class: "form-control" %>
+                            <%= f.label :program_production, class: "control-label col-sm-2" %>
+                              <div class="col-sm-10 col-lg-4 col-xs-12">
+                                  <div class="input-group">
+                                      <%= f.text_field :program_production,  autofocus: true ,:pattern => "[0-9]+", class: "form-control",:"data-error"=>"Este campo no puede estar en blanco",:required => true %>
+                                        <span class="input-group-addon" id="basic-addon2">Kg</span>
                                     </div>
                                 </div>
+                            </div>
+                        
+                            <div class="col-xs-10 col-md-5 col-md-offset-2">                                                              
+                                <% if controller.action_name == "edit" ||  controller.action_name == "update" %>
+                                  <%= link_to "../../estimate_sales", :controller => "estimate_sales", :action => "index", :type => "button", :class =>"btn btn-danger" do  %>                              
+                                    Cancelar                       
+                                  <%end%>  
+                                <%else%>
+                                  <button type="reset" class="btn btn-danger btn-space" >Cancelar</button>
 
-                                <div class="form-group"> 
-                                    <%= f.label :variation_stock, class: "control-label col-sm-2 col-sm-offset-1"%>
-                                      <div class="col-sm-4">
-                                          <div class="input-group">
-                                              <%= f.text_field :variation_stock,  autofocus: true , class: "form-control" %>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group"> 
-                                        <%= f.label :program_production, class: "control-label col-sm-2 col-sm-offset-1" %>
-                                          <div class="col-sm-4">
-                                              <div class="input-group">
-                                                  <%= f.text_field :program_production,  autofocus: true , class: "form-control" %>
-                                                    <span class="input-group-addon" id="basic-addon2">Kg</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="control-group col-sm-offset-3">
-
-                                            <div class="controls">                                             
-                                                <button type="reset" class="btn btn-danger">Cancel</button>
-                                                <button type="submit" class="btn btn-primary">Save</button>
-                                            </div>
-
-                                        </div>
-                                      <% end %>
-
-                                  </div>
-                              </div>
-                          </div>
+                                <% end%>
+                                <% if controller.action_name == "new"  ||  controller.action_name == "create"%>
+                                  <button type="submit" id="btn_submit_form_prog_prod"  class="btn btn-primary" disabled="disabled">Guardar</button>
+                                <%else%>
+                                  <button type="submit" class="btn btn-primary">Actualizar</button>
+                                <% end%>                           
+                            </div>
+                          <% end %>
                       </div>
                   </div>

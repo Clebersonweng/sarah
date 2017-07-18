@@ -35,12 +35,45 @@
 }
 .alert_sarah 
 {
-    position:absolute;
-    width : 100%;
-    z-index :1050;
-    border-radius : 3px;
+    position: fixed;
+    top: 16%;
+    left: 21%;
+    width: 60%;
+    z-index: 1060;
+    border-radius: 3px;
 }
 .hand 
 {
     cursor:pointer;
+}
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+.bv-form .help-block {
+    margin-bottom: 0;
+}
+.bv-form .tooltip-inner {
+    text-align: left;
+}
+.nav-tabs li.bv-tab-success > a {
+    color: #3c763d;
+}
+.nav-tabs li.bv-tab-error > a {
+    color: #a94442;
+}
+
+.bv-form .bv-icon-no-label {
+	top: 0;
+}
+
+.bv-form .bv-icon-input-group {
+	top: 0;
+	z-index: 100;
+}
+a {
+    color: #fff;
+    text-decoration: none;
 }

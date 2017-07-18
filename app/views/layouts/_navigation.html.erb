@@ -23,7 +23,7 @@
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-                <% if current_user.role.role=="admin"%>
+                <% if current_user.role_id==1%>
                   <li>
                       <%= link_to  edit_user_registration_path do %>                        
                         <i class="fa fa-fw fa-gear"></i> &nbsp; Perfil                        

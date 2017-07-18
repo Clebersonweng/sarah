@@ -12,10 +12,7 @@ class ApplicationController < ActionController::Base
     layout :layout_by_resource
     respond_to :html, :json
     responders :flash
-    
-    
-    
-    
+  
     
     
     
@@ -48,4 +45,9 @@ class ApplicationController < ActionController::Base
     def after_sign_out_path_for(resource)
       root_path
     end
+    
+    
+    private
+
+      
   end

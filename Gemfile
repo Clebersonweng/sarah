@@ -54,3 +54,5 @@ gem "font-awesome-rails"
 gem "select2-rails"
 
 gem "responders"
+#validaciones client side
+gem 'bootstrap-validator-rails', '~> 0.5.3'

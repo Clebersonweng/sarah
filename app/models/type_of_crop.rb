@@ -1,7 +1,7 @@
 class TypeOfCrop < ApplicationRecord
   has_many :estimate_sales
   
-  validates :name, length: { minimum: 3, maximum: 50}, format: { with: /\A[a-zA-Z]+\z/}
+  validates :name, length: { minimum: 3, maximum: 50}, format: { with: /\A[a-zA-Z0-9 ]+\z/}
   validates :code, uniqueness: true, length: { maximum: 7 } 
   before_create :add_zeros_to_code
   

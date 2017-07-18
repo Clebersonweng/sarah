@@ -6,10 +6,10 @@ class EstimateSalesController < ApplicationController
   def index
     @estimate_sales = EstimateSale.all
     #@estimate_sales = EstimateSale.all 
-    #respond_to do |format|
-    # format.html # index.html.erb
-    # render json: @estimate_sales 
-    # end
+    respond_to do |format|
+      format.html
+      format.json { render json: @estimate_sales.as_json(only: [:id, :code, :date_init,:date_end,:estimate_production,:total_production,:"['farming_plot']['name']",:price,:gross_sale],:include => { :farming_plot => { :only => :name }}) }
+    end
   end
 
   # GET /estimate_sales/1
@@ -17,6 +17,25 @@ class EstimateSalesController < ApplicationController
   def show
   end
   
+  #verifica que no exista un mismo tipo de cultivo para un mismo periodo
+  def verify_new_estimate_sale
+    
+    @date_init        = params[:date_init]
+    @date_end         = params[:date_end]
+    @farming_plot_id  = params[:farming_plot_id]
+    @type_of_crop_id  = params[:type_of_crop_id]
+    valor = EstimateSale.validate_periods(@farming_plot_id,@date_init,@date_end)
+     
+
+    #render :text => @valor.inspect 
+    if valor.present?
+       render json: { respuesta: valor, status: :ok }
+       #EstimateSale.where(" date_init >= ? AND date_end <= ? AND farming_plot_id = ?",date_init, date_end,faming_plot)
+    else
+       @valor = TypeOfCrop.all
+      render json: { respuesta: valor,status: :existe, msg:"Ya existe una estimación para este periodo y cultivo." }
+    end
+  end
   
   
   # GET /estimate_sales/new
@@ -40,13 +59,13 @@ class EstimateSalesController < ApplicationController
 
     respond_to do |format|
       if @estimate_sale.save
-        format.js
-        #flash[:notice] = "Successfull be create"
-        #format.html { redirect_to  action:"index"}
+        # format.js
+        flash[:notice] = "Fue guardado exitosamente!"
+        format.html { redirect_to  action:"index"}
       else
-        format.js
-        #flash[:alert] = "Unsuccessfull be create"
-        #format.html { redirect_to  action:"edit"}
+        #format.js
+        flash[:alert] = "Ha ocurrido un error al guardar!"
+        format.html { redirect_to  action:"edit"}
       end
     end
   end
@@ -58,10 +77,10 @@ class EstimateSalesController < ApplicationController
     
     respond_to do |format|
       if @estimate_sale.update(estimate_sale_params)
-        flash[:notice] = "Successfull be update"
+        flash[:notice] = "Fue guardado exitosamente!"
         format.html { redirect_to  action:"index"}
       else
-        flash[:notice] = "Unsuccessfull be create"
+        flash[:notice] = "Ha ocurrido un error al guardar!"
         format.html { redirect_to  action:"edit"}
       end
     end
@@ -73,9 +92,9 @@ class EstimateSalesController < ApplicationController
     @estimate_sale = EstimateSale.find(params[:id])
     respond_to do |format|
       if @estimate_sale.destroy        
-        format.json { render :show, status: :created, location: @estimate_sale }
+        format.js
       else
-        format.json { render json: @estimate_sale.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -88,13 +107,13 @@ class EstimateSalesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def estimate_sale_params
-    params.require(:estimate_sale).permit(:code,:type_of_crop_id,:farming_plot_id,:chart_of_account_id, :estimate_production,:date, :total_production, :price, :gross_sale)
+    params.require(:estimate_sale).permit(:code,:type_of_crop_id,:farming_plot_id,:chart_of_account_id, :estimate_production,:date_init,:date_end, :total_production, :price, :gross_sale)
   end
   def get_estimate_sale_params
     @farming_plots = FarmingPlot.all.collect {|p| [ p.name, p.id, {"data-area-parcela"=>p.area} ] }
     @charts = ChartOfAccount.all.collect {|type|[type.name, type.id]}
     @history_sales = HistorySale.all.collect {|type| [type.quantity, type.id, {"data-date"=>type.date} ] }
-    @type_of_crops = TypeOfCrop.all.collect {|p| [ p.name, p.id ] }
+    #@type_of_crops = TypeOfCrop.all.collect {|p| [ p.name, p.id ] }
 
     # @farm = EstimateSale.farming_plot.find(:estimate_sale_farming_plot_id)
   end

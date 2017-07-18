@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170520153215) do
+ActiveRecord::Schema.define(version: 20170627015245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,8 +23,10 @@ ActiveRecord::Schema.define(version: 20170520153215) do
   end
 
   create_table "chart_of_accounts", force: :cascade do |t|
-    t.string "code", limit: 20
-    t.string "name", limit: 100
+    t.string   "code"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "cost_oper_machine_cont_details", force: :cascade do |t|
@@ -79,9 +81,10 @@ ActiveRecord::Schema.define(version: 20170520153215) do
     t.float    "gross_sale"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
-    t.date     "date"
+    t.date     "date_init"
     t.string   "code"
     t.integer  "type_of_crop_id"
+    t.date     "date_end"
     t.index ["chart_of_account_id"], name: "index_estimate_sales_on_chart_of_account_id", using: :btree
     t.index ["farming_plot_id"], name: "index_estimate_sales_on_farming_plot_id", using: :btree
     t.index ["type_of_crop_id"], name: "index_estimate_sales_on_type_of_crop_id", using: :btree

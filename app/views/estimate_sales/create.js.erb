@@ -1,0 +1,23 @@
+$(document).ready(function ()
+{
+  var quant_errors = <%= @estimate_sale.errors.count %>;
+  if(quant_errors > 0)
+      {
+        console.log(quant_errors);
+      }
+  $('#form_estimate_sales').validator().on('submit', function (e) {
+    if (e.isDefaultPrevented()) {
+      if($("#estimate_sale_farming_plot_id").val() == "" || $("#estimate_sale_type_of_crop_id").val() == ""  || $("#estimate_sale_estimate_production").val() == ""  || $("#estimate_sale_total_production").val() == ""  || $("#estimate_sale_price").val() ==""  || $("#estimate_sale_gross_sale").val() == "")
+      {
+        alert_sarah("Debe cargar todos los campos", "danger");
+      }
+    }
+    else
+    {
+      alert_sarah("El registro fue guardado con exito", "success");
+      $("#form_estimate_sales input" ).val("");
+      $("#form_estimate_sales select" ).val("");
+    }
+  });
+
+});

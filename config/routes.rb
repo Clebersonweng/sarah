@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   
   resources :program_productions
   resources :people
-  
+  post 'estimate_sales/verify_new_estimate_sale'
   
 
   

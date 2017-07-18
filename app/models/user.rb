@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :person, :dependent => :destroy
-  devise :timeoutable, :timeout_in => 30.minutes
+  devise :timeoutable
  
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable
@@ -17,6 +17,6 @@ class User < ApplicationRecord
 
   private
   def set_default_role
-    self.role ||= Role.find_by_role('registered')
+    self.role ||= Role.find_by_id(3)
   end
 end

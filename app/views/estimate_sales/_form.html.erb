@@ -1,88 +1,94 @@
 <div class="panel-body">
-    <%= form_for(@estimate_sale,html: {class: 'form-horizontal', :"data-toggle"=>"validator", remote:true}) do |f| %>
-
+    <%= form_for(@estimate_sale,html: {class: 'form-horizontal',id: "form_estimate_sales"}) do |f| %>
         <div class="col-xs-12 col-lg-8  ">
-            <div class="form-group">
-                <label for="ejemplo_password_3" class="col-sm-1 control-label">Codigo</label>
+            <div class="form-group"id="gr_code">
+                <label for=" " class=" col-sm-2 control-label">Codigo</label>
                 <div class="col-sm-2">
                     <%= f.text_field :code, autofocus: true,:type=>"text", class: "form-control", :readonly => "true",:placeholder =>"automatico"%>
-                      <p class="help-block"> <%= f.object.errors[:code].to_sentence if f.object.errors[:code] %></p>
+                      <span class="help-block with-errors"> <%= f.object.errors[:code].to_sentence if f.object.errors[:code] %></span>
                   </div>
               </div>
-              <div class="form-group">
-                  <label for="ejemplo_password_3" class="col-sm-1 control-label">Fecha</label>
+              <div class="form-group" id="gr_date_init">
+                  <label for=" " class=" col-sm-2 control-label">Fecha Inicial</label>
                   <div class="col-sm-4">
-                      <%= f.date_field :date, autofocus: true,:type=>"date", class: "form-control datepicker",:value => Time.now.strftime('%Y-%m-%d'),:min => Time.now.strftime('%Y-%m-%d'), :required => true%>
-                        <p class="help-block"> <%= f.object.errors[:date].to_sentence if f.object.errors[:date] %></p>
+                      <%= f.date_field :date_init, autofocus: true,:type=>"date", class: "form-control",:value => Date.today,:min => Date.today, :required => true%>
+                        <span class="help-block with-errors"> <%= f.object.errors[:date_init].to_sentence if f.object.errors[:date_init] %></span>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-1 control-label">Parcela Agr.</label>
-                    <div class="col-sm-4 text-center">
-                        <%= f.select :farming_plot_id, options_for_select(@farming_plots, f.object.farming_plot_id), {}, { :class => 'form-control', :required => true }%>
-                        <p class="help-block"> <%= f.object.errors[:farming_plot_id].to_sentence if f.object.errors[:farming_plot_id] %></p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="ejemplo_password_3" class="col-sm-1 control-label">Tipo Cult.</label>
+                <div class="form-group" id="gr_date_end">
+                    <label for=" " class=" col-sm-2 control-label">Fecha Final</label>
                     <div class="col-sm-4">
-                        <%= f.select :type_of_crop_id, options_for_select(@type_of_crops, f.object.type_of_crop_id), {}, { :class => 'form-control', :include_blank => 'ELEGIR', :required => true }%>
-                        <p class="help-block"> <%= f.object.errors[:type_of_crop_id].to_sentence if f.object.errors[:type_of_crop_id] %></p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-1 control-label">Estim. Prod.</label>
-                    <div class="col-sm-3">
-                        <%= f.text_field :estimate_production, input_html: { min: '3', max: '5' },:pattern => "[0-9]+" ,size: 5,:"data-error"=>"Verifique si el dato esta correcto.", autofocus: true , class: "form-control",:readonly=>true, :required => true,:placeholder =>"cantidad producida" %>
+                        <%= f.date_field :date_end,:type=>"date", class: "form-control",:value => Date.today + 120.days,:min => Date.today + 90.days, :required => true%>
+                          <span class="help-block"> <%= f.object.errors[:date_end].to_sentence if f.object.errors[:date_end] %></span>
                       </div>
-                      <div class="col-xs-3">
-                          <a type="button" class="btn btn-primary btn-sm disabled" id="openHistory" disabled>Cargar</a>
-                      </div>
-                      <p class="help-block"> <%= f.object.errors[:estimate_production].to_sentence if f.object.errors[:estimate_production] %></p>
                   </div>
-
-                  <div class="form-group">
-                      <label for="ejemplo_password_3" class="col-sm-1 control-label">Total Prod.</label>
+                  <div class="form-group" id="gr_farming_plot_id">
+                      <label class=" col-sm-2 control-label">Parcela Agr.</label>
                       <div class="col-sm-4">
-                          <%= f.text_field :total_production,  autofocus: true , class: "form-control",:readonly => "true", :required => true %>
+                          <%= f.select :farming_plot_id, options_for_select(@farming_plots, f.object.farming_plot_id), {}, { :class => 'form-control', :required => true }%>
+                          <span class="help-block"> <%= f.object.errors[:farming_plot_id].to_sentence if f.object.errors[:farming_plot_id] %></span>
+                      </div>
+                  </div>
+                  <div class="form-group" id="gr_type_of_crop_id">
+                      <label for=" " class=" col-sm-2 control-label">Tipo Cult.</label>
+                      <div class="col-sm-4">
+                          <%= f.collection_select( :type_of_crop_id, {}, :id, :name, :class => 'form-control')%>
+                          <span class="help-block"> <%= f.object.errors[:type_of_crop_id].to_sentence if f.object.errors[:type_of_crop_id] %></span>
+                      </div>
+                  </div>
+                  <div class="form-group" id="gr_estimate_prod">
+                      <label class=" col-sm-2 control-label">Estim. Prod.</label>
+                      <div class="col-sm-3">
+                          <%= f.text_field :estimate_production, input_html: {type:'number', min: '3', max: '5' },:pattern => "[0-9]+" ,size: 5, class: "form-control only_numbers",:readonly=>true, :required => true,:placeholder =>"cantidad producida" %>
                         </div>
-                        <p class="help-block"> <%= f.object.errors[:total_production].to_sentence if f.object.errors[:total_production] %></p>
-
+                        <div class="col-xs-12 col-lg-1 text-center">
+                            <a type="button" class="btn btn-primary btn-sm disabled" id="openHistory" data-toggle="modal" disabled>Cargar</a>
+                        </div>
+                        <span class="help-block" id="message_estimate_prod"> <%= f.object.errors[:estimate_production].to_sentence if f.object.errors[:estimate_production] %></span>
                     </div>
-                    <div class="form-group">
-                        <label for="price" class="col-sm-1 control-label">Precio</label>
+
+                    <div class="form-group" id="gr_total_prod">
+                        <label for=" " class=" col-sm-2 control-label">Total Prod.</label>
                         <div class="col-sm-4">
-                            <%= f.text_field :price,autofocus: true ,input_html: { min: '3', max: '15' }, class: "form-control",:pattern => "[0-9]+", :required => true%>
+                            <%= f.text_field :total_production,   class: "form-control",:readonly => "true", :required => true %>
                           </div>
-                          <p class="help-block"> <%= f.object.errors[:price].to_sentence if f.object.errors[:price] %></p>
+                          <span class="help-block" id="message_total_prod"> <%= f.object.errors[:total_production].to_sentence if f.object.errors[:total_production] %></span>
 
                       </div>
-                      <div class="form-group">
-                          <label for="ejemplo_password_3" class="col-sm-1 control-label">Ingreso Bruto</label>
+                      <div class="form-group" id="gr_price">
+                          <label for="price" class=" col-sm-2 control-label">Precio</label>
                           <div class="col-sm-4">
-                              <%= f.text_field :gross_sale,  autofocus: true , class: "form-control",:readonly =>true, :required => true %>
+                              <%= f.text_field :price,input_html: { min: '3', max: '15' }, class: "form-control only_numbers",:pattern => "[0-9]+", :required => true%>
                             </div>
-                            <p class="help-block"> <%= f.object.errors[:gross_sale].to_sentence if f.object.errors[:gross_sale] %></p>
+                            <span class="help-block"> <%= f.object.errors[:price].to_sentence if f.object.errors[:price] %></span>
+
                         </div>
+                        <div class="form-group" id="gr_gross_sale">
+                            <label for=" " class=" col-sm-2 control-label">Ingreso Bruto</label>
+                            <div class="col-sm-4">
+                                <%= f.text_field :gross_sale,   class: "form-control only_numbers",:readonly =>true, :required => true %>
+                              </div>
+                              <span class="help-block"> <%= f.object.errors[:gross_sale].to_sentence if f.object.errors[:gross_sale] %></span>
+                          </div>
 
-                        <div class="col-xs-10 col-md-4 col-md-offset-1">                                                              
-                            <% if controller.action_name == "edit" ||  controller.action_name == "update" %>
-                              <%= link_to "../../estimate_sales", :controller => "estimate_sales", :action => "index", :type => "button", :class =>"btn btn-danger" do  %>                              
-                                Cancelar                       
-                              <%end%>  
-                            <%else%>
-                              <button type="reset" class="btn btn-danger btn-space" >Cancelar</button>
+                          <div class="col-xs-10 col-md-4 col-md-offset-2">                                                              
+                              <% if controller.action_name == "edit" ||  controller.action_name == "update" %>
+                                <%= link_to "../../estimate_sales", :controller => "estimate_sales", :action => "index", :type => "button", :class =>"btn btn-danger" do  %>                              
+                                  Cancelar                       
+                                <%end%>  
+                              <%else%>
+                                <button type="reset" class="btn btn-danger btn-space" >Cancelar</button>
 
-                            <% end%>
-                            <% if controller.action_name == "new"  ||  controller.action_name == "create"%>
-                              <button type="submit" class="btn btn-primary">Guardar</button>
-                            <%else%>
-                              <button type="submit" class="btn btn-primary">Actualizar</button>
-                            <% end%>                           
-                        </div>
-
-          </div>
-     <%end%>
-    </div>
+                              <% end%>
+                              <% if controller.action_name == "new"  ||  controller.action_name == "create"%>
+                                <button type="submit" id="btn_submit_form_estimate_sale"  class="btn btn-primary">Guardar</button>
+                              <%else%>
+                                <button type="submit" class="btn btn-primary">Actualizar</button>
+                              <% end%>                           
+                          </div>
+                </div>
+          <%end%>
+      </div>
+     <input type="hidden" id="controller" value="<%= controller_name%>">
   </body>
 </html>

@@ -40,9 +40,11 @@ class ProgramProductionsController < ApplicationController
 
     respond_to do |format|
       if @program_production.save
+        #format.js
         flash[:notice] = "Successfull be create"
         format.html { redirect_to  action:"index"}
       else
+        #format.js
         flash[:alert] = "Unsuccessfull be create"
         format.html { redirect_to  action:"edit"}
       end

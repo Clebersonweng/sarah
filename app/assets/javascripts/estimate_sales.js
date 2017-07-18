@@ -1,54 +1,66 @@
+var _id;
 var quantity_estimate_prod;
 var total_production;
 var price_sale;
 var area;
 var estimacionDeProduccion;
-var title_name = "Estimacion de Ventas";
+
 $(document).ready(function () {
-    add_title_to_panel
     btn_evt_calculate_total_production();
-    open_modal_history();
     evt_click_to_row_table();
     btn_evt_calculate_total_gross_sale();
-});
-
-function add_title_to_panel()
-{
-   $('.panel-title.text-center').html("Estimacion de Ventas"); 
-}
-/**************    Funciones de la estimacion de ventas ******************/
-function open_modal_history()
-{
-    $('#openHistory').on("click", function (event) {
-        event.preventDefault();
-        $('#md_historyProd').modal("show");
+    form_estimate_sale_validates();
+    remove_error_before_charge_gross_sale();
+    controlador = $("#controller").val();
+    recharge_events_estimate_sales();
+    verify_exist_type_crop_to_period();
+    $("#openHistory").on("click", function ()
+    {
+        $('#md_historyProd').modal();
         charge_history_prod();
     });
+    $('.only_numbers').valida_sarah('0123456789');
+    $('.only_letters').valida_sarah('azAZ ');
 
+
+});
+
+function recharge_events_estimate_sales()
+{
+    $("#table_estimate_sales tr").on("mouseenter", function ()
+    {
+        if (typeof controlador != "undefined" || typeof controlador != "")
+        {
+            open_modal(controlador);
+        }
+    });
 }
-var charge_history_prod = function ()
+/**************    Funciones de la estimacion de ventas ******************/
+function charge_history_prod()
 {
     $("#tb_history_sale tbody tr").on("click", function () {
         $("#estimate_sale_estimate_production").focus("on");
         var quantity = $(this).find("td:nth-child(3)").text();
         $("#estimate_sale_estimate_production").val(quantity);
+        remove_error_before_charge_estimate_prod();
         $("#md_historyProd").modal('hide');
         //add_value_to_quantity_produced();
     });
 }
+
 function calcute_total_prod(area, quantity_produced)
 {
     return area * quantity_produced;
 }
+
 function calculate_gross_sale(total_production, price)
 {
     return total_production * price;
 }
 
-function btn_evt_calculate_total_production() {
-
-
-    $("#estimate_sale_farming_plot_id").on("change", function () {
+function btn_evt_calculate_total_production()
+{
+    $("#estimate_sale_farming_plot_id").off("change").on("change", function () {
 
         if ($("#estimate_sale_farming_plot_id option:selected").data('area-parcela') !== "" || $("#estimate_sale_farming_plot_id option:selected").data('area-parcela') !== "undefined")
         {
@@ -63,7 +75,7 @@ function btn_evt_calculate_total_production() {
             $("#estimate_sale_estimate_production").addAttr("readonly");
         }
     });
-    $("#estimate_sale_estimate_production").on("keyup focus change", function () {
+    $("#estimate_sale_estimate_production").off("keyup").on("keyup", function () {
         if ($("#estimate_sale_farming_plot_id option:selected").data('area-parcela') !== "" || $("#estimate_sale_farming_plot_id option:selected").data('area-parcela') !== "undefined")
         {
             $("#estimate_sale_total_production").val(calcute_total_prod($("#estimate_sale_farming_plot_id option:selected").data('area-parcela'), $("#estimate_sale_estimate_production").val()))
@@ -72,9 +84,10 @@ function btn_evt_calculate_total_production() {
     });
 
 }
+
 function evt_click_to_row_table() {
 
-    $("#tb_history_sale").on("click", function () {
+    $("#tb_history_sale").off("click").on("click", function () {
         quantity_estimate_prod = $("#estimate_sale_estimate_production").val();
         if (quantity_estimate_prod != "" && typeof quantity_estimate_prod != "undefined" && quantity_estimate_prod != (isNaN))
         {
@@ -86,8 +99,9 @@ function evt_click_to_row_table() {
         }
     });
 }
+
 function btn_evt_calculate_total_gross_sale() {
-    $("#estimate_sale_price").on("keyup", function () {
+    $("#estimate_sale_price").off("keyup").on("keyup", function () {
         if ($("#estimate_sale_total_production").val() !== "" && typeof $("#estimate_sale_total_production").val() !== "undefined" && $("#estimate_sale_total_production").val() !== "0")
         {
             $("#estimate_sale_gross_sale").val(calculate_gross_sale($("#estimate_sale_price").val(), $("#estimate_sale_total_production").val()));
@@ -95,20 +109,159 @@ function btn_evt_calculate_total_gross_sale() {
     });
 }
 
-/*    
- 
- else if( $("#estimate_sale_total_production").val() != "" && $("#estimate_sale_total_production").val() != "undefined")
- {   
- $("#estimate_sale_total_production").val(calcute_total_prod($("#estimate_sale_farming_plot_id option:selected").data('area-parcela'), $("#estimate_sale_total_production")));  
- }
- else
- {
- $("#estimate_sale_price").val("");
- $("#estimate_sale_estimate_production").val('');
- $("#estimate_sale_total_production").val('');
- $("#openHistory").prop("disabled", true);
- $("#openHistory").addClass('disabled');
- }
- });
- }
- */
+function form_estimate_sale_validates()
+{
+    $('#form_estimate_sales').bootstrapValidator({
+        framework: 'bootstrap',
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            'estimate_sale[date]': {
+                validators: {
+                    notEmpty: {
+                        message: 'Este campo es obligatório'
+                    }
+                }
+            },
+            'estimate_sale[farming_plot_id]': {
+                validators: {
+                    notEmpty: {
+                        message: 'Este campo es obligatório'
+                    }
+                }
+            },
+            'estimate_sale[type_of_crop_id]': {
+                validators: {
+                    notEmpty: {
+                        message: 'Este campo es obligatório'
+                    },
+                    verify_period: {
+                        message: 'hay que verificar'
+                    }
+                }
+            },
+            'estimate_sale[estimate_production]': {
+                validators: {
+                    notEmpty: {
+                        message: 'Este campo es obligatório'
+                    },
+                    stringLength: {
+                        min: 1,
+                        max: 9,
+                        message: 'El campo debe contener entre 1 y 9 numeros'
+                    },
+                    regexp: {
+                        regexp: /^[0-9.]+$/,
+                        message: 'Debe contener solamente numeros'
+                    }
+                }
+            },
+            'estimate_sale[price]': {
+                validators: {
+                    notEmpty: {
+                        message: 'Este campo es obligatorio'
+                    },
+                    stringLength: {
+                        min: 1,
+                        max: 9,
+                        message: 'El campo debe contener entre 1 y 9 numeros'
+                    },
+                    regexp: {
+                        regexp: /^[0-9.]+$/,
+                        message: 'Debe contener solamente numeros'
+                    }
+                }
+            }
+        }
+
+    })
+            .on('status.field.bv', function (e, data) {
+                if (data.bv.getSubmitButton()) {
+                    data.bv.disableSubmitButtons(false);
+                }
+            });
+}
+
+function remove_error_before_charge_estimate_prod()
+{
+    if (typeof $("#estimate_sale_estimate_production").val() != "" || typeof $("#estimate_sale_estimate_production").val() != "undefined")
+    {
+        reset_errors("total_prod");
+        reset_errors("estimate_prod");
+        $('.help-block').each(function () {
+            $(this).remove();
+        });
+
+    }
+}
+
+function remove_error_before_charge_gross_sale()
+{
+    $("#estimate_sale_price").off("focusout").on("focusout", function () {
+        if (typeof $("#estimate_sale_gross_sale").val() != "" || typeof $("#estimate_sale_gross_sale").val() != "undefined")
+        {
+            reset_errors("gross_sale");
+
+        }
+    });
+}
+
+function verify_exist_type_crop_to_period()
+{
+    $("#estimate_sale_farming_plot_id").on("change", function ()
+    {
+        var date_init = $("#estimate_sale_date_init").val();
+        var date_end = $("#estimate_sale_date_end").val();
+        var farming_plot_id = $("#estimate_sale_farming_plot_id").val();
+        var type_of_crop_id = $("#estimate_sale_type_of_crop_id").val();
+        var select =  $("#estimate_sale_type_of_crop_id");
+        if (typeof date_init != "" && typeof date_end != "" && typeof farming_plot_id != "" && typeof type_of_crop_id != "" && farming_plot_id != "")
+        {
+            $.ajax({
+                type: "POST",
+                dataType: 'JSON',
+                data: {"date_init": date_init, "date_end": date_end, "farming_plot_id": farming_plot_id},
+                url: "/" + controlador + "/verify_new_estimate_sale",
+                success: function (response) {
+                    if (response.status == "ok")
+                    {
+                        select.html('');
+                        console.log(response.respuesta[0].name);
+                        $.each(response.respuesta, function (i, item) {
+                            item = response.respuesta[i].name
+                            var value = response.respuesta[i].id
+                            select.append($("<option></option>").attr("value", value).text(item));
+                        });
+                        reset_errors("farming_plot_id");
+                        reset_errors("type_of_crop_id");
+                        reset_errors("date_init");
+                        reset_errors("date_end");
+                        alert_sarah("Puede seguir con la estimación de ventas", "success", 4000);
+                    } else if (response.status == "existe")
+                    {
+                        select.html('');
+                        $.each(response.respuesta, function (i, item) {
+                            item = response.respuesta[i].name
+                            var value = response.respuesta[i].id
+                            select.append($("<option></option>").attr("value", value).text(item));
+                        });
+                        add_errors("farming_plot_id");
+                        add_errors("type_of_crop_id");
+                        add_errors("date_init");
+                        add_errors("date_end");
+                        alert_sarah("Ya existe una estimación para esta parcela para este periodo y cultivo", "danger", 4000);
+                    }
+                },
+                error: function (response) {
+
+                    //alert_sarah("ocurrió un error en e", "danger", 4000);
+
+                }
+            });
+        }
+    });
+
+}
