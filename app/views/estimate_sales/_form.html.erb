@@ -32,63 +32,63 @@
                   <div class="form-group" id="gr_type_of_crop_id">
                       <label for=" " class=" col-sm-2 control-label">Tipo Cult.</label>
                       <div class="col-sm-4">
-                          <%= f.collection_select( :type_of_crop_id, {}, :id, :name, :class => 'form-control')%>
-                          <span class="help-block"> <%= f.object.errors[:type_of_crop_id].to_sentence if f.object.errors[:type_of_crop_id] %></span>
-                      </div>
-                  </div>
-                  <div class="form-group" id="gr_estimate_prod">
-                      <label class=" col-sm-2 control-label">Estim. Prod.</label>
-                      <div class="col-sm-3">
-                          <%= f.text_field :estimate_production, input_html: {type:'number', min: '3', max: '5' },:pattern => "[0-9]+" ,size: 5, class: "form-control only_numbers",:readonly=>true, :required => true,:placeholder =>"cantidad producida" %>
+                            <%=  (f.select :type_of_crop_id, {}, {class: "form-control"} ) %>                       
+                            <span class="help-block"> <%= f.object.errors[:type_of_crop_id].to_sentence if f.object.errors[:type_of_crop_id] %></span>
                         </div>
-                        <div class="col-xs-12 col-lg-1 text-center">
-                            <a type="button" class="btn btn-primary btn-sm disabled" id="openHistory" data-toggle="modal" disabled>Cargar</a>
-                        </div>
-                        <span class="help-block" id="message_estimate_prod"> <%= f.object.errors[:estimate_production].to_sentence if f.object.errors[:estimate_production] %></span>
                     </div>
-
-                    <div class="form-group" id="gr_total_prod">
-                        <label for=" " class=" col-sm-2 control-label">Total Prod.</label>
-                        <div class="col-sm-4">
-                            <%= f.text_field :total_production,   class: "form-control",:readonly => "true", :required => true %>
+                    <div class="form-group" id="gr_estimate_prod">
+                        <label class=" col-sm-2 control-label">Estim. Prod.</label>
+                        <div class="col-sm-3">
+                            <%= f.text_field :estimate_production, input_html: {type:'number', min: '3', max: '5' },:pattern => "[0-9]+" ,size: 5, class: "form-control only_numbers",:readonly=>true, :required => true,:placeholder =>"cantidad producida" %>
                           </div>
-                          <span class="help-block" id="message_total_prod"> <%= f.object.errors[:total_production].to_sentence if f.object.errors[:total_production] %></span>
-
+                          <div class="col-xs-12 col-lg-1 text-center">
+                              <a type="button" class="btn btn-primary btn-sm disabled" id="openHistory" data-toggle="modal" disabled>Cargar</a>
+                          </div>
+                          <span class="help-block" id="message_estimate_prod"> <%= f.object.errors[:estimate_production].to_sentence if f.object.errors[:estimate_production] %></span>
                       </div>
-                      <div class="form-group" id="gr_price">
-                          <label for="price" class=" col-sm-2 control-label">Precio</label>
+
+                      <div class="form-group" id="gr_total_prod">
+                          <label for=" " class=" col-sm-2 control-label">Total Prod.</label>
                           <div class="col-sm-4">
-                              <%= f.text_field :price,input_html: { min: '3', max: '15' }, class: "form-control only_numbers",:pattern => "[0-9]+", :required => true%>
+                              <%= f.text_field :total_production,   class: "form-control",:readonly => "true", :required => true %>
                             </div>
-                            <span class="help-block"> <%= f.object.errors[:price].to_sentence if f.object.errors[:price] %></span>
+                            <span class="help-block" id="message_total_prod"> <%= f.object.errors[:total_production].to_sentence if f.object.errors[:total_production] %></span>
 
                         </div>
-                        <div class="form-group" id="gr_gross_sale">
-                            <label for=" " class=" col-sm-2 control-label">Ingreso Bruto</label>
+                        <div class="form-group" id="gr_price">
+                            <label for="price" class=" col-sm-2 control-label">Precio</label>
                             <div class="col-sm-4">
-                                <%= f.text_field :gross_sale,   class: "form-control only_numbers",:readonly =>true, :required => true %>
+                                <%= f.text_field :price,input_html: { min: '3', max: '15' }, class: "form-control only_numbers",:pattern => "[0-9]+", :required => true%>
                               </div>
-                              <span class="help-block"> <%= f.object.errors[:gross_sale].to_sentence if f.object.errors[:gross_sale] %></span>
-                          </div>
+                              <span class="help-block"> <%= f.object.errors[:price].to_sentence if f.object.errors[:price] %></span>
 
-                          <div class="col-xs-10 col-md-4 col-md-offset-2">                                                              
-                              <% if controller.action_name == "edit" ||  controller.action_name == "update" %>
-                                <%= link_to "../../estimate_sales", :controller => "estimate_sales", :action => "index", :type => "button", :class =>"btn btn-danger" do  %>                              
-                                  Cancelar                       
-                                <%end%>  
-                              <%else%>
-                                <button type="reset" class="btn btn-danger btn-space" >Cancelar</button>
-
-                              <% end%>
-                              <% if controller.action_name == "new"  ||  controller.action_name == "create"%>
-                                <button type="submit" id="btn_submit_form_estimate_sale"  class="btn btn-primary">Guardar</button>
-                              <%else%>
-                                <button type="submit" class="btn btn-primary">Actualizar</button>
-                              <% end%>                           
                           </div>
-                </div>
-          <%end%>
-      </div>
-     <input type="hidden" id="controller" value="<%= controller_name%>">
-  </body>
-</html>
+                          <div class="form-group" id="gr_gross_sale">
+                              <label for=" " class=" col-sm-2 control-label">Ingreso Bruto</label>
+                              <div class="col-sm-4">
+                                  <%= f.text_field :gross_sale,   class: "form-control only_numbers",:readonly =>true, :required => true %>
+                                </div>
+                                <span class="help-block"> <%= f.object.errors[:gross_sale].to_sentence if f.object.errors[:gross_sale] %></span>
+                            </div>
+
+                            <div class="col-xs-10 col-md-4 col-md-offset-2">                                                              
+                                <% if controller.action_name == "edit" ||  controller.action_name == "update" %>
+                                  <%= link_to "../../estimate_sales", :controller => "estimate_sales", :action => "index", :type => "button", :class =>"btn btn-danger" do  %>                              
+                                    Cancelar                       
+                                  <%end%>  
+                                <%else%>
+                                  <button type="reset" class="btn btn-danger btn-space" >Cancelar</button>
+
+                                <% end%>
+                                <% if controller.action_name == "new"  ||  controller.action_name == "create"%>
+                                  <button type="submit" id="btn_submit_form_estimate_sale"  class="btn btn-primary">Guardar</button>
+                                <%else%>
+                                  <button type="submit" class="btn btn-primary">Actualizar</button>
+                                <% end%>                           
+                            </div>
+                        </div>
+                      <%end%>
+                  </div>
+                  <input type="hidden" id="controller" value="<%= controller_name%>">
+                  </body>
+                  </html>

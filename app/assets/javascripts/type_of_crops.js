@@ -1,28 +1,10 @@
-var _id;
 $(document).ready(function ()
 {
-
     validations_type_of_crops();
-    //$('#numOrden,#cantidad').validaCleber('0123456789');
-
-    $(".pull-left.pagination-detail").hide();
-
-    $("input").on("focusout", function () {
-        return false
-    });
     controlador = $("#controller").val();
-    pos_charge_table_type_of_crops();
-    pos_reset_button();
-    
+    pos_reset_button();   
 });
-function pos_charge_table_type_of_crops()
-{
-    $("#table_type_of_crops tr").on("mouseenter", function ()
-    {
-        //controlador = $("#controller").val();
-        open_modal(controlador);
-    });
-}
+
 function validations_type_of_crops()
 {
     $('#form_type_of_crop').bootstrapValidator

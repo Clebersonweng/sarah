@@ -5,7 +5,7 @@ class ProgramProductionsController < ApplicationController
   # GET /program_productions
   # GET /program_productions.json
   def index
-    @program_productions = ProgramProduction.all
+    @program_productions = ProgramProduction.all.sort()
   end
 
   # GET /program_productions/1
@@ -14,22 +14,24 @@ class ProgramProductionsController < ApplicationController
   end
 
   # GET /program_productions/new
-  def new
-     
+  def new   
     @program_production = ProgramProduction.new
     id_ventas = EstimateSale.last()
     venta = EstimateSale.find(id_ventas)
-    @ventasId = venta.id
-    @ventas = venta.total_production
-    
-     
+    @sales_id = venta.id
+    @sales_total_production = venta.total_production
+    @sales_farming_plot = venta.farming_plot.name   
+    @sales_area = venta.farming_plot.area   
   end
 
   # GET /program_productions/1/edit
   def edit
     id_ventas = EstimateSale.last()
     venta = EstimateSale.find(id_ventas)
-    @ventasId = venta.id
+    @sales_id = venta.id
+    @sales_total_production = venta.total_production
+    @sales_farming_plot = venta.farming_plot.name   
+    @sales_area = venta.farming_plot.area  
   end
 
   # POST /program_productions
@@ -41,11 +43,11 @@ class ProgramProductionsController < ApplicationController
     respond_to do |format|
       if @program_production.save
         #format.js
-        flash[:notice] = "Successfull be create"
+        flash[:notice] = "Fue creado el registro exitosamente"
         format.html { redirect_to  action:"index"}
       else
         #format.js
-        flash[:alert] = "Unsuccessfull be create"
+        flash[:alert] = "Ocurrió un error al crear el registro"
         format.html { redirect_to  action:"edit"}
       end
     end
@@ -56,11 +58,11 @@ class ProgramProductionsController < ApplicationController
   def update
     respond_to do |format|
       if @program_production.update(program_production_params)
-        format.html { redirect_to @program_production, notice: 'Person was successfully created.' }
-        format.json { render :show, status: :created, location: @program_production }
+        flash[:notice] = "El registro fue guardado exitosamente!"
+        format.html { redirect_to  action:"index"}
       else
-        format.html { render :edit }
-        format.json { render json: @program_production.errors, status: :unprocessable_entity }
+        flash[:notice] = "Ha ocurrido un error al guardar!"
+        format.html { redirect_to  action:"edit"}
       end
     end
   end
@@ -68,13 +70,15 @@ class ProgramProductionsController < ApplicationController
   # DELETE /program_productions/1
   # DELETE /program_productions/1.json
   def destroy
-    @program_production.destroy
+    @program_production = ProgramProduction.find(params[:id])  
     respond_to do |format|
-      format.html { redirect_to program_productions_url, notice: 'Program production was successfully destroyed.' }
-      format.json { head :no_content }
+      if(@program_production.destroy)      
+        format.json { head :no_content, message:"Registro eliminado existosamente.", response:"ok" }
+      else
+        format.json { head :no_content, message:"Ocurrió un error al eliminar.",response:"error"}
+      end
     end
   end
-
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_program_production

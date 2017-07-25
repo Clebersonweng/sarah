@@ -17,3 +17,4 @@
 //= bootstrap-table
 //= require bootstrapValidator.min
 //= require_tree .
+//= require data-confirm-modal

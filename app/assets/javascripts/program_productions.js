@@ -1,49 +1,56 @@
-var stock_end = 0;
-var stock_start = 0;
-var variation_stock = 0;
-var estimateUnits;
-var program_production = 0;
-var total_production = 0;
-
 $(document).ready(function () {
     form_validates();
-    calculate_variation_stock();
+    controlador = $("#controller").val();
+    $("#program_production_stock_initial,#program_production_stock_end").off("change").on("change", function () {
+        calculate_variation_stock();
+        calculate_program_production();
+    });
+    /*$('#form_program_production').on('status.field.bv', function (e, data) {
+        formIsValid = true;
+        $('.form-group', $(this)).each(function () {
+            $(this).addClass('has-success')
+            formIsValid = formIsValid && $(this).hasClass('has-success');
+        });
 
+        if (formIsValid) {
+            $('.submit-button', $(this)).attr('disabled', false);
+        } else {
+            $('.submit-button', $(this)).attr('disabled', true);
+        }
+    });*/
 });
-function calculate_new_program_production()
-{
-    
-}
+
 function calculate_variation_stock()
 {
-    /**tomo el area de la parcela para multiplicar por la estimacion de produccion,
-     segun el precio  determinando el ingreso bruto de las ventas**/
-
-    $("#program_production_stock_initial").change(function () {
-        stock_end = $("#program_production_stock_end").val();
-        stock_start = $("#program_production_stock_initial").val();
-        variation_stock = (parseInt(stock_end) - (parseInt(stock_start)));
+    /**tomo el area de la parcela para multiplicar por la estimacion de produccion segun el precio  determinando el ingreso bruto de las ventas**/
+    var variation_stock = 0;
+    variation_stock = ((parseInt($("#program_production_stock_end").val()) - (parseInt($("#program_production_stock_initial").val()))));
+    if (variation_stock >= 0 || typeof variation_stock !== "undefined" && !isNaN(variation_stock))
+    {
         $("#program_production_variation_stock").val(variation_stock);
-
-        if (variation_stock < 0) {
-            total_production = $("#program_production_estimate_sale_id option:selected").data('total-production');
-            variation_stock = $("#program_production_variation_stock").val();
-            program_production = (parseInt(total_production) - (parseInt(-variation_stock)));
-            $("#program_production_program_production").val(program_production);
-        } else {
-            total_production = $("#program_production_estimate_sale_id option:selected").data('total-production');
-            variation_stock = $("#program_production_variation_stock").val();
-            program_production = (parseInt(total_production) - (parseInt(variation_stock)));
-            $("#program_production_program_production").val(program_production);
-        }
-    });
+    } else
+    {
+        $("#program_production_variation_stock").val(0);
+    }
 }
-
+function calculate_program_production()
+{
+    var prog_production = 0;
+    prog_production = ((parseInt($("#estimate_sale").val()) - (parseInt($("#program_production_variation_stock").val()))));
+    if (prog_production >= 0 || typeof prog_production !== "undefined" && !isNaN(prog_production))
+    {
+        $("#program_production_program_production").val(prog_production);
+    } else
+    {
+        $("#program_production_program_production").val(0);
+    }
+}
 
 function form_validates()
 {
     $('#form_program_production').bootstrapValidator({
         framework: 'bootstrap',
+        excluded: [':disabled', ':hidden', ':not(:visible)'],
         icon: {
             valid: 'glyphicon glyphicon-ok',
             invalid: 'glyphicon glyphicon-remove',
@@ -115,10 +122,21 @@ function form_validates()
                 }
             }
         }
-    })
-          /*  .on('success.field.fv', function (e, data) {
-                if (data.fv.getInvalidFields().length > 0) {    // There is invalid field
-                    data.fv.disableSubmitButtons(true);
-                }
-            });*/
+    }).on('keyup', '[name="program_production[variation_stock]"]', function() {
+            var isEmpty = $(this).val() == '';
+            $('#form_program_production')
+                    .formValidation('enableFieldValidators', 'program_production[variation_stock]', !isEmpty)
+                    .formValidation('enableFieldValidators', 'program_production[program_production]', !isEmpty);
+
+            // Revalidate the field when user start typing in the password field
+            if ($(this).val().length == 1) {
+                $('#form_program_production').formValidation('validateField', 'program_production[variation_stock]')
+                                .formValidation('validateField', 'program_production[program_production]');
+            }
+        });
+    /*  .on('success.field.fv', function (e, data) {
+     if (data.fv.getInvalidFields().length > 0) {    // There is invalid field
+     data.fv.disableSubmitButtons(true);
+     }
+     });*/
 }

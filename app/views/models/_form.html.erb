@@ -1,45 +1,34 @@
-
-</br>
-<div class="row">
-    <div class="col-sm-12">
-        <div class="panel panel-default">
-            <div class="panel-heading"><h3 align="center">Model</h3>
-                <%=render 'layouts/submenu' %>
-            </div>
-
-            <div class="panel-body">
-                <%=form_for @model, url: models_path, :html =>{ class: 'form-horizontal' } do |f| %>
-                    <div class="col-sm-6 col-sm-offset-2">
-
-                        <div class="form-group">
-                            <%= f.label :brand_id ,class: "control-label col-sm-2 col-sm-offset-1"%>
-                              <div class="col-sm-5">
-                                  <%= f.select(:brand_id, @brands, :class => "form-control", autofocus: true)%>
-                               </div>
-                        </div>
-
-                                <div class="form-group">
-                                    <%= f.label "Model", class: "control-label col-sm-2 col-sm-offset-1"%>
-                                      <div class="col-sm-5">
-                                          <%= f.text_field :name, autofocus: true, class: "form-control"%>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <%= f.label :description ,class: "control-label col-sm-2 col-sm-offset-1"%>
-                                          <div class="col-sm-5">
-                                              <%= f.text_field :description, autofocus: true , class: "form-control"%>
-                                            </div>
-                                        </div>
-                                        <div class="control-group col-sm-offset-4">
-
-                                            <div class="controls">
-                                                <button type="submit" class="btn btn-primary">Save</button>
-                                                <button type="reset" class="btn btn-danger">Cancel</button>
-                                            </div>
-
-                                        </div></div>
-                                  <% end %>
-                              </div>
-                          </div>
+<div class="panel-body">
+    <%=form_for @model, url: models_path, :html =>{ class: 'form-horizontal' } do |f| %>
+        <div class="col-sm-6 col-sm-offset-2">
+    
+            <div class="form-group">
+                <%= f.label :brand_id ,class: "control-label col-sm-2 col-sm-offset-1"%>
+                  <div class="col-sm-5">
+                      <%= f.select(:brand_id, @brands, :class => "form-control", autofocus: true)%>
+                  </div>
+              </div>
+      
+              <div class="form-group">
+                  <%= f.label "Model", class: "control-label col-sm-2 col-sm-offset-1"%>
+                    <div class="col-sm-5">
+                        <%= f.text_field :name, autofocus: true, class: "form-control"%>
                       </div>
                   </div>
+                  <div class="form-group">
+                      <%= f.label :description ,class: "control-label col-sm-2 col-sm-offset-1"%>
+                        <div class="col-sm-5">
+                            <%= f.text_field :description, autofocus: true , class: "form-control"%>
+                          </div>
+                      </div>
+                      <div class="control-group col-sm-offset-4">
+              
+                          <div class="controls">
+                              <button type="submit" class="btn btn-primary">Save</button>
+                              <button type="reset" class="btn btn-danger">Cancel</button>
+                          </div>
+
+                      </div>
+        </div>
+  <% end %>
+</div>

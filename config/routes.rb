@@ -74,14 +74,15 @@ Rails.application.routes.draw do
   #  resources :farming_plots
   #end
   #resources :farming_plots, only: [:index]
-  
+  resources :program_productions do
+    resources :estimate_sales #-> url.com/logs/:log_id/meals/:id
+  end
   resources :cost_oper_machines do
     resources :cost_oper_machine_details
   end
   
   resources :cost_oper_machine_conts do
     resources :cost_oper_machine_cont_details
-    
   end
   #resources :cost_oper_machine_conts do
   #  get 'traer_programaProduccion' => ':cost_oper_machine_conts#traer_programaProduccion'

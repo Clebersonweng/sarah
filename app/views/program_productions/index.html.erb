@@ -1,34 +1,35 @@
 <div class="panel-body">
-    <table data-toggle="table" data-url="program_production"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="program_production" data-sort-order="desc">
+    <table class="table table-condensed table-hover table-responsive" data-toggle="table" data-url="program_production"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="program_production" data-sort-order="desc">
         <thead>
             <tr>
 
-                <th data-field="estimate_sales" data-sortable="true" >Estimacion de venta</th> 
-                <th data-field="stock_initial" >Stock inicial</th> 
-                <th data-field="stock_end" >Stock final</th>  
-                <th data-field="variation_stock" >Variacion stock</th>  
-                <th data-field="program_production">Programa de produccion</th>                            
-                <th>action</th>
+                <th data-field="estimate_sales" data-sortable="true" >Estim. de venta</th> 
+                <th data-field="stock_initial" >Exist. Final</th> 
+                <th data-field="stock_end" >Exist. inicial</th>  
+                <th data-field="variation_stock" >Variación exist.</th>  
+                <th data-field="program_production">Prog. de producción</th>                            
+                <th>Acción</th>
             </tr>
         </thead>
         <tbody>
             <% @program_productions.each do |prog_product| %>
-              <tr>
-
-                  <td><%=  prog_product.estimate_sale.farming_plot.name %></td>
-                  <td><%= prog_product.stock_initial %></td>
-                  <td><%= prog_product.stock_end %></td>
-                  <td><%= prog_product.variation_stock %></td>
-                  <td><%= number_with_precision(prog_product.program_production, :precision => 0, :delimiter => '.')  %></td>
-                  <td class="text-right">                     
-                      <%= link_to edit_program_production_path(prog_product), class: "btn btn-primary" do %>
-                          <i class="fa fa-1x fa-pencil"></i>
-                        <% end %>                            
-                        <a type="button" class="btn_md_program btn btn-primary" data-id_="<%= prog_product.id %>"><i class="fa fa-1x fa-trash"></i></a>                       
-                    </td>
-
-                </tr>
-              <% end %>
-          </tbody>
-      </table>
-  </div>
+             <tr id="tr_<%= prog_product.id %>">
+                 <td><%=  prog_product.estimate_sale.farming_plot.name %></td>
+                 <td><%= prog_product.stock_initial %></td>
+                 <td><%= prog_product.stock_end %></td>
+                 <td><%= prog_product.variation_stock %></td>
+                 <td><%= number_with_precision(prog_product.program_production, :precision => 0, :delimiter => '.')  %></td>
+                 <td class="text-right">                     
+                     <%= link_to edit_program_production_path(prog_product), class: "btn btn-primary btn-sm" do %>
+                       <i class="fa fa-1x fa-pencil"></i>
+                      <% end %>                            
+                      <a type="button" id="" data-id="<%= prog_product.id %>" class="btn btn-primary btn-sm delete" data-loading-text="Loading...">
+                          <i class="fa fa-1x fa-trash"></i>
+                      </a>                     
+                  </td>
+              </tr>
+             <% end %>
+         </tbody>
+     </table>
+     <input type="hidden" id="controller" value="<%= controller_name%>">
+ </div>

@@ -25,15 +25,13 @@ class EstimateSalesController < ApplicationController
     @farming_plot_id  = params[:farming_plot_id]
     @type_of_crop_id  = params[:type_of_crop_id]
     valor = EstimateSale.validate_periods(@farming_plot_id,@date_init,@date_end)
-     
 
-    #render :text => @valor.inspect 
     if valor.present?
-       render json: { respuesta: valor, status: :ok }
+       render json: { respuesta: valor, status: :ok, msg:"success"}
        #EstimateSale.where(" date_init >= ? AND date_end <= ? AND farming_plot_id = ?",date_init, date_end,faming_plot)
     else
-       @valor = TypeOfCrop.all
-      render json: { respuesta: valor,status: :existe, msg:"Ya existe una estimación para este periodo y cultivo." }
+       valor = TypeOfCrop.all
+      render json: { respuesta: valor,status: :existe, msg:"Ya existe este tipo de cultivo para el periodo." }
     end
   end
   
@@ -113,8 +111,5 @@ class EstimateSalesController < ApplicationController
     @farming_plots = FarmingPlot.all.collect {|p| [ p.name, p.id, {"data-area-parcela"=>p.area} ] }
     @charts = ChartOfAccount.all.collect {|type|[type.name, type.id]}
     @history_sales = HistorySale.all.collect {|type| [type.quantity, type.id, {"data-date"=>type.date} ] }
-    #@type_of_crops = TypeOfCrop.all.collect {|p| [ p.name, p.id ] }
-
-    # @farm = EstimateSale.farming_plot.find(:estimate_sale_farming_plot_id)
   end
 end

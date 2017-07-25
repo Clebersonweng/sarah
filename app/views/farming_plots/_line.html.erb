@@ -6,11 +6,11 @@
         <td><%= farm.person.name %></td>
         <td class="hidden-xs"><%= farm.description %></td>
         <td class="text-right">
-            <%= link_to edit_farming_plot_path(farm), class: "btn btn-primary" do %>
+            <%= link_to edit_farming_plot_path(farm), class: "btn btn-primary  btn-sm" do %>
                 <i class="fa fa-1x fa-pencil"></i>
-              <% end %>                            
-              <a type="button" class="btn btn-primary btn_delete_farming_plots" data-id="<%=farm.id%>">
-                  <i class="fa fa-1x fa-trash">                 
+              <% end %>    
+              <a type="button" class="btn btn-primary delete btn-sm" data-toggle="modal"  data-id="<%=farm.id%>">
+                  <i class="fa fa-1x fa-trash">                
                   </i>
               </a>
           </td>

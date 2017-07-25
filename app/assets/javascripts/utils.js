@@ -1,65 +1,54 @@
 var controlador;
+var _id;
 $(document).ready(function ()
 {
-    
-// fin de carga de la pagina
+    $('.only_numbers').valida_sarah('0123456789');
+    $('.only_letters').valida_sarah('azAZ ');
+    $('.delete').click(function (event) {
+        _id = $(this).data('id');
+        confirm_modal();
+    });
+    $(".pull-left.pagination-detail").hide();
 });
-function open_modal(sufixe) {
-    if (typeof sufixe == "undefined" || typeof sufixe == "")
-    {
-        sufixe = "";
-    }
-    if (sufixe != "")
-    {
-        console.log("tiene evento");
-        $(".btn_delete_" + sufixe).off("click").on("click", function ()
-        {
-            _id = $(this).data('id');
-            $('.modal.fade').modal("show");
+
+function confirm_modal()
+{
+    dataConfirmModal.confirm({
+        title: 'Eliminar un registro?',
+        text: 'Está seguro que desea eliminar un registro?',
+        commit: 'Eliminar',
+        cancel: 'Salir',
+        zindex: 1055,
+        onConfirm: function () {
+            delete_modal(controlador, _id);
+        },
+        onCancel: function () {
         }
-        );
-    } else
-    {
-        //console.log("tiene evento");
-        $(".btn_delete_" + sufixe).off("click").on("click", function ()
-        {
-            _id = $(this).data('id');
-            // console.log(_id);
-            $('.modal.fade').modal("show");
-        }
-        );
-    }
+    });
 }
-function delete_modal(controlador, element_id) {
-    $("#btn_md_confirm").addClass('disabled');
+
+function delete_modal(controlador, element_id)
+{
+    $(".commit").addClass('disabled');
     $.ajax({
         type: "POST",
         url: "/" + controlador + "/" + element_id,
         data: {"_method": "delete"},
         success: function (msg) {
-            $('#myModal').modal("hide");
-            $('.modal-backdrop').remove();
+            $('#tr_' + element_id).fadeOut();
             alert_sarah("El registro fue eliminado con exito!", "success");
-            console.log(msg);
             $("#ajax-loader").addClass('hide');
-            $("#btn_md_confirm").removeClass('disabled');
+            $(".commit").removeClass('disabled');
         },
         error: function (msg)
         {
-            console.log(msg);
-            $('#myModal').modal("hide");
-            $('.modal-backdrop').remove();
             alert_sarah("Ocurrio un error al eliminar el campo!", "danger");
-            $("#ajax-loader").addClass('hide');
-            $("#btn_md_confirm").removeClass('disabled');
+            $(".commit").removeClass('disabled');
         },
         fail: function (msg)
         {
-            $('#myModal').modal("hide");
-            $('.modal-backdrop').remove();
             alert_sarah("Ocurrio un error en el servidor!", "danger");
-            $("#ajax-loader").addClass('hide');
-            $("#btn_md_confirm").removeClass('disabled');
+            $(".commit").removeClass('disabled');
         }
 
     });

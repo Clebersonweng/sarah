@@ -1,4 +1,4 @@
-var _id;
+//var _id;
 var quantity_estimate_prod;
 var total_production;
 var price_sale;
@@ -12,29 +12,10 @@ $(document).ready(function () {
     form_estimate_sale_validates();
     remove_error_before_charge_gross_sale();
     controlador = $("#controller").val();
-    recharge_events_estimate_sales();
     verify_exist_type_crop_to_period();
-    $("#openHistory").on("click", function ()
-    {
-        $('#md_historyProd').modal();
-        charge_history_prod();
-    });
-    $('.only_numbers').valida_sarah('0123456789');
-    $('.only_letters').valida_sarah('azAZ ');
-
-
 });
 
-function recharge_events_estimate_sales()
-{
-    $("#table_estimate_sales tr").on("mouseenter", function ()
-    {
-        if (typeof controlador != "undefined" || typeof controlador != "")
-        {
-            open_modal(controlador);
-        }
-    });
-}
+
 /**************    Funciones de la estimacion de ventas ******************/
 function charge_history_prod()
 {
@@ -64,14 +45,11 @@ function btn_evt_calculate_total_production()
 
         if ($("#estimate_sale_farming_plot_id option:selected").data('area-parcela') !== "" || $("#estimate_sale_farming_plot_id option:selected").data('area-parcela') !== "undefined")
         {
-            $("#openHistory").removeAttr('disabled');
-            $("#openHistory").removeClass('disabled');
+            $("#openHistory").removeAttr('disabled').removeClass('disabled');
             $("#estimate_sale_estimate_production").removeAttr("readonly");
-
         } else
         {
-            $("#openHistory").addAttr('disabled');
-            $("#openHistory").addClass('disabled');
+            $("#openHistory").addAttr('disabled').addClass('disabled');
             $("#estimate_sale_estimate_production").addAttr("readonly");
         }
     });
@@ -194,7 +172,6 @@ function remove_error_before_charge_estimate_prod()
         $('.help-block').each(function () {
             $(this).remove();
         });
-
     }
 }
 
@@ -217,7 +194,7 @@ function verify_exist_type_crop_to_period()
         var date_end = $("#estimate_sale_date_end").val();
         var farming_plot_id = $("#estimate_sale_farming_plot_id").val();
         var type_of_crop_id = $("#estimate_sale_type_of_crop_id").val();
-        var select =  $("#estimate_sale_type_of_crop_id");
+       
         if (typeof date_init != "" && typeof date_end != "" && typeof farming_plot_id != "" && typeof type_of_crop_id != "" && farming_plot_id != "")
         {
             $.ajax({
@@ -228,40 +205,38 @@ function verify_exist_type_crop_to_period()
                 success: function (response) {
                     if (response.status == "ok")
                     {
-                        select.html('');
-                        console.log(response.respuesta[0].name);
-                        $.each(response.respuesta, function (i, item) {
-                            item = response.respuesta[i].name
-                            var value = response.respuesta[i].id
-                            select.append($("<option></option>").attr("value", value).text(item));
-                        });
+                        run_option_result(response);
                         reset_errors("farming_plot_id");
                         reset_errors("type_of_crop_id");
                         reset_errors("date_init");
                         reset_errors("date_end");
-                        alert_sarah("Puede seguir con la estimación de ventas", "success", 4000);
-                    } else if (response.status == "existe")
-                    {
-                        select.html('');
-                        $.each(response.respuesta, function (i, item) {
-                            item = response.respuesta[i].name
-                            var value = response.respuesta[i].id
-                            select.append($("<option></option>").attr("value", value).text(item));
-                        });
+                      } 
+                      else if (response.status == "existe")
+                      {
+                       
+                         run_option_result(response);
                         add_errors("farming_plot_id");
                         add_errors("type_of_crop_id");
                         add_errors("date_init");
                         add_errors("date_end");
-                        alert_sarah("Ya existe una estimación para esta parcela para este periodo y cultivo", "danger", 4000);
-                    }
+                     }
                 },
                 error: function (response) {
-
-                    //alert_sarah("ocurrió un error en e", "danger", 4000);
-
-                }
+                   console.log(response.msg);
+                },
+                fail: function (response)
+                {alert_sarah("Ocurrió un error en el servidor","danger");}
             });
         }
     });
-
+}
+function run_option_result(response)
+{
+  var select =  $("#estimate_sale_type_of_crop_id");
+  select.html('');
+  $.each(response.respuesta, function (i, item) {
+    item = response.respuesta[i].name
+    var value = response.respuesta[i].id
+    select.append($("<option></option>").attr("value", value).text(item));
+  });  
 }

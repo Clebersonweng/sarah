@@ -27,10 +27,10 @@
                       <td><%= number_with_precision( sales.price, :precision => 0, :delimiter => '.' ) %></td>
                       <td><%= number_with_precision(sales.gross_sale, :precision => 0, :delimiter => '.' ) %></td>
                       <td class="text-right data-icons">                     
-                          <%= link_to edit_estimate_sale_path(sales), class: "btn btn-primary" do %>
+                          <%= link_to edit_estimate_sale_path(sales), class: "btn btn-primary btn-sm" do %>
                               <i class="fa fa-1x fa-pencil"></i>
-                            <% end %>   
-                            <a type="button" class="btn btn-primary btn_delete_estimate_sales" data-toggle="modal" data-id="<%= sales.id %>"><i class="fa fa-1x fa-trash"></i></a>                       
+                          <% end %>   
+                            <a type="button" class="btn btn-primary delete btn-sm" data-toggle="modal" data-id="<%= sales.id %>"><i class="fa fa-1x fa-trash"></i></a>                       
                         </td>
 
                     </tr>
@@ -38,6 +38,6 @@
               </tbody>                        
           </table>
       </div> 
-    <input type="hidden" id="controller" value="<%= controller_name%>">
-  </div>
+   <input type="hidden" id="controller" value="<%= controller_name%>">
+</div>
  

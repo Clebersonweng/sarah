@@ -37,7 +37,7 @@ class FarmingPlotsController < ApplicationController
 
     respond_to do |format|
       if @farming_plot.save
-        flash[:notice] = "Creado exitosamente."
+        flash[:notice] = "El registro fue creado exitosamente."
         format.html { redirect_to  action:"index"}
       else
         format.html { render :new }
@@ -64,20 +64,14 @@ class FarmingPlotsController < ApplicationController
   # DELETE /farming_plots/1
   # DELETE /farming_plots/1.json
   def destroy
-    @farming_plot = FarmingPlot.find(params[:id])    
+     @farming_plot = FarmingPlot.find(params[:id])  
     respond_to do |format|
-      if @farming_plot.destroy
-        #format.html { redirect_to @type_of_crop, notice: 'Se actualizo exitosamente!' }        
-       # res = 1
-        #format.json  { render :json => res }
-        format.js
-        #format.json { status: :created, location: @type_of_crop }
+      if(@farming_plot.destroy)      
+        format.json { head :no_content, message:"Registro eliminado existosamente.", response:"ok" }
       else
-       # res = 0
-        #format.json  { render :json => res }
-        format.js
+        format.json { head :no_content, message:"Ocurrió un error al eliminar.",response:"error"}
       end
-    end  
+    end
   end
 
   private

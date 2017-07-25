@@ -1,14 +1,14 @@
 <% @type_of_crops.each do |types| %>
-  <tr id="tr_<%=types.id%>">
-      <td><%= types.code%></td>
-      <td><%= types.name %></td>
-      <td class="hidden-xs"><%= types.variety%></td>                           
-      <td class="text-right">
-          <%= link_to edit_type_of_crop_path(types), class: "btn btn-primary" do %>
-              <i class="fa fa-1x fa-pencil"></i>
+ <tr id="tr_<%=types.id%>">
+     <td><%= types.code%></td>
+     <td><%= types.name %></td>
+     <td class="hidden-xs"><%= types.variety%></td>                           
+     <td class="text-right">
+         <%= link_to edit_type_of_crop_path(types), class: "btn btn-primary btn-sm" do %>
+           <i class="fa fa-1x fa-pencil"></i>
           <% end %>                            
-            <a type="button" class="btn btn-primary btn_delete_type_of_crops" data-id="<%= types.id %>"><i class="fa fa-1x fa-trash"></i></a>
+          <a type="button" class="btn btn-primary delete btn-sm" data-toggle="modal" data-id="<%= types.id %>"><i class="fa fa-1x fa-trash"></i></a>
       </td>
 
-    </tr>
-  <% end %>
+  </tr>
+ <% end %>
