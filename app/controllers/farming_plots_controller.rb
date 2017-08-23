@@ -34,37 +34,29 @@ class FarmingPlotsController < ApplicationController
   def create
     get_params_plot
     @farming_plot = FarmingPlot.new(farming_plot_params)
-
-    respond_to do |format|
-      if @farming_plot.save
-        flash[:notice] = "El registro fue creado exitosamente."
-        format.html { redirect_to  action:"index"}
-      else
-        format.html { render :new }
-        format.json { render json: @farming_plot.errors, status: :unprocessable_entity }
-      end
+    
+    if @farming_plot.save
+      render json: { contenido: @farming_plot, location: farming_plot_url(@farming_plot),result: :ok },status: 200
+    else
+      render json:  @farming_plot.errors, status: :unprocessable_entity 
     end
   end
 
   # PATCH/PUT /farming_plots/1
   # PATCH/PUT /farming_plots/1.json
   def update
-    get_params_plot
-    respond_to do |format|
-      if @farming_plot.update(farming_plot_params)
-        flash[:notice] = "Actualizado exitosamente."
-        format.html { redirect_to  action:"index"}
-      else
-        format.html { render :edit }
-        format.json { render json: @farming_plot.errors, status: :unprocessable_entity }
-      end
+    get_params_plot   
+    if @farming_plot.update(farming_plot_params)
+      render json: { contenido: @farming_plot, location: product_url(@farming_plot),result: :ok },status: 200
+    else
+      render json:  @farming_plot.errors, status: :unprocessable_entity   
     end
   end
 
   # DELETE /farming_plots/1
   # DELETE /farming_plots/1.json
   def destroy
-     @farming_plot = FarmingPlot.find(params[:id])  
+    @farming_plot = FarmingPlot.find(params[:id])  
     respond_to do |format|
       if(@farming_plot.destroy)      
         format.json { head :no_content, message:"Registro eliminado existosamente.", response:"ok" }

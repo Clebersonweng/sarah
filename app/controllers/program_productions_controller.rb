@@ -6,6 +6,10 @@ class ProgramProductionsController < ApplicationController
   # GET /program_productions.json
   def index
     @program_productions = ProgramProduction.all.sort()
+    respond_to do |format|
+      format.html
+      format.json { render json: @program_productions.as_json(:include => { :estimate_sale => { :only => :code }}) }
+    end
   end
 
   # GET /program_productions/1

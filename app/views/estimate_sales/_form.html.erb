@@ -32,7 +32,7 @@
                   <div class="form-group" id="gr_type_of_crop_id">
                       <label for=" " class=" col-sm-2 control-label">Tipo Cult.</label>
                       <div class="col-sm-4">
-                            <%=  (f.select :type_of_crop_id, {}, {class: "form-control"} ) %>                       
+                            <%=  f.select :type_of_crop_id, options_for_select(@farming_plots, f.object.farming_plot_id), {}, { :class => 'form-control', :required => true } %>
                             <span class="help-block"> <%= f.object.errors[:type_of_crop_id].to_sentence if f.object.errors[:type_of_crop_id] %></span>
                         </div>
                     </div>

@@ -47,9 +47,9 @@
     cursor:pointer;
 }
 .field_with_errors {
-  padding: 2px;
-  background-color: red;
-  display: table;
+    padding: 2px;
+    background-color: red;
+    display: table;
 }
 
 .bv-form .help-block {
@@ -66,14 +66,24 @@
 }
 
 .bv-form .bv-icon-no-label {
-	top: 0;
+    top: 0;
 }
 
 .bv-form .bv-icon-input-group {
-	top: 0;
-	z-index: 100;
+    top: 0;
+    z-index: 100;
 }
 a {
     color: #fff;
     text-decoration: none;
+}
+#errors {
+    border-left: 5px solid #a94442;
+    padding-left: 15px;
+}
+#errors li {
+    list-style-type: none;
+}
+#errors li:before {
+    content: '\b7\a0';
 }

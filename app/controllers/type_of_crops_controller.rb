@@ -39,14 +39,13 @@ class TypeOfCropsController < ApplicationController
   def create   
     @type_of_crop = TypeOfCrop.new(type_of_crop_params)
 
-    respond_to do |format|
-      if @type_of_crop.save
-        format.html { redirect_to @type_of_crop, notice: 'Fue guardado exitosamente.' }
-        format.json { render :show, status: :created, location: @type_of_crop }
-      else
-        format.html { render :new }
-        format.json { render json: @implement.errors, status: :unprocessable_entity }
-      end
+    if @type_of_crop.save
+      #format.html { redirect_to @product, notice: 'Supply was successfully created.' }
+      render json: { contenido: @type_of_crop, location: product_url(@type_of_crop),result: :ok },status: 200
+    else
+      #format.html { render :new }
+      render json:  @type_of_crop.errors, status: :unprocessable_entity 
+      
     end
   end
 
@@ -83,11 +82,11 @@ class TypeOfCropsController < ApplicationController
         #res = 1
         #format.json  { render :json => res }
         #format.json { status: :created, location: @type_of_crop }
-         format.js
+        format.js
       else
         #res = 0
         #format.json  { render :json => res }
-         format.js
+        format.js
       end
     end  
   end

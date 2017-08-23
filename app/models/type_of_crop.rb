@@ -20,7 +20,3 @@ class TypeOfCrop < ApplicationRecord
   end
   
 end
-#def set_account_number
- #   nuevoCodigo = TypeOfCrop.maximum(:code)
-#    self.code = nuevoCodigo.to_i + 1
- # end

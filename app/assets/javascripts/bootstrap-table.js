@@ -594,7 +594,7 @@
             html = [];
             html.push(             
                 '<div class="search input-group">',
-                    sprintf("<span class='input-group-addon'><i class='fa fa-search'></i></span><input class='form-control' type='text' placeholder='buscar' autofocus>",
+                    sprintf("<span class='input-group-addon'><i class='fa fa-search'></i></span><input class='form-control' id='buscar' type='text' placeholder='buscar..' autofocus>",
                             this.options.formatSearch()),
                 '</div>');
 
