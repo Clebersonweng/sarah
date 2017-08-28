@@ -2,10 +2,10 @@ $(document).ready(function ()
 {
   
   controlador = $("#controller").val();
+  
   validate_generic_form(controlador);
   generic_response_form(controlador);
   form_type_of_crops_validates();
-  confirm_modal();
   
   $("#buscar").on("keyup", function ()
   {

@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">Sarah</a>
+        <a class="navbar-brand" href="/">Sarah | Presupuesto Ágricola</a>
     </div>
 
 
@@ -16,24 +16,24 @@
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-user"></i>
                 <% if current_user.blank?%>
-                  redirect_to home
+                 redirect_to home
                 <%elsif%>
-                  <%= current_user.email %>
+                 <%= current_user.email %>
                 <%end%>             
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
                 <% if current_user.role_id==1%>
-                  <li>
-                      <%= link_to  edit_user_registration_path do %>                        
-                        <i class="fa fa-fw fa-gear"></i> &nbsp; Perfil                        
-                      <%end%>
-                  </li>
+                 <li>
+                     <%= link_to  edit_user_registration_path do %>                        
+                      <i class="fa fa-fw fa-gear"></i> &nbsp; Perfil                        
+                     <%end%>
+                 </li>
                 <%end%>
                 <li class="divider"></li>
                 <li>
                     <%= link_to  destroy_user_session_path, :method => 'delete' do %>
-                      <i class="fa fa-fw fa-power-off"></i> &nbsp; Salir
+                     <i class="fa fa-fw fa-power-off"></i> &nbsp; Salir
                     <%end%>
                 </li>
             </ul>
@@ -42,194 +42,111 @@
     </ul>
     <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
-        <ul class="nav navbar-nav side-nav nav_left_sarah">
-            <li id="menu_home" class="">
-                <a href="/"><i class="fa fa-fw fa-dashboard"></i> Inicio</a>
+        <ul class="nav navbar-nav side-nav">
+            <li id="menu_home" class="active">
+                <a href="/"><i class="fa fa-home" aria-hidden="true" ></i> Inicio</a>
             </li>
             <!--#############################################################-->
+
+            <!--#############################################################-->
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Cargar Parcela<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li id="menu_farming_plots">
-                        <%= link_to "../farming_plots", :controller => "farming_plots", :action => "index" do  %>
-                          Farming Plot
-                        <% end %>
-                    </li>
+                <a href="javascript:;" data-toggle="collapse" data-target=".catastros" class="" aria-expanded="false"><i class="fa fa-building-o" aria-hidden="true"></i> Catastros <i class="fa fa-fw fa-caret-down"></i></a>
+                <ul id="" class="collapse catastros">
+
                     <li id="menu_type_of_crops">
                         <%= link_to "../type_of_crops", :controller => "type_of_crops", :action => "index" do  %>                              
-                          Type Of Crops                        
+                         Tipo de Cultivo                       
                         <%end%>
                     </li>
+
+                    <li id="menu_farming_plots">
+                        <%= link_to "../farming_plots", :controller => "farming_plots", :action => "index" do  %>
+                         Parcela Agrícola
+                        <% end %>
+                    </li>
+
+                    <li id="menu_brands">
+                        <%= link_to "../brands", :controller => "brands", :action => "index" do  %>
+                         Marca
+                        <% end %> 
+                    </li>
+
+                    <li id="menu_models">
+                        <%= link_to "../models", :controller => "models", :action => "index" do  %>
+                         Modelo
+                        <% end %> 
+                    </li>
+
+                    <li id="menu_implements">
+                        <%= link_to "../implements", :controller => "implements", :action => "index" do  %>
+                         Implemento
+                        <% end %> 
+                    </li>
+
+                    <li id="menu_machines">
+                        <%= link_to "../machines", :controller => "machines", :action => "index" do  %>
+                         Maquinaria
+                        <% end %> 
+                    </li>
+
+                    <li id="menu_products">
+                        <%= link_to "../products", :controller => "products", :action => "index" do  %>
+                         Productos
+                        <% end %> 
+                    </li> 
+
+                    <li id="menu_supplies">
+                        <%= link_to "../supplies", :controller => "supplies", :action => "index" do  %>
+                         Productos
+                        <% end %> 
+                    </li> 
+                    <li id="menu_type_of_services">
+                        <%= link_to "../type_of_services", :controller => "type_of_services", :action => "index" do  %>
+                         Tipo de Servicio
+                        <% end %>
+                    </li>
+
+                    <li id="menu_people">
+                        <%= link_to "../people", :controller => "people", :action => "index" do  %>
+                         Funcionário
+                        <% end %> 
+                    </li>
+
                 </ul>
             </li>
 
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Cargar Datos<b class="caret"></b></a>
-                <ul class="dropdown-menu">
+                <a href="javascript:;" data-toggle="collapse" data-target="#unit_consuption"><i class="fa fa-fw fa-arrows-v"></i> Unid. de Consumo <i class="fa fa-fw fa-caret-down"></i></a>
+                <ul id="unit_consuption" class="collapse">
                     <li id="menu_fuels">
                         <%= link_to "../fuels", :controller => "fuels", :action => "index" do  %>
-                          Tipo de Combustible
+                         Tipo de Combustible
                         <% end %>
                     </li>
 
                     <li id="menu_unit_of_measurements">
                         <%= link_to "../unit_of_measurements", :controller => "unit_of_measurements", :action => "index" do  %>
-                          Unidades de medida
-                        <% end %>
-                    </li>
-                    <li id="menu_type_of_services">
-                        <%= link_to "../type_of_services", :controller => "type_of_services", :action => "index" do  %>
-                          Tipo de Servicio
-                        <% end %>
-                    </li>
-                </ul>
-            </li>
-            <!--################################################################################-->
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Gastos<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li id="menu_structure_expenses">
-                        <%= link_to "../unit_of_measurements", :controller => "unit_of_measurements", :action => "index" do  %>
-                          Gastos de Estructura
-                        <% end %>
-                    </li>
-                    <li id="menu_type_of_services">
-                        <%= link_to "../manu_indi_expenses", :controller => "manu_indi_expenses", :action => "index" do  %>
-                          Gastos Ind. Prod
+                         Unidades de medida
                         <% end %>
                     </li>
                 </ul>
             </li>
 
-            <!--########################################################################################################################################-->
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Mano de Obra<b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cubes" aria-hidden="true"></i> Reportes<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li id="menu_type_of_services">
-                        <%= link_to "../people", :controller => "people", :action => "index" do  %>
-                          Persona
-                        <% end %> 
-                    </li>
-                    <li id="menu_type_of_services">
-                        <%= link_to "../type_of_works", :controller => "type_of_works", :action => "index" do  %>
-                          Tipo de Trabajo
-                        <% end %> 
-                    </li>
-                    <li id="menu_type_of_services">
-                        <%= link_to "../man_powers", :controller => "man_powers", :action => "index" do  %>
-                          Mano de Obra
-                        <% end %> 
+                    <li id="menu_reportes" href="#">                        
                     </li>
                 </ul>
             </li>
-            <!--###################################################################################################################################################-->
 
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Maq. Tercerizada<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li id="menu_type_of_services">
-                        <%= link_to "../ype_of_services", :controller => "type_of_services", :action => "index" do  %>
-                          Tipo de Servicio
-                        <% end %> 
-                    </li>
-                    <li id="menu_cost_oper_machine_conts">
-                        <%= link_to "../cost_oper_machine_conts", :controller => "cost_oper_machine_conts", :action => "index" do  %>
-                          Costo Oper.
-                        <% end %> 
-                    </li>
-
-                </ul>
-            </li>
-            <!--#######################################################################################################################################-->
-
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Costo Op. Maq. Propia<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li id="menu_brands">
-                        <%= link_to "../brands", :controller => "brands", :action => "index" do  %>
-                          Marca
-                        <% end %> 
-                    </li>
-                    <li id="menu_models">
-                        <%= link_to "../models", :controller => "models", :action => "index" do  %>
-                          Modelo
-                        <% end %> 
-                    </li>
-                    <li id="menu_machines">
-                        <%= link_to "../machines", :controller => "machines", :action => "index" do  %>
-                          Maquinaria
-                        <% end %> 
-                    </li>
-                    <li id="menu_implements">
-                        <%= link_to "../implements", :controller => "implements", :action => "index" do  %>
-                          Implemento
-                        <% end %> 
-                    </li>
-                    <li id="menu_cost_oper_machines">
-                        <%= link_to "../cost_oper_machines", :controller => "cost_oper_machines", :action => "index" do  %>
-                          Costo Oper.
-                        <% end %> 
-                    </li>
-
-                </ul>
-            </li>
-            <!--#######################################################################################################################################-->
-
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-minus-square" aria-hidden="true"></i> Progr. Produc <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li id="menu_program_productions">
-                    <%= link_to "../program_productions", :controller => "program_productions", :action => "index" do  %>
-                          Programa de Prod.
-                        <% end %>   
-                    </li>
-                    <li id="menu_estimate_sales">
-                    <%= link_to "../estimate_sales", :controller => "estimate_sales", :action => "index" do  %>
-                          Estim. Ventas
-                        <% end %>   
-                    </li>
-                </ul>
-            </li>
-            <!--#######################################################################################################################################-->
-
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-minus-square" aria-hidden="true"></i> Insumos <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li id="menu_program_productions">
-                        <a href="../products"><i class="fa fa-fw fa-gear"></i> Productos</a>
-                    </li>         
-                    <li id="menu_program_productions">
-                        <a href="../supplies"><i class="fa fa-fw fa-gear"></i> Insumos</a>
-                    </li> 
-
-
-                </ul>
-            </li>
             <li class="divider"></li>
+
             <li>
-                <a href=""><i class="fa fa-area-chart" aria-hidden="true"></i> Income Statement</a>
+                <a href=""><i class="fa fa-area-chart" aria-hidden="true"></i> Cuentas de Resultados</a>
             </li>
         </ul>
     </div>
     <!-- /.navbar-collapse -->
 </nav>
-
-<!--/.sidebar-->
-<script>
-    var controllerName = "<%= params[:controller] || controller.name %>";
-    if(controllerName == "default" ){
-      $("#menu_home").addClass("active");
-    }
-    else
-    {
-      $("#menu_"+controllerName).addClass("active");
-    }
-
-   $(document).ready (function(){
-      $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
-      $("#success-alert").slideUp(500);
-    });  
-
-});
-</script>
 

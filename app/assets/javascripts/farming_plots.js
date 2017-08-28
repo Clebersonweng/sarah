@@ -1,19 +1,23 @@
 
+
 $(document).ready(function ()
 {
- 
+
+
   controlador = $("#controller").val();
-  validate_generic_form(controlador);
+  
+  
   generic_response_form(controlador);
   form_farming_plots_validates();
+  confirm_modal();
   
   $("#buscar").on("keyup", function ()
   {
     confirm_modal();
   });
-  
-  
+
 });
+
 
 function form_farming_plots_validates()
 {
@@ -26,7 +30,7 @@ function form_farming_plots_validates()
             message: 'Este campo es obligatório'
           },
           regexp: {
-            regexp: /^[a-zA-Z0-9_\d{0,2} ]+$/,
+            regexp: /^[a-zA-Z0-9_ ]+$/,
             message: 'El nombre debe consistir en caracteres alfanuméricos'
           }
         }
@@ -37,9 +41,13 @@ function form_farming_plots_validates()
             message: 'Este campo es obligatório'
           },
           stringLength: {
-            min: 3,
+            min: 1,
             max: 30,
             message: 'El nombre no puede ser menor que 3 y mayor que 50 caracteres'
+          },
+          greaterThan: {
+            value: 1,
+            message: 'El campo debe contener un valor mayor que 0 !'
           },
           regexp: {
             regexp: /^[0-9.]+$/,
@@ -67,6 +75,6 @@ function form_farming_plots_validates()
     }
   }).on('change', 'form', function (e) {
     e.preventDefault();
-     //$("#form_products").bootstrapValidator('revalidateField', 'investments');
+    //$("#form_products").bootstrapValidator('revalidateField', 'investments');
   });
 }

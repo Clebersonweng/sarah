@@ -1,6 +1,5 @@
 module ApplicationHelper
     
-
   #agregado para traer varios campos en el select
   def options_for_select(container, selected = nil)
     return container if String === container
@@ -39,6 +38,7 @@ module ApplicationHelper
     end
     html_attributes.join
   end
+  
   #para la busqueda en index
   def sortable(column, title = nil)
     title ||= column.titleize
@@ -46,6 +46,7 @@ module ApplicationHelper
     direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
     link_to title, params.merge(:sort => column, :direction => direction, :page => nil), {:class => css_class}
   end
+  
   ##########################################################################################
   #mensahes flash para ajax####
   def add_flash_to_header
@@ -56,5 +57,5 @@ module ApplicationHelper
     # make sure flash does not appear on the next page
     flash.discard
   end
-     
+  
 end

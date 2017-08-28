@@ -1,15 +1,7 @@
 
 <div class="panel-body">
     <%= form_for(@type_of_crop,html: {class: 'form-horizontal',id:'form_type_of_crops', remote:true}) do |f| %>
-      <div class="col-lg-8 col-xs-12 col-sm-6">
-
-          <div class="form-group">  
-              <%= f.label :code,"Código:",class: "control-label col-sm-2" %>
-               <div class="col-sm-4">
-                   <%= f.text_field :code,autofocus: true , class: "form-control ", :maxlength => "7", :required => false, readonly:"true" %>
-                    <div class="help-block"> <%= f.object.errors[:code].to_sentence if f.object.errors[:code] %></div>
-                </div>
-            </div>
+      <div class="col-xs-12 col-lg-8 col-sm-12">
 
             <div class="form-group">  
                 <%= f.label :name,"Nombre:",class: "control-label col-sm-2" %>
@@ -29,18 +21,7 @@
                 <%= render('layouts/error_lists')%>
 
                 <div class="text-center">                                                              
-                    <% if controller.action_name == "edit" ||  controller.action_name == "update" %>
-                     <%= link_to "../../type_of_crops", :controller => "type_of_crops", :action => "index", :type => "button", :class =>"btn btn-danger" do  %>                              
-                      Cancelar                       
-                     <%end%>  
-                    <%else%>
-                     <button type="reset" id="btn_cancel_type_of_crops" class="btn btn-danger btn-space" >Cancelar</button>
-                    <% end%>
-                    <% if controller.action_name == "new"  ||  controller.action_name == "create"%>
-                     <button type="submit" name="submitButton"  id="btn_submit_type_of_crops" class="btn btn-success">Guardar</button>
-                    <%else%>
-                     <button type="submit" name="submitButton" id="btn_submit_type_of_crops" class="btn btn-success">Actualizar</button>
-                    <% end%>                           
+                    <%= render('layouts/buttons')%>
                 </div>
 
             </div>

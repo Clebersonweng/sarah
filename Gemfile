@@ -58,3 +58,5 @@ gem "responders"
 gem 'bootstrap-validator-rails', '~> 0.5.3'
 #gem delete modal
 gem 'data-confirm-modal'
+
+gem 'jquery-turbolinks'

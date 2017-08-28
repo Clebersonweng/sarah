@@ -10,6 +10,7 @@ class FarmingPlot < ApplicationRecord
   validates :name, length: { minimum: 3 }
   validates :area, :format => { :with => /\A\d+(?:\.\d{0,2})?\z/ }, :numericality => {:greater_than => 0}
   validates :description, length: { maximum: 100 }
+  
   # validate :expiration_date_cannot_be_in_the_past_start, :expiration_date_cannot_be_in_the_past_end
   #validates_presence_of :code, :name, :area, :type_of_crop_id, :culture_period_start, :culture_period_end
  

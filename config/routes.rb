@@ -10,69 +10,22 @@ Rails.application.routes.draw do
   #delete 'type_of_crops/:id', controller: 'type_of_crops', action: 'destroy' #→ exclui o contato pelo identificador passado
   #get 'type_of_crops/:id/edit', controller: 'type_of_crops', action: 'edit', as: 'edit_type_of_crop_path'
   
-  resources :type_of_crops
+  resources :type_of_crops, :program_productions, :people , :farming_plots, :manu_indi_expense_dets, :manu_indi_expenses, :stru_expense_dets
+  resources :structure_expenses, :mark_spending_dets, :mark_spendings, :supply_details, :supplies, :chart_of_accounts, :cost_oper_machine_conts
+  resources :cost_oper_machine_cont_details, :type_of_services, :fuels,:cost_oper_machine_details,:cost_oper_machines, :implements
+  resources :machines, :models, :brands, :type_of_works, :man_power_details, :man_powers, :products, :estimate_sales, :unit_of_measurements
   
-  resources :program_productions
-  resources :people
   post 'estimate_sales/verify_new_estimate_sale'
-  
-
-  
-  resources :farming_plots
-  
-  resources :manu_indi_expense_dets
-  resources :manu_indi_expenses
-  
-  resources :stru_expense_dets
-  resources :structure_expenses
-  
-  resources :mark_spending_dets
-  resources :mark_spendings
-  
-  resources :supply_details
-  resources :supplies
-  
-  resources :chart_of_accounts
-   
-  resources :cost_oper_machine_conts
-  resources :cost_oper_machine_cont_details
-  
-  resources :type_of_services
   
   # root to: "cost_oper_machine_cont_details#traer_programaProduccion"
   #get 'traer_programaProduccion/:id' => 'cost_oper_machine_conts#traer_programaProduccion'
   #post 'cost_oper_machine_conts/traer_programaProduccion'
   #get "/cost_oper_machine_conts#traer_programaProduccion/:idPrograma", to: "cost_oper_machine_conts#traer_programaProduccion"
   
-  resources :fuels
-  
-  resources :cost_oper_machine_details
-  resources :cost_oper_machines
-  
-  resources :implements
-  resources :machines
-  resources :models
-  resources :brands
-  resources :type_of_works
-  
-  resources :man_power_details
-  resources :man_powers 
- 
-
-  resources :products
-
-  resources :estimate_sales
-
-  resources :unit_of_measurements
+   
   
   devise_for :users
- 
-  
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  
-  #resources  :type_of_crops do
-  #  resources :farming_plots
-  #end
+
   #resources :farming_plots, only: [:index]
   resources :program_productions do
     resources :estimate_sales #-> url.com/logs/:log_id/meals/:id
@@ -84,7 +37,5 @@ Rails.application.routes.draw do
   resources :cost_oper_machine_conts do
     resources :cost_oper_machine_cont_details
   end
-  #resources :cost_oper_machine_conts do
-  #  get 'traer_programaProduccion' => ':cost_oper_machine_conts#traer_programaProduccion'
-  # end
+
 end

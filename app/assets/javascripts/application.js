@@ -12,9 +12,14 @@
 //
 
 //= require jquery
+
 //= require jquery_ujs
 //= require bootstrap.min 
 //= bootstrap-table
 //= require bootstrapValidator.min
 //= require_tree .
 //= require data-confirm-modal
+
+//= require jquery.turbolinks
+//= require turbolinks
+

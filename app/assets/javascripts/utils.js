@@ -21,19 +21,18 @@ function confirm_modal()
 {
   $(".delete").on("click", function () {
     _id = $(this).data('id');
-    console.log(_id);
     dataConfirmModal.confirm({
-      title: 'Eliminar un registro?',
-      text: 'Está seguro que desea eliminar un registro?',
-      commit: 'Eliminar',
-      cancel: 'Salir',
-      zindex: 1055,
-      onConfirm: function () {
-        delete_modal(controlador, _id);
-      },
-      onCancel: function () {
-      }
-    });
+                                  title: 'Eliminar un registro?',
+                                  text: 'Está seguro que desea eliminar un registro?',
+                                  commit: 'Eliminar',
+                                  cancel: 'Salir',
+                                  zindex: 1055,
+                                  onConfirm: function () {
+                                                            delete_modal(controlador, _id);
+                                                          },
+                                  onCancel: function ()  {
+                                                         }
+                              });
   });
 
 }
@@ -109,7 +108,6 @@ $.fn.valida_sarah = function (cadena) {
 
 function validate_generic_form(sufixe)
 {
-  console.log(sufixe);
   $('#btn_submit_' + sufixe).on('click', function (e) {
     e.preventDefault();
     if ($("#form_" + sufixe).data('bootstrapValidator').isValid())
@@ -124,10 +122,10 @@ function validate_generic_form(sufixe)
     }
   });
 
-  $('#btn_cancel' + sufixe).on('click', function (e) {
+  $('#btn_cancel_'+ sufixe).on('click', function (e) {
     e.preventDefault();
-    $("#form_" + sufixe)[0].reset();
-    $('#form_' + sufixe).data('bootstrapValidator').resetForm();
+    //$("#form_" + sufixe)[0].reset();
+   // $('#form_' + sufixe).data('bootstrapValidator').resetForm();
   });
 }
 
@@ -137,6 +135,7 @@ function generic_response_form(sufixe) {
     alert_sarah("El registro fue realizado con exito", "success");
     $("#form_" + sufixe)[0].reset();
     $("#form_" + sufixe).data('bootstrapValidator').resetForm();
+    $("#errors").hide();
   });
 
   $(document).on('ajax:error', 'form#form_' + sufixe, function (event, jqxhr, settings, exception) {
@@ -145,7 +144,7 @@ function generic_response_form(sufixe) {
     $.each(jqxhr.responseJSON, function (index, value) {
       if (typeof index == "string")
       {
-        $('#errors').html(index + " " + value);
+        $('#errors').html(index + ": " + value);
       }
     });
   });

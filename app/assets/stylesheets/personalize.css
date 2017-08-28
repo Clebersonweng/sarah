@@ -77,6 +77,7 @@ a {
     color: #fff;
     text-decoration: none;
 }
+/*errores que vienen del servidor*/
 #errors {
     border-left: 5px solid #a94442;
     padding-left: 15px;
@@ -86,4 +87,25 @@ a {
 }
 #errors li:before {
     content: '\b7\a0';
+}
+
+@media (min-width: 1237px) 
+{
+    .alert_sarah
+    {
+      width:34%;  
+    }
+}
+
+@media (min-width: 1024px) 
+{
+    .alert_sarah
+    {
+      width:34%;  
+    }
+}
+
+.turbolinks-progress-bar {
+  height: 5px;
+  background-color: green;
 }
