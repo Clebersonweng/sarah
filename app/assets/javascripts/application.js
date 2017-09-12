@@ -19,6 +19,8 @@
 //= require bootstrapValidator.min
 //= require_tree .
 //= require data-confirm-modal
+//= require nprogress
+//= require nprogress-turbolinks
 
 //= require jquery.turbolinks
 //= require turbolinks

@@ -10,7 +10,9 @@ $(document).ready(function () {
   btn_evt_calculate_total_gross_sale();
   form_estimate_sale_validates();
   remove_error_before_charge_gross_sale();
+  
   controlador = $("#controller").val();
+   
   verify_exist_type_crop_to_period();
   $("#openHistory").off("click").on("click", function () {
     $("#md_historyProd").modal('show');

@@ -105,7 +105,12 @@ a {
     }
 }
 
-.turbolinks-progress-bar {
-  height: 5px;
-  background-color: green;
+#loading-bar .bar 
+{
+    background: #3c763d;
+    height: 4px;
+}
+.upper_case
+{
+    text-transform:uppercase
 }

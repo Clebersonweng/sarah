@@ -1,20 +1,8 @@
-
-
 $(document).ready(function ()
 {
-
-
-  controlador = $("#controller").val();
-  
-  
+  controlador = $("#controller").val();   
   generic_response_form(controlador);
   form_farming_plots_validates();
-  confirm_modal();
-  
-  $("#buscar").on("keyup", function ()
-  {
-    confirm_modal();
-  });
 
 });
 

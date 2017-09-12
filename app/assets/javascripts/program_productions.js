@@ -1,6 +1,8 @@
 $(document).ready(function () {
   form_validates();
+  
   controlador = $("#controller").val();
+    
   $("#program_production_stock_initial,#program_production_stock_end").off("change").on("change", function () {
     calculate_variation_stock();
     calculate_program_production();

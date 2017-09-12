@@ -47,93 +47,69 @@
                 <a href="/"><i class="fa fa-home" aria-hidden="true" ></i> Inicio</a>
             </li>
             <!--#############################################################-->
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
+                <a class="nav-link nav-link-collapse " data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
+                    <i class="fa fa-fw fa-sitemap"></i>
+                    <span class="nav-link-text">
+                        Catastros
+                    </span>
+                </a>
+                <ul class="sidenav-second-level collapse" id="collapseMulti">
+                    <!--Segundo nivel 
+                    <li>
+                        <a href="#">Second Level Item</a>
+                    </li>
+                    <li>
+                        <a href="#">Second Level Item</a>
+                    </li>
+                    <!--fin Segundo nivel -->
+                    <li>
+                        <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">Parcela</a>
+                        <ul class="sidenav-third-level collapse" id="collapseMulti2">
+                            <li class="<%= 'active' if params[:controller] == 'type_of_crops' && params[:action] == 'index' %>"><%= link_to 'Tipo de Cultivo', type_of_crops_path %></li>
+                            <li class="<%= 'active' if params[:controller] == 'farming_plots' && params[:action] == 'index' %>"><%= link_to 'Parcela Agrícola', farming_plots_path %></li>
 
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti3">Máquinas & Implementos</a>
+                        <ul class="sidenav-third-level collapse" id="collapseMulti3">
+                            <li class="<%= 'active' if params[:controller] == 'brands' && params[:action] == 'index' %>"><%= link_to 'Marca', brands_path %></li>
+                            <li class="<%= 'active' if params[:controller] == 'models' && params[:action] == 'index' %>"><%= link_to 'Modelo', models_path %></li>
+                            <li class="<%= 'active' if params[:controller] == 'implements' && params[:action] == 'index' %>"><%= link_to 'Implemento', implements_path %></li>
+                            <li class="<%= 'active' if params[:controller] == 'machines' && params[:action] == 'index' %>"><%= link_to 'Maquinária', machines_path %></li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti4">Productos & Insumos</a>
+                        <ul class="sidenav-third-level collapse" id="collapseMulti4">
+                            <li class="<%= 'active' if params[:controller] == 'products' && params[:action] == 'index' %>"><%= link_to 'Productos', products_path %></li>
+                            <li class="<%= 'active' if params[:controller] == 'supplies' && params[:action] == 'index' %>"><%= link_to 'Insumos', supplies_path %></li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti5">Personas</a>
+                        <ul class="sidenav-third-level collapse" id="collapseMulti5">
+                            <li class="<%= 'active' if params[:controller] == 'type_of_services' && params[:action] == 'index' %>"><%= link_to 'Tipo de Servicio', type_of_services_path %></li>
+                            <li class="<%= 'active' if params[:controller] == 'people' && params[:action] == 'index' %>"><%= link_to 'Personas', people_path %></li>
+
+                        </ul>
+                    </li>
+                </ul>
+            </li>
             <!--#############################################################-->
             <li class="dropdown">
-                <a href="javascript:;" data-toggle="collapse" data-target=".catastros" class="" aria-expanded="false"><i class="fa fa-building-o" aria-hidden="true"></i> Catastros <i class="fa fa-fw fa-caret-down"></i></a>
-                <ul id="" class="collapse catastros">
-
-                    <li id="menu_type_of_crops">
-                        <%= link_to "../type_of_crops", :controller => "type_of_crops", :action => "index" do  %>                              
-                         Tipo de Cultivo                       
-                        <%end%>
-                    </li>
-
-                    <li id="menu_farming_plots">
-                        <%= link_to "../farming_plots", :controller => "farming_plots", :action => "index" do  %>
-                         Parcela Agrícola
-                        <% end %>
-                    </li>
-
-                    <li id="menu_brands">
-                        <%= link_to "../brands", :controller => "brands", :action => "index" do  %>
-                         Marca
-                        <% end %> 
-                    </li>
-
-                    <li id="menu_models">
-                        <%= link_to "../models", :controller => "models", :action => "index" do  %>
-                         Modelo
-                        <% end %> 
-                    </li>
-
-                    <li id="menu_implements">
-                        <%= link_to "../implements", :controller => "implements", :action => "index" do  %>
-                         Implemento
-                        <% end %> 
-                    </li>
-
-                    <li id="menu_machines">
-                        <%= link_to "../machines", :controller => "machines", :action => "index" do  %>
-                         Maquinaria
-                        <% end %> 
-                    </li>
-
-                    <li id="menu_products">
-                        <%= link_to "../products", :controller => "products", :action => "index" do  %>
-                         Productos
-                        <% end %> 
-                    </li> 
-
-                    <li id="menu_supplies">
-                        <%= link_to "../supplies", :controller => "supplies", :action => "index" do  %>
-                         Productos
-                        <% end %> 
-                    </li> 
-                    <li id="menu_type_of_services">
-                        <%= link_to "../type_of_services", :controller => "type_of_services", :action => "index" do  %>
-                         Tipo de Servicio
-                        <% end %>
-                    </li>
-
-                    <li id="menu_people">
-                        <%= link_to "../people", :controller => "people", :action => "index" do  %>
-                         Funcionário
-                        <% end %> 
-                    </li>
-
-                </ul>
-            </li>
-
-            <li class="dropdown">
                 <a href="javascript:;" data-toggle="collapse" data-target="#unit_consuption"><i class="fa fa-fw fa-arrows-v"></i> Unid. de Consumo <i class="fa fa-fw fa-caret-down"></i></a>
-                <ul id="unit_consuption" class="collapse">
-                    <li id="menu_fuels">
-                        <%= link_to "../fuels", :controller => "fuels", :action => "index" do  %>
-                         Tipo de Combustible
-                        <% end %>
-                    </li>
-
-                    <li id="menu_unit_of_measurements">
-                        <%= link_to "../unit_of_measurements", :controller => "unit_of_measurements", :action => "index" do  %>
-                         Unidades de medida
-                        <% end %>
-                    </li>
+                <ul id="unit_consumption" class="collapse">
+                    <li class="<%= 'active' if params[:controller] == 'fuels' && params[:action] == 'index' %>"><%= link_to 'Combustible', fuels_path %></li>
+                    <li class="<%= 'active' if params[:controller] == 'unit_of_measurements' && params[:action] == 'index' %>"><%= link_to 'Unid. de Medida', unit_of_measurements_path %></li>
                 </ul>
             </li>
 
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cubes" aria-hidden="true"></i> Reportes<b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book" aria-hidden="true"></i> Reportes<b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li id="menu_reportes" href="#">                        
                     </li>

@@ -1,52 +1,42 @@
-<div class="row">
-    <div class="col-xs-12">
-        <div class="panel panel-default">
-            <div class="panel-heading"><h3 align="center">Implements</h3>
-                <%=render 'layouts/submenu' %>
-            </div>
-            <div class="panel-body">
-                <table data-toggle="table" data-url="implement"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
-                    <thead>
-                        <tr>
-                            <th data-field="id" data-sortable="true" data-checkbox="true">Item ID</th>
-                            <th data-field="name">Name</th> 
-                            <th data-field="brand">Brand</th> 
-                            <th data-field="model">Model</th>
-                            <th data-field="oper_time">Operative Time</th>
-                            <th data-field="coef_cccr">Coef. Maint.</th>
-                            <th data-field="machine">Machine</th>
-                            <th data-field="year">Year</th>
-                            <th data-field="price">Price</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% @implements.each do |implement| %>
-                          <tr>
-                              <td><%= implement.id %></td>
-                              <td><%= implement.name %></td>
-                              <td><%= implement.brand %></td>
-                              <td><%= implement.model %></td>
-                              <td><%= implement.oper_time %></td>
-                              <td><%= implement.coef_cccr%></td>
-                              <td><%= implement.machine.model.name %></td>
-                              <td><%= implement.year %></td>
-                              <td><%= number_to_currency implement.price %></td>
+<div class="panel-body">
+    <div class="table-responsive">
+        <table data-toggle="table" data-url="implement"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+            <thead>
+                <tr>
+                    <th data-field="name">Implemento</th> 
+                    <th data-field="brand">Marca</th> 
+                    <th data-field="model">Modelo</th>
+                    <th data-field="oper_time">Tiempo Operativo</th>
+                    <th data-field="coef_cccr">Coeficiente de Mantenimiento</th>
+                    <th data-field="machine">Máquina</th>
+                    <th data-field="year">Año</th>
+                    <th data-field="price">Precio</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @implements.each do |implement| %>
+                 <tr>
+                     <td><%= implement.id %></td>
+                     <td><%= implement.name %></td>
+                     <td><%= implement.brand %></td>
+                     <td><%= implement.model %></td>
+                     <td><%= implement.oper_time %></td>
+                     <td><%= implement.coef_cccr%></td>
+                     <td><%= implement.machine.model.name %></td>
+                     <td><%= implement.year %></td>
+                     <td><%= number_with_precision(implement.price, :precision => 0, :delimiter => '.') %></td>
 
-                              <td class="col-md-1">
-                                  <%= link_to edit_implement_path(implement) do %>
-                                    <i class="fa fa-2x fa-edit"></i>
-                                  <% end %>
-                                  <%= link_to implement, method: :delete, data: { confirm: 'Are you sure?' }  do%>
-                                    <i class="fa fa-2x fa-minus"></i>
-                                  <% end %>
-                              </td>
-                          </tr>
-                        <% end %>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-<br>
+                     <td class="text-right data-icons">                     
+                         <%= link_to edit_implement_path(implement), class: "btn btn-primary btn-sm" do %>
+                           <i class="fa fa-1x fa-pencil"></i>
+                          <% end %>   
+                          <a type="button" class="btn btn-primary delete btn-sm" data-toggle="modal" data-id="<%= implement.id %>"><i class="fa fa-1x fa-trash"></i></a>                       
+                      </td>
+                  </tr>
+                 <% end %>
+             </tbody>
+         </table>
+     </div>
+ </div>
+ <input type="hidden" id="controller" value="<%=controller_name%>">

@@ -3,6 +3,13 @@
     <%= form_for(@type_of_crop,html: {class: 'form-horizontal',id:'form_type_of_crops', remote:true}) do |f| %>
       <div class="col-xs-12 col-lg-8 col-sm-12">
 
+          <div class="form-group">  
+              <%= f.label :code,"Código",class: "control-label col-sm-2" %>
+               <div class="col-xs-12 col-md-12 col-sm-12 col-lg-4">
+                   <%= f.text_field :code,autofocus: true , class: "form-control ", onkeyup: "this.value=this.value.toUpperCase()", :maxlength => "4", :readonly => "readonly"%>
+                    <div class="help-block  with-errors"> <%= f.object.errors[:code].to_sentence if f.object.errors[:code] %></div>
+                </div>
+            </div>
             <div class="form-group">  
                 <%= f.label :name,"Nombre:",class: "control-label col-sm-2" %>
                  <div class="col-xs-12 col-md-12 col-sm-12 col-lg-8">
@@ -20,9 +27,8 @@
 
                 <%= render('layouts/error_lists')%>
 
-                <div class="text-center">                                                              
-                    <%= render('layouts/buttons')%>
-                </div>
+                <%= render('layouts/buttons')%>
+
 
             </div>
             <input type="hidden" id="controller" value="<%= controller_name%>">

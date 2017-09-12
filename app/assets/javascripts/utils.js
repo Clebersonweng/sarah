@@ -2,37 +2,57 @@ var controlador;
 var _id;
 $(document).ready(function ()
 {
-   if(typeof controlador == "undefined")
+  if (typeof controlador == "undefined")
   {
     alert("variable controlador no declarada");
   }
-  
+  confirm_modal();
   $('.only_numbers').valida_sarah('0123456789');
   $('.only_letters').valida_sarah('azAZ ');
   $(".pull-left.pagination-detail").hide();
- 
-  $(document).on('click', '.pull-right.pagination', {}, function (e) {  
+
+  $(document).on('click', '.pull-right.pagination', {}, function (e) {
     confirm_modal();
   });
 
-});
+  $("#buscar").on("keyup", function ()
+  {
+    confirm_modal();
+  });
 
+  NProgress.configure({
+    showSpinner: false,
+    ease: 'ease',
+    speed: 500
+  });
+
+  $(".upper_text").on('keyup', function (e) {
+    if (e.which >= 97 && e.which <= 122) {
+      var newKey = e.which - 32;
+      // I have tried setting those
+      e.keyCode = newKey;
+      e.charCode = newKey;
+    }
+    $(this).val(($(this).val()).toUpperCase());
+  });
+  
+});
 function confirm_modal()
 {
   $(".delete").on("click", function () {
     _id = $(this).data('id');
     dataConfirmModal.confirm({
-                                  title: 'Eliminar un registro?',
-                                  text: 'Está seguro que desea eliminar un registro?',
-                                  commit: 'Eliminar',
-                                  cancel: 'Salir',
-                                  zindex: 1055,
-                                  onConfirm: function () {
-                                                            delete_modal(controlador, _id);
-                                                          },
-                                  onCancel: function ()  {
-                                                         }
-                              });
+      title: 'Eliminar un registro?',
+      text: 'Está seguro que desea eliminar un registro?',
+      commit: 'Eliminar',
+      cancel: 'Salir',
+      zindex: 1055,
+      onConfirm: function () {
+        delete_modal(controlador, _id);
+      },
+      onCancel: function () {
+      }
+    });
   });
 
 }
@@ -80,8 +100,7 @@ function alert_sarah(contenido, classe, time)
   setTimeout(function ()
   {
     $('#alerta').addClass("hide").removeClass("alert-" + classe);
-  }
-  , time);
+  }, time);
 
 }
 /**************funcion para validar datos como acentos etc***************/
@@ -122,10 +141,10 @@ function validate_generic_form(sufixe)
     }
   });
 
-  $('#btn_cancel_'+ sufixe).on('click', function (e) {
+  $('#btn_cancel_' + sufixe).on('click', function (e) {
     e.preventDefault();
     //$("#form_" + sufixe)[0].reset();
-   // $('#form_' + sufixe).data('bootstrapValidator').resetForm();
+    // $('#form_' + sufixe).data('bootstrapValidator').resetForm();
   });
 }
 
@@ -136,6 +155,7 @@ function generic_response_form(sufixe) {
     $("#form_" + sufixe)[0].reset();
     $("#form_" + sufixe).data('bootstrapValidator').resetForm();
     $("#errors").hide();
+    $('input:visible:enabled:first').focus();
   });
 
   $(document).on('ajax:error', 'form#form_' + sufixe, function (event, jqxhr, settings, exception) {
@@ -156,6 +176,7 @@ function add_errors(id)
   $("#gr_" + id).removeClass("has-success");
 
 }
+
 function reset_errors(id)
 {
   $("#gr_" + id).removeClass("has-error");

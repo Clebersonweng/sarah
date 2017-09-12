@@ -1,87 +1,66 @@
+<div class="panel-body">
+    <%=form_for @implement, url: implements_path,:html => { class: 'form-horizontal' } do |f| %>
+      <div class="col-xs-12 col-lg-8 col-sm-12">
 
-  <% if implement.errors.any? %>
-    <div id="error_explanation">
-        <h2><%= pluralize(implement.errors.count, "error") %> prohibited this man_power from being saved:</h2>
-
-        <ul>
-            <% implement.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-        </ul>
-    </div>
-  <% end %>
-</br>
-<div class="row">
-    <div class="col-sm-12">
-        <div class="panel panel-default">
-            <div class="panel-heading"><h3 align="center">Implements</h3>
-                <%=render 'layouts/submenu' %>
+          <div class="form-group">
+              <%= f.label :name,"Nombre :" ,class: "control-label col-sm-2"%>
+               <div class="col-sm-5">
+                   <%= f.text_field :name, autofocus: true , class: "form-control"%>
+                </div>
             </div>
 
-            <div class="panel-body">
-                <%=form_for @implement, url: implements_path,:html => { class: 'form-horizontal' } do |f| %>
-                    <div class="col-sm-6 col-sm-offset-2">
+            <div class="form-group">
+                <%= f.label :brand, "Marca :" ,class: "control-label col-sm-2"%>
+                 <div class="col-sm-4">
+                     <%= f.text_field :brand, autofocus: true , class: "form-control"%>
+                  </div>
+              </div>
 
-                        <div class="form-group">
-                            <%= f.label :name ,class: "control-label col-sm-2 col-sm-offset-1"%>
-                              <div class="col-sm-5">
-                                  <%= f.text_field :name, autofocus: true , class: "form-control"%>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <%= f.label :brand ,class: "control-label col-sm-2 col-sm-offset-1"%>
-                                  <div class="col-sm-5">
-                                      <%= f.text_field :brand, autofocus: true , class: "form-control"%>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <%= f.label :model ,class: "control-label col-sm-2 col-sm-offset-1"%>
-                                      <div class="col-sm-5">
-                                          <%= f.text_field :model, autofocus: true , class: "form-control"%>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <%= f.label "Time Operative" ,class: "control-label col-sm-2 col-sm-offset-1"%>
-                                          <div class="col-sm-5">
-                                              <%= f.text_field :oper_time, autofocus: true , class: "form-control"%>
-                                            </div>
-                                         <a href="#" class="btn btn-default" id="openBtn">Calculate</a>
-                                        </div>
-                                        <div class="form-group">
-                                            <%= f.label :machine_id ,class: "control-label col-sm-2 col-sm-offset-1"%>
-                                              <div class="col-sm-5">
-                                                  <%= f.select(:machine_id, options_for_select(@machines, :selected => f.object.machine_id),:class => "form-control", :include_blank => true) %>
-                            
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <%= f.label "Coef_Maint." ,class: "control-label col-sm-2 col-sm-offset-1"%>
-                                                  <div class="col-sm-5">
-                                                      <%= f.text_field :coef_cccr, autofocus: true , class: "form-control"%>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <%= f.label :year ,class: "control-label col-sm-2 col-sm-offset-1"%>
-                                                      <div class="col-sm-5">
-                                                          <%= f.text_field :year, autofocus: true , class: "form-control"%>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <%= f.label :price ,class: "control-label col-sm-2 col-sm-offset-1"%>
-                                                          <div class="col-sm-5">
-                                                              <%= f.text_field :price, autofocus: true , class: "form-control"%>
-                                                            </div>
-                                                        </div>
-                                                        <div class="control-group col-sm-offset-4">
+              <div class="form-group">
+                  <%= f.label :model, "Modelo :" ,class: "control-label col-sm-2"%>
+                   <div class="col-sm-4">
+                       <%= f.text_field :model, autofocus: true , class: "form-control"%>
+                    </div>
+                </div>
+          
+                <div class="form-group">
+                    <%= f.label "Tiempo Operativo :" ,class: "control-label col-sm-2"%>
+                     <div class="col-sm-2">
+                         <%= f.text_field :oper_time, autofocus: true , class: "form-control"%>
+                      </div>                   
+                      <a href="#" class="btn btn-default col-xs-offset-2 col-lg-offset-0" id="openBtn"><i class="fa fa-calculator" aria-hidden="true"></i> Calcular</a>
+                  </div>
 
-                                                            <div class="form-group controls">
-                                                                <button type="submit" class="btn btn-primary">Save</button>
-                                                                <button type="reset" class="btn btn-danger">Cancel</button>
-                                                            </div>
+                  <div class="form-group">
+                      <%= f.label :machine_id,"Máquina :" ,class: "control-label col-sm-2"%>
+                       <div class="col-sm-3">
+                           <%= f.select :machine_id, options_for_select(@machines, f.object.machine_id), {}, { :class => 'form-control', :required => true }%>
+                       </div>
+                   </div>
 
-                                                        </div></div>
-                                                  <% end %>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
+                   <div class="form-group">
+                       <%= f.label :coef_cccr, "Coef. de Consumo :" ,class: "control-label col-sm-2"%>
+                        <div class="col-sm-2">
+                            <%= f.text_field :coef_cccr, autofocus: true , class: "form-control"%>
+                         </div>
+                     </div>
+
+                     <div class="form-group">
+                         <%= f.label :year, "Ano" ,class: "control-label col-sm-2"%>
+                          <div class="col-sm-1">
+                              <%= f.text_field :year, autofocus: true , class: "form-control"%>
+                           </div>
+                       </div>
+
+                       <div class="form-group">
+                           <%= f.label :price, "Precio :" ,class: "control-label col-sm-2"%>
+                            <div class="col-sm-3">
+                                <%= f.text_field :price, autofocus: true , class: "form-control"%>
+                             </div>
+                         </div>
+
+                         <%= render('layouts/buttons')%>
+                     </div>
+                    <% end %>
+                </div>
+                <input type="hidden" id="controller" value="<%=controller_name%>">

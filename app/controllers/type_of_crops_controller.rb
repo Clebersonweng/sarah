@@ -7,7 +7,6 @@ class TypeOfCropsController < ApplicationController
   # GET /type_of_crops.json
   def index
     @type_of_crops = TypeOfCrop.all
-    @controller_name = "Tipo de cultivo" 
   end
 
   # GET /type_of_crops/1
@@ -41,7 +40,7 @@ class TypeOfCropsController < ApplicationController
 
     if @type_of_crop.save
       #format.html { redirect_to @product, notice: 'Supply was successfully created.' }
-      render json: { contenido: @type_of_crop, location: product_url(@type_of_crop),result: :ok },status: 200
+      render json: { contenido: @type_of_crop, location: type_of_crop_url(@type_of_crop),result: :ok },status: 200
     else
       #format.html { render :new }
       render json:  @type_of_crop.errors, status: :unprocessable_entity 
@@ -60,14 +59,11 @@ class TypeOfCropsController < ApplicationController
     @type_of_crop.code = @code;
     @type_of_crop.name = @name;
     @type_of_crop.variety = @variety
-    respond_to do |format|
-      if @type_of_crop.save
-        flash[:notice] = "Se guardo exitosamente."
-        format.html { redirect_to  action:"index"}
-      else
-        flash[:alert] = "Ocurrio un error al guardar"
-        format.html { redirect_to  action:"edit"}
-      end
+    
+    if @type_of_crop.save
+      render json: { contenido: @type_of_crop, location: product_url(@type_of_crop),result: :ok },status: 200
+    else
+      render json:  @type_of_crop.errors, status: :unprocessable_entity 
     end
   end
   
@@ -78,14 +74,8 @@ class TypeOfCropsController < ApplicationController
     
     respond_to do |format|
       if @type_of_crop.destroy
-        #format.html { redirect_to @type_of_crop, notice: 'Se actualizo exitosamente!' }        
-        #res = 1
-        #format.json  { render :json => res }
-        #format.json { status: :created, location: @type_of_crop }
         format.js
       else
-        #res = 0
-        #format.json  { render :json => res }
         format.js
       end
     end  

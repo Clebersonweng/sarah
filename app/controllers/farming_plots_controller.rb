@@ -52,18 +52,19 @@ class FarmingPlotsController < ApplicationController
   # DELETE /farming_plots/1
   # DELETE /farming_plots/1.json
   def destroy
-    @farming_plot = FarmingPlot.find(params[:id])  
+    @farming_plot = TypeOfCrop.find(params[:id]) 
+    
     respond_to do |format|
-      if(@farming_plot.destroy)      
-        format.json { head :no_content, message:"Registro eliminado existosamente.", response:"ok" }
+      if @farming_plot.destroy
+        format.js
       else
-        format.json { head :no_content, message:"Ocurrió un error al eliminar.",response:"error"}
+        format.js
       end
-    end
+    end 
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
+ 
   def set_farming_plot
     @farming_plot = FarmingPlot.find(params[:id])
   end

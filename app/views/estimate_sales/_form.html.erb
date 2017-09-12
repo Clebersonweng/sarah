@@ -78,9 +78,9 @@
                      <span class="help-block"> <%= f.object.errors[:gross_sale].to_sentence if f.object.errors[:gross_sale] %></span>
                  </div>
 
-                 <div class="text-center">                                                              
-                     <%= render('layouts/buttons')%>                          
-                 </div>
+                  <%= render('layouts/error_lists')%>
+
+                <%= render('layouts/buttons')%>
                 <%end%>
             </div>
         </div>

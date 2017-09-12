@@ -1,16 +1,9 @@
 $(document).ready(function ()
 {
-  
+
   controlador = $("#controller").val();
-  
-  validate_generic_form(controlador);
   generic_response_form(controlador);
   form_type_of_crops_validates();
-  
-  $("#buscar").on("keyup", function ()
-  {
-    confirm_modal();
-  });
 
 });
 
@@ -48,6 +41,6 @@ function form_type_of_crops_validates()
     }
   }).on('change', 'form', function (e) {
     e.preventDefault();
-     //$("#form_products").bootstrapValidator('revalidateField', 'investments');
+    //$("#form_products").bootstrapValidator('revalidateField', 'investments');
   });
 }
