@@ -1,51 +1,47 @@
+
 $(document).ready(function ()
 {
-  controlador = $("#controller").val();   
+
+  controlador = $("#controller").val();
   generic_response_form(controlador);
-  form_farming_plots_validates();
+  form_type_of_services_validates();
+  
+  //md_popover("machine_consumption","Coef consumo lt/hs","Aprox. 0,16% * hp ");
+  //md_popover("machine_time_oper","","Si maquinária es pulverizador</br> autopropulsado");
+  
 });
 
-
-function form_farming_plots_validates()
+function form_type_of_services_validates()
 {
-  $('#form_farming_plots').bootstrapValidator({
-    excluded: [':disabled', ':hidden', ':not(:visible)'],
+  $('#form_type_of_services').bootstrapValidator({
+    framework: 'bootstrap',
+    icon: {
+      valid: 'glyphicon glyphicon-ok',
+      invalid: 'glyphicon glyphicon-remove',
+      validating: 'glyphicon glyphicon-refresh'
+    },
     fields: {
-      "farming_plot[name]": {
+      'type_of_service[price]': {
         validators: {
           notEmpty: {
             message: 'Este campo es obligatório'
-          },
-          regexp: {
-            regexp: /^[a-zA-Z0-9_ ]+$/,
-            message: 'El nombre debe consistir en caracteres alfanuméricos'
           }
         }
       },
-      "farming_plot[area]": {
+      'type_of_service[name]': {
         validators: {
           notEmpty: {
             message: 'Este campo es obligatório'
-          },
-          stringLength: {
-            min: 1,
-            max: 30,
-            message: 'El nombre no puede ser menor que 3 y mayor que 50 caracteres'
-          },
-          greaterThan: {
-            value: 1,
-            message: 'El campo debe contener un valor mayor que 0 !'
-          },
-          regexp: {
-            regexp: /^[0-9.]+$/,
-            message: 'El área debe consistir en números'
           }
         }
       },
-      "farming_plot[person_id]": {
+      'type_of_service[unit_of_measurement_id]': {
         validators: {
           notEmpty: {
             message: 'Este campo es obligatório'
+          },
+          verify_period: {
+            message: 'hay que verificar'
           }
         }
       }
@@ -65,3 +61,7 @@ function form_farming_plots_validates()
     //$("#form_products").bootstrapValidator('revalidateField', 'investments');
   });
 }
+
+
+/*
+*/

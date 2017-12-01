@@ -16,8 +16,8 @@ $(document).ready(function() {
                 "</tr>";
     };
 
-     function addNuevasFilas(type_service,amount, subtotal) {
-   $("#addFilas").append(
+    function addNuevasFilas(type_service,amount, subtotal) {
+      $("#addFilas").append(
         "<input type='text' size='20' name='cost_oper_machine_cont[cost_oper_machine_cont_details_attributes]["+count+"][type_of_service_id]' id='txt' value="+type_service+">"+
         "<input type='text' size='20' name='cost_oper_machine_cont[cost_oper_machine_cont_details_attributes]["+count+"][amount]' id='txt1' value="+amount+">"+
         "<input type='text' size='20' name='cost_oper_machine_cont[cost_oper_machine_cont_details_attributes]["+count+"][subtotal]' id='txt1' value="+subtotal+">"    

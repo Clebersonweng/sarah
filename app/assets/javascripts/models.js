@@ -1,20 +1,26 @@
 $(document).ready(function ()
 {
-  controlador = $("#controller").val();   
+
+  controlador = $("#controller").val();
   generic_response_form(controlador);
-  form_farming_plots_validates();
+  form_models_validates();
+//nameFormatter();
 });
 
-
-function form_farming_plots_validates()
+function form_models_validates()
 {
-  $('#form_farming_plots').bootstrapValidator({
+  $('#form_models').bootstrapValidator({
     excluded: [':disabled', ':hidden', ':not(:visible)'],
     fields: {
-      "farming_plot[name]": {
+      "model[name]": {
         validators: {
           notEmpty: {
             message: 'Este campo es obligatório'
+          },
+          stringLength: {
+            min: 3,
+            max: 30,
+            message: 'El nombre no puede ser menor que 3 y mayor que 30 caracteres'
           },
           regexp: {
             regexp: /^[a-zA-Z0-9_ ]+$/,
@@ -22,27 +28,7 @@ function form_farming_plots_validates()
           }
         }
       },
-      "farming_plot[area]": {
-        validators: {
-          notEmpty: {
-            message: 'Este campo es obligatório'
-          },
-          stringLength: {
-            min: 1,
-            max: 30,
-            message: 'El nombre no puede ser menor que 3 y mayor que 50 caracteres'
-          },
-          greaterThan: {
-            value: 1,
-            message: 'El campo debe contener un valor mayor que 0 !'
-          },
-          regexp: {
-            regexp: /^[0-9.]+$/,
-            message: 'El área debe consistir en números'
-          }
-        }
-      },
-      "farming_plot[person_id]": {
+      "model[brand_id]": {
         validators: {
           notEmpty: {
             message: 'Este campo es obligatório'
@@ -62,6 +48,11 @@ function form_farming_plots_validates()
     }
   }).on('change', 'form', function (e) {
     e.preventDefault();
-    //$("#form_products").bootstrapValidator('revalidateField', 'investments');
   });
 }
+
+/*function nameFormatter(value, row) {
+        var icon = row % 2 === 0 ? 'glyphicon-star' : 'glyphicon-star-empty'
+        return '<i class="glyphicon ' + icon + '"></i> ' + value;
+    }
+*/
