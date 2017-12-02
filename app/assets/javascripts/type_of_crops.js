@@ -4,6 +4,10 @@ $(document).ready(function ()
   controlador = $("#controller").val();
   generic_response_form(controlador);
   form_type_of_crops_validates();
+<<<<<<< HEAD
+=======
+
+>>>>>>> products
 });
 
 function form_type_of_crops_validates()
@@ -43,4 +47,7 @@ function form_type_of_crops_validates()
     //$("#form_products").bootstrapValidator('revalidateField', 'investments');
   });
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> products

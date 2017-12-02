@@ -1,42 +1,40 @@
+<div class="panel-body">
+    <div class="table-responsive">
+        <table data-toggle="table" data-url="product"  data-show-refresh="false" data-show-toggle="false" data-show-columns="true" data-search="true" data-select-item-name="maker" data-pagination="true" data-sort-name="maker" data-sort-order="desc">
+            <thead>
+                <tr>
+                    <th data-field="tradename"  data-sortable="true">Nombre comercial</th>
+                    <th data-field="maker" >Marca</th> 
+                    <th data-field="unit_of_measurement" >U.M</th>                    
+                    <th data-field="price"> Precio</th>
+                    <th data-field="dosage" >Dosis</th>
+                    <th data-field="cost_per_hectare" >Costo por ha</th>
+                    <th data-field="description" >Descripción</th>
+                    <th class="text-right">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @products.each do |product| %>
+                 <tr>
+                     <td><%= product.tradename%></td>
+                     <td><%= product.maker%></td>
+                     <td><%= product.unit_of_measurement.abbreviation%></td>                    
+                     <td><%= number_to_currency product.price%></td>
+                     <td><%= product.dosage%></td>
+                     <td><%= number_to_currency product.cost_per_hectare%></td>
+                     <td><%= product.description%></td>
+                     <td class="text-right">                     
+                         <%= link_to edit_product_path(product), class: "btn btn-primary btn-sm" do %>
+                           <i class="fa fa-1x fa-pencil"></i>
+                          <% end %>                            
+                          <a type="button" id="" data-id="<%= product.id %>" class="btn btn-primary btn-sm delete" data-loading-text="Loading...">
+                              <i class="fa fa-1x fa-trash"></i>
+                          </a>                     
+                      </td>
+                  </tr>
+                 <% end %>
+             </tbody>
+         </table>
+     </div>
+ </div>
 
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-heading"><h3 align="center">Products</h3>
-                <%=render 'layouts/submenu' %>
-            </div>
-            <div class="panel-body">
-                <table data-toggle="table" data-url="supply"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="tradename" data-sort-order="desc">
-                    <thead>
-                        <tr>
-                            <th data-field="id" data-sortable="true" data-checkbox="true">Item ID</th>
-                            <th data-field="maker" >Maker</th> 
-                            <th data-field="unit_of_measurement" >U.M</th>                            
-                            <th data-field="tradename"  data-sortable="true">Tradename</th>
-                            <th data-field="price" data-sortable="true"> Price</th>
-                            <th data-field="dosage" >Dosage</th>
-                            <th data-field="cost_per_hectare" >Cost per hectare</th>
-                            <th data-field="description" >Description</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% @products.each do |product| %>
-                          <tr>
-                              <td><%= product.id%></td>
-                             
-                              <td><%= product.unit_of_measurement.abbreviation%></td>
-                              <td><%= product.tradename%></td>
-                              <td><%= number_to_currency product.price%></td>
-                              <td><%= product.dosage%></td>
-                              <td><%= number_to_currency product.cost_per_hectare%></td>
-                              <td><%= product.description%></td>
-
-                          </tr>
-                        <% end %>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>

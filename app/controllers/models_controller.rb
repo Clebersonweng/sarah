@@ -31,10 +31,8 @@ class ModelsController < ApplicationController
 
     respond_to do |format|
       if @model.save
-        format.html { redirect_to @model, notice: 'Model was successfully created.' }
-        format.json { render :show, status: :created, location: @model }
+        format.json { redirect_to  action:"index", status: :created, location: @model }
       else
-        format.html { render :new }
         format.json { render json: @model.errors, status: :unprocessable_entity }
       end
     end
@@ -44,14 +42,10 @@ class ModelsController < ApplicationController
   # PATCH/PUT /models/1.json
   def update
     get_params_model
-    respond_to do |format|
-      if @model.update(model_params)
-        format.html { redirect_to @model, notice: 'Model was successfully updated.' }
-        format.json { render :show, status: :ok, location: @model }
-      else
-        format.html { render :edit }
-        format.json { render json: @model.errors, status: :unprocessable_entity }
-      end
+     if @model.update(farming_plot_params)
+      render json: { contenido: @model, location: farming_plot_url(@model),result: :ok },status: 200
+    else
+      render json:  @model.errors, status: :unprocessable_entity   
     end
   end
 
@@ -59,12 +53,15 @@ class ModelsController < ApplicationController
   # DELETE /models/1.json
   def destroy
     get_params_model
-    @model = Model.find(params[:id])
-    @model.destroy
+    @model = TypeOfCrop.find(params[:id]) 
+    
     respond_to do |format|
-      format.html { redirect_to models_url, notice: 'Model was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+      if @model.destroy
+        format.js
+      else
+        format.js
+      end
+    end 
   end
 
   private
@@ -77,6 +74,7 @@ class ModelsController < ApplicationController
   def model_params
     params.require(:model).permit(:name,:brand_id, :description)
   end
+  
   def get_params_model
     @brands = Brand.all.collect{|type| [type.name, type.id]}
   end

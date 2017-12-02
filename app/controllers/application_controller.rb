@@ -12,21 +12,9 @@ class ApplicationController < ActionController::Base
     layout :layout_by_resource
     respond_to :html, :json
     responders :flash
-  
     
     
     
-    
-    
-    #######################################################################
-    protected
-    def layout_by_resource
-      if devise_controller?
-        "login"
-      else
-        "bootstrap"
-      end
-    end
     #######################################################################
     def configure_devise_permitted_parameters
       registration_params = [:own_machine, :role_id, :email, :password, :password_confirmation]
@@ -46,6 +34,15 @@ class ApplicationController < ActionController::Base
       root_path
     end
     
+    #######################################################################
+    protected
+    def layout_by_resource
+      if devise_controller?
+        "login"
+      else
+        "bootstrap"
+      end
+    end
     
     private
 

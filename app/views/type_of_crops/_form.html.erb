@@ -1,46 +1,38 @@
 
 <div class="panel-body">
-    <%= form_for(@type_of_crop,html: {class: 'form-horizontal',id:'form_type_of_crop'}) do |f| %>
-        <div class="col-sm-6 col-xs-10">
-            <div class="form-group">  
-                <%= f.label :code,"Código",class: "control-label col-sm-2" %>
-                  <div class="col-sm-4">
-                      <%= f.text_field :code,autofocus: true , class: "form-control ", :maxlength => "7", :required => false, readonly:"true" %>
-                        <div class="help-block"> <%= f.object.errors[:code].to_sentence if f.object.errors[:code] %></div>
-                        <div class="help-block with-errors"></div>
-                    </div>
+    <%= form_for(@type_of_crop,html: {class: 'form-horizontal',id:'form_type_of_crops', remote:true}) do |f| %>
+      <div class="col-xs-12 col-lg-8 col-sm-12">
+
+          <div class="form-group">  
+              <%= f.label :code,"Código",class: "control-label col-sm-2" %>
+               <div class="col-xs-12 col-md-12 col-sm-12 col-lg-4">
+                   <%= f.text_field :code,autofocus: true , class: "form-control ", onkeyup: "this.value=this.value.toUpperCase()", :maxlength => "4", :readonly => "readonly"%>
+                    <div class="help-block  with-errors"> <%= f.object.errors[:code].to_sentence if f.object.errors[:code] %></div>
                 </div>
+            </div>
             <div class="form-group">  
-                 <%= f.label :name,"Nombre",class: "control-label col-sm-2" %>
-                <div class="col-sm-4">
-                    <%= f.text_field :name,autofocus: true , class: "form-control " ,onkeyup: "this.value=this.value.toUpperCase()", :maxlength => "20", :required => true %>
+                <%= f.label :name,"Nombre:",class: "control-label col-sm-2" %>
+                 <div class="col-xs-12 col-md-12 col-sm-12 col-lg-8">
+                     <%= f.text_field :name,autofocus: true , class: "form-control ", onkeyup: "this.value=this.value.toUpperCase()", :maxlength => "20", :required => true %>
                       <div class="help-block  with-errors"> <%= f.object.errors[:name].to_sentence if f.object.errors[:name] %></div>
                   </div>
               </div>
+
               <div class="form-group">  
                   <%= f.label :variety, "Variedad:",class: "control-label col-sm-2"  %>
-                    <div class="col-sm-4">                                         
-                        <%= f.text_area :variety,autofocus: true , class: "form-control"  %>                                                
-                      </div>
-              </div>
-                  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-lg-offset-2">                                                              
-                      <% if controller.action_name == "edit" ||  controller.action_name == "update" %>
-                        <%= link_to "../../type_of_crops", :controller => "type_of_crops", :action => "index", :type => "button", :class =>"btn btn-danger" do  %>                              
-                          Cancelar                       
-                        <%end%>  
-                      <%else%>
-                        <button type="reset" id="cancelar" class="btn btn-danger btn-space" >Cancelar</button>
+                   <div class="col-xs-12 col-md-12 col-sm-12 col-lg-8">                                         
+                       <%= f.text_area :variety,autofocus: true , class: "form-control"  %>                                                
+                    </div>
+                </div>
 
-                      <% end%>
-                      <% if controller.action_name == "new"  ||  controller.action_name == "create"%>
-                        <button type="submit" name="submitButton"  id="submitButton" class="btn btn-primary bv-hidden-submit">Guardar</button>
-                      <%else%>
-                        <button type="submit" name="submitButton" id="submitButton" class="btn btn-primary bv-hidden-submit">Actualizar</button>
-                      <% end%>                           
-                  </div>
-              </div>
+                <%= render('layouts/error_lists')%>
 
-            <% end %>
+                <%= render('layouts/buttons')%>
+
+
             </div>
+            <input type="hidden" id="controller" value="<%= controller_name%>">
+           <% end %>
+       </div>
 
 

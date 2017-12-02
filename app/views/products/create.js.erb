@@ -1,0 +1,17 @@
+$(document).ready(function ()
+{
+  $("#form_products")
+    .bind("ajax:loading",  toggleLoading)
+    .bind("ajax:complete", toggleLoading)
+    .bind("ajax:success", function(event, data, status, xhr) {
+      alert_sarah("El registro fue realizado con exito","success");
+      console.log(data);
+      console.log(status);
+      console.log(xhr);
+    });
+
+
+console.log("<%= @product %>");
+console.log("<%= @product['result'] %>");
+  
+});

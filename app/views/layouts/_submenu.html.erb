@@ -1,18 +1,8 @@
 <ul class="nav nav-tabs responsive tabs_sarah ">
     <li id="submenu_index" >      
-    <a href="../../<%=controller_name%>" class="tabs_sarah">Listar</a>        
+    <a href="../../<%=controller_name%>" class="tabs_sarah"><i class="fa fa-list-ul fa-lg" aria-hidden="true"></i> Listar</a>        
       </li>
     <li id="submenu_new">
-       <a href="../<%=controller_name%>/new" class="tabs_sarah">Crear</a>      
+       <a href="../<%=controller_name%>/new" class="tabs_sarah" data-turbolinks-action="replace"><i class="fa fa-plus-square fa-lg" aria-hidden="true"></i> Agregar</a>      
     </li>
 </ul>
-
-<!-- js para activar/desactivar submenu -->
-<script>
-    var actionName = "<%=controller.action_name %>";
-    if(actionName === "index"){
-        $("#submenu_index").addClass("active");       
-    }else if(actionName === "new" || actionName === "create"){
-        $("#submenu_new").addClass("active");
-    }
-</script>

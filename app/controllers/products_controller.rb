@@ -16,33 +16,37 @@ class ProductsController < ApplicationController
 
   # GET /supplies/new
   def new
+    get_selects
     @product = Product.new
-    @unit_of_measurement = UnitOfMeasurement.all.collect{|type| [type.name, type.id]}
   end
 
   # GET /supplies/1/edit
   def edit
+    @titulo = "<h2>Productos<h2>"
   end
 
   # POST /supplies
   # POST /supplies.json
   def create
+    get_selects
     @product = Product.new(supply_params)
 
-    respond_to do |format|
-      if @product.save
-        format.html { redirect_to @product, notice: 'Supply was successfully created.' }
-        format.json { render :show, status: :created, location: @product }
-      else
-        format.html { render :new }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
-      end
+    if @product.save
+      #format.html { redirect_to @product, notice: 'Supply was successfully created.' }
+      render json: { contenido: @product, location: product_url(@product),result: :ok },status: 200
+    else
+      #format.html { render :new }
+      #format.json { render json: @product.errors, status: :unprocessable_entity }
+      render json:  @product.errors, status: :unprocessable_entity 
+      #format.js { render layout: false, content_type: 'text/javascript' }
+      
     end
   end
 
   # PATCH/PUT /supplies/1
   # PATCH/PUT /supplies/1.json
   def update
+    get_selects
     respond_to do |format|
       if @product.update(supply_params)
         format.html { redirect_to @product, notice: 'Supply was successfully updated.' }
@@ -74,5 +78,8 @@ class ProductsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def supply_params
     params.require(:product).permit(:maker, :unit_of_measurement_id, :tradename, :price, :dosage, :cost_per_hectare, :description)
+  end
+  def get_selects
+    @unit_of_measurement = UnitOfMeasurement.all.collect{|type| [type.name, type.id]}
   end
 end

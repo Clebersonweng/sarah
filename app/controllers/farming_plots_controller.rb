@@ -6,10 +6,6 @@ class FarmingPlotsController < ApplicationController
   # GET /farming_plots.json
   def index
     @farming_plots = FarmingPlot.all
-    # respond_to do |format|
-    #  format.html
-    #  format.json { render :json => @farming_plots.to_json(:include => { :type_of_crop => { :only => :name } })}
-    #end
   end
 
   # GET /farming_plots/1
@@ -19,72 +15,65 @@ class FarmingPlotsController < ApplicationController
 
   # GET /farming_plots/new
   def new
-    get_params_plot
+    get_all
     @farming_plot = FarmingPlot.new
    
   end
 
   # GET /farming_plots/1/edit
   def edit
-    get_params_plot
+    get_all
   end
 
   # POST /farming_plots
   # POST /farming_plots.json
   def create
-    get_params_plot
+    get_all
     @farming_plot = FarmingPlot.new(farming_plot_params)
-
-    respond_to do |format|
-      if @farming_plot.save
-        flash[:notice] = "El registro fue creado exitosamente."
-        format.html { redirect_to  action:"index"}
-      else
-        format.html { render :new }
-        format.json { render json: @farming_plot.errors, status: :unprocessable_entity }
-      end
+    
+    if @farming_plot.save
+      render json: { contenido: @farming_plot, location: farming_plot_url(@farming_plot),result: :ok },status: 200
+    else
+      render json:  @farming_plot.errors, status: :unprocessable_entity 
     end
   end
 
   # PATCH/PUT /farming_plots/1
   # PATCH/PUT /farming_plots/1.json
   def update
-    get_params_plot
-    respond_to do |format|
-      if @farming_plot.update(farming_plot_params)
-        flash[:notice] = "Actualizado exitosamente."
-        format.html { redirect_to  action:"index"}
-      else
-        format.html { render :edit }
-        format.json { render json: @farming_plot.errors, status: :unprocessable_entity }
-      end
+    get_all   
+    if @farming_plot.update(farming_plot_params)
+      render json: { contenido: @farming_plot, location: farming_plot_url(@farming_plot),result: :ok },status: 200
+    else
+      render json:  @farming_plot.errors, status: :unprocessable_entity   
     end
   end
 
   # DELETE /farming_plots/1
   # DELETE /farming_plots/1.json
   def destroy
-     @farming_plot = FarmingPlot.find(params[:id])  
+    @farming_plot = TypeOfCrop.find(params[:id]) 
+    
     respond_to do |format|
-      if(@farming_plot.destroy)      
-        format.json { head :no_content, message:"Registro eliminado existosamente.", response:"ok" }
+      if @farming_plot.destroy
+        format.js
       else
-        format.json { head :no_content, message:"Ocurrió un error al eliminar.",response:"error"}
+        format.js
       end
-    end
+    end 
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
+ 
   def set_farming_plot
     @farming_plot = FarmingPlot.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def farming_plot_params
-    params.require(:farming_plot).permit(:code, :name, :area,:person_id ,:description)
+    params.require(:farming_plot).permit(:name, :area,:person_id ,:description)
   end
-  def get_params_plot
+  def get_all
     @type_of_crops = TypeOfCrop.all.collect { |type| [type.name, type.id]}
     @person = Person.all.collect { |type| [type.name, type.id]}
     @charts = ChartOfAccount.all.collect {|type| [type.name, type.id]}

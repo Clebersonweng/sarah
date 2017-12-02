@@ -19,6 +19,9 @@ class BrandsController < ApplicationController
 
   # GET /brands/1/edit
   def edit
+    @brand = Brand.find(params[:id]);
+    @name = @brand.name
+    @description = @brand.description
   end
 
   # POST /brands
@@ -26,40 +29,45 @@ class BrandsController < ApplicationController
   def create
     @brand = Brand.new(brand_params)
 
-    respond_to do |format|
-      if @brand.save
-        flash[:notice] = "Successfull be create"
-        format.html { redirect_to  action:"index"}
-      else
-        flash[:alert] = "Unsuccessfull be create"
-        format.html { redirect_to  action:"edit"}
-      end
+    if @brand.save
+      #format.html { redirect_to @product, notice: 'Supply was successfully created.' }
+      render json: { contenido: @brand, location: brand_url(@brands),result: :ok },status: 200
+    else
+      #format.html { render :new }
+      render json:  @brand.errors, status: :unprocessable_entity 
+      
     end
   end
 
   # PATCH/PUT /brands/1
   # PATCH/PUT /brands/1.json
   def update
-    respond_to do |format|
-      if @brand.update(brand_params)
-        format.html { redirect_to @brand, notice: 'Brand was successfully updated.' }
-        format.json { render :show, status: :ok, location: @brand }
-      else
-        format.html { render :edit }
-        format.json { render json: @brand.errors, status: :unprocessable_entity }
-      end
+    @name = params[:brand]["name"];
+    @description = params[:brand]["description"];
+   
+    @brand = Brand.find(params[:id]);
+    @brand.name = @name
+    @brand.description = @description
+    
+    if @brand.save
+      render json: { contenido: @brand,location: "window.location.pathname='#{brands_path}'",result: :ok },status: 200
+    else
+      render json:  @brand.errors, status: :unprocessable_entity 
     end
   end
 
   # DELETE /brands/1
   # DELETE /brands/1.json
   def destroy
-    @brand = Brand.find(params[:id])
-    @brand.destroy
+    @brand = Brand.find(params[:id]) 
+    
     respond_to do |format|
-      format.html { redirect_to brands_url, notice: 'Brand was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+      if @brand.destroy
+        format.js
+      else
+        format.js
+      end
+    end 
   end
 
   private

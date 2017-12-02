@@ -19,9 +19,12 @@
 //= require bootstrapValidator.min
 //= require_tree .
 //= require data-confirm-modal
+<<<<<<< HEAD
 
 //= require bootstrap-datepicker
 
+=======
+>>>>>>> products
 //= require nprogress
 //= require nprogress-turbolinks
 
