@@ -20,6 +20,8 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-   dates:
-    formats:
-      date_month_year_concise: '%Y-%m-%d'
+  date:
+    order:
+      - :day
+      - :month
+      - :year

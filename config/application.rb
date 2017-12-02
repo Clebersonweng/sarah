@@ -15,8 +15,11 @@ module Sarah
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
-    config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
-  "<div class=\"field_with_errors control-group error\">#{html_tag}</div>".html_safe
-}
+    config.action_view.field_error_proc = Proc.new {
+       |html_tag, instance| 
+      "<div class=\"field_with_errors control-group error\">#{html_tag}</div>".html_safe
+    }
+   # Time::DATE_FORMATS[:default] = "%d/%m/%Y %H:%M"
+     Date::DATE_FORMATS[:default] = "%d/%m/%Y"
   end
 end

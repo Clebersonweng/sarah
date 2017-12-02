@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170627015245) do
+ActiveRecord::Schema.define(version: 20171022195918) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,14 +120,14 @@ ActiveRecord::Schema.define(version: 20170627015245) do
   create_table "implements", force: :cascade do |t|
     t.string   "name"
     t.string   "model"
-    t.float    "oper_time"
     t.integer  "machine_id"
-    t.float    "coef_cccr"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.string   "brand"
-    t.date     "year"
+    t.string   "year"
     t.float    "price"
+    t.decimal  "coef_cccr",  precision: 15, scale: 10
+    t.decimal  "oper_time",  precision: 15, scale: 10
     t.index ["machine_id"], name: "index_implements_on_machine_id", using: :btree
   end
 
@@ -137,13 +137,13 @@ ActiveRecord::Schema.define(version: 20170627015245) do
     t.float    "hp"
     t.float    "consumption"
     t.float    "price"
-    t.date     "year_purchase"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string   "year_purchase"
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
     t.string   "name"
-    t.float    "coeficient_cccr"
-    t.string   "time_oper"
     t.integer  "fuel_id"
+    t.decimal  "coeficient_cccr", precision: 15, scale: 10
+    t.decimal  "time_oper",       precision: 15, scale: 10
     t.index ["brand_id"], name: "index_machines_on_brand_id", using: :btree
     t.index ["fuel_id"], name: "index_machines_on_fuel_id", using: :btree
     t.index ["model_id"], name: "index_machines_on_model_id", using: :btree
@@ -311,9 +311,10 @@ ActiveRecord::Schema.define(version: 20170627015245) do
   create_table "type_of_crops", force: :cascade do |t|
     t.string   "code"
     t.string   "name"
-    t.string   "variety"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "variety_id"
+    t.index ["variety_id"], name: "index_type_of_crops_on_variety_id", using: :btree
   end
 
   create_table "type_of_services", force: :cascade do |t|
@@ -362,6 +363,13 @@ ActiveRecord::Schema.define(version: 20170627015245) do
     t.index ["role_id"], name: "index_users_on_role_id", using: :btree
   end
 
+  create_table "varieties", force: :cascade do |t|
+    t.string   "code"
+    t.string   "descr"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "cost_oper_machine_cont_details", "type_of_services"
   add_foreign_key "cost_oper_machine_conts", "chart_of_accounts"
   add_foreign_key "cost_oper_machine_conts", "farming_plots"
@@ -396,5 +404,6 @@ ActiveRecord::Schema.define(version: 20170627015245) do
   add_foreign_key "supplies", "chart_of_accounts"
   add_foreign_key "supplies", "program_productions"
   add_foreign_key "supply_details", "products"
+  add_foreign_key "type_of_crops", "varieties"
   add_foreign_key "type_of_services", "unit_of_measurements"
 end
