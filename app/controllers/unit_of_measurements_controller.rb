@@ -69,11 +69,11 @@ class UnitOfMeasurementsController < ApplicationController
     @unit_of_measurement.variety = @coefficient
     respond_to do |format|
       if @unit_of_measurement.save
-        format.html { redirect_to @unit_of_measurements, notice: 'Unidad de medida actualizada con exito.' }
-        #format.json { render :show, status: :created, location: @stru_expense_det }
+        #format.html { redirect_to @unit_of_measurements, notice: 'Unidad de medida actualizada con exito.' }
+        format.json { render :show, status: :created, location: @unit_of_measurement }
       else
-        format.html { render :new }
-        #format.json { render json: @type_of_crop.errors, status: :unprocessable_entity }
+        #format.html { render :new }
+        format.json { render json: @unit_of_measurements.errors, status: :unprocessable_entity }
       end
     end
   end

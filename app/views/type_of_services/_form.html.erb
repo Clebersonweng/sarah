@@ -1,53 +1,41 @@
   <div class="panel-body">
-      <%= form_for(@type_of_service, html: {class: 'form-horizontal'}) do |f| %>
-          <div class="col-sm-6 col-xs-12">
+   <%= form_for(@type_of_service,html: {class: 'form-horizontal', id: "form_type_of_services", remote: true}) do |f| %>
+          <div class="col-sm-6 col-lg-8 col-lg-8">
               <div class="form-group">  
-                  <%= f.label :name,class: "control-label col-sm-1" %>
-                    <div class="col-sm-4">
+                  <%= f.label :name,"Nombre :",class: "control-label col-sm-3" %>
+                    <div class="col-sm-6">
                         <%= f.text_field :name,autofocus: true , class: "form-control " ,onblur: "this.value=this.value.toUpperCase()"  %>
                           <div class="help-block"> <%= f.object.errors[:name].to_sentence if f.object.errors[:name] %></div>
                       </div>
                   </div>
 
                   <div class="form-group">  
-                      <%= f.label :price,class: "control-label col-sm-1"  %>
-                        <div class="col-sm-4">                                         
+                      <%= f.label :price,"Precio :",class: "control-label col-sm-3"  %>
+                        <div class="col-sm-6">                                         
                             <%= f.text_field :price,autofocus: true , class: "form-control"  %>
                               <div class="help-block"> <%= f.object.errors[:price].to_sentence if f.object.errors[:price] %></div>
                           </div>
                       </div>
                       <div class="form-group">  
-                          <%= f.label "U M", class:"control-label col-sm-1"  %>
-                            <div class="col-sm-4">                                         
-                                <%= f.text_field :unit_of_measurement_id,autofocus: true , class: "form-control"  %> 
+                          <%= f.label "U M :", class:"control-label col-sm-3"  %>
+                            <div class="col-sm-6">                                         
+                                <%= f.select :unit_of_measurement_id, options_for_select(@unit_measurements, f.object.unit_of_measurement_id), {},
+                                      { :class => 'form-control', :required => true }%>
                                   <div class="help-block"> <%= f.object.errors[:unit_of_measurement_id].to_sentence if f.object.errors[:unit_of_measurement_id] %></div>
                               </div>
                           </div>
                           <div class="form-group">  
-                              <%= f.label "Descrip.",class: "control-label col-sm-1"  %>
-                                <div class="col-sm-4">                                         
-                                    <%= f.text_field :description,autofocus: true , class: "form-control"  %> 
+                              <%= f.label "Descripción :",class: "control-label col-sm-3"  %>
+                                <div class="col-sm-6">                                         
+                                    <%= f.text_area :description,autofocus: true , class: "form-control"  %> 
                                      <div class="help-block"> <%= f.object.errors[:description].to_sentence if f.object.errors[:description] %></div>
                                   </div>
-                              </div>
-
-                              <div class="col-sm-6 col-sm-offset-1">
-                                  <% if controller.action_name == "edit" ||  controller.action_name == "update" %>
-                                    <button type="reset" id="btn_cancel_crop"class="btn btn-danger btn-space" >Cancelar</button>
-                                  <%else%>
-                                    <button type="reset" class="btn btn-danger btn-space">Cancelar</button>
-                                  <% end%>
-                                  <% if controller.action_name == "new"  ||  controller.action_name == "create"%>
-                                    <button type="submit" class="btn btn-primary">Guardar</button>
-                                  <%else%>
-                                    <button type="submit" class="btn btn-primary">Actualizar</button>
-                                  <% end%>
-
-
-                              </div>
                           </div>
-                          <div class="col-sm-6 col-xs-6"></div>
+                          <%= render('layouts/error_lists')%>
+                          <%= render('layouts/buttons')%>
+        </div>
+                         
                         <% end %>
                     </div>
-
+<input type="hidden" id="controller" value="<%= controller_name%>">
 

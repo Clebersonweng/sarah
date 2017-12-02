@@ -1,0 +1,14 @@
+<div class="form-group">
+	<div class="col-lg-offset-2 col-sm-offset-2 col-md-offset-2 col-md-10 col-sm-10">
+	   <% if controller.action_name == "edit" %>
+	     <%= link_to "<i class='fa fa-trash-o' aria-hidden='true'></i>  Cancelar".html_safe, "../../#{controller_name}",:type => "button",:class =>"btn btn-sm btn-danger" %>
+
+	   <% else %>
+
+	     <%= link_to "<i class='fa fa-trash-o' aria-hidden='true'></i>  Cancelar".html_safe, "../#{controller_name}",:type => "button",:class =>"btn btn-sm btn-danger" %>
+	   <% end %>
+
+	   <%= link_to "<i class='fa fa-floppy-o' aria-hidden='true'></i>  Guardar".html_safe, "#",:type => "button",:class =>"btn btn-sm btn-success",:id => "btn_submit_#{controller_name}" %>
+
+	</div>
+</div>

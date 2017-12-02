@@ -18,15 +18,17 @@ class EstimateSale < ApplicationRecord
     full_periods
   end
   #["SELECT body FROM comments WHERE author = :user_id OR approved_by = :user_id", { :user_id => user_id }]
-  def self.validate_periods(farming_plot,date_init, date_end)
-    #EstimateSale.where(" date_init >= ? AND date_end <= ? AND farming_plot_id = ?",date_init, date_end,faming_plot)
-    EstimateSale.find_by_sql([ " SELECT id,name FROM type_of_crops AS crop
-                                  WHERE   crop.id NOT IN 
-                                  ( 
-                                     SELECT 
-                                     estimate_sales.type_of_crop_id 
-                                     FROM 
-                                     estimate_sales
+   def self.validate_periods(farming_plot,date_init, date_end)
+      #EstimateSale.where(" date_init >= ? AND date_end <= ? AND farming_plot_id = ?",date_init, date_end,faming_plot)
+      EstimateSale.find_by_sql([ " SELECT 
+                                    id,name FROM type_of_crops AS crop
+                                 WHERE   
+                                    crop.id NOT IN 
+                                    ( 
+                                        SELECT 
+                                        estimate_sales.type_of_crop_id 
+                                        FROM 
+                                        estimate_sales
                                      WHERE
                                     ((estimate_sales.date_init >=  '#{date_init}'  AND  estimate_sales.date_end <= '#{date_end}' )
                                     OR
@@ -37,7 +39,7 @@ class EstimateSale < ApplicationRecord
                                   )
                                 "])
                           
-  end
+   end
   
   def self.get_crops_not_exist_es()
     EstimateSale.find_by_sql ["

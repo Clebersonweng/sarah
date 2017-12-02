@@ -4,6 +4,7 @@ class TypeOfServicesController < ApplicationController
   # GET /type_of_services
   # GET /type_of_services.json
   def index
+    get_all
     @type_of_services = TypeOfService.all
   end
 
@@ -14,13 +15,13 @@ class TypeOfServicesController < ApplicationController
 
   # GET /type_of_services/new
   def new
-    get_type_service_params
+    get_all
     @type_of_service = TypeOfService.new
   end
 
   # GET /type_of_services/1/edit
   def edit
-    get_type_service_params
+    get_all
   end
 
   # POST /type_of_services
@@ -30,10 +31,10 @@ class TypeOfServicesController < ApplicationController
 
     respond_to do |format|
       if @type_of_service.save
-        format.html { redirect_to @type_of_service, notice: 'Type of service was successfully created.' }
+        #format.html { redirect_to @type_of_service, notice: 'Type of service was successfully created.' }
         format.json { render :show, status: :created, location: @type_of_service }
       else
-        format.html { render :new }
+        #format.html { render :new }
         format.json { render json: @type_of_service.errors, status: :unprocessable_entity }
       end
     end
@@ -44,10 +45,10 @@ class TypeOfServicesController < ApplicationController
   def update
     respond_to do |format|
       if @type_of_service.update(type_of_service_params)
-        format.html { redirect_to @type_of_service, notice: 'Type of service was successfully updated.' }
+       #format.html { redirect_to @type_of_service, notice: 'Type of service was successfully updated.' }
         format.json { render :show, status: :ok, location: @type_of_service }
       else
-        format.html { render :edit }
+        #format.html { render :edit }
         format.json { render json: @type_of_service.errors, status: :unprocessable_entity }
       end
     end
@@ -55,12 +56,26 @@ class TypeOfServicesController < ApplicationController
 
   # DELETE /type_of_services/1
   # DELETE /type_of_services/1.json
+ def check_rel(_id)
+    exist_relation = Model.where(:brand_id => _id)
+    return true if exist_relation.count == 0
+    false
+  end
+
   def destroy
-    @type_of_service.destroy
-    respond_to do |format|
-      format.html { redirect_to type_of_services_url, notice: 'Type of service was successfully destroyed.' }
-      format.json { head :no_content }
+    @type_of_service        = Brand.find(params[:id]) 
+    if check_rel(params[:id]) 
+        respond_to do |format|
+            if @type_of_service.destroy
+              format.js
+            else
+              render json: { contenido: @type_of_service, location: type_of_service_url(@type_of_service),message: :"no puede ser eliminado" },status: 400
+            end
+        end  
+    else
+      render json:  @type_of_service.errors, status: :bad_request 
     end
+
   end
 
   private
@@ -73,8 +88,11 @@ class TypeOfServicesController < ApplicationController
     def type_of_service_params
       params.require(:type_of_service).permit(:name, :price, :unit_of_measurement_id, :description)
     end
-    def get_type_service_params
+   
+    def get_all
+      @path = "tipo de servicio"
       @unit_measurements = UnitOfMeasurement.all.collect { |p| [ p.name, p.id ] }
+
     end
     
 end

@@ -1,23 +1,34 @@
 <div class="panel-body">
-    <table class="table  table-hover table-striped table-condensed display" data-url="brand" id="table_brand" data-toggle="table" data-search="true" data-toolbar="toolbar2" data-show-toggle="true" data-url="type_of_crops" data-show-refresh="false" data-pagination="true" onlyInfoPagination="false" data-sort-name="name" data-sort-order="desc">
+    <div class="table-responsive">
+          <table    data-width="100%"
+                    class="table  table-hover table-striped table-condensed display"
+                    data-toggle="table" 
+                    data-search="true" 
+                    data-toolbar="toolbar1"
+                    data-show-toggle="true"
+                    data-show-refresh="false"
+                    data-pagination="true"
+                    onlyInfoPagination="false"
+                    data-icons="icons"
+                    data-height="380"
+                    data-sort-name="name"
+                    data-sort-order="desc" 
+                    data-card-view="false">
         <thead>
             <tr>
-                <th data-field="name" style="width: 45%">Nombre</th> 
-                <th data-field="description" style="width: 45%">Descripción</th> 
-                <th class="text-right" style="width: 10%">Acción</th>
+                <th data-visible="true" class="hidden" data-field="id">Código</th>
+                <th class="col-xs-4 col-md-4 col-sm-4" data-sortable="true"  data-field="name">Nombre</th> 
+                <th class="col-xs-6 col-md-2 col-sm-2 col-lg-6" data-field="description">Descripción</th> 
+                <th data-halign="right" data-align="right" data-formatter="actionFormatter" data-events="actionEvents">Acción</th>
             </tr>
         </thead>
         <tbody>
             <% @brands.each do |brand| %>
-             <tr id="tr_<%= brand.id %>">
+             <tr>
+                 <td><%= brand.id%></td>
                  <td><%= brand.name%></td>
                  <td><%= brand.description %></td>
-                 <td class="text-right" >
-                     <%= link_to edit_brand_path(brand), class: "btn btn-primary btn-sm" do %>
-                       <i class="fa fa-1x fa-pencil"></i>
-                      <% end %>                            
-                      <a type="button" class="btn btn-primary delete btn-sm" data-toggle="modal" data-id="<%= brand.id %>"><i class="fa fa-1x fa-trash"></i></a>
-                  </td>
+                 
               </tr>
              <% end %>
          </tbody>

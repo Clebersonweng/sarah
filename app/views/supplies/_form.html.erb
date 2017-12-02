@@ -1,35 +1,100 @@
-<%= form_for(supply) do |f| %>
-  <% if supply.errors.any? %>
-    <div id="error_explanation">
-        <h2><%= pluralize(supply.errors.count, "error") %> prohibited this supply from being saved:</h2>
 
-        <ul>
-            <% supply.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-        </ul>
-    </div>
+    <% if supply.errors.any? %>
+      <div id="error_explanation">
+          <h2><%= pluralize(supply.errors.count, "error") %> prohibited this supply from being saved:</h2>
+
+          <ul>
+              <% supply.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+          </ul>
+      </div>
   <% end %>
 
-  <div class="field">
-      <%= f.label :program_production_id %>
-      <%@idUltimoPrograma%>
+  <div class="panel-body">
+        <%= form_for(@supply,html: {class: 'form-horizontal', id: "form_supplies", remote: true}) do |f| %>
+          <div class="col-xs-12 col-lg-12 col-sm-12">
 
-  </div>
+              <div class="form-group">
+                <%= f.label :program_production_id, "Parcela Agrícola :" ,class: "control-label col-sm-3"%>
+                  <div class="col-sm-4 col-lg-2 col-md-4">
+                      <input class="form-control" value="<%= @last_farming_plot %>" readonly/>
+                  </div>
+              </div>
+              <div class="form-group">
+                <%= f.label :program_production_id, "Area :" ,class: "control-label col-sm-3"%>
+                  <div class="col-sm-4 col-lg-2 col-md-4">
+                      <input class="form-control" id="farming_plot_area" name="farming_plot_area" value="<%= @farming_plot_area %>" readonly/>
+                  </div>
+              </div>
+              <div class="form-group">
+                <%= f.label :program_production_id, "Programa de Producción :" ,class: "control-label col-sm-3"%>
+                  <div class="col-sm-4 col-lg-2 col-md-4">
+                    <input class="form-control" value="<%= @last_program_production_id %>" type="hidden" name="supply[program_production_id]" id="supply_program_production_id" required/>
+                      <input class="form-control" value="<%= @last_program_production_total %>" readonly/>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <span class="col-md-1 control-label"></span>
+                  <div class="col-md-8">
+                      <div class="form-group row">
+                        <span class="col-md-1 control-label"></span>
+                          <label for="inputKey" class="col-md-2 control-label">Producto</label>
+                          <div class="col-md-3">
+                             <%= select("supply_detail", "product", @products, {include_blank: 'select the option'})%>
+                          </div>
+                            
+                            <div class="form-group col-xs-1 col-sm-1">   
+                               <a type='button' class="btn btn-default disabled" id="add_product" >ADD</a>
+                            </div>
+                  </div>
+              </div>
+                
+                  <table id="tb_suppy_detail" data-height="100">
+                    <thead>
+                        <tr>
+                            <th data-field="id">Código</th>
+                            <th data-field="product_id" data-footer-formatter="totalFormatter">Insumo</th>
+                            <th data-field="price">Precio</th>
+                            <th data-field="dosage">Dosis</th>
+                            <th data-field="quantity_need">Cantidad Necesária</th>
+                            <th data-halign='right' data-align='right' data-field="subtotal">Sub-total</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                  <tfoot><input name="supply[total]"/></tfoot>
+                </table>
+                
+              
+          </div>
+                
 
-  <div class="form-group">                   
-      <%= f.label :chart_of_account_id,class: "control-label col-sm-2 col-sm-offset-1" %>
-        <div class="col-sm-4">
-            <%= f.select(:chart_of_account_id, options_for_select(@charts),:class => "form-control", :include_blank => true) %>
-        </div> 
-    </div>
+              <div id="addRow"></div>
+            <%= render('layouts/buttons')%>
+          </div>  
+        <% end %>
+        <input type="hidden" id="controller" value="<%= controller_name%>">
+  </div>  
 
-    <div class="field">
-        <%= f.label :total %>
-        <%= f.text_field :total %>
-    </div>
 
-    <div class="actions">
-        <%= f.submit %>
-    </div>
-  <% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

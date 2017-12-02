@@ -1,73 +1,73 @@
+
+
 <div class="panel-body">
-    <%=@titulo%>
-    <%=form_for @product,url: products_path,:html => { role: :form, 'data-model' => 'product', class: 'form-horizontal',id: "form_products",remote: true} do |f| %>
-      <div class="col-lg-8 col-xs-12 col-sm-6">
+    <%= form_for( @product, html: {class: 'form-horizontal', id: 'form_products', remote:true}) do |f| %>
+          
+          <div class="col-lg-6 col-xs-12 col-sm-6">
 
-          <div class="form-group">                   
-              <%= f.label :maker,"Marca",class: "control-label col-sm-2" %>
-               <div class="col-xs-12 col-md-12 col-sm-12 col-lg-10">
-                   <%= f.text_field :maker,  autofocus: true , class: "form-control"  %>
-                    <span class="help-block"> <%= f.object.errors[:maker].to_sentence if f.object.errors[:maker] %></span>
+              <div class="form-group">                   
+                  <%= f.label :maker,"Marca :",class: "control-label col-sm-3" %>
+                   <div class="col-xs-12 col-md-4 col-sm-4 col-lg-8">
+                       <%= f.text_field :maker,  autofocus: true , class: "form-control upper_text" , :required => true %>
+                        <span class="help-block"> <%= f.object.errors[:maker].to_sentence if f.object.errors[:maker] %></span>
+                    </div> 
+              </div>       
+
+              <div class="form-group">                   
+                <%= f.label :tradename,"Nombre comercial :",class: "control-label col-sm-3"%>
+                <div class="col-xs-12 col-md-4 col-sm-4 col-lg-8">
+                   <%= f.text_field :tradename, class: "form-control upper_text" ,:required => true %> 
+                    <span class="help-block"> <%= f.object.errors[:tradename].to_sentence if f.object.errors[:tradename] %></span>
                 </div> 
-            </div>       
-
-            <div class="form-group">                   
-                <%= f.label :tradename,"Nombre comercial",class: "control-label col-sm-2"%>
-                 <div class="col-xs-12 col-md-12 col-sm-12 col-lg-10">
-                     <%= f.text_field :tradename, class: "form-control" ,:required => true %> 
-                      <span class="help-block"> <%= f.object.errors[:tradename].to_sentence if f.object.errors[:tradename] %></span>
-                  </div> 
               </div>
 
               <div class="form-group">                   
-                  <%= f.label :price,"Precio",class: "control-label col-sm-2" %>
-                   <div class="col-xs-12 col-md-12 col-sm-12 col-lg-10">
-                       <%= f.text_field :price, {:required => true,class: "form-control numbers"}  %> 
+                  <%= f.label :price,"Precio :",class: "control-label col-sm-3" %>
+                   <div class="col-xs-12 col-md-4 col-sm-4 col-lg-6">
+                       <%= f.text_field :price, class: "form-control only_numbers text-right" ,:required => true   %> 
                         <span class="help-block"> <%= f.object.errors[:price].to_sentence if f.object.errors[:price] %></span>
                     </div> 
-                </div>
-
-                <div class="form-group">                   
-                    <%= f.label :unit_of_measurement_id,"U.M",class: "control-label col-sm-2" %>
-                     <div class="col-xs-12 col-md-12 col-sm-12 col-lg-10">
-                         <%= f.select :unit_of_measurement_id,options_for_select(@unit_of_measurement, :selected => f.object.unit_of_measurement_id), {}, { :class => 'form-control', :required => true }%>
-                         <span class="help-block"> <%= f.object.errors[:unit_of_measurement_id].to_sentence if f.object.errors[:unit_of_measurement_id] %></span>
-                     </div> 
-                 </div>
-
-                 <div class="form-group">                   
-                     <%= f.label :dosage,"Dosis",class: "control-label col-sm-2 " %>
-                      <div class="col-xs-12 col-md-12 col-sm-12 col-lg-10">
-                          <%= f.text_field :dosage, class: "form-control numbers",:required => true  %>   
-                           <span class="help-block"> <%= f.object.errors[:dosage].to_sentence if f.object.errors[:dosage] %></span>
-                       </div> 
-                   </div>
-
-                   <div class="form-group">                   
-                       <%= f.label :cost_per_hectare,"Costo por hectarea",class: "control-label col-sm-2" %>
-                        <div class="col-xs-12 col-md-12 col-sm-12 col-lg-10">
-                            <%= f.text_field :cost_per_hectare, class: "form-control numbers",:required => true,  :readonly =>"readonly" %>   
-                             <span class="help-block"> <%= f.object.errors[:cost_per_hectare].to_sentence if f.object.errors[:cost_per_hectare] %></span>
-                         </div> 
-                     </div>
-
-                     <div class="form-group">                   
-                         <%= f.label :description,"Descripción",class: "control-label col-sm-2" %>
-                          <div class="col-xs-12 col-md-12 col-sm-12 col-lg-10">
-                              <%= f.text_area :description, class: "form-control" %> 
-                               <span class="help-block"> <%= f.object.errors[:description].to_sentence if f.object.errors[:description] %></span>
-                           </div> 
-                       </div>
-
-                      <%= render('layouts/error_lists')%>
-          
-                       <div class="control-group">
-                           <div class="text-center">                                                              
-                               <%= render('layouts/buttons')%>                              
-                           </div>
-                       </div>
-                       <input type="hidden" id="controller" value="<%= controller_name%>">
-                      <% end %>
-
-                  </div>
               </div>
+              
+              <div class="form-group">                   
+                 <%= f.label :description,"Descripción:",class: "control-label col-sm-3" %>
+                  <div class="col-xs-12 col-md-4 col-sm-4 col-lg-7">
+                      <%= f.text_area :description, class: "form-control" %> 
+                       <span class="help-block"> <%= f.object.errors[:description].to_sentence if f.object.errors[:description] %></span>
+                  </div> 
+              </div>
+          </div>
+        <div class="col-lg-6 col-xs-12 col-sm-6">
+            <div class="form-group">                   
+                <%= f.label :unit_of_measurement_id,"U.M :",class: "control-label col-sm-5" %>
+                 <div class="col-xs-12 col-md-4 col-sm-4 col-lg-6">
+                     <%= f.select :unit_of_measurement_id,options_for_select(@unit_of_measurements, :selected => f.object.unit_of_measurement_id), {}, class: "form-control" ,:required => true %>
+                    <span class="help-block"> <%= f.object.errors[:unit_of_measurement_id].to_sentence if f.object.errors[:unit_of_measurement_id] %>
+                    </span>
+                 </div> 
+            </div>
+
+            <div class="form-group">                   
+                 <%= f.label :dosage,"Dosis :",class: "control-label col-sm-6" %>
+                  <div class="col-xs-12 col-md-4 col-sm-4 col-lg-5">
+                      <%= f.text_field :dosage, class: "form-control only_numbers text-right" ,:required => true   %>   
+                      <span class="help-block"> <%= f.object.errors[:dosage].to_sentence if f.object.errors[:dosage] %></span>
+                   </div> 
+            </div>
+
+            <div class="form-group">                   
+                 <%= f.label :cost_per_hectare,"Costo por hectarea :",class: "control-label col-sm-6" %>
+                  <div class="col-xs-12 col-md-4 col-sm-4 col-lg-5">
+                      <%= f.text_field :cost_per_hectare, class: "form-control only_numbers text-right",:required => true,  :readonly =>"readonly" %>   
+                       <span class="help-block"> <%= f.object.errors[:cost_per_hectare].to_sentence if f.object.errors[:cost_per_hectare] %>
+                       </span>
+                  </div> 
+            </div>
+        </div>
+        <%= render('layouts/error_lists')%>
+        <%= render('layouts/buttons2col') %>           
+    <% end %>
+
+  </div>
+</div>
+ <input type="hidden" id="controller" value="<%= controller_name%>">

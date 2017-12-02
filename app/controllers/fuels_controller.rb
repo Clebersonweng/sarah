@@ -40,17 +40,16 @@ class FuelsController < ApplicationController
   # PATCH/PUT /fuels/1
   # PATCH/PUT /fuels/1.json
   def update
-    respond_to do |format|
-      if @fuel.update(fuel_params)
-        format.html { redirect_to @fuel, notice: 'Fuel was successfully updated.' }
-        format.json { render :show, status: :ok, location: @fuel }
-      else
-        format.html { render :edit }
-        format.json { render json: @fuel.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @fuel.update(fuel_params)
+         format.json { render json: @fuel }
+        else
+          format.json { render json: @fuels.errors, :status => :unprocessable_entity }
+        end
       end
-    end
-  end
 
+  end
+  
   # DELETE /fuels/1
   # DELETE /fuels/1.json
   def destroy

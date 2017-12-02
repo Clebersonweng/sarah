@@ -1,70 +1,78 @@
 class ImplementsController < ApplicationController
   before_action :set_implement, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  
   # GET /implements
   # GET /implements.json
   def index
+    get_all
     @implements = Implement.all
   end
 
-  # GET /implements/1
-  # GET /implements/1.json
+
   def show
+    @implements = Implement.find(params[:id])
+    respond_to do |format|
+      format.html { redirect_to  action:"index"}
+      #format.json { render json: @types_crops}
+    end
   end
 
-  # GET /implements/new
+
   def new
-    get_params_implements
+    get_all
     @implement = Implement.new
+    
   end
 
-  # GET /implements/1/edit
+
   def edit
-    get_params_implements
+   get_all
   end
 
-  # POST /implements
-  # POST /implements.json
-  def create
-    get_params_implements
+  def create 
+    get_all  
     @implement = Implement.new(implement_params)
 
-    respond_to do |format|
-      if @implement.save
-        format.html { redirect_to @implement, notice: 'Implement was successfully created.' }
-        format.json { render :show, status: :created, location: @implement }
-      else
-        format.html { render :new }
-        format.json { render json: @implement.errors, status: :unprocessable_entity }
-      end
+    if @implement.save
+      #format.html { redirect_to @product, notice: 'Supply was successfully created.' }
+      render json: { contenido: @implement, location: implement_url(@implement),result: :ok },status: 200
+    else
+      #format.html { render :new }
+      render json:  @implement.errors, status: :unprocessable_entity 
+      
     end
   end
 
-  # PATCH/PUT /implements/1
-  # PATCH/PUT /implements/1.json
   def update
-    get_params_implements
-    respond_to do |format|
-      if @implement.update(implement_params)
-        format.html { redirect_to @implement, notice: 'Implement was successfully updated.' }
-        format.json { render :show, status: :ok, location: @implement }
-      else
-        format.html { render :edit }
-        format.json { render json: @implement.errors, status: :unprocessable_entity }
-      end
+    get_all
+    if @implement.update(implement_params)
+      render json: { contenido: @implement, location: implement_url(@implement),result: :ok },status: 200
+    else
+      render json:  @implement.errors, status: :unprocessable_entity   
     end
   end
 
-  # DELETE /implements/1
-  # DELETE /implements/1.json
+  def check_rel(_id)
+    exist_relation = Implement.where(:machine_id => _id)
+      return true if exist_relation.count == 0
+    false
+  end
+  
   def destroy
-    get_params_implements
-    @implement = Implement.find(params[:id])
-    @implement.destroy
-    respond_to do |format|
-      format.html { redirect_to implements_url, notice: 'Implement was successfully destroyed.' }
-      format.json { head :no_content }
+    @implement        = Implement.find(params[:id]) 
+    if check_rel(@implement.machine_id) 
+        respond_to do |format|
+            if @implement.destroy
+              format.js
+            else
+              render json: { contenido: @implement, location: implement_url(@implement),message: :"no puede ser eliminado" },status: 400
+            end
+        end  
+    else
+      render json:  @implement.errors, status: :bad_request 
     end
+
   end
 
   private
@@ -75,9 +83,11 @@ class ImplementsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def implement_params
-      params.require(:implement).permit(:name, :model, :oper_time, :machine_id, :coef_cccr, :year, :brand, :price)
+      params.require(:implement).permit(:name,:brand, :model, :oper_time, :machine_id, :coef_cccr, :year, :price)
     end
-    def get_params_implements
+
+    def get_all
       @machines = Machine.all.collect {|type| [type.model.name, type.id]}
+      @path = "implementos"
     end
 end

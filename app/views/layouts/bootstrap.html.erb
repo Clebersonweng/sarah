@@ -1,4 +1,4 @@
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -19,11 +19,8 @@
             <div id="page-wrapper">                
                 <div class="container-fluid">                    
                     <div class="col-md-12 col-xs-12 ">
-                        <ol class="breadcrumb">
-                            <li class="active">
-                                <i class="fa fa-home"></i> Inicio
-                            </li>
-                        </ol>
+                    <br>
+                         <%= render 'layouts/breadcrump' %>
                         <div class="panel panel-primary panel-sarah">                             
                             <% if controller.controller_name != "home" && controller.action_name != "edit"%> 
                              <div class="panel-heading clearfix panel-sarah">  <h5 class="panel-title col-lg-offset-3 text-left"></h5>
@@ -34,7 +31,7 @@
                                  <h1 class="panel-title text-center">Editar</h1>                   
                              </div> 
                             <% end %>
-                            <%= render 'layouts/messages' %>
+                                <%= render 'layouts/messages' %>
                             <br>
                             <div class="col-xs-6 col-lg-6">
                                 <div id="alerta" class="alert  alert_sarah hide" role="alert">
@@ -58,13 +55,14 @@
                        var actionName = "<%=controller.action_name %>";
                        if (actionName === "index") {
                          $("#submenu_index").addClass("active");
+                         progress(true);
                        }
                        else if (actionName === "new" || actionName === "create") {
                          $("#submenu_new").addClass("active");
+                         progress(true);
                        }
-
-              <!-- js para activar/desactivar menu -->
-
+                        
+                      progress(false);
 
                        var controllerName = "<%= params[:controller] || controller.name %>";
                        if (controllerName == "default") {

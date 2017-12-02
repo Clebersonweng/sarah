@@ -1,14 +1,17 @@
-<div class="col-lg-offset-2">
-   <% if controller.action_name == "edit" %>
-     <%= link_to "<i class='fa fa-trash-o' aria-hidden='true'></i>  Cancelar".html_safe, "../../#{controller_name}",:type => "button",:class =>"btn btn-danger" %>
 
-   <% else %>
+<div class="form-group">
+	<div class="col-lg-offset-3 col-md-6 col-sm-6">
+	   <% if controller.action_name == "edit" %>
+	     <%= link_to "<i class='fa fa-trash-o' aria-hidden='true'></i>  Cancelar".html_safe, "../../#{controller_name}",:type => "button",:class =>"btn btn-danger" %>
 
-     <%= link_to "<i class='fa fa-trash-o' aria-hidden='true'></i>  Cancelar".html_safe, "../#{controller_name}",:type => "button",:class =>"btn btn-danger" %>
-   <% end %>
+	   <% else %>
 
-   <%= link_to "<i class='fa fa-floppy-o' aria-hidden='true'></i>  Guardar".html_safe, "../#{controller_name}",:type => "button",:class =>"btn btn-success",:id => "btn_submit_#{controller_name}" %>
+	     <%= link_to "<i class='fa fa-trash-o' aria-hidden='true'></i>  Cancelar".html_safe, "../#{controller_name}",:type => "button",:class =>"btn btn-danger" %>
+	   <% end %>
 
+	   <%= link_to "<i class='fa fa-floppy-o' aria-hidden='true'></i>  Guardar".html_safe, "../#{controller_name}",:type => "button",:class =>"btn btn-success",:id => "btn_submit_#{controller_name}" %>
+
+	</div>
 </div>
 
 

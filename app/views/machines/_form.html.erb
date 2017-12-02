@@ -1,88 +1,86 @@
-</br>
-<div class="row">
+
+<div class="panel-body">
+   <%= form_for(@machine,html: {class: 'form-horizontal', id: "form_machines", remote: true}) do |f| %>
+   
     <div class="col-sm-12">
-        <div class="panel panel-default">
-            <div class="panel-heading"><h3 align="center">Machine</h3>
-                <%=render 'layouts/submenu' %>
+       <div class="col-sm-6 col-md-6">
+        
+            <div class="form-group">
+              <%= f.label :name,"Nombre :" ,class: "control-label col-sm-3"%>
+              <div class="col-sm-7">
+                <%= f.text_field :name, autofocus: true, class: "form-control upper_text"%>
+              </div>
             </div>
 
-            <div class="panel-body">
-                <%=form_for @machine, url: machines_path,:html => { class: 'form-horizontal' } do |f| %>
-                    <div class="col-sm-6 col-sm-offset-2">
-                        <div class="form-group">
-                            <%= f.label :name ,class: "control-label col-sm-2 col-sm-offset-1"%>
-                              <div class="col-sm-5">
-                                  <%= f.text_field :name, autofocus: true, class: "form-control", onblur: "this.value=this.value.toUpperCase()"%>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <%= f.label :brand_id ,class: "control-label col-sm-2 col-sm-offset-1"%>
-                                  <div class="col-sm-5">
-                                      <%= f.select(:brand_id, @brands, class: "form-control")  %>    
-                                    </div>
-                                </div>
+            <div class="form-group">
+              <%= f.label :brand_id,"Marca :" ,class: "control-label col-sm-3"%>
+              <div class="col-sm-6">
+                     <%= f.select :brand_id, options_for_select(@brands, f.object.brand_id), {}, { :class => 'form-control', :required => true }%>
+               </div>
+            </div>
 
-                                <div class="form-group">
-                                    <%= f.label :model_id ,class: "control-label col-sm-2 col-sm-offset-1"%>
-                                      <div class="col-sm-5">
-                                          <%= f.collection_select(:model_id, Model.all, :id, :name, class: 'form-control')%> 
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <%= f.label :hp ,class: "control-label col-sm-2 col-sm-offset-1"%>
-                                          <div class="col-sm-5">
-                                              <%= f.text_field :hp, placeholder: "ej: 85", class: 'form-control'%> 
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <%= f.label :consumption, "Coef. Consumption", class: "control-label col-sm-2 col-sm-offset-1"%>
-                                              <div class="col-sm-5">
-                                                  <%= f.text_field :consumption,placeholder: " ej: 0.12", class: 'form-control'%> 
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <%= f.label :coeficient_cccr, "Coef. Rep y Maint.", class: "control-label col-sm-2 col-sm-offset-1"%>
-                                                  <div class="col-sm-5">
-                                                      <%= f.text_field :coeficient_cccr, class: 'form-control'%> 
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <%= f.label :price ,class: "control-label col-sm-2 col-sm-offset-1"%>
-                                                      <div class="col-sm-5">
-                                                          <%= f.text_field :price, class: 'form-control'%> 
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <%= f.label :time_oper ,class: "control-label col-sm-2 col-sm-offset-1"%>
-                                                          <div class="col-sm-5">
-                                                              <%= f.text_field :time_oper, class: "form-control"  %>    
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <%= f.label :fuel_id ,class: "control-label col-sm-2 col-sm-offset-1"%>
-                                                              <div class="col-sm-5">
-                                                                  <%= select("machine","fuel_id", options_for_select(@fuels))%>                                  
-                                                              </div>
-                                                          </div>
-                                                          <div class="form-group">
-                                                              <%= f.label :year_purchase ,class: "control-label col-sm-2 col-sm-offset-1"%>
-                                                                <div class="col-sm-5">
-                                                                    <%= f.text_field :year_purchase, class: "form-control"  %>    
-                                                                  </div>
-                                                              </div>
+            <div class="form-group">
+                <%= f.label :model_id,"Modelo :" ,class: "control-label col-sm-3"%>
+                <div class="col-sm-6">
+                     <%= f.select :model_id, options_for_select(@models, f.object.model_id), {}, { :class => 'form-control', :required => true }%>
+                </div>
+            </div>
 
-                                                              <div class="control-group col-sm-offset-4">
-                                                                  <div class="controls">
-                                                                      <button type="submit" class="btn btn-primary">Guardar</button>
-                                                                      <button type="reset" class="btn btn-danger">Borrar</button>
-                                                                  </div>
-                                                              </div>
-                                                          </div>
-                                                        <% end %>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <script>
-                                            $('#machine_consumption').popover();
-                                        </script>
+            <div class="form-group">
+              <%= f.label :hp,"HP :" ,class: "control-label col-sm-3 "%>
+              <div class="col-sm-3">
+                  <%= f.text_field :hp, placeholder: "ej: 85", class: 'form-control text-right only_numbers',:required => true %> 
+                </div>
+            </div>
+
+          <div class="form-group">
+              <%= f.label :price,"Precio :" ,class: "control-label col-sm-3"%>
+              <div class="col-sm-5">
+                <%= f.text_field :price, class: 'form-control text-right only_numbers',:required => true %> 
+              </div>
+          </div> 
+      </div>
+      <div class="col-sm-6 col-md-6">
+
+          <div class="form-group">
+              <%= f.label :coeficient_cccr, "Coef. Reparación y Mantenim:", class: "control-label col-sm-5" %>
+              <div class="col-sm-5">
+                <%= f.text_field :coeficient_cccr, class: 'form-control text-right only_numbers',:required => true %> 
+              </div>
+          </div>
+            <div class="form-group">
+                <%= f.label :consumption, "Consumo (hs) :", class: "control-label col-sm-5"%>
+                <div class="col-sm-5">
+                  <%= f.text_field :consumption,placeholder: " ej: 0.16%", class: 'form-control text-right only_numbers',:required => true %> 
+                </div>
+                <a href="#" class="btn btn-default col-xs-offset-2 col-lg-offset-0" data-toggle="modal" data-target="#md_consumption"><i class="fa fa-calculator" aria-hidden="true"></i></a>   
+            </div>
+
+          <div class="form-group">
+              <%= f.label :time_oper,"Tiempo Oper :" ,class: "control-label col-sm-5"%>
+              <div class="col-sm-5">
+                <%= f.text_field :time_oper, class: "form-control only_numbers" %>    
+              </div>
+          </div>
+
+          <div class="form-group">
+              <%= f.label :year_purchase,"Año :",class: "control-label col-sm-6"%>
+              <div class="col-sm-4">
+                <%= f.text_field :year_purchase, class: "form-control text-right only_numbers","data-fv-date-format": "YYYY",:required => true  %>    
+              </div>
+          </div>
+
+          <div class="form-group">
+              <%= f.label :fuel_id,"Combust :" ,class: "control-label col-sm-5"%>
+              <div class="col-sm-5">
+                   <%= f.select :fuel_id, options_for_select(@fuels, f.object.fuel_id), {}, { :class => 'form-control', :required => true }%>
+              </div>
+          </div>
+      </div>
+      <%= render('layouts/error_lists')%>
+      <%= render('layouts/buttons2col')%>
+
+   <% end %>
+  </div>
+</div>
+<input type="hidden" id="controller" value="<%=controller_name%>">

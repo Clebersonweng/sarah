@@ -42,10 +42,10 @@ class CostOperMachineContDetailsController < ApplicationController
   def update
     respond_to do |format|
       if @cost_oper_machine_cont_detail.update(cost_oper_machine_cont_detail_params)
-        format.html { redirect_to @cost_oper_machine_cont_detail, notice: 'Cost oper machine cont detail was successfully updated.' }
+        #format.html { redirect_to @cost_oper_machine_cont_detail, notice: 'Cost oper machine cont detail was successfully updated.' }
         format.json { render :show, status: :ok, location: @cost_oper_machine_cont_detail }
       else
-        format.html { render :edit }
+       # format.html { render :edit }
         format.json { render json: @cost_oper_machine_cont_detail.errors, status: :unprocessable_entity }
       end
     end

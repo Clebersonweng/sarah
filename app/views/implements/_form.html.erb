@@ -1,66 +1,80 @@
 <div class="panel-body">
-    <%=form_for @implement, url: implements_path,:html => { class: 'form-horizontal' } do |f| %>
-      <div class="col-xs-12 col-lg-8 col-sm-12">
+    <%= form_for( @implement, html: {class: 'form-horizontal', id: 'form_implements', remote:true}) do |f| %>
 
-          <div class="form-group">
-              <%= f.label :name,"Nombre :" ,class: "control-label col-sm-2"%>
-               <div class="col-sm-5">
-                   <%= f.text_field :name, autofocus: true , class: "form-control"%>
+    <div class="col-sm-12 col-lg-12 col-xs-12">
+
+      <div class="col-sm-6 col-md-6">
+            <div class="form-group">
+                <%= f.label :name,"Nombre :" ,class: "control-label col-sm-3"%>
+              <div class="col-sm-8">
+                  <%= f.text_field :name, autofocus: true , class: "form-control", :required => true %>
+                  <span class="help-block"> <%= f.object.errors[:name].to_sentence if f.object.errors[:name] %></span>   
+              </div>
+            </div>
+
+            <div class="form-group">
+                <%= f.label :brand, "Marca :" ,class: "control-label col-sm-3"%>
+                <div class="col-sm-6">
+                     <%= f.text_field :brand, autofocus: true , class: "form-control", :required => true%>
+                      <span class="help-block"> <%= f.object.errors[:brand].to_sentence if f.object.errors[:brand] %></span>   
                 </div>
             </div>
 
             <div class="form-group">
-                <%= f.label :brand, "Marca :" ,class: "control-label col-sm-2"%>
-                 <div class="col-sm-4">
-                     <%= f.text_field :brand, autofocus: true , class: "form-control"%>
-                  </div>
-              </div>
-
-              <div class="form-group">
-                  <%= f.label :model, "Modelo :" ,class: "control-label col-sm-2"%>
-                   <div class="col-sm-4">
-                       <%= f.text_field :model, autofocus: true , class: "form-control"%>
-                    </div>
+                <%= f.label :model, "Modelo :" ,class: "control-label col-sm-3"%>
+                <div class="col-sm-6">
+                  <%= f.text_field :model, autofocus: true , class: "form-control", :required => true %>
+                   <span class="help-block"> <%= f.object.errors[:model].to_sentence if f.object.errors[:model] %></span>   
                 </div>
-          
-                <div class="form-group">
-                    <%= f.label "Tiempo Operativo :" ,class: "control-label col-sm-2"%>
-                     <div class="col-sm-2">
-                         <%= f.text_field :oper_time, autofocus: true , class: "form-control"%>
-                      </div>                   
-                      <a href="#" class="btn btn-default col-xs-offset-2 col-lg-offset-0" id="openBtn"><i class="fa fa-calculator" aria-hidden="true"></i> Calcular</a>
-                  </div>
+            </div>
+            
+            <div class="form-group">
+              <%= f.label "Tiempo Operativo :" ,class: "control-label col-sm-3"%>
+               <div class="col-sm-4">
+                   <%= f.text_field :oper_time, autofocus: true , class: "form-control only_numbers", :required => true %>
+                    <span class="help-block"> <%= f.object.errors[:oper_time].to_sentence if f.object.errors[:oper_time] %></span>   
+                </div>                   
+                <a href="#" class="btn btn-default col-xs-offset-2 col-lg-offset-0" id="openBtn"><i class="fa fa-calculator" aria-hidden="true"></i></a>
+            </div>
+      </div>
+       
+      <div class="col-md-6 col-sm-6">
+       
+            <div class="form-group">
+                <%= f.label :machine_id,"Máquina :" ,class: "control-label col-sm-3"%>
+                 <div class="col-sm-8">
+                     <%= f.select :machine_id, options_for_select(@machines, f.object.machine_id), {}, { :class => 'form-control', :required => true }%>
+                      <span class="help-block"> <%= f.object.errors[:machine_id].to_sentence if f.object.errors[:machine_id] %></span>   
+                 </div>
+             </div>
 
-                  <div class="form-group">
-                      <%= f.label :machine_id,"Máquina :" ,class: "control-label col-sm-2"%>
-                       <div class="col-sm-3">
-                           <%= f.select :machine_id, options_for_select(@machines, f.object.machine_id), {}, { :class => 'form-control', :required => true }%>
-                       </div>
+             <div class="form-group">
+                 <%= f.label :coef_cccr, "Coef. Reparación:" ,class: "control-label col-sm-7"%>
+                  <div class="col-sm-4">
+                      <%= f.text_field :coef_cccr, autofocus: true , class: "form-control only_numbers", :required => true %>
+                       <span class="help-block"> <%= f.object.errors[:coef_cccr].to_sentence if f.object.errors[:coef_cccr] %></span>   
                    </div>
+             </div>
 
-                   <div class="form-group">
-                       <%= f.label :coef_cccr, "Coef. de Consumo :" ,class: "control-label col-sm-2"%>
-                        <div class="col-sm-2">
-                            <%= f.text_field :coef_cccr, autofocus: true , class: "form-control"%>
-                         </div>
-                     </div>
+             <div class="form-group">
+                 <%= f.label :year, "Año :" ,class: "control-label col-sm-6"%>
+                  <div class="col-sm-5">
+                      <%= f.text_field :year, autofocus: true , class: "form-control only_numbers", :required => true %>
+                       <span class="help-block"> <%= f.object.errors[:year].to_sentence if f.object.errors[:year] %></span>   
+                  </div>
+             </div>
 
-                     <div class="form-group">
-                         <%= f.label :year, "Ano" ,class: "control-label col-sm-2"%>
-                          <div class="col-sm-1">
-                              <%= f.text_field :year, autofocus: true , class: "form-control"%>
-                           </div>
-                       </div>
-
-                       <div class="form-group">
-                           <%= f.label :price, "Precio :" ,class: "control-label col-sm-2"%>
-                            <div class="col-sm-3">
-                                <%= f.text_field :price, autofocus: true , class: "form-control"%>
-                             </div>
-                         </div>
-
-                         <%= render('layouts/buttons')%>
-                     </div>
-                    <% end %>
-                </div>
-                <input type="hidden" id="controller" value="<%=controller_name%>">
+             <div class="form-group">
+                 <%= f.label :price, "Precio :" ,class: "control-label col-sm-5"%>
+                  <div class="col-sm-6">
+                      <%= f.text_field :price, autofocus: true , class: "form-control only_numbers", :required => true %>
+                       <span class="help-block"> <%= f.object.errors[:price].to_sentence if f.object.errors[:price] %></span>   
+                  </div>
+             </div>
+      </div>
+           <%= render('layouts/error_lists')%>
+            <%= render('layouts/buttons2col')%>
+    </div>
+  <%end%>           
+</div>
+<input type="hidden" id="controller" value="<%=controller_name%>">

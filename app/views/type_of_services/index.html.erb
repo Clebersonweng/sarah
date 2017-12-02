@@ -1,41 +1,41 @@
-<div class="panel-heading clearfix ">
-    <h5 class="panel-title pull-left" style="padding-top: 7.5px;"> Tipo de Servicio</h5>
-    <div class="input-group col-xs-4 col-md-2 pull-right">
-        <input id="filter_type_service" type="search"  class="form-control input-sm" placeholder=" buscar">
-    </div>
-</div>
 <div class="panel-body">
-        <div class="table-responsive">
-                <table  id="tb_type_crop"class="table  table-hover table-striped" data-toggle="table" data-url="type_of_service" >
-                    <thead>
+    <div class="table-responsive">
+        <table  data-width="100%"
+                    class="table  table-hover table-striped table-condensed display"
+                    data-toggle="table" 
+                    data-search="true" 
+                    data-toolbar="#toolbar"
+                    data-show-toggle="true"
+                    data-show-refresh="false"
+                    data-pagination="true"
+                    onlyInfoPagination="false"
+                    data-icons="icons"
+                    data-sort-name="brand_id"
+                    data-sort-order="desc" 
+                    data-height="380"
+                    id="table_models"
+                    data-card-view="false">
+                <thead>
                         <tr>
-                            <th data-field="id" data-checkbox="true">Item ID</th>
-                            <th data-field="name" >Name</th> 
-                            <th data-field="price" >Price</th>                            
-                            <th data-field="description"  data-sortable="true">Description</th>                            
-                            <th>action</th>
+                            <th data-visible="false" data-field="id">Código</th>
+                            <th data-field="name" >Nombre</th> 
+                            <th data-field="price" >Precio</th>                            
+                            <th data-field="description"  data-sortable="true">Descripción</th>                            
+                            <th data-halign="right" data-align="right" data-formatter="actionFormatter" data-events="actionEvents">Acción</th>
                         </tr>
                     </thead>
                     <tbody>
                         <% @type_of_services.each do |type_service| %>
                           <tr>
-                              <td><%= type_service.id%></td>
+                              <td><%= type_service.id %></td>
                               <td><%= type_service.name %></td>
-                              <td><%= type_service.price %></td>
+                              <td><%= number_with_precision(type_service.price, :precision => 0, :delimiter => '.' )   %></td>
                               <td><%= type_service.description %></td>                              
-                              <td class="col-md-1">
-                                  <%= link_to edit_type_of_service_path(type_service) do %>
-                                    <i class="fa fa-2x fa-edit"></i>
-                                  <% end %>
-                                  <%= link_to    type_service, method: :delete, data: { confirm: 'Are you sure?' }  do%>
-                                    <i class="fa fa-2x fa-minus"></i>
-                                  <% end %>
-                              </td>
-
+                              
                           </tr>
                         <% end %>
                     </tbody>
                 </table>
             </div>
         </div>
-   
+<input type="hidden" id="controller" value="<%= controller_name%>">   

@@ -1,37 +1,36 @@
-</br>
-<div class="row">
-    <div class="col-sm-12">
-        <div class="panel panel-default">
-            <div class="panel-heading"><h3 align="center">Type Of Work</h3></div>
-            <%=render 'layouts/submenu' %>
-            <div class="panel-body">
-                <table data-toggle="table" data-url="type_of_work"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
-                    <thead>
+<div class="panel-body">
+    <div class="table-responsive">
+        <table      data-width="100%"
+                    class="table  table-hover table-striped table-condensed display"
+                    data-toggle="table" 
+                    data-search="true" 
+                    data-toolbar="#toolbar"
+                    data-show-toggle="true"
+                    data-show-refresh="false"
+                    data-pagination="true"
+                    onlyInfoPagination="false"
+                    data-icons="icons"
+                    data-sort-name="name"
+                    data-sort-order="desc" 
+                    data-height="380"
+                    id="table_models"
+                    data-card-view="false">
+                <thead>
                         <tr>
-                            <th data-field="id" data-checkbox="true">Item ID</th>
-                            <th data-field="code" data-sortable="true">Name</th> 
-                            <th data-field="price_hours"data-sortable="true" > Price Per Hours</th>
-                           <th data-field="type_of_crop_id" > Description</th>
-                            <th>action</th>
+                            <th data-visible="false" data-field="id">Codigo</th>
+                            <th data-halign="left" data-align="left" data-field="name" data-sortable="true">Nombre</th> 
+                            <th data-halign="left" data-align="left" data-field="price_hours" data-sortable="true" > Precio por hora</th>
+                           <th data-field="description" > Descripción</th>
+                            <th data-halign="right" data-align="right" data-formatter="actionFormatter" data-events="actionEvents">Acción</th>
                         </tr>
                     </thead>
                     <tbody>
                         <% @type_of_works.each do |types| %>
                           <tr>
                               <td><%= types.id%></td>
-                              <td><%= types.name %></td>
-                              <td><%= types.price_hours %></td>
-                              <td><%= types.description %></td>
-                             
-                              <td class="col-md-1">
-                                  <%= link_to edit_type_of_work_path(types) do %>
-                                    <i class="fa fa-2x fa-edit"></i>
-                                  <% end %>
-                                  <%= link_to    types, method: :delete, data: { confirm: 'Are you sure?' }  do%>
-                                    <i class="fa fa-2x fa-minus"></i>
-                                  <% end %>
-                              </td>
-
+                              <td class="col-md-3"><%= types.name %></td>
+                              <td class="col-md-2"><%= number_with_precision(types.price_hours, :precision => 0, :delimiter => '.' )  %></td>
+                              <td class="col-md-5"><%= types.description %></td>
                           </tr>
                         <% end %>
                     </tbody>
@@ -39,4 +38,5 @@
             </div>
         </div>
     </div>
-</
+</div>
+<input type="hidden" id="controller" value="<%= controller_name%>">   

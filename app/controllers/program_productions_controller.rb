@@ -5,6 +5,7 @@ class ProgramProductionsController < ApplicationController
   # GET /program_productions
   # GET /program_productions.json
   def index
+    get_all
     @program_productions = ProgramProduction.all.sort()
     respond_to do |format|
       format.html
@@ -18,7 +19,8 @@ class ProgramProductionsController < ApplicationController
   end
 
   # GET /program_productions/new
-  def new   
+  def new 
+    get_all  
     @program_production = ProgramProduction.new
     id_ventas = EstimateSale.last()
     venta = EstimateSale.find(id_ventas)
@@ -30,6 +32,7 @@ class ProgramProductionsController < ApplicationController
 
   # GET /program_productions/1/edit
   def edit
+    get_all
     id_ventas = EstimateSale.last()
     venta = EstimateSale.find(id_ventas)
     @sales_id = venta.id
@@ -41,18 +44,16 @@ class ProgramProductionsController < ApplicationController
   # POST /program_productions
   # POST /program_productions.json
   def create
-    get_other_params
-    @program_production = ProgramProduction.create(program_production_params)
+    get_all
+    @program_production = ProgramProduction.new(program_production_params)
 
     respond_to do |format|
       if @program_production.save
-        #format.js
-        flash[:notice] = "Fue creado el registro exitosamente"
-        format.html { redirect_to  action:"index"}
+        format.html { redirect_to @program_production, notice: 'Creado con exito.' }
+        format.json { render json: @program_production }
       else
-        #format.js
-        flash[:alert] = "Ocurrió un error al crear el registro"
-        format.html { redirect_to  action:"edit"}
+        format.html { render :new }
+        format.json { render json: @program_production.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -60,28 +61,36 @@ class ProgramProductionsController < ApplicationController
   # PATCH/PUT /program_productions/1
   # PATCH/PUT /program_productions/1.json
   def update
-    respond_to do |format|
-      if @program_production.update(program_production_params)
-        flash[:notice] = "El registro fue guardado exitosamente!"
-        format.html { redirect_to  action:"index"}
-      else
-        flash[:notice] = "Ha ocurrido un error al guardar!"
-        format.html { redirect_to  action:"edit"}
-      end
+    if @program_production.update(program_production_params)
+      render json: { contenido: @program_production, location: program_production_url(@program_production),result: :ok },status: 200
+    else
+      render json:  @program_production.errors, status: :unprocessable_entity   
     end
+
   end
 
   # DELETE /program_productions/1
   # DELETE /program_productions/1.json
+  def check_rel(_id)
+    exist_relation = Supply.where(:program_production_id => _id)
+    return true if exist_relation.count == 0
+    false
+  end
+
   def destroy
-    @program_production = ProgramProduction.find(params[:id])  
-    respond_to do |format|
-      if(@program_production.destroy)      
-        format.json { head :no_content, message:"Registro eliminado existosamente.", response:"ok" }
-      else
-        format.json { head :no_content, message:"Ocurrió un error al eliminar.",response:"error"}
-      end
+    @program_production        = ProgramProduction.find(params[:id]) 
+    if check_rel(params[:id]) 
+        respond_to do |format|
+            if @program_production.destroy
+              format.json { render json: @program_production }
+            else
+              render json: { contenido: @program_production, location: program_production_url(@program_production),message: :"no puede ser eliminado" },status: 400
+            end
+        end  
+    else
+      render json:  @program_production.errors, status: :bad_request 
     end
+
   end
   private
   # Use callbacks to share common setup or constraints between actions.
@@ -93,7 +102,7 @@ class ProgramProductionsController < ApplicationController
   def program_production_params
     params.require(:program_production).permit(:estimate_sale_id, :stock_initial, :stock_end, :variation_stock, :program_production)
   end
-  def get_other_params
-    # @sales = EstimateSale.last()
+  def get_all
+    @path = "programa de producción"
   end
 end

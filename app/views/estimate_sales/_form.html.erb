@@ -1,33 +1,33 @@
 <div class="panel-body">
-    <%= form_for(@estimate_sale,html: {class: 'form-horizontal',id: "form_estimate_sales"}) do |f| %>
+    <%= form_for(@estimate_sale,html: {class: 'form-horizontal', id: "form_estimate_sales", remote: true}) do |f| %>
       <div class="col-xs-12 col-lg-8 col-sm-12">
 
           <div class="form-group"id="gr_code">
-              <label for="estimate_sales_code" class=" col-sm-2 control-label">Código</label>
-              <div class="col-sm-2">
+              <label for="code" class=" col-sm-3 control-label">Código</label>
+              <div class="col-sm-3">
                   <%= f.text_field :code, autofocus: true,:type=>"text", class: "form-control", :readonly => "true",:placeholder =>"automatico"%>
                    <span class="help-block with-errors"> <%= f.object.errors[:code].to_sentence if f.object.errors[:code] %></span>
                </div>
            </div>
 
            <div class="form-group" id="gr_date_init">
-               <label for=" " class=" col-sm-2 control-label">Fecha Inicial</label>
+               <label for=" " class=" col-sm-3 control-label">Fecha Inicial</label>
                <div class="col-sm-4">
-                   <%= f.date_field :date_init, autofocus: true,:type=>"date", class: "form-control",:value => Date.today,:min => Date.today, :required => true%>
+                   <%= f.text_field :date_init, autofocus: true, class: "form-control datepicker", :required => true%>
                     <span class="help-block with-errors"> <%= f.object.errors[:date_init].to_sentence if f.object.errors[:date_init] %></span>
                 </div>
             </div>
 
-            <div class="form-group" id="gr_date_end">
-                <label for=" " class=" col-sm-2 control-label">Fecha Final</label>
+            <div class="form-group">
+                <label for=" " class=" col-sm-3 control-label">Fecha Final</label>
                 <div class="col-sm-4">
-                    <%= f.date_field :date_end,:type=>"date", class: "form-control",:value => Date.today + 120.days,:min => Date.today + 90.days, :required => true%>
+                    <%= f.text_field :date_end,autofocus: true, class: "form-control datepicker", :required => true%>
                      <span class="help-block"> <%= f.object.errors[:date_end].to_sentence if f.object.errors[:date_end] %></span>
                  </div>
              </div>
 
              <div class="form-group" id="gr_farming_plot_id">
-                 <label class=" col-sm-2 control-label">Parcela Agr.</label>
+                 <label class=" col-sm-3 control-label">Parcela Agr.</label>
                  <div class="col-sm-4">
                      <%= f.select :farming_plot_id, options_for_select(@farming_plots, f.object.farming_plot_id), {}, { :class => 'form-control', :required => true }%>
                      <span class="help-block"> <%= f.object.errors[:farming_plot_id].to_sentence if f.object.errors[:farming_plot_id] %></span>
@@ -35,15 +35,15 @@
              </div>
 
              <div class="form-group" id="gr_type_of_crop_id">
-                 <label for=" " class=" col-sm-2 control-label">Tipo Cult.</label>
+                 <label  class=" col-sm-3 control-label">Tipo de Cultivo:</label>
                  <div class="col-sm-4">
-                     <%=  f.select :type_of_crop_id, options_for_select(@farming_plots, f.object.farming_plot_id), {}, { :class => 'form-control', :required => true } %>
+                     <%=  f.select :type_of_crop_id, options_for_select({}, f.object.farming_plot_id), {}, { :class => 'form-control', :required => true } %>
                      <span class="help-block"> <%= f.object.errors[:type_of_crop_id].to_sentence if f.object.errors[:type_of_crop_id] %></span>
                  </div>
              </div>
 
              <div class="form-group" id="gr_estimate_prod">
-                 <label class=" col-sm-2 control-label">Estim. Prod.</label>
+                 <label class=" col-sm-3 control-label">Estim. Prod.</label>
                  <div class="col-sm-3">
                      <%= f.text_field :estimate_production, input_html: {type:'number', min: '3', max: '5' },:pattern => "[0-9]+" ,size: 5, class: "form-control only_numbers",:readonly=>true, :required => true,:placeholder =>"cantidad producida" %>
                   </div>
@@ -55,7 +55,7 @@
 
 
               <div class="form-group" id="gr_total_prod">
-                  <label for=" " class=" col-sm-2 control-label">Total Prod.</label>
+                  <label for=" " class=" col-sm-3 control-label">Total Prod.</label>
                   <div class="col-sm-4">
                       <%= f.text_field :total_production,   class: "form-control",:readonly => "true", :required => true %>
                    </div>
@@ -63,7 +63,7 @@
                </div>
 
                <div class="form-group" id="gr_price">
-                   <label for="price" class=" col-sm-2 control-label">Precio</label>
+                   <label for="price" class=" col-sm-3 control-label">Precio</label>
                    <div class="col-sm-4">
                        <%= f.text_field :price,input_html: { min: '3', max: '15' }, class: "form-control only_numbers",:pattern => "[0-9]+", :required => true%>
                     </div>
@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="form-group" id="gr_gross_sale">
-                    <label for=" " class=" col-sm-2 control-label">Ingreso Bruto</label>
+                    <label for=" " class=" col-sm-3 control-label">Ingreso Bruto</label>
                     <div class="col-sm-4">
                         <%= f.text_field :gross_sale,   class: "form-control only_numbers",:readonly =>true, :required => true %>
                      </div>

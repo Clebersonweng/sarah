@@ -12,12 +12,7 @@
 <% end %>
 </br>
 </br>
-<div class="row">
-    <div class="col-sm-12">
-        <div class="panel panel-default">
-            <div class="panel-heading"><h3 align="center">Outsourced Machines</h3>
-                <%=render 'layouts/submenu' %>
-            </div>
+
             <div class="panel-body">
                 <%=form_for @cost_oper_machine_cont, url: cost_oper_machine_conts_path,:html => { class: 'form-inline' } do |f| %>
                     <div class="col-sm-12">

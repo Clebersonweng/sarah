@@ -1,26 +1,34 @@
 <div class="panel-body">
     <div class="table-responsive">
-        <table class="table table-striped table-condensed" id="table_farming_plots" data-url="farming_plots" data-toggle="table" data-show-columns="true" data-search="true" data-pagination="true" data-sort-name="name" data-sort-order="asc">
+       <table data-width="100%"  
+                data-flat="true"
+                data-response-handler="flatJSON"
+                data-search="true"                
+                class="table  table-hover table-striped table-condensed display" 
+                data-toggle="table"
+                data-show-toggle="true"                
+                data-show-refresh="false" 
+                data-pagination="true" 
+                onlyInfoPagination="false" 
+                data-icons="icons" data-sort-name="code" data-sort-order="desc" 
+                data-card-view="false">
             <thead>
                 <tr>
-                    <th data-field="code">Codigo</th> 
+                    <th data-visible="false" data-field="id">Id</th> 
+                    <th data-field="code">Código</th> 
                     <th data-field="name">Nombre</th>                            
-                    <th data-field="area">Area</th>
+                    <th data-field="area">Área</th>
                     <th data-field="people_id">Encargado</th>                           
-                    <th data-field="description">Descripcion</th>
-                    <th class="text-right">Accion</th>
+                    <th data-field="description">Descripción</th>
+                    <th data-halign="right" data-align="right" data-formatter="actionFormatter" data-events="actionEvents">Acción</th>
                 </tr>
             </thead>
             <tbody>
-                <% if (@farming_plots == nil )%>
-                  <tr><td colspam="7">no cuenta con datos</td></tr>
-                <%else%>
                   <%= render "line"%>
-                <%end%>
             </tbody>
         </table>
     </div>
 </div>
-    <input type="hidden" id="controller" value="<%= controller_name%>"
-<!--############################################-->
+<input type="hidden" id="controller" value="<%= controller_name%>"
+
 

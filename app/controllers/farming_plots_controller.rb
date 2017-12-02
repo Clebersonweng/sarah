@@ -5,6 +5,7 @@ class FarmingPlotsController < ApplicationController
   # GET /farming_plots
   # GET /farming_plots.json
   def index
+    get_all
     @farming_plots = FarmingPlot.all
   end
 
@@ -52,7 +53,7 @@ class FarmingPlotsController < ApplicationController
   # DELETE /farming_plots/1
   # DELETE /farming_plots/1.json
   def destroy
-    @farming_plot = TypeOfCrop.find(params[:id]) 
+    @farming_plot = FarmingPlot.find(params[:id]) 
     
     respond_to do |format|
       if @farming_plot.destroy
@@ -74,8 +75,9 @@ class FarmingPlotsController < ApplicationController
     params.require(:farming_plot).permit(:name, :area,:person_id ,:description)
   end
   def get_all
-    @type_of_crops = TypeOfCrop.all.collect { |type| [type.name, type.id]}
     @person = Person.all.collect { |type| [type.name, type.id]}
     @charts = ChartOfAccount.all.collect {|type| [type.name, type.id]}
+    @path = "parcela agrícola"
+
   end
 end

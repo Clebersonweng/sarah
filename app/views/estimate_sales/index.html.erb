@@ -1,38 +1,46 @@
 <div class="panel-body">
     <div class="table-responsive">
-        <table id="table_estimate_sales" class="table table-condensed table-hover table-responsive" data-toggle="table" data-url="estimate_sale" data-response-handler="responseHandler"  data-show-columns="true" data-search="true"  data-pagination="true" data-sort-name="code" data-sort-order="asc">
+          <table    data-width="100%"
+                    class="table  table-hover table-striped table-condensed display"
+                    data-toggle="table" 
+                    data-search="true" 
+                    data-toolbar="toolbar1"
+                    data-show-toggle="true"
+                    data-show-refresh="false"
+                    data-pagination="true"
+                    onlyInfoPagination="false"
+                    data-icons="icons"
+                    data-height="380"
+                    data-sort-name="name"
+                    data-sort-order="desc" 
+                    data-card-view="false">
             <thead>
                 <tr>
-                    <th data-field="code">Codigo</th>
-                     <th data-field="date" class="text-center">Periodo</th>
+                    <th data-visible="false" class="hidden" data-field="id">Id</th>
+                    <th data-visible="false" data-field="code">Código</th>
+                    <th data-field="date" data-sortable="true" class="text-center">Periódo</th>
                     <th data-field="farming_plot_id">Parcela agrícola</th> 
-                    <th data-field="type_of_crop_id.name">Tipo de cultivo</th> 
-                    <th data-field="estimate_production" >Est. produc x ha</th>                            
-                    <th data-field="total_production">Total prod.</th>
-                    <th data-field="price"> Precio(KG)</th>
-                    <th data-field="gross_sale">Ingreso Bruto</th>
-                    <th class="text-right">Acción</th>
+                    <th data-switchable="false" data-field="type_of_crop_id.name">Tipo de cultivo</th> 
+                    <th data-visible="false" data-halign="right" data-field="estimate_production" >Est. produc x ha</th>         
+                    <th data-checkbox="false"  data-halign="right" ata-field="total_production">Total prod.</th>
+                    <th data-checkbox="false"  data-halign="right" data-switchable="false" data-field="price"> Precio(KG)</th>
+                    <th data-align="right" data-field="gross_sale">Ingreso Bruto</th>
+                     <th data-halign="right" data-align="right"  data-switchable="false" data-formatter="actionFormatter" data-events="actionEvents">Acción</th>
                 </tr>
             </thead>
             <tbody>
                 <% @estimate_sales.each do |sales| %>
-                  <tr id="tr_<%=sales.id%>" >
+                  <tr>
+                      <td><%= sales.id%></td>
                       <td><%= sales.code%></td>
-                        <td><%= sales.full_periods.to_s %></td>
+                      <td><%= sales.full_periods.to_s %></td>
                       <td><%= sales.farming_plot.name %></td>
                       <td><%= sales.type_of_crop.name %></td>
                        <td><%= number_with_precision(sales.estimate_production, :precision => 0, :delimiter => '.' ) %></td>
-                       
                       <td><%= number_with_precision( sales.total_production, :precision => 0, :delimiter => '.' ) %></td>
                       <td><%= number_with_precision( sales.price, :precision => 0, :delimiter => '.' ) %></td>
                       <td><%= number_with_precision(sales.gross_sale, :precision => 0, :delimiter => '.' ) %></td>
-                      <td class="text-right data-icons">                     
-                          <%= link_to edit_estimate_sale_path(sales), class: "btn btn-primary btn-sm" do %>
-                              <i class="fa fa-1x fa-pencil"></i>
-                          <% end %>   
-                            <a type="button" class="btn btn-primary delete btn-sm" data-toggle="modal" data-id="<%= sales.id %>"><i class="fa fa-1x fa-trash"></i></a>                       
-                        </td>
-
+                      
                     </tr>
                   <% end %>
               </tbody>                        

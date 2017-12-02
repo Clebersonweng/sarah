@@ -1,54 +1,51 @@
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-heading"><h3 align="center">Machines</h3></div>
-            <%=render 'layouts/submenu' %>
-            <div class="panel-body">
-                <table data-toggle="table" data-url="machine"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
-                    <thead>
-                        <tr>
-                            <th data-field="id" data-checkbox="true">Item ID</th>
-                            <th data-field="name" data-sortable="true">Name</th>
-                            <th data-field="brands.name">Brand</th>
-                            <th data-field="model">Model</th>
-                            <th data-field="hp">Hp</th>
-                            <th data-field="consumption">Coef. Consumption</th>
-                            <th data-field="price">Price</th>
-                            <th data-field="coeficient_cccr">Coef. Maint. y Repair.</th>
-                            <th data-field="time_oper">Time Oper</th>
-                            <th data-field="fuel.name">Fuel</th>
-                            <th data-field="year_purchase">Year Purchase</th>
-                            <th>action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% @machines.each do |machine| %>
-                          <tr>
-                              <td><%= machine.id %></td>
-                              <td><%= machine.name%></td>
-                              <td><%= machine.brand.name %></td>
-                              <td><%= machine.model.name %></td>
-                              <td><%= machine.hp %></td>
-                              <td><%= machine.consumption %></td>
-                              <td><%= number_to_currency machine.price %></td>
-                              <td><%= machine.coeficient_cccr %></td>
-                              <td><%= machine.time_oper %></td>
-                              <td><%= machine.fuel.name %></td>
-                              <td><%= machine.year_purchase %></td>
-                              <td class="col-md-1">
-                                  <%= link_to edit_machine_path(machine) do %>
-                                    <i class="fa fa-2x fa-edit"></i>
-                                  <% end %>
-                                  <%= link_to    machine, method: :delete, data: { confirm: 'Are you sure?' }  do%>
-                                    <i class="fa fa-2x fa-minus"></i>
-                                  <% end %>
-                              </td>
+<div class="panel-body">
+    <div class="table-responsive">
+          <table    data-width="100%"
+                    class="table  table-hover table-striped table-condensed display"
+                    data-toggle="table" 
+                    data-search="true" 
+                    data-toolbar="toolbar1"
+                    data-show-toggle="true"
+                    data-show-refresh="false"
+                    data-pagination="true"
+                    onlyInfoPagination="false"
+                    data-icons="icons"
+                    data-height="380"
+                    data-sort-name="name"
+                    data-sort-order="desc" 
+                    data-card-view="false">
+            <thead>
+              <tr>
+                  <th data-field="name" data-sortable="true">Nombre</th>
+                  <th data-field="brand_id">Marca</th>
+                  <th data-field="hp">Hp</th>
+                  <th data-halign="right" data-align="right" data-field="consumption">Coef. Consumo</th>
+                  <th data-halign="right" data-align="right" data-field="price" data-visible="false">Precio</th>
+                  <th data-field="coeficient_cccr" data-halign="right" data-align="right" >Coef. Man. y Rep.</th>
+                  <th data-halign="right" data-align="right" data-field="time_oper">T. Oper</th>               
+                  <th data-halign="right" data-align="right">Acción</th>
+              </tr>
+          </thead>
+              <tbody>
+                  <% @machines.each do |machine| %>
+                    <tr id="tr_<%=machine.id %>">
+                        <td><%= machine.name%></td>
+                        <td><%= machine.brand.name %></td>
+                        <td><%= machine.hp %></td>
+                        <td data-align="right"><%= machine.consumption %></td> 
+                        <td data-align="right" data-visible="false"><%= number_with_precision( machine.price , :precision => 0, :delimiter => '.' ) %></td>
+                        <td data-align="right"><%= machine.coeficient_cccr %></td>
+                        <td data-align="right" data-visible="false"><%= machine.time_oper %></td>
+                        <td data-align="right">
+                           <%= link_to edit_machine_path(machine), class: "btn btn-primary btn-sm" do %>
+                             <i class="fa fa-1x fa-pencil"></i>
+                           <% end %>                            
+                            <a type="button" class="btn btn-primary delete btn-sm" data-toggle="modal" data-id="<%= machine.id %>"><i class="fa fa-1x fa-trash"></i></a>
+                        </td>
 
-                          </tr>
-                        <% end %>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
     </div>
-</div>
+ <input type="hidden" id="controller" value="<%=controller_name%>">

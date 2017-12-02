@@ -17,10 +17,9 @@
   <tbody>
     <% @supply_details.each do |supply_detail| %>
       <tr>
-        <td><%= supply_detail.supply %></td>
-        <td><%= supply_detail.product %></td>
+        <td><%= supply_detail.supply_id %></td>
+        <td><%= supply_detail.product.tradename %></td>
         <td><%= supply_detail.quantity_needed %></td>
-        <td><%= supply_detail.float %></td>
         <td><%= supply_detail.subtotal %></td>
         <td><%= link_to 'Show', supply_detail %></td>
         <td><%= link_to 'Edit', edit_supply_detail_path(supply_detail) %></td>

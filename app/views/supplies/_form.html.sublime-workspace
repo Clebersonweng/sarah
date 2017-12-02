@@ -1,0 +1,328 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"contro",
+				"controlador"
+			],
+			[
+				"id",
+				"id_ventas"
+			],
+			[
+				"variet",
+				"variety_id"
+			],
+			[
+				"con",
+				"controlador"
+			],
+			[
+				"ca",
+				"calc_cons_fuel_per_hours"
+			],
+			[
+				"md",
+				"md_consumption"
+			],
+			[
+				"HI",
+				"history_sale"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"Snippet: link_to (path plural)"
+			]
+		],
+		"width": 392.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/javascripts/calculate_cost_oper_outsourced.js",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/models/supply_detail.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/models/cost_oper_machine.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/models/cost_oper_machine_detail.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/models/supply.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/models/cost_oper_machine_cont.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/supply_details/_form.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/cost_oper_machine_conts/_form.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/layouts/_navigation.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/controllers/models_controller.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/controllers/supplies_controller.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/controllers/unit_of_measurements_controller.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/controllers/varieties_controller.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/controllers/type_of_crops_controller.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/controllers/type_of_services_controller.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/controllers/people_controller.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/controllers/products_controller.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/controllers/program_productions_controller.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/controllers/machines_controller.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/controllers/man_powers_controller.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/controllers/implements_controller.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/controllers/history_sales_controller.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/controllers/fuels_controller.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/controllers/estimate_sales_controller.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/controllers/farming_plots_controller.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/supplies/_form.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/javascripts/supply.js",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/controllers/brands_controller.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/controllers/cost_oper_machine_cont_details_controller.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/products/_form.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/javascripts/calculate_cost_operative.js",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/controllers/cost_oper_machine_conts_controller.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/controllers/cost_oper_machines_controller.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/type_of_crops/_form.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/models/index.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/supplies/new.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/program_productions/_form.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/supplies/index.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/program_productions/index.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/implements/index.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/products/index.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/javascripts/program_productions.js",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/javascripts/implements.js",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/brands/_form.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/chart_of_accounts/_form.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/controllers/chart_of_accounts_controller.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/javascripts/models.js",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/javascripts/estimate_sales.js",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/javascripts/machines.js",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/javascripts/calculate_implements.js",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/javascripts/calculate_consumption.js",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/javascripts/products.js",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/javascripts/brands.js",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/estimate_sales/_form.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/javascripts/utils.js",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/javascripts/history_sales.js",
+		"/Users/ultimate/Documents/RailsProjects/sarah/config/locales/en.yml",
+		"/Users/ultimate/Documents/RailsProjects/sarah/config/application.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/config/locales/devise.en.yml",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/history_sales/new.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/layouts/bootstrap.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/javascripts/bootstrap-datepicker.es.js",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/javascripts/application.js",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/javascripts/datepicker-es.js",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/javascripts/datepicker.es.js",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/history_sales/_form.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/Gemfile",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/stylesheets/application.css",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/javascripts/sb-admin-2.js",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/javascripts/metisMenu.js",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/estimate_sales/index.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/models/man_power_detail.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/controllers/type_of_works_controller.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/controllers/man_power_details_controller.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/models/implement.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/models/type_of_work.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/type_of_works/index.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/type_of_services/index.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/machines/index.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/javascripts/type_of_works.js",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/type_of_works/_form.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/javascripts/type_of_services.js",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/javascripts/farming_plots.js",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/type_of_works/new.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/type_of_works/edit.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/brands/index.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/type_of_services/_form.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/javascripts/plugins/type_of_services.js",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/models/_form.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/javascripts/people.js",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/people/_form.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/people/index.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/models/person.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/machines/_form.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/cost_oper_machines/_form.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/people/new.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/machines/new.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/machines/edit.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/products/edit.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/products/create.js.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/products/show.json.jbuilder",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/products/show.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/products/new.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/implements/_form.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/stylesheets/bootstrap.min.css",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/stylesheets/personalize.css",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/stylesheets/bootstrap-table.css",
+		"/Users/ultimate/Documents/RailsProjects/sarah/vendor/assets/javascripts/bootstrap-table.js",
+		"/Users/ultimate/Documents/RailsProjects/sarah/vendor/assets/javascripts/es_ES.js",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/stylesheets/flaticon.css",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/models/machine.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/type_of_crops/index.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/models/edit.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/models/index.json.jbuilder",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/models/_model.json.jbuilder",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/type_of_crops/_index.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/varieties/index.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/layouts/_messages.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/assets/javascripts/varieties.js",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/models/brand.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/models/variety.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/models/application_record.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/models/type_of_crop.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/layouts/_buttons2col.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/app/views/farming_plots/index.html.erb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/config/initializers/date_time_formats.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/config/environments/development.rb",
+		"/Users/ultimate/Documents/RailsProjects/sarah/config/puma.rb"
+	],
+	"find":
+	{
+		"height": 39.0
+	},
+	"find_in_files":
+	{
+		"height": 101.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": false,
+		"use_buffer2": false,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 361.0
+	},
+	"pinned_build_system": "",
+	"project": "_form.html.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"ApplicationRecord"
+			]
+		],
+		"width": 392.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 282.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

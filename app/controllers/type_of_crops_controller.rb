@@ -6,7 +6,11 @@ class TypeOfCropsController < ApplicationController
   # GET /type_of_crops
   # GET /type_of_crops.json
   def index
+    get_all
     @type_of_crops = TypeOfCrop.all
+    @type_of_crops.as_json(only: [:id, :code, :name, :variety_id,:"['variety']['descr']"],:include => { :variety => { :only => :descr }})
+
+    respond_with(@type_of_crops)
   end
 
   # GET /type_of_crops/1
@@ -21,21 +25,20 @@ class TypeOfCropsController < ApplicationController
 
   # GET /type_of_crops/new
   def new
+    get_all
     @type_of_crop = TypeOfCrop.new
     
   end
 
   # GET /type_of_crops/1/edit
   def edit
-    @type_of_crop = TypeOfCrop.find(params[:id]);
-    @code = @type_of_crop.code;
-    @name = @type_of_crop.name;
-    @variety = @type_of_crop.variety;
+    get_all
   end
 
   # POST /type_of_crops
   # POST /type_of_crops.json
-  def create   
+  def create  
+    get_all 
     @type_of_crop = TypeOfCrop.new(type_of_crop_params)
 
     if @type_of_crop.save
@@ -51,19 +54,12 @@ class TypeOfCropsController < ApplicationController
   # PATCH/PUT /type_of_crops/1
   # PATCH/PUT /type_of_crops/1.json
   def update
-    @code = params[:type_of_crop]["code"];
-    @name = params[:type_of_crop]["name"];
-    @variety = params[:type_of_crop]["variety"];
-   
-    @type_of_crop = TypeOfCrop.find(params[:id]);
-    @type_of_crop.code = @code;
-    @type_of_crop.name = @name;
-    @type_of_crop.variety = @variety
-    
-    if @type_of_crop.save
-      render json: { contenido: @type_of_crop, location: product_url(@type_of_crop),result: :ok },status: 200
+    get_all #traer todos los campos
+
+    if @type_of_crop.update(type_of_crop_params)
+      render json: { contenido: @type_of_crop, location: type_of_crop_url(@type_of_crop),result: :ok },status: 200
     else
-      render json:  @type_of_crop.errors, status: :unprocessable_entity 
+      render json:  @type_of_crop.errors, status: :unprocessable_entity   
     end
   end
   
@@ -89,6 +85,12 @@ class TypeOfCropsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def type_of_crop_params
-    params.require(:type_of_crop).permit(:code, :name, :variety)
+    params.require(:type_of_crop).permit(:code, :name, :variety_id)
+  end
+
+  def get_all
+    @varieties = Variety.all.collect {|p| [ p.descr, p.id ] }
+    @path = "tipo de cultivo"
+
   end
 end

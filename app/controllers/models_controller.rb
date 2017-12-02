@@ -1,67 +1,83 @@
 class ModelsController < ApplicationController
   before_action :set_model, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  # GET /models
-  # GET /models.json
+  
   def index
+    get_all
     @models = Model.all
+    respond_with(@models)
+
   end
 
-  # GET /models/1
-  # GET /models/1.json
+
   def show
+    @models = Model.find(params[:id])
+    respond_to do |format|
+      format.html { redirect_to  action:"index"}
+      #format.json { render json: @types_crops}
+    end
   end
 
-  # GET /models/new
+
   def new
-    get_params_model
+    get_all
     @model = Model.new
+    
   end
 
-  # GET /models/1/edit
+
   def edit
-    get_params_model
+    get_all
   end
 
-  # POST /models
-  # POST /models.json
-  def create
-    get_params_model
+  def create 
+    get_all  
     @model = Model.new(model_params)
 
-    respond_to do |format|
-      if @model.save
-        format.json { redirect_to  action:"index", status: :created, location: @model }
-      else
-        format.json { render json: @model.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /models/1
-  # PATCH/PUT /models/1.json
-  def update
-    get_params_model
-     if @model.update(farming_plot_params)
-      render json: { contenido: @model, location: farming_plot_url(@model),result: :ok },status: 200
+    if @model.save
+      #format.html { redirect_to @product, notice: 'Supply was successfully created.' }
+      render json: { contenido: @model, location: model_url(@model),result: :ok },status: 200
     else
-      render json:  @model.errors, status: :unprocessable_entity   
+      #format.html { render :new }
+      render json:  @model.errors, status: :unprocessable_entity 
+      
     end
   end
 
-  # DELETE /models/1
-  # DELETE /models/1.json
-  def destroy
-    get_params_model
-    @model = TypeOfCrop.find(params[:id]) 
-    
-    respond_to do |format|
-      if @model.destroy
-        format.js
-      else
-        format.js
+  def update
+      respond_to do |format|
+        if @model.update(model_params)
+         format.json { render json: @model }
+        else
+          format.json { render json: @models.errors, :status => :unprocessable_entity }
+        end
       end
-    end 
+
+  end
+
+  
+  
+
+def check_rel(_id)
+  exist_relation = Machine.where(:model_id => _id)
+    return true if exist_relation.count == 0
+  false
+end
+
+  def destroy
+    @model        = Model.find(params[:id]) 
+    if check_rel(params[:id]) 
+        respond_to do |format|
+            if @model.destroy
+              format.js
+            else
+              render json: { contenido: @model, location: model_url(@model),message: :"no puede ser eliminado" },status: 400
+            end
+        end  
+    else
+      render json:  @model.errors, status: :bad_request 
+    end
+
   end
 
   private
@@ -75,7 +91,9 @@ class ModelsController < ApplicationController
     params.require(:model).permit(:name,:brand_id, :description)
   end
   
-  def get_params_model
-    @brands = Brand.all.collect{|type| [type.name, type.id]}
+  def get_all
+    @brands = Brand.all.collect {|p| [ p.name, p.id ] }
+    @path = "modelo"
+
   end
 end

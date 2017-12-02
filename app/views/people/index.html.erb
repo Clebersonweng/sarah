@@ -1,43 +1,55 @@
-<p id="notice"><%= notice %></p>
+<div class="panel-body">
+    <div class="table-responsive">
+        <table  data-width="100%"
+                    class="table  table-hover table-striped table-condensed display"
+                    data-toggle="table" 
+                    data-search="true" 
+                    data-toolbar="#toolbar"
+                    data-show-toggle="true"
+                    data-show-refresh="false"
+                    data-pagination="true"
+                    onlyInfoPagination="false"
+                    data-icons="icons"
+                    data-sort-name="brand_id"
+                    data-sort-order="desc" 
+                    data-height="380"
+                    id="table_models"
+                    data-card-view="false">
+                <thead>
+                <tr>
+                    <th data-visible="false" data-field="id">Id</th> 
+                    <th data-class="col-lg-4" data-sortable="true" data-field="name">Nombre</th> 
+                    <th class="col-md-2" data-sortable="true"  data-field="lastname">Apellido</th> 
+                    <th  data-halign="left" data-align="right" data-field="salary">Sueldo</th> 
+                    <th  data-field="ruc_ci">RUC/CI</th> 
+                    <th class="col-md-2" data-field="address">Dirección</th> 
+                    <th  data-field="phone">Teléfono</th> 
+                    <th data-field="birthday">Cumpleaños</th> 
+                    <th data-field="gender">Género</th> 
+                    <th data-halign="right" data-align="right" data-formatter="actionFormatter" data-events="actionEvents">Acción</th>
+                </tr>
+            </thead>
+              <tbody>
+                <% @people.each do |person| %>
+                  <tr>
+                    <td><%= person.id %></td>
+                    <td><%= person.name %></td>
+                    <td><%= person.lastname %></td>
+                    <td><%= person.salary %></td>
+                    <td><%= person.ruc_ci %></td>
+                    <td><%= person.address %></td>
+                    <td><%= person.phone %></td>
+                    <td><%= person.birthday %></td>
+                    <td><%= person.gender %></td>
+                   
+                  </tr>
+                <% end %>
+              </tbody>
+        </table>
+    </div>
+</div>
 
-<h1>People</h1>
+<input type="hidden" id="controller" value="<%= controller_name%>">
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Lastname</th>
-      <th>Salary</th>
-      <th>User</th>
-      <th>Ruc ci</th>
-      <th>Address</th>
-      <th>Phone</th>
-      <th>Birthday</th>
-      <th>Gender</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @people.each do |person| %>
-      <tr>
-        <td><%= person.name %></td>
-        <td><%= person.lastname %></td>
-        <td><%= person.salary %></td>
-        <td><%= person.user %></td>
-        <td><%= person.ruc_ci %></td>
-        <td><%= person.address %></td>
-        <td><%= person.phone %></td>
-        <td><%= person.birthday %></td>
-        <td><%= person.gender %></td>
-        <td><%= link_to 'Show', person %></td>
-        <td><%= link_to 'Edit', edit_person_path(person) %></td>
-        <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<br>
-
-<%= link_to 'New Person', new_person_path %>

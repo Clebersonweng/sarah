@@ -69,6 +69,6 @@ class SupplyDetailsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def supply_detail_params
-      params.require(:supply_detail).permit(:supply, :product_id, :quantity_needed, :float, :subtotal)
+      params.require(:supply_detail).permit(:supply_id, :product_id, :quantity_needed, :subtotal)
     end
 end

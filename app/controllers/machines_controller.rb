@@ -14,61 +14,71 @@ class MachinesController < ApplicationController
 
   # GET /machines/new
   def new
-    get_machine_params
+    get_all
     @machine = Machine.new
   end
 
   # GET /machines/1/edit
   def edit
-    get_machine_params
+    get_all
   end
 
   # POST /machines
   # POST /machines.json
   def create
-    get_machine_params
+    get_all
     @machine = Machine.new(machine_params)
 
-    respond_to do |format|
-      if @machine.save
-        format.html { redirect_to @machine, notice: 'Machine was successfully created.' }
-        format.json { render :show, status: :created, location: @machine }
-      else
-        format.html { render :new }
-        format.json { render json: @machine.errors, status: :unprocessable_entity }
-      end
+    if @machine.save
+      #format.html { redirect_to @product, notice: 'Supply was successfully created.' }
+      render json: { contenido: @successfully, location: machine_url(@machine),result: :ok },status: 200
+    else
+      #format.html { render :new }
+      render json:  @machine.errors, status: :unprocessable_entity 
+      
     end
   end
 
   # PATCH/PUT /machines/1
   # PATCH/PUT /machines/1.json
   def update
-    get_machine_params
-    respond_to do |format|
-      if @machine.update(machine_params)
-        flash[:notice] = "Successfull be update"
-        format.html { redirect_to  action:"index"}
-      else
-        format.html { render :edit }
-        format.json { render json: @machine.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @machine.update(machine_params)
+         format.json { render json: @machine }
+        else
+          format.json { render json: @machines.errors, :status => :unprocessable_entity }
+        end
       end
-    end
+
   end
 
   # DELETE /machines/1
   # DELETE /machines/1.json
+  def check_rel(_id)
+    exist_relation = Implement.where(:machine_id => _id)
+      return true if exist_relation.count == 0
+    false
+  end
+  
   def destroy
-    @machine.destroy
-    respond_to do |format|
-      format.html { redirect_to machines_url, notice: 'Machine was successfully destroyed.' }
-      format.json { head :no_content }
+    @machine        = Machine.find(params[:id]) 
+    if check_rel(@implement.machine_id) 
+        respond_to do |format|
+            if @machine.destroy
+              format.js
+            else
+              render json: { contenido: @machine, location: implement_url(@machine),message: :"no puede ser eliminado" },status: 400
+            end
+        end  
+    else
+      render json:  @machine.errors, status: :bad_request 
     end
+
   end
 
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_machine
-    get_machine_params
     @machine = Machine.find(params[:id])
   end
 
@@ -76,9 +86,11 @@ class MachinesController < ApplicationController
   def machine_params
     params.require(:machine).permit(:name, :brand_id, :model_id, :hp, :consumption, :price, :year_purchase, :coeficient_cccr, :time_oper, :fuel_id)
   end
-  def get_machine_params
+  
+  def get_all
     @brands = Brand.all.collect {|c| [c.name, c.id] }
     @models = Model.all.collect {|type|[type.name, type.id]}
-    @fuels = Fuel.all.collect {|p| [p.name, p.id, {"data-price"=>p.price}]}
+    @fuels  = Fuel.all.collect {|p| [p.name, p.id, {"data-price"=>p.price}]}
+    @path   = "maquinárias"
   end
 end

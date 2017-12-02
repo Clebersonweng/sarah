@@ -1,21 +1,42 @@
 
 <div class="panel-body">
-    <table data-toggle="table" data-url="model"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
-        <thead>
-            <tr>
-                <th data-field="brand">Marca</th> 
-                <th data-field="name">Modelo</th> 
-                <th>Acción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% @models.each do |model| %>
-             <tr id="tr_<%= model.id %>">
-                 <td><%= model.brand.name%></td>
-                 <td><%= model.name %></td>
-             </tr>
-            <% end %>
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table  data-width="100%"
+                    class="table  table-hover table-striped table-condensed display"
+                    data-toggle="table" 
+                    data-search="true" 
+                    data-toolbar="#toolbar"
+                    data-show-toggle="true"
+                    data-show-refresh="false"
+                    data-pagination="true"
+                    onlyInfoPagination="false"
+                    data-icons="icons"
+                    data-sort-name="brand_id"
+                    data-sort-order="desc" 
+                    data-height="380"
+                    id="table_models"
+                    data-card-view="false">
+                <thead>
+                <tr>
+                    <th data-visible="false" data-field="id">Id</th> 
+                    <th class="col-md-3" data-sortable="true" data-field="brand_id">Marca</th> 
+                    <th class="col-md-5" data-sortable="true"  data-field="name">Modelo</th> 
+                    <th class="col-md-5" data-field="description">Descripción</th> 
+                    <th data-halign="right" data-align="right" data-formatter="actionFormatter" data-events="actionEvents">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @models.each do |model| %>
+                 <tr>
+                     <td><%= model.id%></td>
+                     <td><%= model.brand.name%></td>
+                     <td><%= model.name %></td>
+                     <td><%= model.description %></td>
+                    
+                 </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
 </div>
- <input type="hidden" id="controller" value="<%= controller_name%>">
+<input type="hidden" id="controller" value="<%= controller_name%>">

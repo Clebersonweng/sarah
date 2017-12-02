@@ -4,11 +4,13 @@ class EstimateSalesController < ApplicationController
   # GET /estimate_sales
   # GET /estimate_sales.json
   def index
+    get_all
     @estimate_sales = EstimateSale.all
     #@estimate_sales = EstimateSale.all 
     respond_to do |format|
       format.html
-      format.json { render json: @estimate_sales.as_json(only: [:id, :code, :date_init,:date_end,:estimate_production,:total_production,:"['farming_plot']['name']",:price,:gross_sale],:include => { :farming_plot => { :only => :name }}) }
+      format.json { render json: @estimate_sales.as_json(only: [:id, :code, :date_init,:date_end,:estimate_production,:total_production,:"['farming_plot']['name']",:price,:gross_sale],:include => { :farming_plot => { :only => :descr }}) }
+      #render plain: "raw"
     end
   end
 
@@ -39,51 +41,47 @@ class EstimateSalesController < ApplicationController
   
   # GET /estimate_sales/new
   def new
-    get_estimate_sale_params
+    get_all
     @history_sales = HistorySale.all
     @estimate_sale = EstimateSale.new
   end
 
   # GET /estimate_sales/1/edit
   def edit
-    get_estimate_sale_params
+    get_all
     
   end
 
   # POST /estimate_sales
   # POST /estimate_sales.json
   def create
-    get_estimate_sale_params
+    get_all  
     @estimate_sale = EstimateSale.new(estimate_sale_params)
 
-    respond_to do |format|
-      if @estimate_sale.save
-        # format.js
-        flash[:notice] = "Fue guardado exitosamente!"
-        format.html { redirect_to  action:"index"}
-      else
-        #format.js
-        flash[:alert] = "Ha ocurrido un error al guardar!"
-        format.html { redirect_to  action:"edit"}
-      end
+    if @estimate_sale.save
+      #format.html { redirect_to @product, notice: 'Supply was successfully created.' }
+      # delay del controlador sleep(3.0)
+      render json: { contenido: @estimate_sale, location: estimate_sale_url(@estimate_sale),result: :ok },status: 200
+    else
+      #format.html { render :new }
+      render json:  @estimate_sale.errors, status: :unprocessable_entity 
+      
     end
   end
 
   # PATCH/PUT /estimate_sales/1
   # PATCH/PUT /estimate_sales/1.json
   def update
-    get_estimate_sale_params
-    
-    respond_to do |format|
-      if @estimate_sale.update(estimate_sale_params)
-        flash[:notice] = "Fue guardado exitosamente!"
-        format.html { redirect_to  action:"index"}
-      else
-        flash[:notice] = "Ha ocurrido un error al guardar!"
-        format.html { redirect_to  action:"edit"}
+      respond_to do |format|
+        if @estimate_sale.update(estimate_sale_params)
+         format.json { render json: @estimate_sale }
+        else
+          format.json { render json: @estimate_sales.errors, :status => :unprocessable_entity }
+        end
       end
-    end
+
   end
+  
 
   # DELETE /estimate_sales/1
   # DELETE /estimate_sales/1.json
@@ -108,9 +106,10 @@ class EstimateSalesController < ApplicationController
   def estimate_sale_params
     params.require(:estimate_sale).permit(:code,:type_of_crop_id,:farming_plot_id,:chart_of_account_id, :estimate_production,:date_init,:date_end, :total_production, :price, :gross_sale)
   end
-  def get_estimate_sale_params
+  def get_all
     @farming_plots = FarmingPlot.all.collect {|p| [ p.name, p.id, {"data-area-parcela"=>p.area} ] }
     @charts = ChartOfAccount.all.collect {|type|[type.name, type.id]}
     @history_sales = HistorySale.all.collect {|type| [type.quantity, type.id, {"data-date"=>type.date} ] }
+    @path = "estimación de ventas"
   end
 end

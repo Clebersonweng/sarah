@@ -1,27 +1,31 @@
 <div class="panel-body">
-    <%=form_for( @program_production, html: {class: 'form-horizontal',id: "form_program_production"}) do |f| %>
+    <%=form_for( @program_production, html: {class: 'form-horizontal',id: "form_program_productions", remote:true}) do |f| %>
     <div class="col-lg-8 col-xs-12 col-sm-6">                                    
+          
           <div class="form-group">                   
               <input type="hidden" id="program_production_estimate_sale_id" name="program_production[estimate_sale_id]" value="<%=@sales_id%>"/> 
           </div>
         
           <div class="form-group"> 
-              <label class="control-label col-sm-2 col-lg-2">Parcela Agrícola </label>
-              <div class="col-xs-12 col-md-12 col-sm-12 col-lg-10">    
+              <label class="control-label col-sm-3 col-lg-3">Parcela Agrícola </label>
+              <div class="col-xs-12 col-md-12 col-sm-12 col-lg-4">    
                   <input class="form-control" value="<%=@sales_farming_plot%>" readonly/>
               </div>
           </div>
         
           <div class="form-group"> 
-              <label class="control-label col-sm-2">Área</label>
-              <div class="col-xs-12 col-md-12 col-sm-12 col-lg-10">    
-                  <input class="form-control text-right" value="<%=@sales_area%>" readonly/>
+              <label class="control-label col-sm-3 col-lg-3">Área :</label>
+              <div class="col-xs-12 col-md-12 col-sm-12 col-lg-2">    
+                  <div class="input-group">
+                      <input class="form-control text-right" value="<%=@sales_area%>" readonly/>
+                      <span class="input-group-addon" id="basic-addon2">Ha</span>
+                  </div>
               </div>
           </div>
         
           <div class="form-group"> 
-              <label class="control-label col-sm-2">Cantidad estim. a vender </label>
-              <div class="col-xs-12 col-md-12 col-sm-12 col-lg-10"> 
+              <label class="control-label col-sm-3 col-lg-3">Cantidad estim. a vender : </label>
+              <div class="col-xs-12 col-md-12 col-sm-12 col-lg-3"> 
                   <div class="input-group">
                       <input class="form-control text-right" id="estimate_sale"  value="<%=@sales_total_production%>" readonly />     
                       <span class="input-group-addon" id="basic-addon2">KG</span>
@@ -29,20 +33,20 @@
               </div>
           </div>
         
-          <div class="form-group"> 
-              <%= f.label :stock_end,"Stock final", class: "control-label col-sm-2 col-lg-2" %>
-               <div class="col-xs-12 col-md-12 col-sm-12 col-lg-10">    
-                   <div class="input-group">
-                       <%= f.text_field :stock_end,  class: "form-control only_numbers text-right",:pattern => "[0-9]+",:"data-error"=>"Este campo no puede estar en blanco",:required => true %>
-                        <span class="input-group-addon" id="basic-addon2"><i class="fa fa-plus-circle" aria-hidden="true"></i></span>
+              <div class="form-group"> 
+                  <%= f.label :stock_end,"Stock Final :", class: "control-label col-sm-3 col-lg-3 col-md-4"%>
+                   <div class="col-xs-12 col-md-12 col-sm-12 col-lg-3">                         
+                       <div class="input-group">
+                           <%= f.text_field :stock_end, :pattern => "[0-9]+", class: "form-control only_numbers text-right"%>                               
+                            <span class="input-group-addon" id="basic-addon2"><i class="" aria-hidden="true">=</i></span>
+                        </div>
+                        <span class="help-inline"> <%= f.object.errors[:stock_end].to_sentence if f.object.errors[:stock_end] %></span>
                     </div>
-                    <span class="help-block"><%= f.object.errors[:stock_end].to_sentence if f.object.errors[:stock_end] %></span>
                 </div>
-            </div>
         
             <div class="form-group"> 
-                <%= f.label :stock_initial,"Stock inicial", class: "control-label col-sm-2 col-lg-2" %>
-                 <div class="col-xs-12 col-md-12 col-sm-12 col-lg-10">                            
+                <%= f.label :stock_initial,"Stock inicial :", class: "control-label col-sm-3 col-lg-3 col-md-4" %>
+                 <div class="col-xs-12 col-md-12 col-sm-12 col-lg-2">                            
                      <div class="input-group">
                          <%= f.text_field :stock_initial, class: "form-control only_numbers text-right",:pattern => "[0-9]+",:"data-error"=>"Este campo no puede estar en blanco",:required => true %>
                           <span class="input-group-addon" id="basic-addon2"><i class="fa fa-minus-circle" aria-hidden="true"></i></span>
@@ -52,28 +56,29 @@
               </div>
         
               <div class="form-group"> 
-                  <%= f.label :variation_stock,"Variación de stock", class: "control-label col-sm-2 col-lg-2"%>
-                   <div class="col-xs-12 col-md-12 col-sm-12 col-lg-10">                         
+                  <%= f.label :variation_stock,"Variación de stock :", class: "control-label col-sm-3 col-lg-3 col-md-4"%>
+                   <div class="col-xs-12 col-md-12 col-sm-12 col-lg-3">                         
                        <div class="input-group">
-                           <%= f.text_field :variation_stock, :pattern => "[0-9]+",:"data-error"=>"Este campo no puede estar en blanco", class: "form-control only_numbers text-right",:required => true, :readonly=>"readonly"%>                               
+                           <%= f.text_field :variation_stock, :pattern => "[0-9]+", class: "form-control only_numbers text-right", :readonly=>"readonly"%>                               
                             <span class="input-group-addon" id="basic-addon2"><i class="" aria-hidden="true">=</i></span>
                         </div>
                     </div>
                 </div>
         
                 <div class="form-group"> 
-                    <%= f.label :program_production,"Programa de producción", class: "control-label col-sm-2 col-lg-2" %>
-                     <div class="col-xs-12 col-md-12 col-sm-12 col-lg-10">
+                    <%= f.label :program_production,"Programa de producción :", class: "control-label col-sm-3 col-lg-3 col-md-4" %>
+                     <div class="col-xs-12 col-md-12 col-sm-12 col-lg-4">
                          <div class="input-group">
-                             <%= f.text_field :program_production,:pattern => "[0-9]+", class: "form-control text-right",:"data-error"=>"Este campo no puede estar en blanco",:required => true, :readonly=>"readonly"%>
+                             <%= f.text_field :program_production,:pattern => "[0-9]+", class: "form-control text-right",:"data-error"=>"Este campo no puede estar en blanco",:readonly=>"readonly"%>
                               <span class="input-group-addon" id="basic-addon2">Kg</span>
                           </div>
                       </div>
                   </div>
         
-                  <div class="text-center">                                                              
-                      <%= render('layouts/buttons')%>                             
-                  </div>
+                                                                             
+                  <%= render('layouts/error_lists')%>
+                  <%= render('layouts/buttons') %>           
+
         
                   <input type="hidden" id="controller" value="<%= controller_name%>">
                  <% end %>

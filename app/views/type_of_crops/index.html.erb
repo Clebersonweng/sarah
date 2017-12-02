@@ -1,12 +1,24 @@
 <div class="panel-body">
     <div class="table-responsive">
-        <table class="table  table-hover table-striped table-condensed display" id="table_type_of_crops" data-toggle="table" data-search="true" data-toolbar="toolbar2" data-show-toggle="true" data-url="type_of_crops" data-show-refresh="false" data-pagination="true" onlyInfoPagination="false" data-sort-name="name" data-sort-order="desc">
-            <thead>
+         <table data-width="100%"  
+                data-flat="true"
+                data-response-handler="flatJSON"
+                data-search="true"                
+                class="table  table-hover table-striped table-condensed display" 
+                data-toggle="table"
+                data-show-toggle="true"                
+                data-show-refresh="false" 
+                data-pagination="true" 
+                onlyInfoPagination="false" 
+                data-icons="icons" data-sort-name="code" data-sort-order="desc" 
+                data-card-view="false">
+        <thead>
                 <tr>
-                    <th data-field="code"class="searchable">Codigo</th> 
-                    <th data-field="name">Nombre</th>                            
-                    <th data-field="variety" class="hidden-xs">Variedad</th> 
-                    <th class="text-right">Acción</th>
+                    <th data-visible="false" data-field="id">Id</th> 
+                    <th data-width="10%" data-field="code">Código</th> 
+                    <th data-width="40%" data-field="name">Nombre</th>                            
+                    <th data-width="40%" data-field="variety.descr" class="hidden-xs">Variedad</th> 
+                    <th data-halign="right" data-align="right" data-formatter="actionFormatter" data-events="actionEvents">Acción</th>
                 </tr>
             </thead>
             <tbody>
@@ -15,4 +27,4 @@
         </table>
     </div>
 </div>
-<input type="hidden" id="controller" value="<%= controller_name%>"
+<input type="hidden" id="controller" value="<%= controller_name%>">

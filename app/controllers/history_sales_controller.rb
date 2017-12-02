@@ -4,6 +4,7 @@ class HistorySalesController < ApplicationController
   # GET /history_sales
   # GET /history_sales.json
   def index
+    get_all
     @history_sales = HistorySale.all
   end
 
@@ -14,11 +15,13 @@ class HistorySalesController < ApplicationController
 
   # GET /history_sales/new
   def new
+    get_all
     @history_sale = HistorySale.new
   end
 
   # GET /history_sales/1/edit
   def edit
+    get_all
   end
 
   # POST /history_sales
@@ -28,10 +31,10 @@ class HistorySalesController < ApplicationController
 
     respond_to do |format|
       if @history_sale.save
-        format.html { redirect_to @history_sale, notice: 'History sale was successfully created.' }
+        #format.html { redirect_to @history_sale, notice: 'History sale was successfully created.' }
         format.json { render :show, status: :created, location: @history_sale }
       else
-        format.html { render :new }
+        #format.html { render :new }
         format.json { render json: @history_sale.errors, status: :unprocessable_entity }
       end
     end
@@ -42,10 +45,10 @@ class HistorySalesController < ApplicationController
   def update
     respond_to do |format|
       if @history_sale.update(history_sale_params)
-        format.html { redirect_to @history_sale, notice: 'History sale was successfully updated.' }
+        #format.html { redirect_to @history_sale, notice: 'History sale was successfully updated.' }
         format.json { render :show, status: :ok, location: @history_sale }
       else
-        format.html { render :edit }
+        #format.html { render :edit }
         format.json { render json: @history_sale.errors, status: :unprocessable_entity }
       end
     end
@@ -56,9 +59,12 @@ class HistorySalesController < ApplicationController
   def destroy
     @history_sale.destroy
     respond_to do |format|
-      format.html { redirect_to history_sales_url, notice: 'History sale was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+      if @history_sale.destroy
+        format.js
+      else
+        format.js
+      end
+    end 
   end
 
   private
@@ -71,4 +77,9 @@ class HistorySalesController < ApplicationController
     def history_sale_params
       params.require(:history_sale).permit(:period, :date, :quantity)
     end
+
+    def get_all
+      @path = "histórico de producción"
+    end
+
 end

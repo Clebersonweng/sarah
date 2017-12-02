@@ -1,128 +1,366 @@
-<nav class="navbar navbar-inverse navbar-fixed-top nav_top_sarah" role="navigation">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/">Sarah | Presupuesto Ágricola</a>
-    </div>
+<nav class="navbar navbar-default navbar-static-top nav_top_sarah" role="navigation" style="margin-bottom: 0" data-turbolinks-partial="breadcrump">
+            <div class="navbar-header nav_left_sarah">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Sarah | Presupuesto Agrícola</a>
+            </div>
+            <!-- /.navbar-header -->
 
-
-    <!-- Top Menu Items -->
-    <ul class="nav navbar-right top-nav">
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-user"></i>
-                <% if current_user.blank?%>
-                 redirect_to home
-                <%elsif%>
-                 <%= current_user.email %>
-                <%end%>             
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-                <% if current_user.role_id==1%>
-                 <li>
-                     <%= link_to  edit_user_registration_path do %>                        
-                      <i class="fa fa-fw fa-gear"></i> &nbsp; Perfil                        
-                     <%end%>
-                 </li>
-                <%end%>
-                <li class="divider"></li>
-                <li>
-                    <%= link_to  destroy_user_session_path, :method => 'delete' do %>
-                     <i class="fa fa-fw fa-power-off"></i> &nbsp; Salir
-                    <%end%>
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <strong>John Smith</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>Yesterday</em>
+                                    </span>
+                                </div>
+                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>Read All Messages</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-messages -->
                 </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-tasks">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 1</strong>
+                                        <span class="pull-right text-muted">40% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                            <span class="sr-only">40% Complete (success)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 2</strong>
+                                        <span class="pull-right text-muted">20% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                            <span class="sr-only">20% Complete</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 3</strong>
+                                        <span class="pull-right text-muted">60% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                            <span class="sr-only">60% Complete (warning)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 4</strong>
+                                        <span class="pull-right text-muted">80% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                            <span class="sr-only">80% Complete (danger)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>See All Tasks</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-tasks -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-comment fa-fw"></i> New Comment
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                    <span class="pull-right text-muted small">12 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-tasks fa-fw"></i> New Task
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>See All Alerts</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-alerts -->
+                </li>
+                <!-- /.verify state user exists -->
+                <% if current_user.blank?%>
+                    redirect_to home
+                <%end%>  
+                <!-- /. end -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="/"><i class="fa fa-user fa-fw"></i> 
+                                <% unless current_user.blank?%>
+                                    <%= current_user.email %>
+                                <%end%>
+                            </a>
+                        </li>
+                        <%# if current_user.role_id==1%>
+                            <li>
+                                <%= link_to  edit_user_registration_path do %>                        
+                                    <i class="fa fa-fw fa-gear"></i> &nbsp; Perfil                        
+                                <%end%>
+                            </li>
+                        <%#end%>
+                        <li class="divider"></li>
+                        <li>
+                         <%= link_to  destroy_user_session_path, :method => 'delete' do %>
+                            <i class="fa fa-sign-out fa-fw"></i>&nbsp; Salir
+                            <%end%>     
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
             </ul>
+           <!-- /.menu de usuario -->   
+           
+            <div class="navbar-default sidebar nav_left_sarah" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Buscar...">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                        <li>
+                            <a href="/"><i class="fa fa-home" aria-hidden="true" ></i> Inicio</a>
+                        </li>
 
-        </li>
-    </ul>
-    <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
-        <ul class="nav navbar-nav side-nav">
-            <li id="menu_home" class="active">
-                <a href="/"><i class="fa fa-home" aria-hidden="true" ></i> Inicio</a>
-            </li>
-            <!--#############################################################-->
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
-                <a class="nav-link nav-link-collapse " data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
-                    <i class="fa fa-fw fa-sitemap"></i>
-                    <span class="nav-link-text">
-                        Catastros
-                    </span>
-                </a>
-                <ul class="sidenav-second-level collapse" id="collapseMulti">
-                    <!--Segundo nivel 
-                    <li>
-                        <a href="#">Second Level Item</a>
-                    </li>
-                    <li>
-                        <a href="#">Second Level Item</a>
-                    </li>
-                    <!--fin Segundo nivel -->
-                    <li>
-                        <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">Parcela</a>
-                        <ul class="sidenav-third-level collapse" id="collapseMulti2">
-                            <li class="<%= 'active' if params[:controller] == 'type_of_crops' && params[:action] == 'index' %>"><%= link_to 'Tipo de Cultivo', type_of_crops_path %></li>
-                            <li class="<%= 'active' if params[:controller] == 'farming_plots' && params[:action] == 'index' %>"><%= link_to 'Parcela Agrícola', farming_plots_path %></li>
+                         
+                        <li>
+                            <a href="#"><i class="fa fa-briefcase" aria-hidden="true"></i> Catastros<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">                              
+                                <li>
+                                    <a href="#"><i class="fa fa-pagelines" aria-hidden="true"></i> Parcela <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li class="<%= 'active' if params[:controller] == 'farming_plots' && params[:action] == 'index'%>"><%= link_to 'Parcela Agrícola', farming_plots_path %></li>
 
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti3">Máquinas & Implementos</a>
-                        <ul class="sidenav-third-level collapse" id="collapseMulti3">
-                            <li class="<%= 'active' if params[:controller] == 'brands' && params[:action] == 'index' %>"><%= link_to 'Marca', brands_path %></li>
-                            <li class="<%= 'active' if params[:controller] == 'models' && params[:action] == 'index' %>"><%= link_to 'Modelo', models_path %></li>
-                            <li class="<%= 'active' if params[:controller] == 'implements' && params[:action] == 'index' %>"><%= link_to 'Implemento', implements_path %></li>
-                            <li class="<%= 'active' if params[:controller] == 'machines' && params[:action] == 'index' %>"><%= link_to 'Maquinária', machines_path %></li>
+                                        <li class="<%= 'active' if params[:controller] == 'type_of_crops' && params[:action] == 'index' %>"><%= link_to 'Tipo de Cultivo', type_of_crops_path %></li>
+                                        <li class="<%= 'active' if params[:controller] == 'varieties' && params[:action] == 'index' %>"><%= link_to 'Variedades', varieties_path %></li>
+                                        <li class="<%= 'active' if params[:controller] == 'history_sales' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to '<i class="fa fa-book" aria-hidden="true"></i> Histórico de Produción'.html_safe, history_sales_path %></li>
+                        
+            
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
 
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti4">Productos & Insumos</a>
-                        <ul class="sidenav-third-level collapse" id="collapseMulti4">
-                            <li class="<%= 'active' if params[:controller] == 'products' && params[:action] == 'index' %>"><%= link_to 'Productos', products_path %></li>
-                            <li class="<%= 'active' if params[:controller] == 'supplies' && params[:action] == 'index' %>"><%= link_to 'Insumos', supplies_path %></li>
+                                <li>
+                                    <a href="#"><i class="fa  fa-truck  " aria-hidden="true" ></i> Máquinas & Implementos <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li class="<%= 'active' if params[:controller] == 'brands' && params[:action] == 'index' || 'new' %>"><%= link_to 'Marca', brands_path %></li>
+                                        <li class="<%= 'active' if params[:controller] == 'models' && params[:action] == 'index' %>"><%= link_to 'Modelo', models_path %></li>
+                                        <li class="<%= 'active' if params[:controller] == 'implements' && params[:action] == 'index' %>"><%= link_to 'Implemento', implements_path %></li>
+                                        <li class="<%= 'active' if params[:controller] == 'machines' && params[:action] == 'index' %>"><%= link_to 'Maquinária', machines_path %></li>
 
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti5">Personas</a>
-                        <ul class="sidenav-third-level collapse" id="collapseMulti5">
-                            <li class="<%= 'active' if params[:controller] == 'type_of_services' && params[:action] == 'index' %>"><%= link_to 'Tipo de Servicio', type_of_services_path %></li>
-                            <li class="<%= 'active' if params[:controller] == 'people' && params[:action] == 'index' %>"><%= link_to 'Personas', people_path %></li>
+            
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
 
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <!--#############################################################-->
-            <li class="dropdown">
-                <a href="javascript:;" data-toggle="collapse" data-target="#unit_consuption"><i class="fa fa-fw fa-arrows-v"></i> Unid. de Consumo <i class="fa fa-fw fa-caret-down"></i></a>
-                <ul id="unit_consumption" class="collapse">
-                    <li class="<%= 'active' if params[:controller] == 'fuels' && params[:action] == 'index' %>"><%= link_to 'Combustible', fuels_path %></li>
-                    <li class="<%= 'active' if params[:controller] == 'unit_of_measurements' && params[:action] == 'index' %>"><%= link_to 'Unid. de Medida', unit_of_measurements_path %></li>
-                </ul>
-            </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-book" aria-hidden="true"></i> Productos <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                         <li class="<%= 'active' if params[:controller] == 'products' && params[:action] == 'index' %>"><%= link_to 'Productos', products_path %></li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li> 
+                                <li>
+                                    <a href="#"><i class="fa fa-male" aria-hidden="true"></i> Personas <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li class="<%= 'active' if params[:controller] == 'people' && params[:action] == 'index' %>"><%= link_to 'Personas', people_path %></li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                                 <li>
+                                    <a href="#">Tipos <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level">
+                                        <li class="<%= 'active' if params[:controller] == 'type_of_services' && params[:action] == 'index' %>"><%= link_to 'Tipo de Servicio', type_of_services_path %></li>
+                                         <li class="<%= 'active' if params[:controller] == 'type_of_works' && params[:action] == 'index' %>"><%= link_to 'Tipo de Trabajo', type_of_works_path %></li>
 
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book" aria-hidden="true"></i> Reportes<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li id="menu_reportes" href="#">                        
-                    </li>
-                </ul>
-            </li>
+            
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
 
-            <li class="divider"></li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <!-- Begin create estimate production -->
+                <li>
+                            <a href="#"><i class="fa fa-cubes" aria-hidden="true"></i> Crear Estimación<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                              
+                                <li>
+                                    <li class="<%= 'active' if params[:controller] == 'estimate_sales' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to 'Estimación de Ventas', estimate_sales_path %></li>
 
-            <li>
-                <a href=""><i class="fa fa-area-chart" aria-hidden="true"></i> Cuentas de Resultados</a>
-            </li>
-        </ul>
-    </div>
-    <!-- /.navbar-collapse -->
-</nav>
+                                     <li class="<%= 'active' if params[:controller] == 'program_productions' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to 'Programa de Producción', program_productions_path %></li>
 
+                                     <li class="<%= 'active' if params[:controller] == 'supplies' && params[:action] == 'index' %>"><%= link_to 'Insumos', supplies_path %></li>
+
+
+                                     <li class="<%= 'active' if params[:controller] == 'cost_oper_machine_conts' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to 'Costo Oper. Maquinária Tercerizada', cost_oper_machine_conts_path %></li>
+s
+                                     <li class="<%= 'active' if params[:controller] == 'cost_oper_machines' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to 'Costo Oper. Maquinária Propia', cost_oper_machines_path %></li>
+
+                                     <li class="<%= 'active' if params[:controller] == 'man_powers' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to 'Mano de Obra', man_powers_path %></li>
+
+                                     
+
+                                     <li class="<%= 'active' if params[:controller] == 'manu_indi_expense_dets' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to 'Gastos Indirectos', manu_indi_expense_dets_path %></li>
+                                     
+                                     <li class="<%= 'active' if params[:controller] == 'structure_expenses' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to 'Gastos de Estructura', structure_expenses_path %></li>
+                                     
+                                    <!-- /.nav-third-level -->
+                                </li>
+
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+                        <!-- End create estimate production -->
+                        <li>
+                            <a href="#"><span class="flaticon-sarah-poison"></span> Auxiliares<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li class="<%= 'active' if params[:controller] == 'fuels' && params[:action] == 'index' %>"><%= link_to 'Combustible', fuels_path %></li>
+                                <li class="<%= 'active' if params[:controller] == 'unit_of_measurements' && params[:action] == 'index' %>"><%= link_to 'Unid. de Medida', unit_of_measurements_path %></li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#"><i class="fa fa-area-chart" aria-hidden="true"></i> Cuentas de Resultados</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>

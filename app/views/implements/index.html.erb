@@ -1,40 +1,47 @@
 <div class="panel-body">
     <div class="table-responsive">
-        <table data-toggle="table" data-url="implement"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+          <table    data-width="100%"
+                    class="table  table-hover table-striped table-condensed display"
+                    data-toggle="table" 
+                    data-search="true" 
+                    data-toolbar="toolbar1"
+                    data-show-toggle="true"
+                    data-show-refresh="false"
+                    data-pagination="true"
+                    onlyInfoPagination="false"
+                    data-icons="icons"
+                    data-height="380"
+                    data-sort-name="name"
+                    data-sort-order="desc" 
+                    data-card-view="false">
             <thead>
                 <tr>
-                    <th data-field="name">Implemento</th> 
-                    <th data-field="brand">Marca</th> 
-                    <th data-field="model">Modelo</th>
-                    <th data-field="oper_time">Tiempo Operativo</th>
-                    <th data-field="coef_cccr">Coeficiente de Mantenimiento</th>
-                    <th data-field="machine">Máquina</th>
-                    <th data-field="year">Año</th>
-                    <th data-field="price">Precio</th>
-                    <th>Acción</th>
+                    <th class="col-xs-6 col-md-2 col-sm-2 col-lg-6" data-visible="false" class="hidden" data-field="id">Código</th>
+                    <th class="col-xs-6 col-md-2 col-sm-2 col-lg-2" data-field="machine_id">Máquina</th>
+                    <th class="col-xs-6 col-md-2 col-sm-2 col-lg-2" data-sortable="true" data-field="brand">Marca</th>
+                    <th  class="col-xs-6 col-md-2 col-sm-2 col-lg-2" data-sortable="true" data-field="name">Nombre</th>
+                    <th class="col-xs-2 col-md-2 col-sm-2 col-lg-2" data-sortable="true" data-field="model">Modelo</th>
+                    <th class="col-xs-6 col-md-2 col-sm-2 col-lg-2" data-field="oper_time">Tiempo Op.</th>
+                    <th class="col-xs-6 col-md-2 col-sm-2 col-lg-2" data-field="coef_cccr">Coef. RM</th>
+                    <th class="col-xs-6 col-md-2 col-sm-2 col-lg-1" data-field="year">Año</th>
+                    <th class="col-xs-6 col-md-2 col-sm-2 col-lg-2" data-halign="left" data-align="right" data-field="price">Precio</th>
+                    <th class="col-xs-1 col-md-4 col-sm-4 col-lg-4" data-halign="right" data-align="right" data-formatter="actionFormatter" data-events="actionEvents">Acción</th>
                 </tr>
             </thead>
             <tbody>
                 <% @implements.each do |implement| %>
                  <tr>
-                     <td><%= implement.id %></td>
-                     <td><%= implement.name %></td>
-                     <td><%= implement.brand %></td>
-                     <td><%= implement.model %></td>
-                     <td><%= implement.oper_time %></td>
-                     <td><%= implement.coef_cccr%></td>
-                     <td><%= implement.machine.model.name %></td>
-                     <td><%= implement.year %></td>
-                     <td><%= number_with_precision(implement.price, :precision => 0, :delimiter => '.') %></td>
-
-                     <td class="text-right data-icons">                     
-                         <%= link_to edit_implement_path(implement), class: "btn btn-primary btn-sm" do %>
-                           <i class="fa fa-1x fa-pencil"></i>
-                          <% end %>   
-                          <a type="button" class="btn btn-primary delete btn-sm" data-toggle="modal" data-id="<%= implement.id %>"><i class="fa fa-1x fa-trash"></i></a>                       
-                      </td>
+                    <td><%= implement.id %></td>
+                    <td><%= implement.machine.model.name %></td>
+                    <td><%= implement.brand %></td>
+                    <td><%= implement.name %></td>                    
+                    <td><%= implement.model %></td>
+                    <td><%= implement.oper_time %></td>
+                    <td><%= implement.coef_cccr%></td>                   
+                    <td><%= implement.year %></td>
+                    <td><%= number_with_precision(implement.price, :precision => 0, :delimiter => '.') %></td>
                   </tr>
-                 <% end %>
+                <% end %>
              </tbody>
          </table>
      </div>

@@ -5,6 +5,7 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.json
   def index
+    get_all
     @people = Person.all
   end
 
@@ -15,16 +16,19 @@ class PeopleController < ApplicationController
 
   # GET /people/new
   def new
+    get_all
     @person = Person.new
   end
 
   # GET /people/1/edit
   def edit
+    get_all
   end
 
   # POST /people
   # POST /people.json
   def create
+    get_all
     @person = Person.new(person_params)
 
     respond_to do |format|
@@ -43,10 +47,10 @@ class PeopleController < ApplicationController
   def update
     respond_to do |format|
       if @person.update(person_params)
-        format.html { redirect_to @person, notice: 'Person was successfully updated.' }
+        #format.html { redirect_to @person, notice: 'Person was successfully updated.' }
         format.json { render :show, status: :ok, location: @person }
       else
-        format.html { render :edit }
+        #format.html { render :edit }
         format.json { render json: @person.errors, status: :unprocessable_entity }
       end
     end
@@ -72,4 +76,9 @@ class PeopleController < ApplicationController
     def person_params
       params.require(:person).permit(:name, :lastname, :salary, :user_id, :ruc_ci, :address, :phone, :birthday, :gender)
     end
+
+    def get_all
+      @path = "personas"
+    end
+
 end
