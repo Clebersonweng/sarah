@@ -34,20 +34,7 @@ function charge_history_prod()
 
   });
 }
-function revalidar_campos_pos_cultivo()
-{
-  $('form').on('keyup', 'input[name="estimate_sale[date_init]"], input[name="estimate_sale[date_end]"], input[name="estimate_sale[farming_plot_id]"]', function (e) {
-    var y = $('form').find('[name="estimate_sale[date_init]"]').val(),
-            m = $('form').find('[name="estimate_sale[date_end]"]').val(),
-            d = $('form').find('[name="estimate_sale[farming_plot_id]"]').val();
 
-    // Set the dob field value
-    $('form').find('[name="dob"]').val(y === '' || m === '' || d === '' ? '' : [y, m, d].join('.'));
-
-    // Revalidate it
-    $('#profileForm').formValidation('revalidateField', 'dob');
-  });
-}
 function calcute_total_prod(area, quantity_produced)
 {
   return area * quantity_produced;
@@ -122,13 +109,10 @@ function form_estimate_sale_validates()
         validators: {
           notEmpty: {
             message: 'Este campo es obligatório'
-<<<<<<< HEAD
           },
           date: {
                   format: 'MM/DD/YYYY',
                   message: 'No es una fecha válida'
-=======
->>>>>>> products
           }
         }
       },
@@ -147,7 +131,6 @@ function form_estimate_sale_validates()
           verify_period: {
             message: 'hay que verificar'
           }
-<<<<<<< HEAD
         }
       },
       'estimate_sale[estimate_production]': {
@@ -167,17 +150,11 @@ function form_estimate_sale_validates()
         }
       },
       'estimate_sale[total_production]': {
-=======
-        }
-      },
-      'estimate_sale[estimate_production]': {
->>>>>>> products
         validators: {
           notEmpty: {
             message: 'Este campo es obligatório'
           },
           stringLength: {
-<<<<<<< HEAD
             min: 3,
             max: 10,
             message: 'El campo debe contener entre 3 y 10 numeros'
@@ -185,15 +162,6 @@ function form_estimate_sale_validates()
           regexp: {
             regexp: /^[0-9.]+$/,
             message: 'Debe contener solamente números'
-=======
-            min: 1,
-            max: 9,
-            message: 'El campo debe contener entre 1 y 9 numeros'
-          },
-          regexp: {
-            regexp: /^[0-9.]+$/,
-            message: 'Debe contener solamente numeros'
->>>>>>> products
           }
         }
       },
@@ -246,13 +214,8 @@ function verify_exist_type_crop_to_period()
 {
   $("#estimate_sale_farming_plot_id").on("change", function ()
   {
-<<<<<<< HEAD
     var date_init       = convert_date($("#estimate_sale_date_init").val());
     var date_end        = convert_date($("#estimate_sale_date_end").val());
-=======
-    var date_init = $("#estimate_sale_date_init").val();
-    var date_end = $("#estimate_sale_date_end").val();
->>>>>>> products
     var farming_plot_id = $("#estimate_sale_farming_plot_id").val();
     var type_of_crop_id = $("#estimate_sale_type_of_crop_id").val();
 
@@ -266,10 +229,6 @@ function verify_exist_type_crop_to_period()
         success: function (response) {
           if (response.status == "ok")
           {
-<<<<<<< HEAD
-=======
-            console.log(response);
->>>>>>> products
             // fv.updateMessage(field, 'blank', response.fields[field]).updateStatus(field, 'INVALID', 'blank');
             run_option_result(response);
             reset_errors("farming_plot_id");
@@ -279,10 +238,6 @@ function verify_exist_type_crop_to_period()
           }
           else if (response.status == "existe")
           {
-<<<<<<< HEAD
-=======
-            console.log(response.status);
->>>>>>> products
             run_option_result(response);
             add_errors("farming_plot_id");
             add_errors("type_of_crop_id");
@@ -291,10 +246,6 @@ function verify_exist_type_crop_to_period()
           }
         },
         error: function (response) {
-<<<<<<< HEAD
-=======
-          console.log(response.msg);
->>>>>>> products
         },
         fail: function (response)
         {

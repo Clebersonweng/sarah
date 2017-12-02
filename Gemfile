@@ -62,3 +62,7 @@ gem 'data-confirm-modal'
 gem 'jquery-turbolinks'
 
 gem "nprogress-rails"
+
+gem "bootstrap-table-rails"
+
+gem 'bootstrap-datepicker-rails'

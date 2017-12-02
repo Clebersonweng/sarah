@@ -29,7 +29,7 @@ function form_history_sales_validates()
             message: 'Este campo es obligatório'
           },
           date: {
-            format: 'dd/mm/yyyy',
+            format: 'DD/MM/YYYY',
             message: 'No es una fecha válida'
           }
         }
@@ -54,6 +54,5 @@ function form_history_sales_validates()
     }
   }).on('change', 'form', function (e) {
     e.preventDefault();
-    //$("#form_products").bootstrapValidator('revalidateField', 'investments');
   });
 }

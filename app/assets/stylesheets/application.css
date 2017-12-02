@@ -15,9 +15,11 @@
  *= require "bootstrap.min"
  *= require "font-awesome.min"
  *= require bootstrapValidator.min
+ *= require bootstrap-table
  *= require nprogress
  *= require nprogress-bootstrap
  *= require nprogress-turbolinks5
+ *= require bootstrap-datepicker
  *= require_tree .
  *
  */

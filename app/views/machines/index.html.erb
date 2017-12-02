@@ -16,6 +16,7 @@
                     data-card-view="false">
             <thead>
               <tr>
+                  <th data-visible="false" class="hidden" data-field="id">Id</th>
                   <th data-field="name" data-sortable="true">Nombre</th>
                   <th data-field="brand_id">Marca</th>
                   <th data-field="hp">Hp</th>
@@ -23,12 +24,13 @@
                   <th data-halign="right" data-align="right" data-field="price" data-visible="false">Precio</th>
                   <th data-field="coeficient_cccr" data-halign="right" data-align="right" >Coef. Man. y Rep.</th>
                   <th data-halign="right" data-align="right" data-field="time_oper">T. Oper</th>               
-                  <th data-halign="right" data-align="right">Acción</th>
+                  <th data-halign="right" data-align="right"  data-switchable="false" data-formatter="actionFormatter" data-events="actionEvents">Acción</th>
               </tr>
           </thead>
               <tbody>
                   <% @machines.each do |machine| %>
                     <tr id="tr_<%=machine.id %>">
+                        <td><%= machine.id%></td>
                         <td><%= machine.name%></td>
                         <td><%= machine.brand.name %></td>
                         <td><%= machine.hp %></td>
@@ -36,13 +38,6 @@
                         <td data-align="right" data-visible="false"><%= number_with_precision( machine.price , :precision => 0, :delimiter => '.' ) %></td>
                         <td data-align="right"><%= machine.coeficient_cccr %></td>
                         <td data-align="right" data-visible="false"><%= machine.time_oper %></td>
-                        <td data-align="right">
-                           <%= link_to edit_machine_path(machine), class: "btn btn-primary btn-sm" do %>
-                             <i class="fa fa-1x fa-pencil"></i>
-                           <% end %>                            
-                            <a type="button" class="btn btn-primary delete btn-sm" data-toggle="modal" data-id="<%= machine.id %>"><i class="fa fa-1x fa-trash"></i></a>
-                        </td>
-
                     </tr>
                 <% end %>
             </tbody>

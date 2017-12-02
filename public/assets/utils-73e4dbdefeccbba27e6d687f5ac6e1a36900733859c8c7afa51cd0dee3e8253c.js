@@ -298,8 +298,9 @@ function md_popover(_id,_title,_content)
                       }).popover('hide');
 }
 
-function actionFormatter(value, row, index) 
-{  
+function actionFormatter(value, row, index) {
+  //console.log(row.id);
+  
     return [
                 '<a class="edit btn btn-primary btn-sm" href="'+window.location.pathname+'/'+row.id+'/edit" title="Editar">',
                 '  <i class="fa fa-1x fa-pencil"></i>',

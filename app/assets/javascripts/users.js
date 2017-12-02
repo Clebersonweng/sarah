@@ -6,9 +6,5 @@ $(document).ready(function () {
   })
 
   $(".alert_sarah").addClass('in').fadeIn(500).delay(3000).fadeOut(3000);
-<<<<<<< HEAD
   controlador = $("#controller").val();   
-=======
-  
->>>>>>> products
 });

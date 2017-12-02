@@ -160,7 +160,7 @@
             return sprintf('%s filas por pagina', pageNumber);
         },
         formatShowingRows: function (pageFrom, pageTo, totalRows) {
-            return sprintf('Muestra %s de %s de %s filas', pageFrom, pageTo, totalRows);
+            return sprintf('%s al %s de %s filas', pageFrom, pageTo, totalRows);
         },
         formatSearch: function () {
             return 'Search';
@@ -695,7 +695,7 @@
 
         var pageNumber = [
             '<span class="btn-group dropup">',
-            '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">',
+            '<button type="button" class="btn btn-default dropdown-toggle cardview_sarah" data-toggle="dropdown">',
             '<span class="page-size">',
             this.options.pageSize,
             '</span>',

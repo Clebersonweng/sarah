@@ -4,11 +4,7 @@ $(document).ready(function ()
   controlador = $("#controller").val();
   generic_response_form(controlador);
   form_models_validates();
-<<<<<<< HEAD
 //nameFormatter();
-=======
-
->>>>>>> products
 });
 
 function form_models_validates()
@@ -24,18 +20,13 @@ function form_models_validates()
           stringLength: {
             min: 3,
             max: 30,
-<<<<<<< HEAD
             message: 'El nombre no puede ser menor que 3 y mayor que 30 caracteres'
-=======
-            message: 'El nombre no puede ser menor que 3 y mayor que 50 caracteres'
->>>>>>> products
           },
           regexp: {
             regexp: /^[a-zA-Z0-9_ ]+$/,
             message: 'El nombre debe consistir en caracteres alfanuméricos'
           }
         }
-<<<<<<< HEAD
       },
       "model[brand_id]": {
         validators: {
@@ -43,8 +34,6 @@ function form_models_validates()
             message: 'Este campo es obligatório'
           }
         }
-=======
->>>>>>> products
       }
     }
   }).on('init.field.fv', function (e, data) {
@@ -59,7 +48,6 @@ function form_models_validates()
     }
   }).on('change', 'form', function (e) {
     e.preventDefault();
-<<<<<<< HEAD
   });
 }
 
@@ -68,10 +56,3 @@ function form_models_validates()
         return '<i class="glyphicon ' + icon + '"></i> ' + value;
     }
 */
-=======
-    //$("#form_products").bootstrapValidator('revalidateField', 'investments');
-  });
-}
-
-
->>>>>>> products

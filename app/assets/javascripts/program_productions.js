@@ -1,39 +1,17 @@
 $(document).ready(function () {
-<<<<<<< HEAD
   
   
   controlador = $("#controller").val();
    generic_response_form(controlador); 
 
-=======
-  form_validates();
-  
-  controlador = $("#controller").val();
->>>>>>> products
     
   $("#program_production_stock_initial,#program_production_stock_end").off("change").on("change", function () {
     calculate_variation_stock();
     calculate_program_production();
   });
-<<<<<<< HEAD
   
   form_validate_program_production();
   
-=======
-  /*$('#form_program_production').on('status.field.bv', function (e, data) {
-   formIsValid = true;
-   $('.form-group', $(this)).each(function () {
-   $(this).addClass('has-success')
-   formIsValid = formIsValid && $(this).hasClass('has-success');
-   });
-   
-   if (formIsValid) {
-   $('.submit-button', $(this)).attr('disabled', false);
-   } else {
-   $('.submit-button', $(this)).attr('disabled', true);
-   }
-   });*/
->>>>>>> products
 });
 
 function calculate_variation_stock()
@@ -44,11 +22,7 @@ function calculate_variation_stock()
   if (variation_stock >= 0 || typeof variation_stock !== "undefined" && !isNaN(variation_stock))
   {
     $("#program_production_variation_stock").val(variation_stock);
-<<<<<<< HEAD
     $('form').bootstrapValidator('revalidateField', 'program_production[variation_stock]');
-=======
-    $('form').bootstrapValidator('revalidateField', 'estimate_sale[variation_stock]');
->>>>>>> products
   }
   else
   {
@@ -62,11 +36,7 @@ function calculate_program_production()
   if (prog_production >= 0 || typeof prog_production !== "undefined" && !isNaN(prog_production))
   {
     $("#program_production_program_production").val(prog_production);
-<<<<<<< HEAD
     $('form').bootstrapValidator('revalidateField', 'program_production[program_production]');
-=======
-    $('form').bootstrapValidator('revalidateField', 'estimate_sale[program_production]');
->>>>>>> products
   }
   else
   {
@@ -76,7 +46,6 @@ function calculate_program_production()
 
 function form_validate_program_production()
 {
-<<<<<<< HEAD
   $('#form_program_productions').bootstrapValidator({
     framework: 'bootstrap',
     excluded: [':disabled', ':hidden', ':not(:visible)'],
@@ -84,20 +53,10 @@ function form_validate_program_production()
               valid: 'fa fa-check',
               invalid: 'fa fa-times',
               validating: 'fa fa-refresh'
-=======
-  $('#form_program_production').bootstrapValidator({
-    framework: 'bootstrap',
-    excluded: [':disabled', ':hidden', ':not(:visible)'],
-    icon: {
-      valid: 'glyphicon glyphicon-ok',
-      invalid: 'glyphicon glyphicon-remove',
-      validating: 'glyphicon glyphicon-refresh'
->>>>>>> products
     },
     fields: {
       'program_production[stock_end]': {
         validators: {
-<<<<<<< HEAD
                         notEmpty: {
                           message: 'Este campo es obligatorio'
                         },
@@ -187,92 +146,3 @@ function form_validate_program_production()
   });
 }
 
-=======
-          notEmpty: {
-            message: 'Este campo es obligatorio'
-          },
-          stringLength: {
-            min: 1,
-            max: 9,
-            message: 'El campo debe contener entre 1 y 9 numeros'
-          },
-          regexp: {
-            regexp: /^[0-9]+$/,
-            message: 'Debe contener solamente numeros'
-          }
-        }
-      },
-      'program_production[stock_initial]': {
-        validators: {
-          notEmpty: {
-            message: 'Este campo es obligatorio'
-          },
-          stringLength: {
-            min: 1,
-            max: 9,
-            message: 'El campo debe contener entre 1 y 9 numeros'
-          },
-          regexp: {
-            regexp: /^[0-9]+$/,
-            message: 'Debe contener solamente numeros'
-          }
-        }
-      },
-      'program_production[variation_stock]': {
-        validators: {
-          notEmpty: {
-            message: 'Este campo es obligatorio'
-          },
-          stringLength: {
-            min: 1,
-            max: 9,
-            message: 'El campo debe contener entre 1 y 9 numeros'
-          },
-          regexp: {
-            regexp: /^[0-9]+$/,
-            message: 'Debe contener solamente numeros'
-          }
-        }
-      },
-      'program_production[program_production]': {
-        validators: {
-          notEmpty: {
-            message: 'Este campo es obligatorio'
-          },
-          stringLength: {
-            min: 1,
-            max: 9,
-            message: 'El campo debe contener entre 1 y 9 numeros'
-          },
-          regexp: {
-            regexp: /^[0-9]+$/,
-            message: 'Debe contener solamente numeros'
-          }
-        }
-      }
-    }
-  }).on('status.field.bv', function (e, data) {
-    if (data.bv.getSubmitButton()) {
-      data.bv.disableSubmitButtons(false);
-    }
-  });
-
-  /*.on('keyup', '[name="program_production[variation_stock]"]', function() {
-   var isEmpty = $(this).val() == '';
-   $('#form_program_production')
-   .formValidation('enableFieldValidators', 'program_production[variation_stock]', !isEmpty)
-   .formValidation('enableFieldValidators', 'program_production[program_production]', !isEmpty);
-   
-   // Revalidate the field when user start typing in the password field
-   if ($(this).val().length == 1) {
-   $('#form_program_production').formValidation('validateField', 'program_production[variation_stock]')
-   .formValidation('validateField', 'program_production[program_production]');
-   }
-   });
-   /*  .on('success.field.fv', function (e, data) {
-   if (data.fv.getInvalidFields().length > 0) {    // There is invalid field
-   data.fv.disableSubmitButtons(true);
-   }
-   });*/
-}
->>>>>>> products
