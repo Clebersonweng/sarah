@@ -14,11 +14,13 @@
                     data-sort-order="desc" 
                     data-height="380"
                     id="table_models"
-                    data-card-view="false">
+                    data-card-view="false"
+                    data-show-footer="true"
+                    >
                 <thead>
             <tr>
                 <th class="col-md-2" data-field="id">Codigo</th> 
-                <th class="col-md-3" data-field="program_production_id">Programa de producción</th> 
+                <th class="col-md-3" data-field="program_production_id" data-footer-formatter="totalText">Programa de producción</th> 
                 <th class="col-md-3" data-field="tradename">Producto</th> 
                 <th class="col-md-3" data-field="supply_needed_total">Cantidad Necesesaria</th> 
                 <th class="col-md-3" data-halign="right" data-field="total">Total</th> 

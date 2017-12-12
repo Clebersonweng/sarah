@@ -18,6 +18,37 @@ class Supply < ApplicationRecord
   def self.total_need_supply(supply)
   	SupplyDetail.select("SUM(quantity_need)").where("supply_id=?",supply)
   end
+
+  def self.calculate_subtotal(product_id)
+	Supply.find_by_sql([
+								"
+									select 
+										farm_plots.area AS  area
+										,to_char (products.price::float, 'FM999999990.00')  AS price_product
+                                        ,products.tradename AS product_descr
+									    ,to_char (products.dosage::float, 'FM999999990.00') AS dosage
+									    ,to_char(products.dosage * area::float, 'FM999999990.00' ) AS quantity_needed
+									    ,to_char( (products.dosage * area) * (products.price)::float, 'FM999999990.00' )AS subtotal
+									from 
+									    products
+									    ,farming_plots as farm_plots
+									    ,program_productions
+									    ,estimate_sales
+									where 
+									    program_productions.estimate_sale_id = estimate_sales.id
+									    AND estimate_sales.farming_plot_id = farm_plots.id
+									    AND products.id = #{product_id}
+									group by 
+										area
+                                        ,product_descr
+										,price_product
+										,products.price
+										,dosage
+										,quantity_needed
+								"
+							])
+  end
+  
   def self.list_supply_and_detail()
 	Supply.find_by_sql (["			select 
 										    supplies.id
@@ -57,6 +88,30 @@ class Supply < ApplicationRecord
 											supply_needed_all_total.supply_needed_total
 									"]
 						)
-  end
+    end
 
+	def self.view_farming_plot_area
+
+			Supply.find_by_sql ([   "	select  
+											farm_plots.name AS farm_name
+											,farm_plots.area AS  farm_area
+	                                        ,program_productions.program_production AS prog_total_production
+										from 
+										    products
+										    ,farming_plots as farm_plots
+										    ,program_productions
+										    ,estimate_sales
+										where 
+										    program_productions.estimate_sale_id = estimate_sales.id
+										    AND estimate_sales.farming_plot_id = farm_plots.id
+										    
+										group by 
+											farm_name
+	                                        ,farm_area
+	                                        ,prog_total_production
+	                                "
+	                            ])
+		
+	end
+	
 end

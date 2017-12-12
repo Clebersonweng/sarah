@@ -26,7 +26,7 @@
                  </div>
              </div>
 
-             <div class="form-group" id="gr_farming_plot_id">
+             <div class="form-group">
                  <label class=" col-sm-3 control-label">Parcela Agr.</label>
                  <div class="col-sm-4">
                      <%= f.select :farming_plot_id, options_for_select(@farming_plots, f.object.farming_plot_id), {}, { :class => 'form-control', :required => true }%>
@@ -34,7 +34,7 @@
                  </div>
              </div>
 
-             <div class="form-group" id="gr_type_of_crop_id">
+             <div class="form-group">
                  <label  class=" col-sm-3 control-label">Tipo de Cultivo:</label>
                  <div class="col-sm-4">
                      <%=  f.select :type_of_crop_id, options_for_select({}, f.object.farming_plot_id), {}, { :class => 'form-control', :required => true } %>

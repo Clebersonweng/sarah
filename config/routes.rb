@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :varieties
   
   post 'estimate_sales/verify_new_estimate_sale'
+  post 'supplies/calculate_subtotal'
 
   devise_for :users
 

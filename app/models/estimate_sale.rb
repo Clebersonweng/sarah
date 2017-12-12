@@ -14,6 +14,7 @@ class EstimateSale < ApplicationRecord
     #[@date_init, @date_end].reject(&:blank?).join(" ")
     "#{self.date_init}"+" | "+"#{self.date_end}"
   end
+  
   def to_s
     full_periods
   end

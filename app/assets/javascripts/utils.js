@@ -1,7 +1,9 @@
 var controlador;
 var _id;
 $(document).ready(function ()
-{  
+{ 
+
+  $('.panel-body').fadeIn(); 
   if (typeof controlador == "undefined")
   {
     alert("variable controlador no declarada");
@@ -29,7 +31,7 @@ $(document).ready(function ()
     confirm_modal();
   });
 
-  NProgress.configure({
+   NProgress.configure({
                         showSpinner: false,
                         ease: 'ease',
                         speed: 500
@@ -358,10 +360,21 @@ var loadBootstrapTable = function (data) {
   });
 };
 
-function totalFormatter(data) {
-    console.log(data);
-    return data.length;
+function totalText(data) 
+{
+  return 'Total';
+}
 
+function footer_output_text(data) 
+{
+    return 'Total :';
+}
+function sumFormatter(data) 
+{
+    field = this.field;
+    return data.reduce(function (sum, row) {
+        return sum + (+row[field]);
+    }, 0);
 }
 
 $(document).on('turbolinks:click', function() {

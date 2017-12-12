@@ -20,7 +20,7 @@ class EstimateSalesController < ApplicationController
   end
   
   #verifica que no exista un mismo tipo de cultivo para un mismo periodo
-  #/*todavia tiene algunos bugs en la hora de tener un mismo cultivo*/
+  #/*todavia tiene algunos bugs en la hora de tener un mismo cultivo [solucionado]*/
   def verify_new_estimate_sale
     
     @date_init        = params[:date_init]

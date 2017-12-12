@@ -255,6 +255,7 @@ function verify_exist_type_crop_to_period()
     }
   });
 }
+
 function run_option_result(response)
 {
   var select = $("#estimate_sale_type_of_crop_id");
