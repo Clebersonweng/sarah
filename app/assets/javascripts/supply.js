@@ -13,7 +13,9 @@ $(document).ready(function ()
    $('#tb_suppy_detail').bootstrapTable({
       formatNoMatches: function () {
          return "No cuenta con insumos agregado";
-      }
+      },
+      cache: false,
+      remove: actionEvents
    });
 
    $('#supply_detail_product').on("change",function (e) 
@@ -25,7 +27,8 @@ $(document).ready(function ()
       event.preventDefault();
 
       $('#tb_suppy_detail').bootstrapTable("append", generate_row_dt());
-      product_id          =  $("#supply_detail_product option:selected").val();
+      //product_id          =  $("#supply_detail_product option:selected").val();
+     // console.log(generate_row_dt());
       //var data            = "product_id="+product_id;
       //generate_row_bt("calculate_subtotal",data);
       //generate_row_dt();
@@ -35,13 +38,40 @@ $(document).ready(function ()
   {
       call_view_data_farm_plot("calculate_subtotal",""); 
   }
-  
 
+   $('#tb_suppy_detail').on('check.bs.table', function (e, row) 
+   {
+      $remove = $('.remove');
+      selections = [];
+      $remove.click(function () {
+      var ids = getIdSelections($('#tb_suppy_detail'));
+      $('#tb_suppy_detail').bootstrapTable('remove', {
+            field: 'id',
+            values: [row.id]
+         });
+         $remove.prop('disabled', true);
+         var n_total = row.subtotal
+         total = total - eval(n_total);
+         console.log(total);
+                  console.log(n_total);
+         $("#supplies_total").text(total);
+         $("#supply_total").val(total);
+      });
+   });
 });
+
+function getIdSelections(table) 
+{
+   return $.map(table.bootstrapTable('getSelections'), function (row) {
+      console.log(row.id);
+      return row.id
+   });
+}
+
+
 
 function generate_row_dt()
 { 
-   var _data_;
     product_id          =  $("#supply_detail_product option:selected").val();
     var product         =  $("#supply_detail_product option:selected").text();
     var price           =  $("#supply_detail_product option:selected").data("price");
@@ -54,25 +84,27 @@ function generate_row_dt()
     $("#supply_total").val(total.toFixed(0));
     addNewRow(product_id,quantity_need.toFixed(2), subtotal.toFixed(2));
 
-     _data_ = {
+   var  _data_ = {
                   "id": "0"+codigo++,
                   "product": product,
                   "price": price,
                   "dosage": dosage,
                   "quantity_need": quantity_need.toFixed(2) ,          
                   "subtotal": subtotal.toFixed(2),
-                  "Action" : '<a class="remove  btn btn-danger delete btn-sm" onclick="delete_row_table(this)" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></a>',
+                  "Action" : '<a class="remove  btn btn-danger delete btn-sm" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></a>',
                };
-      return _data_;
+
+   return _data_ ;
+
 }
 
-function delete_row_table(evt)
+function delete_row_table(obj)
 {
    total = 0.0;
-   $(evt).parent().parent().remove().fadeOut();
+
+  // $(obj).parent().parent().remove().fadeOut();
    $("#tb_suppy_detail tbody tr").each(function(indice,valor) {
-      var subtotal = parseFloat($(this).find("td:eq(5)").html());
-      console.log(parseFloat(subtotal));
+      var subtotal = parseFloat($(obj).find("td:eq(6)").html());
       if (!isNaN(subtotal))
       {
          total           += subtotal;
@@ -91,9 +123,9 @@ function call_view_data_farm_plot(path,data)
          data: data,
          url: "/" + controlador + "/"+path,
          success: function (response) {
-             $("#farm_name").val(response["0"].farm_name) ;
-             $("#farm_area").val(response["0"].farm_area) ;
-             $("#farm_prog_total_production").val(response["0"].prog_total_production);  
+            $("#farm_name").val(response["0"].farm_name) ;
+            $("#farm_area").val(response["0"].farm_area) ;
+            $("#farm_prog_total_production").val(response["0"].prog_total_production);  
          },
          error: function (response) 
          {
@@ -159,9 +191,9 @@ function enabled_button_add_row(id)
 function addNewRow(product_id,quantity, subtotal) {
   count++;
       $("#addRow").append(
-        "<input type='hidden' size='20' name='supply[supply_details_attributes]["+count+"][product_id]' id='txt_0' value="+product_id+">"+
-        "<input type='hidden' size='20' name='supply[supply_details_attributes]["+count+"][quantity_needed]' id='txt_1' value="+quantity+">"+
-        "<input type='hidden' size='20' name='supply[supply_details_attributes]["+count+"][subtotal]' id='txt_2' value="+subtotal+">"    
+        "<input type='hidden' size='20' name='supply[supply_details_attributes]["+count+"][product_id]' id='txt_"+count+"' value="+product_id+">"+
+        "<input type='hidden' size='20' name='supply[supply_details_attributes]["+count+"][quantity_needed]' id='txt_"+count+"' value="+quantity+">"+
+        "<input type='hidden' size='20' name='supply[supply_details_attributes]["+count+"][subtotal]' id='txt_"+count+"' value="+subtotal+">"    
         );
 }
 
