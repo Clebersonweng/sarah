@@ -20,6 +20,7 @@
                             <th data-visible="false" data-field="id">Código</th>
                             <th data-field="name" >Nombre</th> 
                             <th data-field="price" >Precio</th>                            
+                            <th data-field="unit_of_measurement_id" >U.M</th>                            
                             <th data-field="description"  data-sortable="true">Descripción</th>                            
                             <th data-halign="right" data-align="right" data-formatter="actionFormatter" data-events="actionEvents">Acción</th>
                         </tr>
@@ -30,6 +31,7 @@
                               <td><%= type_service.id %></td>
                               <td><%= type_service.name %></td>
                               <td><%= number_with_precision(type_service.price, :precision => 0, :delimiter => '.' )   %></td>
+                              <td><%= type_service.unit_of_measurement.name %></td>                              
                               <td><%= type_service.description %></td>                              
                               
                           </tr>

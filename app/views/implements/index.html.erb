@@ -30,17 +30,17 @@
             </thead>
             <tbody>
                 <% @implements.each do |implement| %>
-                 <tr>
-                    <td style="widhth:0%"><%= implement.id %></td>
-                    <td style="widhth:20%"><%= implement.machine.model.name %></td>
-                    <td style="widhth:20%"><%= implement.brand %></td>
-                    <td style="widhth:10%"><%= implement.name %></td>                    
-                    <td style="widhth:10%"><%= implement.model %></td>
-                    <td style="widhth:10%"><%= implement.oper_time %></td>
-                    <td style="widhth:10%"><%= implement.coef_cccr%></td>                   
-                    <td style="widhth:10%"><%= implement.year %></td>
-                    <td style="widhth:5%"><%= number_with_precision(implement.price, :precision => 0, :delimiter => '.') %></td>
-                  </tr>
+                    <tr>
+                        <td style="widhth:0%"><%= implement.id %></td>
+                        <td style="widhth:20%"><%= implement.machine.model.name %></td>
+                        <td style="widhth:20%"><%= implement.brand %></td>
+                        <td style="widhth:10%"><%= implement.name %></td>                    
+                        <td style="widhth:10%"><%= implement.model %></td>
+                        <td style="widhth:10%"><%= implement.oper_time %></td>
+                        <td style="widhth:10%"><%= implement.coef_cccr%></td>                   
+                        <td style="widhth:10%"><%= implement.year %></td>
+                        <td style="widhth:5%"><%= number_with_precision(implement.price, :precision => 0, :delimiter => '.') %></td>
+                    </tr>
                 <% end %>
              </tbody>
          </table>

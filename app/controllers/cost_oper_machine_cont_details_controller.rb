@@ -4,7 +4,10 @@ class CostOperMachineContDetailsController < ApplicationController
   # GET /cost_oper_machine_cont_details
   # GET /cost_oper_machine_cont_details.json
   def index
-    @cost_oper_machine_cont_details = CostOperMachineContDetail.all
+    #@cost_oper_machine_cont_details = CostOperMachineContDetail.all
+
+   post = CostOperMachineCont.find(params[:cost_oper_machine_cont_id])
+   @cost_oper_machine_cont_details = post.cost_oper_machine_cont_details
   end
 
   # GET /cost_oper_machine_cont_details/1

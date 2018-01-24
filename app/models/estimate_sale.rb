@@ -1,13 +1,13 @@
 class EstimateSale < ApplicationRecord
-  belongs_to :farming_plot
-  belongs_to :type_of_crop
-  has_one :program_production
-  has_one :cost_oper_machine
-  validates_presence_of :estimate_production, :price, :gross_sale, :date_init,:date_end
-  before_create :add_zeros_to_code
-  validates :code, uniqueness: true, length: { maximum: 7 }
-  validates :estimate_production, length: { minimum: 1 },length: { maximum: 7 } 
-  validates :price, :format => { :with => /\A\d+(?:\.\d{0,2})?\z/ }, :numericality => {:greater_than => 0}
+   belongs_to :farming_plot
+   belongs_to :type_of_crop
+   has_one :program_production
+   has_one :cost_oper_machine
+   validates_presence_of :estimate_production, :price, :gross_sale, :date_init,:date_end
+   before_create :add_zeros_to_code
+   validates :code, uniqueness: true, length: { maximum: 7 }
+   validates :estimate_production, length: { minimum: 1 },length: { maximum: 7 } 
+   validates :price, :format => { :with => /\A\d+(?:\.\d{0,2})?\z/ }, :numericality => {:greater_than => 0}
   
   
   def full_periods
@@ -15,9 +15,9 @@ class EstimateSale < ApplicationRecord
     "#{self.date_init}"+" | "+"#{self.date_end}"
   end
   
-  def to_s
-    full_periods
-  end
+   def to_s
+      full_periods
+   end
   #["SELECT body FROM comments WHERE author = :user_id OR approved_by = :user_id", { :user_id => user_id }]
    def self.validate_periods(farming_plot,date_init, date_end)
       #EstimateSale.where(" date_init >= ? AND date_end <= ? AND farming_plot_id = ?",date_init, date_end,faming_plot)
@@ -42,7 +42,7 @@ class EstimateSale < ApplicationRecord
                           
    end
   
-  def self.get_crops_not_exist_es()
+   def self.get_crops_not_exist_es()
     EstimateSale.find_by_sql ["
                                 select tc.id, tc.name 
                                 from type_of_crops as tc, 
@@ -51,7 +51,7 @@ class EstimateSale < ApplicationRecord
                                 where 
                                 es.type_of_crop_id <> tc.id and es.farming_plot_id = fp.id 
       "]
-  end
+   end
   
   private
   def add_zeros_to_code 

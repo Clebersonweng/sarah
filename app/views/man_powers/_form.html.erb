@@ -1,74 +1,84 @@
-<%= form_for(man_power) do |f| %>
-  <% if man_power.errors.any? %>
-    <div id="error_explanation">
-        <h2><%= pluralize(man_power.errors.count, "error") %> prohibited this man_power from being saved:</h2>
+<div class="panel-body">
+   <%= form_for(@man_power,html: {class: 'form-horizontal', id: "form_man_powers", remote: true}) do |f| %>
 
-        <ul>
-            <% man_power.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-        </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-      <%= f.label :program_production_id %>
-      <input type="text" name="man_power[program_production_id]" value="<%=@prog_production.id%>">
-  </div>
-
- 
-
-
-  <label>Tipo de Trabajo</label>
-
-  <%= select("work","type_of_work_id", options_for_select(TypeOfWork.all.collect {|p| [ p.name, p.id,  ] }),:prompt => "----CHOOSE---")%> 
-
-  <label>Employee</label>
-
-  <%= select("emp","employee_id", options_for_select(Person.all.collect {|p| [ p.name, p.id, {"data-salary"=>p.salary } ] }),:prompt => "----CHOOSE---")%> 
-
-  <label>Hours Needed</label>
-  <input type="text" name="hours_needed" id="hours_needed">
-
-  <button  id="agregarManoDeObra" >AGREGAR</button>
-
-
-  <div id="detalhes-container">
-      <table id="tabla">
-          <thead>
-              <tr>
+      <div class="col-sm-6 col-lg-12 col-md-12 col-xs-12">
+         <div class="row">
+            <div class="col-lg-6">
+               <div class="form-group">
+                  <%= f.label :description,"Empleado:" ,class: "control-label col-lg-5"%>
+                  <div class="col-sm-4 col-md-2 col-xs-12 col-lg-6">
+                    <%= select("man_power_details","employee_id", options_for_select(@employee), {}, {required: 'true', class: "form-control", include_blank: ''})%>   
+                  </div>
+               </div>
+            </div>
+            <div class="col-lg-6">
+               <div class="form-group">
+                  <%= f.label :description,"Tipo de trabajo:" ,class: "control-label col-lg-4"%>
+                  <div class="col-sm-6 col-md-6 col-xs-12 col-lg-6">
+                    <%= select("man_power_details","type_of_work_id", options_for_select(@type_of_work), {}, {required: 'true', class: "form-control", include_blank: ''})%>   
+                  </div>
+               </div>  
+            </div>           
+         </div>
+         <div class="row"> 
+            <div class="col-lg-6">
+               <div class="form-group">
+                  <%= f.label :description,"Horas Necesárias:" ,class: "control-label col-lg-5"%>
+                  <div class="col-sm-6 col-md-6 col-xs-12 col-lg-6">
+                     <input id="hours_needed" value="" class="form-control only_numbers" /> 
+                  </div>
+               </div>
+            </div>
+            <div class="form-group col-xs-1 col-sm-1">   
+               <a href="#" class="btn btn-default btn-sm" id="btn_man_power">Agregar</a>
+            </div>            
+         </div>
+         <table 
+               id="tb_man_power" 
+               data-height="300" 
+               data-show-footer="true" 
+               class="table  table-hover table-striped table-condensed display" 
+               data-toggle="table"
+               data-show-refresh="false" 
+               data-pagination="false" 
+               data-icons="icons"
+               data-footer-style="footerStyle"
+               data-unique-id="tb_sp_detail"
+               data-checkbox-header="false"
+         >
+            <thead>
+               <tr>
+                  <th data-field="id" data-checkbox="true"></th>
+                  <th data-field="code">Código</th>
+                  <th data-field="employee_id">Empleado</th>
+                  <th data-field="type_of_work_id">Tipo de trabajo</th>
+                  <th data-field="hours_needed">Horas necesárias</th>
+                  <th data-halign='right' data-id="subtotal" data-align='right' data-field="subtotal" >Sub-total</th>
+                  <th data-halign='right' data-align='right' data-field="Action" data-events="remove">Acción</th>
+               </tr>
+            </thead>
+            <tbody></tbody>
                  
-                  <th width="20%"> tipo de trabajo</th>
-                  <th width="10%">funcionario</th>
-                  <th width="20%">horas necesarias</th>                  
-                  <th width="20%">Subtotal</th>
-                  <th colspan="3"></th>
+            <tfoot>
+              <tr>
+               <td class="h6 font-weight-bold" colspan="2"><strong>Total :<strong></td>
+               <td colspan="5" class="font-weight-bold text-right">
+                  <strong><span id="man_powers_total"></span><strong>
+               </td>
               </tr>
-          </thead>
-
-          <tbody>
-
-
-
-          </tbody>
-
-      </table>
-
-
-
-      <div id="addFilas">
-          
+            </tfoot>
+            <div id="add_row_man_power"></div>
+         </table>
+         
+         <%= render('layouts/error_lists')%>
+         <%= render('layouts/buttons')%>
       </div>
- <div class="field">
-     
-      <%= f.hidden_field  :total_hours_needed %>
-  </div>
+   <%end%>
+</div> 
+<div id="addRow">
+      <input type="text" name="cost_oper_machine_cont[total]" id="cost_oper_cont_total"/>
+      <input type="text" name="cost_oper_machine_cont[program_production_id]" id="program_production_id" 
+      value="<%= @program_production_id%>" /> 
+</div>
 
-      <div class="field">
-          <%= f.label :total %>
-          <%= f.text_field :total  %>
-      </div>
-      <div class="actions">
-          <%= f.submit %>
-      </div>
-    <% end %>
+<input type="hidden" id="controller" value="<%= controller_name%>">

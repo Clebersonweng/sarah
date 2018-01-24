@@ -22,9 +22,9 @@ $(document).ready(function ()
                                 autoclose: true
                               });
 
-   $(document).on('click', '.pull-right.pagination', {}, function (e) {
-      confirm_modal();
-   });
+  $(document).on('click', '.pull-right.pagination', {}, function (e) {
+    confirm_modal();
+  });
 
   $("#buscar").on("keyup", function ()
   {
@@ -347,7 +347,6 @@ function enabled_button_add_item(input_id,id)
    }
   
 }
-
 window.actionEvents = {
     'click .edit': function (e, value, row, index) {
     },
@@ -358,24 +357,23 @@ window.actionEvents = {
 };
 
 
-function flatJSON(res) 
-{
+function flatJSON(res) {
        return  $.flatJSON({data:res, flat:true});
 }
 
 var loadBootstrapTable = function (data) {
-    
-   $('table').bootstrapTable({
-      data: data.data,
-      needFlatJSON: true,
-      height: 400,
-      width: 400,
-      striped: true,
-      pagination: true,
-      pageSize: 15,
-      pageList: [10, 15, 20, 25, 30],
-      search: true
-   });
+    debugger;
+  $('table').bootstrapTable({
+    data: data.data,
+    needFlatJSON: true,
+    height: 400,
+    width: 400,
+    striped: true,
+    pagination: true,
+    pageSize: 15,
+    pageList: [10, 15, 20, 25, 30],
+    search: true
+  });
 };
 
 function totalText(data) 
@@ -387,7 +385,6 @@ function footer_output_text(data)
 {
     return 'Total :';
 }
-
 function sumFormatter(data) 
 {
     field = this.field;
@@ -398,17 +395,17 @@ function sumFormatter(data)
 
 $(document).on('turbolinks:click', function(e) 
 {
-   setTimeout(function() 
-   {
+  setTimeout(function() 
+  {
        NProgress.start();    
-   }, 600);
+    }, 600);
 
    $(".panel-body", this).fadeOut(500,function()
    {
-      NProgress.start(); 
-      $(".panel-body").fadeIn(1000);
+         NProgress.start(); 
+         $(".panel-body").fadeIn(1000);
    });
-   NProgress.done();
+  NProgress.done();
 
 });
 

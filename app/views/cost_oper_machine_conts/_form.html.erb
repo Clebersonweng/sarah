@@ -10,75 +10,116 @@
       </ul>
   </div>
 <% end %>
-</br>
-</br>
 
-            <div class="panel-body">
-                <%=form_for @cost_oper_machine_cont, url: cost_oper_machine_conts_path,:html => { class: 'form-inline' } do |f| %>
-                    <div class="col-sm-12">
-                        </br>
-                        <div class="row">
-                            <div class="form-group col-xs-6 col-sm-6">
-                                <%= f.label :program_production_id%>  
-                               
-                              </div>
-                            <input value="<%  @farma %>"/>
-                          </div>
-                          <div class="row"></br>
-                              <div class="form-group col-xs-10">
-                                  <div class="form-group col-xs-4 col-sm-4">
-                                      <label>Type Of Service  </label>
-                                      <%= select("type_service","type_of_service_id", options_for_select(@type_services), {}, {required: 'true', class: "form-control", include_blank: ''})%>                        
-                                    </div>
+<div class="panel-body">
+   <%= form_for(@cost_oper_machine_cont,html: {class: 'form-horizontal', id: "form_cost_oper_machine_conts", remote: true}) do |f| %>
 
-                                    <div class="form-group col-xs-3 col-sm-3">                               
-                                        <label for="amount">Amount</label>                            
-                                        <input id="amount" class="form-control"/>
-                                    </div>                                    
-
-                                    <div class="form-group col-xs-1 col-sm-1">                               
-                                        <a href="#" class="btn btn-default" id="agregarCostOperOuts">ADD</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </br>
-                        <div id="detalhes-container">
-                            <table id="tabla" class=" table ">
-                                <thead>
-                                    <tr>                                        
-                                        <th>Type Of Service</th>
-                                        <th>U.M</th>
-                                        <th>Precio</th>
-                                        <th>amount</th> 
-                                        <th>Subtotal</th>
-                                        <th colspan="3"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!--agrego de forma dinamica-->
-
-                                </tbody>
-                                <tfoot> <tr>                                         
-                                        <th id="15">Total</th>
-                                        <th></th><th></th><th></th><th id="TOTAL"></th>
-                                    </tr>
-                                </tfoot>
-
-                            </table>
-                            
-                            <div id="addFilas">
-
-                            </div>
-                             <input type="text" name="cost_oper_machine_cont[total]" id="InputTotal"/>
-                            <div class="controls pull-right">
-                                <button type="submit" class="btn btn-primary" >Save</button>
-                                <button type="reset" class="btn btn-danger" id="cancel">Cancel</button>
-                            </div>
-                          <%end%>
-                      </div>
-                     
+      <div class="col-sm-6 col-lg-12 col-md-12 col-xs-12">
+         <div class="row">
+            <div class="col-lg-5">
+               <div class="form-group">
+                  <%= f.label :program_production_id,"Parcela:" ,class: "control-label col-sm-6 col-lg-5 col-xs-12"%>
+                  <div class="col-lg-6">
+                     <input value="<%= @farm_name %>" class="form-control" readonly/>
                   </div>
-              </div>
-          </div>
+               </div>
+            </div>
+            <div class="col-lg-3">
+               <div class="form-group">
+                  <%= f.label :program_production_id,"Área:" ,class: "control-label col-sm-6 col-lg-4 col-xs-12"%>
+                  <div class="col-lg-6 col-md-2">
+                     <input id="farm_area" value="<%=  @farm_area %>" class="form-control" readonly/>
+                  </div>
+               </div>
+            </div>
+            <div class="col-lg-4">
+               <div class="form-group">
+                  <%= f.label :program_production_id,"Producción:" ,class: "control-label col-sm-6 col-lg-4 col-xs-12"%>
+                  <div class="col-lg-6 col-md-2">
+                     <input id="program_production_id" name="cost_oper_machine_cont[program_production_id]" 
+                     value="<%=  @quantity_production %>" class="form-control" readonly/>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-lg-5">
+               <div class="form-group">
+                  <%= f.label :description,"Tipo de servicio:" ,class: "control-label col-lg-5"%>
+                  <div class="col-sm-4 col-md-2 col-xs-12 col-lg-6">
+                    <%= select("type_service","type_of_service_id", options_for_select(@type_services), {}, {required: 'true', class: "form-control", include_blank: ''})%>   
+                  </div>
+               </div>
+            </div>
+            <div class="col-lg-3" id="implement">
+               <div class="form-group">
+                  <%= f.label :description,"Implemento:" ,class: "control-label col-lg-4"%>
+                  <div class="col-sm-6 col-md-6 col-xs-12 col-lg-6">
+                    <%= select("cost_oper_machine_cont_details","implement_id", options_for_select(@implements), {}, {required: 'true', class: "form-control", include_blank: ''})%>   
+                  </div>
+               </div>
+            </div>
+            <div class="col-lg-3">
+               <div class="form-group">
+                  <%= f.label :description,"Cantidad:" ,class: "control-label col-lg-4"%>
+                  <div class="col-sm-6 col-md-6 col-xs-12 col-lg-6">
+                     <input id="quantity" value="" class="form-control only_numbers" /> 
+                  </div>
+               </div>
+            </div>
+            <div class="form-group col-xs-1 col-sm-1">   
+               <a href="#" class="btn btn-default btn-sm" id="btn_add_cost_out">Agregar</a>
+            </div>            
+         </div>
+         <table 
+               id="tb_co_mach_cont" 
+               data-height="300" 
+               data-show-footer="true" 
+               class="table  table-hover table-striped table-condensed display" 
+               data-toggle="table"
+               data-show-refresh="false" 
+               data-pagination="false" 
+               data-icons="icons"
+               data-footer-style="footerStyle"
+               data-unique-id="tb_sp_detail"
+               data-checkbox-header="false"
+         >
+            <thead>
+               <tr>
+                  <th data-field="id" data-checkbox="true"></th>
+                  <th data-field="code">Código</th>
+                  <th data-field="type_of_service_id">Tipo de servício</th>
+                  <th data-field="price">Precio</th>
+                  <th data-field="quantity">Cantidad</th>
+                  <th data-halign='right' data-id="subtotal" data-align='right' data-field="subtotal" >Sub-total</th>
+                  <th data-halign='right' data-align='right' data-field="Action" data-events="remove">Acción</th>
+               </tr>
+            </thead>
+            <tbody></tbody>
+                 
+            <tfoot>
+              <tr>
+               <td class="h6 font-weight-bold" colspan="2"><strong>Total :<strong></td>
+               <td colspan="5" class="font-weight-bold text-right">
+                  <strong><span id="outsourced_total"></span><strong>
+               </td>
+              </tr>
+            </tfoot>
+            <div id="add_row_cost_oper_cont"></div>
+         </table>
+         
+         <%= render('layouts/error_lists')%>
+         <%= render('layouts/buttons')%>
       </div>
+   <%end%>
+</div>
+   
+   <div id="addRow">
+      <input type="text" name="cost_oper_machine_cont[total]" id="cost_oper_cont_total"/>
+      <input type="text" name="cost_oper_machine_cont[program_production_id]" id="program_production_id" 
+      value="<%= @program_production_id%>"   
+   </div>
+
+   />
+
+<input type="hidden" id="controller" value="<%= controller_name%>">

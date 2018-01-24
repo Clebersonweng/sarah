@@ -4,7 +4,7 @@ class SuppliesController < ApplicationController
    # GET /supplies
    # GET /supplies.json
    def index
-   @supplies = Supply.list_supply_and_detail
+    @supplies = Supply.list_supply_and_detail
    #insumo = Supply.all
    
    #@supply_details = SupplyDetail.all.where(supply_id: insumo)
@@ -50,16 +50,16 @@ class SuppliesController < ApplicationController
    def create
    #get_all
 
-   @supply = Supply.new(supply_params)
-   respond_to do |format|
-     if @supply.save
-       #format.html { redirect_to @supply, notice: 'Supply was successfully created.' }
-        format.json { render json: @supply }
-     else
-       #format.html { render :new }
-       format.json { render json: @supply.errors, status: :unprocessable_entity }
-     end
-   end
+      @supply = Supply.new(supply_params)
+         respond_to do |format|
+            if @supply.save
+             #format.html { redirect_to @supply, notice: 'Supply was successfully created.' }
+              format.json { render json: @supply }
+            else
+             #format.html { render :new }
+             format.json { render json: @supply.errors, status: :unprocessable_entity }
+            end
+         end
    end
 
    # PATCH/PUT /supplies/1
@@ -90,16 +90,15 @@ class SuppliesController < ApplicationController
       
       @calc_container     = Supply.view_farming_plot_area()
 
-      respond_to do |format|
-      if @calc_container.present?
-        #format.html { redirect_to @unit_of_measurements, notice: 'Unidad de medida actualizada con exito.' }
-        format.json { render json: @calc_container, status: :ok, msg:"success" }
-      else
-        #format.html { render :new }
-        format.json { render json: calc_container, status: :error, msg:"Ya existe este tipo de cultivo para el periodo." }
-      end
-    end
-
+         respond_to do |format|
+            if @calc_container.present?
+             #format.html { redirect_to @unit_of_measurements, notice: 'Unidad de medida actualizada con exito.' }
+             format.json { render json: @calc_container, status: :ok, msg:"success" }
+            else
+             #format.html { render :new }
+             format.json { render json: calc_container, status: :error, msg:"Ya existe este tipo de cultivo para el periodo." }
+            end
+         end
    end
 
 

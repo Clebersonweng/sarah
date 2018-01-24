@@ -50,7 +50,8 @@ class Supply < ApplicationRecord
   end
   
   def self.list_supply_and_detail()
-	Supply.find_by_sql (["			select 
+	Supply.find_by_sql (["		
+										select 
 										    supplies.id
 										    ,prog_prod.program_production as total_production 
 										    ,products.tradename

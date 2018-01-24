@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   
   post 'estimate_sales/verify_new_estimate_sale'
   post 'supplies/calculate_subtotal'
+  post 'cost_oper_machine_conts/get_farming_plot'
 
   devise_for :users
 

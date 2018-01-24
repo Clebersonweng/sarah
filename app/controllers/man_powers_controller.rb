@@ -5,6 +5,7 @@ class ManPowersController < ApplicationController
   # GET /man_powers
   # GET /man_powers.json
   def index
+    get_variables
     @man_powers = ManPower.all
   end
 
@@ -88,5 +89,6 @@ class ManPowersController < ApplicationController
     def get_variables
       @employee = Person.all.collect{ |type|[type.name, type.id]}
       @type_of_work = TypeOfWork.all.collect{ |type|[type.name, type.id]}
+      @path = "mano de obra"
     end
 end

@@ -1,26 +1,43 @@
-
-<div class="row">
-    <div class="col-sm-12">
-        <div class="panel panel-default">
-            <div class="panel-heading"><h3 align="Machinery Outsourced"></h3></div>
-            <%=render 'layouts/submenu' %>
-            <div class="panel-body">
-                <table data-toggle="table" data-url="cost_oper_machine_cont"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
-                    <thead>
-                        <tr>
-                            <th data-field="id" data-checkbox="true">Item ID</th>
-                            <th data-field="code" >Farming Plot</th> 
-                            <th data-field="name" >Type Of Service</th>                            
-                            <th data-field="area"  data-sortable="true">U.M</th>
-                            <th data-field="description">Total</th>
-                            <th>action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                       
-                    </tbody>
-                </table>
-            </div>
-        </div>
+<div class="panel-body">
+    <div class="table-responsive">
+          <table    data-width="100%"
+                    class="table  table-hover table-striped table-condensed display"
+                    data-toggle="table" 
+                    data-search="true" 
+                    data-toolbar="toolbar1"
+                    data-show-toggle="true"
+                    data-show-refresh="false"
+                    data-pagination="true"
+                    onlyInfoPagination="false"
+                    data-icons="icons"
+                    data-height="380"
+                    data-sort-name="name"
+                    data-sort-order="desc" 
+                    data-card-view="false">
+            <thead>
+                    <tr>
+                        <th data-visible="false" class="hidden" style="width:3%" data-field="machine_cont_id">Id</th> 
+                        <th data-field="code" >Código</th> 
+                        <th data-field="farm_plots" >Parcela agrícola</th> 
+                        <th data-field="type_service" >Tipo de servicio</th>                            
+                        <th data-field="um"  data-sortable="true">U.M</th>
+                        <th data-align="right" data-field="total">Total</th>
+                        <th data-halign="right" data-align="right"  data-switchable="false" data-formatter="actionFormatter" data-events="actionEvents">Acción</th>
+                    </tr>
+                </thead>
+            <tbody>
+            <% @cost_oper_machine_conts.each do |machine_cont| %>
+               <tr>
+                  <td><%= machine_cont.machine_cont_id %></td>
+                  <td><%= machine_cont.code %></td>
+                  <td><%= machine_cont.farm_plots %></td>
+                  <td><%= machine_cont.type_service%></td>
+                  <td><%= machine_cont.um%></td>
+                  <td><%= number_with_precision(machine_cont.total, :precision => 0, :delimiter => '.' ) %></td>
+               </tr>
+            <% end %>
+            </tbody>
+        </table>
     </div>
 </div>
+<input type="hidden" id="controller" value="<%= controller_name%>">
