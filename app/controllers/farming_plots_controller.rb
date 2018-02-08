@@ -77,7 +77,7 @@ class FarmingPlotsController < ApplicationController
   def get_all
     @person = Person.all.collect { |type| [type.name, type.id]}
     @charts = ChartOfAccount.all.collect {|type| [type.name, type.id]}
-    @path = "parcela agrícola"
+    @path = "/ catastros / parcela / parcela agrícola"
 
   end
 end

@@ -1,5 +1,7 @@
-<%= form_for(manu_indi_expense) do |f| %>
-  <% if manu_indi_expense.errors.any? %>
+
+<%= form_for( @manu_indi_expense, html: {class: 'form-horizontal', id: 'form_manu_indi_expenses', remote:true}) do |f| %>
+
+   <% if manu_indi_expense.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(manu_indi_expense.errors.count, "error") %> prohibited this manu_indi_expense from being saved:</h2>
 
@@ -9,11 +11,11 @@
       <% end %>
       </ul>
     </div>
-  <% end %>
+   <% end %>
 
   <div class="field">
-    <%= f.label :program_production %>
-    <%= f.text_field :program_production %>
+    <%= f.label :program_production_id %>
+    <%= f.text_field :program_production_id %>
   </div>
 
   <div class="field">
@@ -39,4 +41,6 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+
 <% end %>
+<input type="text" id="controller" value="<%=controller_name%>">

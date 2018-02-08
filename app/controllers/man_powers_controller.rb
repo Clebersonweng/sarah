@@ -89,6 +89,6 @@ class ManPowersController < ApplicationController
     def get_variables
       @employee = Person.all.collect{ |type|[type.name, type.id]}
       @type_of_work = TypeOfWork.all.collect{ |type|[type.name, type.id]}
-      @path = "mano de obra"
+      @path = " / crear estimación / mano de obra"
     end
 end

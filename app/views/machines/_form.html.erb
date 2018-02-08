@@ -13,6 +13,12 @@
             </div>
 
             <div class="form-group">
+               <%= f.label :type_machine_id,"Clasificación :" ,class: "control-label col-sm-3"%>
+               <div class="col-sm-6">
+                     <%= f.select :model_id, options_for_select(@type_machines, f.object.type_machine_id), {}, { :class => 'form-control', :required => true }%>
+               </div>
+            </div>
+            <div class="form-group">
               <%= f.label :brand_id,"Marca :" ,class: "control-label col-sm-3"%>
               <div class="col-sm-6">
                      <%= f.select :brand_id, options_for_select(@brands, f.object.brand_id), {}, { :class => 'form-control', :required => true }%>

@@ -1,19 +1,26 @@
 var controlador;
 var _id;
+
 $(document).ready(function ()
-{ 
+{
+   
 
-  $('.panel-body').fadeIn(); 
-  if (typeof controlador == "undefined")
-  {
-    alert("variable controlador no declarada");
-  }
-  //confirm_modal();
-  $('.only_numbers').valida_sarah('0123456789.');
-  $('.only_letters').valida_sarah('azAZ ');
-  $(".pull-left.pagination-detail").hide();
+   $( ".tabs_sarah" ).on("click",function() {
+        $(".panel-body").delay(500).fadeOut();
+        $(".panel-body").delay(1000).fadeIn();
+   });
 
-  $('.datepicker').datepicker({
+
+   if (typeof controlador == "undefined")
+   {
+      alert("variable controlador no declarada");
+   }
+   //confirm_modal();
+   $('.only_numbers').valida_sarah('0123456789.');
+   $('.only_letters').valida_sarah('azAZ ');
+   $(".pull-left.pagination-detail").hide();
+
+   $('.datepicker').datepicker({
                                 format: 'dd/mm/yyyy',
                                 rtl: false,
                                 language: 'es',
@@ -26,10 +33,10 @@ $(document).ready(function ()
       confirm_modal();
    });
 
-  $("#buscar").on("keyup", function ()
-  {
-    confirm_modal();
-  });
+   $("#buscar").on("keyup", function ()
+   {
+      confirm_modal();
+   });
 
    NProgress.configure({
                         showSpinner: false,
@@ -37,16 +44,16 @@ $(document).ready(function ()
                         speed: 500
                       });
 
-// colocar texto en mayusculas
-  $(".upper_text").on('keyup', function (e) {
-    if (e.which >= 97 && e.which <= 122) {
-      var newKey = e.which - 32;
-      // I have tried setting those
-      e.keyCode = newKey;
-      e.charCode = newKey;
-    }
-    $(this).val(($(this).val()).toUpperCase());
-  });
+   // colocar texto en mayusculas
+   $(".upper_text").on('keyup', function (e) {
+      if (e.which >= 97 && e.which <= 122) {
+         var newKey = e.which - 32;
+         // I have tried setting those
+         e.keyCode = newKey;
+         e.charCode = newKey;
+      }
+      $(this).val(($(this).val()).toUpperCase());
+   });
   
   /*$(document).ready(function() {
       if (location.hash !== '') $('a[href="' + location.hash + '"]').tab('show');
@@ -56,30 +63,33 @@ $(document).ready(function ()
   });*/
 
 
-  //sirve para saber el estado de carga de la tabla
-  $('.table').on('load-success.bs.table', function(e, data){
+   //sirve para saber el estado de carga de la tabla
+   $('.table').on('load-success.bs.table', function(e, data)
+   {
        //console.log('Success', data);
-    });
+   });
 
-    $('.table').on('load-error.bs.table', function(e, status){
+   $('.table').on('load-error.bs.table', function(e, status){
        // console.log('Error tabela', status);
-    });
+   });
 
+   $(".numeric").on({
+         "focus": function(event) {
+            $(event.target).select();
+         },
+         "keyup": function(event) {
+            $(event.target).val(function(index, value) {
+               return value.replace(/\D/g, "")
+                  .replace(/([0-9])([0-9]{0})$/, '$1')
+                 .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+            });
+         }
+   });
     //desabilita el enter para que pueda validar solamente en evento boton
-  disabled_enter();
+   disabled_enter();
 
 });
 
-var disabled_enter = function(){
-    $('#form_'+controlador).on("keyup keypress", function(e) {
-      var code = e.keyCode || e.which; 
-      if (code === 13) {               
-          form_farming_plots_validates(); 
-          e.preventDefault();
-          return false;
-      }
-    });
-}
 
 function evt_delete_row(evt)
 {
@@ -102,7 +112,7 @@ function confirm_modal(id)
     //console.log(bt);
     //console.log(no);
 
-    dataConfirmModal.confirm({
+      dataConfirmModal.confirm({
                                 title: 'Eliminar un registro?',
                                 text: 'Está seguro que desea eliminar un registro?',
                                 commit: 'Eliminar',
@@ -118,20 +128,17 @@ function confirm_modal(id)
 
 }
 
-
-$(".numeric").on({
-  "focus": function(event) {
-    $(event.target).select();
-  },
-  "keyup": function(event) {
-    $(event.target).val(function(index, value) {
-      return value.replace(/\D/g, "")
-         .replace(/([0-9])([0-9]{0})$/, '$1')
-        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
-    });
-  }
-});
-
+var disabled_enter = function()
+{
+   $('#form_'+controlador).on("keyup keypress", function(e) {
+      var code = e.keyCode || e.which; 
+      if (code === 13) {               
+          form_farming_plots_validates(); 
+          e.preventDefault();
+          return false;
+      }
+   });
+}
 
 function delete_modal(element_id)
 {
@@ -206,62 +213,59 @@ $.fn.valida_sarah = function (cadena) {
 validate_generic_form = function (sufixe)
 {
   
-  $('#btn_submit_' + sufixe).on('click', function (e) {
-    
-    e.preventDefault();
-    progress(true);
-    
-    if ($("#form_" + sufixe).data('bootstrapValidator').isValid())
-    {
-      $('#btn_submit_' + sufixe).prop("disabled", false);
-      $('#btn_submit_' + sufixe).submit();
-      delayedRedirect(controlador);
+   $('#btn_submit_' + sufixe).on('click', function (e) {
+      e.preventDefault();
+      progress(true);
+      console.log(sufixe);
+      if ( $("#form_"+sufixe).data('bootstrapValidator').isValid() )
+      {
+         $('#btn_submit_' + sufixe).prop("disabled", false);
+         $('#btn_submit_' + sufixe).submit();
+         delayedRedirect(controlador);
+      }
+      else
+      {
+         $('#btn_submit_' + sufixe).prop("disabled", true);
+         $("#form_" + sufixe).data('bootstrapValidator').validate();
+      }
+   });
 
-    }
-    else
-    {
-      $('#btn_submit_' + sufixe).prop("disabled", true);
-      $("#form_" + sufixe).data('bootstrapValidator').validate();
-    }
-
-  });
-
-  $('#btn_cancel_' + sufixe).on('click', function (e) {
-    e.preventDefault();
-    //$("#form_" + sufixe)[0].reset();
-    // $('#form_' + sufixe).data('bootstrapValidator').resetForm();
-  });
+   $('#btn_cancel_' + sufixe).on('click', function (e) {
+      e.preventDefault();
+       //$("#form_" + sufixe)[0].reset();
+      // $('#form_' + sufixe).data('bootstrapValidator').resetForm();
+   } );
 }
 
 function generic_response_form(sufixe) 
 {
-    $(document).on("ajax:success", 'form#form_' + sufixe, function (event, data, status, xhr, result) {
-    progress(false);
-    alert_sarah("El registro fue realizado con exito", "success");
-    $("#form_" + sufixe)[0].reset();
-    $("#form_" + sufixe).data('bootstrapValidator').resetForm();
-    $("#errors").hide();
-    $('input:visible:enabled:first').focus();
-  });
+   $(document).on("ajax:success", 'form#form_' + sufixe, function (event, data, status, xhr, result) {
+      progress(false);
+      alert.log(event);
+      alert_sarah("El registro fue realizado con exito", "success");
+      $("#form_" + sufixe)[0].reset();
+      $("#form_" + sufixe).data('bootstrapValidator').resetForm();
+      $("#errors").hide();
+      $('input:visible:enabled:first').focus();
+   });
 
-  $(document).on('ajax:error', 'form#form_' + sufixe, function (event, jqxhr, settings, exception) {
-    progress(false);
-    alert_sarah("Ocurrió un error al crear el registro!", "danger");
-    /*recorrer los errores en caso de tener*/
-    $.each(jqxhr.responseJSON, function (index, value) {
-      if (typeof index == "string")
-      {
-        $('#errors').html(index + ": " + value);
-      }
-    });
-  });
+   $(document).on('ajax:error', 'form#form_' + sufixe, function (event, jqxhr, settings, exception) {
+      progress(false);
+      alert_sarah("Ocurrió un error al crear el registro!", "danger");
+       /*recorrer los errores en caso de tener*/
+      $.each(jqxhr.responseJSON, function (index, value) {
+         if (typeof index == "string")
+         {
+           $('#errors').html(index + ": " + value);
+         }
+      });
+   });
 }
 
 function add_errors(id)
 {
-  $("#gr_" + id).addClass("has-error");
-  $("#gr_" + id).removeClass("has-success");
-
+   $("#gr_" + id).addClass("has-error");
+   $("#gr_" + id).removeClass("has-success");
 }
 
 function reset_errors(id)
@@ -275,18 +279,17 @@ function reset_errors(id)
 
 function progress(data)
 {
-  if(data=true)
-  {
+   if(data=true)
+   {
       NProgress.start();
       NProgress.set(0.4) 
-      
    }
    else
-  { 
+   { 
       NProgress.done();
-  }
+   }
 
-  NProgress.done();
+   NProgress.done();
 }
 
 function md_popover(_id,_title,_content)

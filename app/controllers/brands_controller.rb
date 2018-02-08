@@ -88,7 +88,7 @@ class BrandsController < ApplicationController
   end
   
   def get_all
-    @path = "marcas"
+    @path = " / catastros / máquinas & implementos / marcas"
   end
 
 end

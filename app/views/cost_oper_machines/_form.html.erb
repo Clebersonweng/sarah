@@ -25,7 +25,7 @@
                <div class="form-group">
                   <%= f.label :description,"Maquinária:" ,class: "control-label col-lg-3"%>
                   <div class="col-sm-4 col-md-2 col-xs-12 col-lg-9">
-                    <%= select("type_service","type_of_service_id", options_for_select(@machines), {}, {required: 'true', class: "form-control", include_blank: ''})%>   
+                    <%= select("cost_oper_machine_detail","machine_id", options_for_select(@machines), {}, {required: 'true', class: "form-control", include_blank: ''})%>   
                   </div>
                </div>
             </div>
@@ -33,13 +33,13 @@
                <div class="form-group" id="implements">
                   <%= f.label :description,"Implemento:" ,class: "control-label col-lg-5"%>
                   <div class="col-sm-4 col-md-2 col-xs-12 col-lg-7">
-                    <%= select("type_service","type_of_service_id", options_for_select(@implements), {}, {required: 'true', class: "form-control", include_blank: ''})%>   
+                    <%= select("cost_oper_machine_detail","implement_id", options_for_select(@implements), {}, {required: 'true', class: "form-control", include_blank: ''})%>   
                   </div>
                </div>
             </div>
             <div class="col-lg-3">
                <div class="form-group">
-                  <%= f.label :description,"Cantidad:" ,class: "control-label col-lg-5"%>
+                  <%= f.label :description,"Aplicaciones:" ,class: "control-label col-lg-5"%>
                   <div class="col-sm-6 col-md-6 col-xs-12 col-lg-7">
                      <input id="quantity" value="" class="form-control only_numbers" /> 
                   </div>
@@ -50,25 +50,26 @@
             </div>            
          </div>
          <table 
-               id="tb_cost_machine" 
+               data-id="tb_cost_machine" 
                data-height="300" 
                data-show-footer="true" 
+               data-show-columns="true" 
                class="table  table-hover table-striped table-condensed display" 
                data-toggle="table"
                data-show-refresh="false" 
                data-pagination="false" 
                data-icons="icons"
                data-footer-style="footerStyle"
-               data-unique-id="tb_sp_detail"
                data-checkbox-header="false"
          >
             <thead>
                <tr>
                   <th data-field="id" data-checkbox="true"></th>
                   <th data-field="code">Código</th>
-                  <th data-field="type_of_service_id">Tipo de servício</th>
-                  <th data-field="price">Precio</th>
-                  <th data-field="quantity">Cantidad</th>
+                  <th data-field="type_of_service_id">Máquinaria</th>
+                  <th data-field="price">Combustible</th>
+                  <th data-field="quantity">Lubricante</th>
+                  <th data-field="quantity">Reparacion y Mant.</th>
                   <th data-halign='right' data-id="subtotal" data-align='right' data-field="subtotal" >Sub-total</th>
                   <th data-halign='right' data-align='right' data-field="Action" data-events="remove">Acción</th>
                </tr>

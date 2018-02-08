@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180114222223) do
+ActiveRecord::Schema.define(version: 20180203044506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,13 +67,13 @@ ActiveRecord::Schema.define(version: 20180114222223) do
   end
 
   create_table "cost_oper_machines", force: :cascade do |t|
-    t.integer  "farming_plot_id"
     t.float    "total"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.integer  "chart_of_account_id"
+    t.integer  "program_production_id"
     t.index ["chart_of_account_id"], name: "index_cost_oper_machines_on_chart_of_account_id", using: :btree
-    t.index ["farming_plot_id"], name: "index_cost_oper_machines_on_farming_plot_id", using: :btree
+    t.index ["program_production_id"], name: "idx_cost_oper_machine_on_prog_prod", using: :btree
   end
 
   create_table "estimate_sales", force: :cascade do |t|
@@ -148,9 +148,11 @@ ActiveRecord::Schema.define(version: 20180114222223) do
     t.integer  "fuel_id"
     t.decimal  "coeficient_cccr", precision: 15, scale: 10
     t.decimal  "time_oper",       precision: 15, scale: 10
+    t.integer  "type_machine_id"
     t.index ["brand_id"], name: "index_machines_on_brand_id", using: :btree
     t.index ["fuel_id"], name: "index_machines_on_fuel_id", using: :btree
     t.index ["model_id"], name: "index_machines_on_model_id", using: :btree
+    t.index ["type_machine_id"], name: "idx_machine_on_type_machine_id", using: :btree
   end
 
   create_table "man_power_details", force: :cascade do |t|
@@ -312,6 +314,13 @@ ActiveRecord::Schema.define(version: 20180114222223) do
     t.index ["supply_id"], name: "index_supply_details_on_supply_id", using: :btree
   end
 
+  create_table "type_machines", force: :cascade do |t|
+    t.string   "code"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "type_of_crops", force: :cascade do |t|
     t.string   "code"
     t.string   "name"
@@ -381,7 +390,6 @@ ActiveRecord::Schema.define(version: 20180114222223) do
   add_foreign_key "cost_oper_machine_details", "cost_oper_machines"
   add_foreign_key "cost_oper_machine_details", "machines"
   add_foreign_key "cost_oper_machines", "chart_of_accounts"
-  add_foreign_key "cost_oper_machines", "farming_plots"
   add_foreign_key "estimate_sales", "chart_of_accounts"
   add_foreign_key "estimate_sales", "farming_plots"
   add_foreign_key "estimate_sales", "type_of_crops"

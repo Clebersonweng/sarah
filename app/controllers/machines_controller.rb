@@ -88,9 +88,10 @@ class MachinesController < ApplicationController
   end
   
   def get_all
+    @type_machines = TypeMachine.all.collect {|c| [c.description, c.id] }
     @brands = Brand.all.collect {|c| [c.name, c.id] }
     @models = Model.all.collect {|type|[type.name, type.id]}
     @fuels  = Fuel.all.collect {|p| [p.name, p.id, {"data-price"=>p.price}]}
-    @path   = "maquinárias"
+    @path   = "/ catastros / máquinas & implementos / maquinárias"
   end
 end

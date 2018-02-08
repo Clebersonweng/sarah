@@ -103,6 +103,6 @@ class ProgramProductionsController < ApplicationController
     params.require(:program_production).permit(:estimate_sale_id, :stock_initial, :stock_end, :variation_stock, :program_production)
   end
   def get_all
-    @path = "programa de producción"
+    @path = " / crear estimación / programa de producción"
   end
 end

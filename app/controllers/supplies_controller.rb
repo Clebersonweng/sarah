@@ -117,6 +117,6 @@ class SuppliesController < ApplicationController
         @charts = ChartOfAccount.all.collect{|c| [c.name, c.id]}
         @programs = ProgramProduction.all.collect{|c| [c.program_production, c.id]}
         @products = Product.all.collect { |p| [ p.tradename, p.id, {"data-price"=> p.price, "data-dosage" => p.dosage} ] }
-        @path = "insumos"
+        @path = " / crear estimación / insumos"
       end
 end

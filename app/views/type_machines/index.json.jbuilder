@@ -1,0 +1,1 @@
+json.array! @type_machines, partial: 'type_machines/type_machine', as: :type_machine

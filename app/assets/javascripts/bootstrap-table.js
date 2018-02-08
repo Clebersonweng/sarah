@@ -160,16 +160,16 @@
             return sprintf('%s filas por pagina', pageNumber);
         },
         formatShowingRows: function (pageFrom, pageTo, totalRows) {
-            return sprintf('Muestra %s de %s de %s filas', pageFrom, pageTo, totalRows);
+            return sprintf('Muestra %s al %s de %s filas', pageFrom, pageTo, totalRows);
         },
         formatSearch: function () {
-            return 'Search';
+            return 'Buscar';
         },
         formatNoMatches: function () {
-            return '<p class="text-center">No cuenta con datos</p>';
+            return '<p class="text-center">Sin registros para mostrar!</p>';
         },
         formatRefresh: function () {
-            return 'Refresh';
+            return 'Recargar';
         },
         formatToggle: function () {
             return 'Toggle';

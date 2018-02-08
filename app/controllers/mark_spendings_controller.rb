@@ -71,4 +71,8 @@ class MarkSpendingsController < ApplicationController
     def mark_spending_params
       params.require(:mark_spending).permit(:estimate_sale_id, :chart_of_account_id, :total)
     end
+    def 
+      @path = " / crear estimación / gastos de comercialización"
+    end
+
 end

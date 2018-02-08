@@ -1,6 +1,7 @@
 class Machine < ApplicationRecord
   belongs_to :brand
   belongs_to :model
+  belongs_to :type_machine
   has_many :implements, :dependent => :destroy
   has_many :cost_oper_machine_details
   belongs_to :fuel, :dependent => :destroy

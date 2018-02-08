@@ -1,0 +1,1 @@
+json.partial! "type_machines/type_machine", type_machine: @type_machine

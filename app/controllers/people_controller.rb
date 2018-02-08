@@ -78,7 +78,7 @@ class PeopleController < ApplicationController
     end
 
     def get_all
-      @path = "personas"
+      @path = " / personas / personas"
     end
 
 end

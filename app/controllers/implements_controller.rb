@@ -88,6 +88,6 @@ class ImplementsController < ApplicationController
 
     def get_all
       @machines = Machine.all.collect {|type| [type.model.name, type.id]}
-      @path = "implementos"
+      @path = "/ catastros / máquinas & implementos / implementos"
     end
 end

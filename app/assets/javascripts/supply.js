@@ -11,13 +11,7 @@ $(document).ready(function ()
    form_supplies_validates();
    enabled_button_add_item("supply_detail_product","add_product");
 
-   $('#tb_suppy_detail').bootstrapTable({
-      formatNoMatches: function () {
-         return "No cuenta con insumos agregado";
-      },
-      cache: false,
-      remove: actionEvents
-   });
+   
 
    $('#supply_detail_product').on("change",function (e) 
    {

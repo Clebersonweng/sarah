@@ -8,7 +8,7 @@ $(document).ready(function()
 
    $('#tb_co_mach_cont').bootstrapTable({
       formatNoMatches: function () {
-         return "No cuenta con costos operativos agregado";
+        return "No cuenta con registros";
       },
       cache: false,
       remove: actionEvents
@@ -16,7 +16,8 @@ $(document).ready(function()
 
    enabled_button_add_item("type_service_type_of_service_id","btn_add_cost_out");
    $('#implement').hide();
-   $('#btn_add_cost_out').click(function () {
+   $('#btn_add_cost_out').click(function (e) {
+    e.preventDefault();
       $('#tb_co_mach_cont').bootstrapTable("append", row_bt_cost_out());
       $('#type_service_type_of_service_id').val("");
       $("#quantity").val("");

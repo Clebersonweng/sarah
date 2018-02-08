@@ -1,0 +1,17 @@
+<div class="panel-body">
+   <%= form_for(@type_machine,html: {class: 'form-horizontal', id: "form_type_machines", remote: true}) do |f| %>
+      <div class="col-sm-6 col-lg-8 col-md-12">
+
+         <div class="form-group">
+            <%= f.label :description,"Descripción :" ,class: "control-label col-sm-3"%>
+            <div class="col-sm-6 col-md-6">
+               <%= f.text_field :description, autofocus: true , class: "form-control upper_text", :required => true%>
+                <span class="help-block"> <%= f.object.errors[:description].to_sentence if f.object.errors[:description] %></span>
+            </div>
+         </div>
+            <%= render('layouts/error_lists')%>
+            <%= render('layouts/buttons')%>
+      </div>
+      <input type="hidden" id="controller" value="<%= controller_name%>">
+   <% end %>
+</div>

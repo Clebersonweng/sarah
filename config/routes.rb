@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :type_machines
   root to: "home#index"
   #match 'history_sales' => 'type_of_crops/history_sales', :via => :post
   

@@ -91,6 +91,6 @@ class TypeOfWorksController < ApplicationController
     params.require(:type_of_work).permit(:name, :price_hours, :description)
   end
   def get_all
-    @path = "tipo de trabajo"
+    @path = "/ catastros / tipos / tipo de trabajo"
   end
 end

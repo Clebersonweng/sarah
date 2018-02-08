@@ -79,7 +79,7 @@ class HistorySalesController < ApplicationController
     end
 
     def get_all
-      @path = "histórico de producción"
+      @path = "/ catastros / parcela / histórico de producción"
     end
 
 end

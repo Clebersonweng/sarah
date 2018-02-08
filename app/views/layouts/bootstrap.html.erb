@@ -55,14 +55,10 @@
                        var actionName = "<%=controller.action_name %>";
                        if (actionName === "index") {
                          $("#submenu_index").addClass("active");
-                         progress(true);
                        }
                        else if (actionName === "new" || actionName === "create") {
                          $("#submenu_new").addClass("active");
-                         progress(true);
                        }
-                        
-                      progress(false);
 
                        var controllerName = "<%= params[:controller] || controller.name %>";
                        if (controllerName == "default") {

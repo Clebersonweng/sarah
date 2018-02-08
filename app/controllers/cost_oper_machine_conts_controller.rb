@@ -105,6 +105,6 @@ class CostOperMachineContsController < ApplicationController
     @type_services = TypeOfService.all.collect {|p| [ p.name, p.id ,{"data-price"=> p.price, "data-u_measure"=>p.unit_of_measurement.name}] } 
     @implements   = Implement.all.collect {|p| [ p.name, p.id ,{"data-oper_time"=> p.oper_time }] } 
     @unit_measure = UnitOfMeasurement.all.collect { |p| [p.name, p.id ]}
-    @path = "costo operativo de máquinas tercerizadas"
+    @path = " / crear estimación / costo operativo de máquinas tercerizadas"
   end
 end
