@@ -86,9 +86,9 @@ class CostOperMachinesController < ApplicationController
    end
    def get_all
       @farming_plots = FarmingPlot.all.collect { |p| [ p.name, p.id, {"data-area"=> p.area} ] }
-      @machines = Machine.all.collect { |type| [type.get_all_names, type.id, {"data-hp"=> type.hp, "data-consumption" => type.consumption, "data-coef_cccr" => type.coeficient_cccr, "data-time_oper" => type.time_oper, "data-price" => type.price, "data-name" => type.name, "data-price_fuel" => type.fuel.price }]}
+      @machines = Machine.all.collect { |type| [type.name, type.id, {"data-hp"=> type.hp, "data-consumption" => type.consumption, "data-coef_cccr" => type.coeficient_cccr, "data-time_oper" => type.time_oper, "data-price" => type.price, "data-name" => type.name, "data-price_fuel" => type.fuel.price }]}
       @implements = Implement.all.collect {|p| [ p.get_all_names, p.id, {"data-oper_time"=>p.oper_time, "data-coef_cccr" => p.coef_cccr, "data-price" => p.price} ] }
-      @charts = ChartOfAccount.all.collect {|p| [ p.name, p.id, ] }
+      #@charts = ChartOfAccount.all.collect {|p| [ p.name, p.id, ] }
       @path = " / crear estimación / costo operativo maquinária propia"
    end
 end

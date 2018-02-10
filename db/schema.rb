@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180203044506) do
+ActiveRecord::Schema.define(version: 20180210185920) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,8 +62,10 @@ ActiveRecord::Schema.define(version: 20180203044506) do
     t.float    "subtotal"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.integer  "type_service_id"
     t.index ["cost_oper_machine_id"], name: "index_cost_oper_machine_details_on_cost_oper_machine_id", using: :btree
     t.index ["machine_id"], name: "index_cost_oper_machine_details_on_machine_id", using: :btree
+    t.index ["type_service_id"], name: "idx_cost_oper_machine_det_on_type_service_id", using: :btree
   end
 
   create_table "cost_oper_machines", force: :cascade do |t|
@@ -125,13 +127,16 @@ ActiveRecord::Schema.define(version: 20180203044506) do
     t.string   "name"
     t.string   "model"
     t.integer  "machine_id"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
-    t.string   "brand"
+    t.datetime "created_at",                                           null: false
+    t.datetime "upand"
     t.string   "year"
-    t.float    "price"
-    t.decimal  "coef_cccr",  precision: 15, scale: 10
-    t.decimal  "oper_time",  precision: 15, scale: 10
+    t.float    "prdated_at",                                           null: false
+    t.string   "brice"
+    t.decimal  "coef_cccr",                  precision: 15, scale: 10
+    t.decimal  "ope_time",                  precision: 15, scale: 10
+    t.decimal  "workirng_capacity",           precision: 6,  scale: 3
+    t.decimal  "working_capacity_effective", precision: 6,  scale: 3
+    t.decimal  "field_efficiency",           precision: 6,  scale: 3
     t.index ["machine_id"], name: "index_implements_on_machine_id", using: :btree
   end
 
@@ -142,13 +147,16 @@ ActiveRecord::Schema.define(version: 20180203044506) do
     t.float    "consumption"
     t.float    "price"
     t.string   "year_purchase"
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
     t.string   "name"
     t.integer  "fuel_id"
-    t.decimal  "coeficient_cccr", precision: 15, scale: 10
-    t.decimal  "time_oper",       precision: 15, scale: 10
+    t.decimal  "coeficient_cccr",            precision: 15, scale: 10
+    t.decimal  "time_oper",                  precision: 15, scale: 10
     t.integer  "type_machine_id"
+    t.decimal  "working_capacity",           precision: 6,  scale: 3
+    t.decimal  "working_capacity_effective", precision: 6,  scale: 3
+    t.decimal  "field_efficiency",           precision: 6,  scale: 3
     t.index ["brand_id"], name: "index_machines_on_brand_id", using: :btree
     t.index ["fuel_id"], name: "index_machines_on_fuel_id", using: :btree
     t.index ["model_id"], name: "index_machines_on_model_id", using: :btree

@@ -30,9 +30,17 @@
                </div>
             </div>
             <div class="col-lg-7">
-               <div class="form-group" id="implements">
-                  <%= f.label :description,"Implemento:" ,class: "control-label col-lg-5"%>
-                  <div class="col-sm-4 col-md-2 col-xs-12 col-lg-7">
+               <div class="form-group " id="implements">
+                  <%= f.label :description,"Implemento:" ,class: "control-label col-lg-2"%>
+                  <div class="col-sm-4 col-md-2 col-xs-12 col-lg-5">
+                    <%= select("cost_oper_machine_detail","implement_id", options_for_select(@implements), {}, {required: 'true', class: "form-control", include_blank: ''})%>   
+                  </div>
+               </div>
+            </div>
+            <div class="col-lg-7">
+               <div class="form-group">
+                  <%= f.label :description,"Implemento:" ,class: "control-label col-lg-2"%>
+                  <div class="col-sm-4 col-md-2 col-xs-12 col-lg-5">
                     <%= select("cost_oper_machine_detail","implement_id", options_for_select(@implements), {}, {required: 'true', class: "form-control", include_blank: ''})%>   
                   </div>
                </div>
@@ -50,7 +58,7 @@
             </div>            
          </div>
          <table 
-               data-id="tb_cost_machine" 
+               id="tb_cost_machine" 
                data-height="300" 
                data-show-footer="true" 
                data-show-columns="true" 

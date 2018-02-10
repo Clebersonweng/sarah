@@ -241,7 +241,9 @@ function generic_response_form(sufixe)
 {
    $(document).on("ajax:success", 'form#form_' + sufixe, function (event, data, status, xhr, result) {
       progress(false);
-      alert.log(event);
+      console.log(data);
+      console.log(xhr);
+      console.log(result);
       alert_sarah("El registro fue realizado con exito", "success");
       $("#form_" + sufixe)[0].reset();
       $("#form_" + sufixe).data('bootstrapValidator').resetForm();
@@ -330,7 +332,7 @@ function convert_date(fullDate)
 function delayedRedirect(controller){
   setTimeout(function ()
   {
-     window.location = "/"+controller;
+     //window.location = "/"+controller;
   }, 50);
 }
 
@@ -399,28 +401,30 @@ function sumFormatter(data)
     }, 0);
 }
 
-$(document).on('turbolinks:click', function(e) 
+$(document).on('turbolinks:request-end', function(event) 
 {
-   setTimeout(function() 
-   {
-       NProgress.start();    
-   }, 600);
+   console.log(event);
+   progress(false);
+});
+
+$(document).on('turbolinks:click', function(event) 
+{
+   progress(true);   
 
    $(".panel-body", this).fadeOut(500,function()
    {
-      NProgress.start(); 
+      progress(false);
       $(".panel-body").fadeIn(1000);
    });
    NProgress.done();
 
 });
 
-$(document).on('turbolinks:render', function(evt) 
+$(document).on('turbolinks:render', function(event) 
 {
    
    setTimeout(function() 
    {
-      NProgress.done();
-      NProgress.remove();
-   }, 600);
+      progress(false);
+   }, 500);
 });

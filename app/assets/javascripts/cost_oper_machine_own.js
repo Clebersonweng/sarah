@@ -1,3 +1,5 @@
+
+
 $(document).ready(function() {
    var count, sum = 0;
    var   machine,
@@ -17,6 +19,7 @@ $(document).ready(function() {
    /**verifico si la maquinaria es un pulverizador entonces el costo de rym esta solamente en maquinas
    y tiene el tiempo operativo si es pulverizador autop, o de arastre   */
    
+   $('table').bootstrapTable();
 
    $('#implement_implement_id').on("change", function() 
    {
@@ -126,21 +129,6 @@ function addNewRow(machine,implement, amount, fuel, lubricant, RYM, subtotal)
 
 /**calculo de gastos con reparacion y mantenimiento,
                 se realiza tomando del valor a nuevo de la maquina y multiplicando por el coeficiente*/
-
-
-var addTotal = function(total)
-{
-     return "<tr>" + 
-                 "<td>"  + "</td>" +
-                  "<td>"  + "</td>" + 
-                  "<td>"  + "</td>" +
-                  "<td>"  + "</td>" + 
-                  "<td>"  + "</td>" 
-                 + "<td>"  + "</td>" +
-                  "<td>"  + "</td>" + 
-                 "<td class='total'>" + total + "</td>" + "<td style='text-align: center'>" + "<a href='#'" + "id='quitar'>" + "<i class='icon-minus'></i>" + "</a>" + "</td>" + 
-             "</tr>";
-}
 
 function total_cost_machine(price_machine,coef_cccr_machine,coef_consum,fuel_price,hp) 
 {
