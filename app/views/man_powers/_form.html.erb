@@ -25,12 +25,13 @@
                <div class="form-group">
                   <%= f.label :description,"Horas Necesárias:" ,class: "control-label col-lg-5"%>
                   <div class="col-sm-6 col-md-6 col-xs-12 col-lg-6">
-                     <input id="hours_needed" value="" class="form-control only_numbers" /> 
+                  <input id="hours_needed" name="man_power_details[hours_needed]" class="form-control only_numbers" value="1"/> 
+                  <input type="hidden" id="man_power_program_production_id" name="man_power[program_production_id]" class="form-control" value="<%= @program_production_id %>"/> 
                   </div>
                </div>
             </div>
             <div class="form-group col-xs-1 col-sm-1">   
-               <a href="#" class="btn btn-default btn-sm" id="btn_man_power">Agregar</a>
+               <a class="btn btn-default btn-sm" id="btn_man_power">Agregar</a>
             </div>            
          </div>
          <table 
@@ -50,24 +51,48 @@
                <tr>
                   <th data-field="id" data-checkbox="true"></th>
                   <th data-field="code">Código</th>
-                  <th data-field="employee_id">Empleado</th>
-                  <th data-field="type_of_work_id">Tipo de trabajo</th>
+                  <th data-field="employee">Empleado</th>
+                  <th data-field="employee_id"></th>
+                  <th data-field="type_of_work">Tipo de trabajo</th>
+                  <th data-field="type_of_work_id"></th>
                   <th data-field="hours_needed">Horas necesárias</th>
-                  <th data-halign='right' data-id="subtotal" data-align='right' data-field="subtotal" >Sub-total</th>
+                  <th data-field="hours_needed_id"></th>
+                  <th data-field="total_hours_needed"></th>
+                  <th data-halign='right' data-align='right' data-field="subtotal" >Sub-total</th>
+                  <th data-halign='right' data-align='right' data-field="subtotal_id" ></th>
+                  <th data-halign='right' data-align='right' data-field="total" ></th>
                   <th data-halign='right' data-align='right' data-field="Action" data-events="remove">Acción</th>
                </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+               <% if (controller.action_name == "edit") %>
+                  <% @man_powers_details.each do |man_power_det| %>
+                  <tr>
+                     <td><%= man_power_det.id%></td>
+                     <td data-style='width: 4%'><%= man_power_det.id%></td>
+                     <td><%= man_power_det.person.name %></td>
+                     <td class="hide"><%= man_power_det.person.id %></td>
+                     <td><%= man_power_det.type_of_work.name %></td>
+                     <td class="hide"><%= man_power_det.type_of_work.id %></td>
+                     <td><%= man_power_det.hours_needed %></td>
+                     <td class="hide"></td>
+                     <td class="hide"></td>
+                     <td class="hide"></td>
+                     <td class="hide"></td>
+                     <td ><%= man_power_det.subtotal %></td>
+                  </tr>
+                  <% end %>   
+               <% end %>
+            </tbody>
                  
             <tfoot>
               <tr>
-               <td class="h6 font-weight-bold" colspan="2"><strong>Total :<strong></td>
-               <td colspan="5" class="font-weight-bold text-right">
+               <td class="h6 font-weight-bold" colspan="5"><strong>Total :<strong></td>
+               <td colspan="8" class="font-weight-bold text-right">
                   <strong><span id="man_powers_total"></span><strong>
                </td>
               </tr>
             </tfoot>
-            <div id="add_row_man_power"></div>
          </table>
          
          <%= render('layouts/error_lists')%>
@@ -75,10 +100,4 @@
       </div>
    <%end%>
 </div> 
-<div id="addRow">
-      <input type="text" name="cost_oper_machine_cont[total]" id="cost_oper_cont_total"/>
-      <input type="text" name="cost_oper_machine_cont[program_production_id]" id="program_production_id" 
-      value="<%= @program_production_id%>" /> 
-</div>
-
 <input type="hidden" id="controller" value="<%= controller_name%>">

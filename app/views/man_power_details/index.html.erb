@@ -5,8 +5,10 @@
 <table>
   <thead>
     <tr>
+      <th>Man power</th>
       <th>Type of work</th>
-      <th>Employee</th>
+      <th>Person</th>
+      <th>Hours needed</th>
       <th>Subtotal</th>
       <th colspan="3"></th>
     </tr>
@@ -15,8 +17,10 @@
   <tbody>
     <% @man_power_details.each do |man_power_detail| %>
       <tr>
+        <td><%= man_power_detail.man_power %></td>
         <td><%= man_power_detail.type_of_work %></td>
-        <td><%= man_power_detail.employee %></td>
+        <td><%= man_power_detail.person %></td>
+        <td><%= man_power_detail.hours_needed %></td>
         <td><%= man_power_detail.subtotal %></td>
         <td><%= link_to 'Show', man_power_detail %></td>
         <td><%= link_to 'Edit', edit_man_power_detail_path(man_power_detail) %></td>

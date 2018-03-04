@@ -1,5 +1,6 @@
 var controlador;
 var _id;
+var TOTAL = 0;
 
 $(document).ready(function ()
 {
@@ -54,7 +55,19 @@ $(document).ready(function ()
       }
       $(this).val(($(this).val()).toUpperCase());
    });
-  
+
+   $(".replace_comma").on('keyup', function (e) {
+      if (e.which = 44) 
+      {
+        $(this).val($(this).val().replace(/,/g, '.'));
+      }
+   });
+   
+   function replace_comma(var_string)
+   {
+
+      a.replace(',','.')
+   }
   /*$(document).ready(function() {
       if (location.hash !== '') $('a[href="' + location.hash + '"]').tab('show');
       return $('a[data-toggle="tab"]').on('shown', function(e) {
@@ -100,19 +113,11 @@ function evt_delete_row(evt)
 }
 
 function confirm_modal(id)
-{ //console.log(controlador);
+{ 
   $('#delete_'+id).off().on("click", function (evt) {
-    event.preventDefault();
-   //console.log(id);
-    //_id = $(this).data('id');
-    row = this;
-    //bt = $(this).parent().parent().fadeOut();
-    //bt = $(this).closest('table').attr('id'); //table id
-    //no = $(this).parent().parent().data("index"); //to get row number when we remove it
-    //console.log(bt);
-    //console.log(no);
-
-      dataConfirmModal.confirm({
+   event.preventDefault();
+   row = this;
+   dataConfirmModal.confirm({
                                 title: 'Eliminar un registro?',
                                 text: 'Está seguro que desea eliminar un registro?',
                                 commit: 'Eliminar',
@@ -210,48 +215,104 @@ $.fn.valida_sarah = function (cadena) {
   });
 };
 
-validate_generic_form = function (sufixe)
+validate_generic_form = function (sufixe,force)
 {
-  
-   $('#btn_submit_' + sufixe).on('click', function (e) {
+   if(typeof sufixe == "undefined") 
+    console.log("No contiene sufijo");
+   $('#form_'+sufixe+' #btn_submit_'+sufixe).on('click', function (e)
+   {
       e.preventDefault();
       progress(true);
-      console.log(sufixe);
-      if ( $("#form_"+sufixe).data('bootstrapValidator').isValid() )
+      console.log(force);
+      
+      if (typeof force == "undefined")
       {
-         $('#btn_submit_' + sufixe).prop("disabled", false);
-         $('#btn_submit_' + sufixe).submit();
-         delayedRedirect(controlador);
+         force = false;
+      }
+      if(force == false)
+      {
+         if ( $("#form_"+sufixe).data('bootstrapValidator').isValid() )
+         {
+            $('#btn_submit_'+sufixe).prop("disabled", false);
+            $('#btn_submit_'+sufixe).submit();
+
+            $(document).on("ajax:success", 'form#form_'+sufixe, function (event, data, status, xhr, result) 
+            {
+               progress(false);
+               alert_sarah("El registro fue realizado con exito", "success");
+               $("#form_"+sufixe)[0].reset();
+               if(typeof force == "undefined")
+               {
+                  force == false
+               }
+               if(!force)
+               {
+                  $("#form_"+sufixe).data('bootstrapValidator').resetForm();
+               }
+               $("#errors").hide();
+               $('input:visible:enabled:first').focus();
+            })
+            .on('ajax:error', 'form#form_'+sufixe, function (event, jqxhr, settings, exception) 
+            {
+               progress(false);
+               console.log(event);
+               console.log(jqxhr);
+               console.log(settings);
+               alert_sarah("Ocurrió un error al crear el registro!", "danger");
+                /*recorrer los errores en caso de tener*/
+               $.each(jqxhr.responseJSON, function (index, value) {
+                  if (typeof index == "string")
+                  {
+                    $('#errors').html(index + ": " + value);
+                  }
+               });
+            });
+            delayedRedirect(controlador);
+         }
+         else
+         {
+            $('#btn_submit_'+sufixe).prop("disabled", true);
+            $("#form_"+sufixe).data('bootstrapValidator').validate();
+         }   
       }
       else
       {
-         $('#btn_submit_' + sufixe).prop("disabled", true);
-         $("#form_" + sufixe).data('bootstrapValidator').validate();
+         console.log("vacio force");
       }
+      
    });
 
    $('#btn_cancel_' + sufixe).on('click', function (e) {
       e.preventDefault();
-       //$("#form_" + sufixe)[0].reset();
-      // $('#form_' + sufixe).data('bootstrapValidator').resetForm();
-   } );
+      $("#form_"+sufixe)[0].reset();
+      $('#form_'+sufixe).data('bootstrapValidator').resetForm();
+   });
 }
 
-function generic_response_form(sufixe) 
+/* 
+function generic_response_form(sufixe,force) 
 {
-   $(document).on("ajax:success", 'form#form_' + sufixe, function (event, data, status, xhr, result) {
+  $(document).on("ajax:success", 'form#form_' + sufixe, function (event, data, status, xhr, result) {
       progress(false);
       alert_sarah("El registro fue realizado con exito", "success");
       $("#form_" + sufixe)[0].reset();
-      $("#form_" + sufixe).data('bootstrapValidator').resetForm();
+      if(typeof force == "undefined")
+      {
+         force == false
+      }
+      if(!force)
+      {
+         $("#form_" + sufixe).data('bootstrapValidator').resetForm();
+      }
       $("#errors").hide();
       $('input:visible:enabled:first').focus();
-   });
-
-   $(document).on('ajax:error', 'form#form_' + sufixe, function (event, jqxhr, settings, exception) {
+   })
+   .on('ajax:error', 'form#form_' + sufixe, function (event, jqxhr, settings, exception) {
       progress(false);
+      console.log(event);
+      console.log(jqxhr);
+      console.log(settings);
       alert_sarah("Ocurrió un error al crear el registro!", "danger");
-       /*recorrer los errores en caso de tener*/
       $.each(jqxhr.responseJSON, function (index, value) {
          if (typeof index == "string")
          {
@@ -259,7 +320,9 @@ function generic_response_form(sufixe)
          }
       });
    });
+   
 }
+*/
 
 function add_errors(id)
 {
@@ -329,7 +392,7 @@ function convert_date(fullDate)
 function delayedRedirect(controller){
   setTimeout(function ()
   {
-     window.location = "/"+controller;
+     //window.location = "/"+controller;
   }, 50);
 }
 
@@ -359,6 +422,16 @@ window.actionEvents = {
     }
 };
 
+window.formatter = {
+    'click .edit': function (e, value, row, index) {
+      console.log(row);
+    },
+    'click .remove': function (e, value, row, index) { 
+
+       confirm_modal(row.id);
+    }
+};
+
 
 function flatJSON(res) 
 {
@@ -380,46 +453,76 @@ var loadBootstrapTable = function (data) {
    });
 };
 
-function totalText(data) 
-{
-  return 'Total';
-}
-
-function footer_output_text(data) 
-{
+function totalTextFormatter(data)
+ {
     return 'Total :';
 }
 
-function sumFormatter(data) 
-{
-    field = this.field;
-    return data.reduce(function (sum, row) {
-        return sum + (+row[field]);
-    }, 0);
+function footerStyle(value, row, index) {
+  index = '0'+index;
+  return index;
 }
 
-$(document).on('turbolinks:click', function(e) 
+function index(data) {
+  index = '0'+index;
+  return index;
+}
+
+function runningFormatter(value, row, index) {
+  TOTAL += row.subtotal
+   console.log(value);
+   console.log(TOTAL.toFixed(0));
+    return TOTAL;
+}
+/*
+window.sumFormatter(data) 
 {
-   setTimeout(function() 
-   {
-       NProgress.start();    
-   }, 600);
+  console.log(data);
+    //field = this.field;
+    //return data.reduce(function (sum, row) {
+     //   return sum + (+row[field]);
+   // }, 0);
+}
+*/
+$(document).on('turbolinks:request-end', function(event) 
+{
+   progress(false);
+});
+
+$(document).on('page:fetch', function() {
+  NProgress.start();
+   setTimeout(function(){
+      NProgress.done();
+   },500);
+});
+
+$(document).on('page:change', function() {
+   NProgress.set(0.4);
+   
+   setTimeout(function(){
+      NProgress.done();
+   },500);
+});
+
+$(document).on('page:restore', function() {
+  NProgress.remove();
+});
+
+$(document).on('turbolinks:request-start', function(event) 
+{
+   NProgress.set(0.4) 
 
    $(".panel-body", this).fadeOut(500,function()
    {
-      NProgress.start(); 
       $(".panel-body").fadeIn(1000);
+        NProgress.done();
    });
-   NProgress.done();
-
 });
 
-$(document).on('turbolinks:render', function(evt) 
+$(document).on('turbolinks:render', function(event) 
 {
    
-   setTimeout(function() 
-   {
-      NProgress.done();
-      NProgress.remove();
-   }, 600);
+  NProgress.done();
+  NProgress.remove();
+
 });

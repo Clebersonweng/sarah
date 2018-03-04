@@ -1,5 +1,6 @@
 var controlador;
 var _id;
+var TOTAL = 0;
 
 $(document).ready(function ()
 {
@@ -54,7 +55,19 @@ $(document).ready(function ()
       }
       $(this).val(($(this).val()).toUpperCase());
    });
-  
+
+   $(".replace_comma").on('keyup', function (e) {
+      if (e.which = 44) 
+      {
+        $(this).val($(this).val().replace(/,/g, '.'));
+      }
+   });
+   
+   function replace_comma(var_string)
+   {
+
+      a.replace(',','.')
+   }
   /*$(document).ready(function() {
       if (location.hash !== '') $('a[href="' + location.hash + '"]').tab('show');
       return $('a[data-toggle="tab"]').on('shown', function(e) {
@@ -210,49 +223,64 @@ $.fn.valida_sarah = function (cadena) {
   });
 };
 
-validate_generic_form = function (sufixe)
+validate_generic_form = function (sufixe,force)
 {
-  
+  if(typeof sufixe == "undefined") 
+    console.log("No contiene sufijo");
+
    $('#btn_submit_' + sufixe).on('click', function (e) {
       e.preventDefault();
       progress(true);
-      console.log(sufixe);
-      if ( $("#form_"+sufixe).data('bootstrapValidator').isValid() )
+      if(typeof force == "undefined")
       {
-         $('#btn_submit_' + sufixe).prop("disabled", false);
-         $('#btn_submit_' + sufixe).submit();
-         delayedRedirect(controlador);
+         force == false
       }
-      else
+      if(!force)
       {
-         $('#btn_submit_' + sufixe).prop("disabled", true);
-         $("#form_" + sufixe).data('bootstrapValidator').validate();
+         if ( $("#form_"+sufixe).data('bootstrapValidator').isValid() )
+         {
+            $('#btn_submit_' + sufixe).prop("disabled", false);
+            $('#btn_submit_' + sufixe).submit();
+            delayedRedirect(controlador);
+         }
+         else
+         {
+            $('#btn_submit_' + sufixe).prop("disabled", true);
+            $("#form_" + sufixe).data('bootstrapValidator').validate();
+         }   
       }
+      else{console.log("vacio force");}
+      
    });
 
    $('#btn_cancel_' + sufixe).on('click', function (e) {
       e.preventDefault();
-       //$("#form_" + sufixe)[0].reset();
-      // $('#form_' + sufixe).data('bootstrapValidator').resetForm();
-   } );
+      $("#form_" + sufixe)[0].reset();
+      $('#form_' + sufixe).data('bootstrapValidator').resetForm();
+   });
 }
 
-function generic_response_form(sufixe) 
+function generic_response_form(sufixe,force) 
 {
    $(document).on("ajax:success", 'form#form_' + sufixe, function (event, data, status, xhr, result) {
       progress(false);
-      console.log(data);
-      console.log(xhr);
-      console.log(result);
       alert_sarah("El registro fue realizado con exito", "success");
       $("#form_" + sufixe)[0].reset();
-      $("#form_" + sufixe).data('bootstrapValidator').resetForm();
+      if(typeof force == "undefined")
+      {
+         force == false
+      }
+      if(!force)
+      {
+         $("#form_" + sufixe).data('bootstrapValidator').resetForm();
+      }
       $("#errors").hide();
       $('input:visible:enabled:first').focus();
-   });
-
-   $(document).on('ajax:error', 'form#form_' + sufixe, function (event, jqxhr, settings, exception) {
+   }).on('ajax:error', 'form#form_' + sufixe, function (event, jqxhr, settings, exception) {
       progress(false);
+      console.log(event);
+      console.log(jqxhr);
+      console.log(settings);
       alert_sarah("Ocurrió un error al crear el registro!", "danger");
        /*recorrer los errores en caso de tener*/
       $.each(jqxhr.responseJSON, function (index, value) {
@@ -355,6 +383,17 @@ function enabled_button_add_item(input_id,id)
 
 window.actionEvents = {
     'click .edit': function (e, value, row, index) {
+      console.log(row);
+    },
+    'click .remove': function (e, value, row, index) { 
+
+       confirm_modal(row.id);
+    }
+};
+
+window.formatter = {
+    'click .edit': function (e, value, row, index) {
+      console.log(row);
     },
     'click .remove': function (e, value, row, index) { 
 
@@ -365,7 +404,7 @@ window.actionEvents = {
 
 function flatJSON(res) 
 {
-       return  $.flatJSON({data:res, flat:true});
+  return  $.flatJSON({data:res, flat:true});
 }
 
 var loadBootstrapTable = function (data) {
@@ -383,48 +422,76 @@ var loadBootstrapTable = function (data) {
    });
 };
 
-function totalText(data) 
-{
-  return 'Total';
-}
-
-function footer_output_text(data) 
-{
+function totalTextFormatter(data)
+ {
     return 'Total :';
 }
 
-function sumFormatter(data) 
-{
-    field = this.field;
-    return data.reduce(function (sum, row) {
-        return sum + (+row[field]);
-    }, 0);
+function footerStyle(value, row, index) {
+  index = '0'+index;
+  return index;
 }
 
+function index(data) {
+  index = '0'+index;
+  return index;
+}
+
+function runningFormatter(value, row, index) {
+  TOTAL += row.subtotal
+   console.log(value);
+   console.log(TOTAL.toFixed(0));
+    return TOTAL;
+}
+/*
+window.sumFormatter(data) 
+{
+  console.log(data);
+    //field = this.field;
+    //return data.reduce(function (sum, row) {
+     //   return sum + (+row[field]);
+   // }, 0);
+}
+*/
 $(document).on('turbolinks:request-end', function(event) 
 {
-   console.log(event);
    progress(false);
 });
 
-$(document).on('turbolinks:click', function(event) 
+$(document).on('page:fetch', function() {
+  NProgress.start();
+   setTimeout(function(){
+      NProgress.done();
+   },500);
+});
+
+$(document).on('page:change', function() {
+   NProgress.set(0.4);
+   
+   setTimeout(function(){
+      NProgress.done();
+   },500);
+});
+
+$(document).on('page:restore', function() {
+  NProgress.remove();
+});
+
+$(document).on('turbolinks:request-start', function(event) 
 {
-   progress(true);   
+   NProgress.set(0.4) 
 
    $(".panel-body", this).fadeOut(500,function()
    {
-      progress(false);
       $(".panel-body").fadeIn(1000);
+        NProgress.done();
    });
-   NProgress.done();
-
 });
 
 $(document).on('turbolinks:render', function(event) 
 {
    
-   setTimeout(function() 
-   {
-      progress(false);
-   }, 500);
+  NProgress.done();
+  NProgress.remove();
+
 });

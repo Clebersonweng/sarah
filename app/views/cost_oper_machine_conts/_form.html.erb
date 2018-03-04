@@ -47,15 +47,15 @@
                <div class="form-group">
                   <%= f.label :description,"Tipo de servicio:" ,class: "control-label col-lg-5"%>
                   <div class="col-sm-4 col-md-2 col-xs-12 col-lg-6">
-                    <%= select("type_service","type_of_service_id", options_for_select(@type_services), {}, {required: 'true', class: "form-control", include_blank: ''})%>   
+                    <%= select("cost_oper_machine_cont_details","type_of_service_id", options_for_select(@type_services), {}, {required: 'true', class: "form-control", include_blank: ''})%>   
                   </div>
                </div>
             </div>
-            <div class="col-lg-3" id="implement">
+            <div class="col-lg-3">
                <div class="form-group">
                   <%= f.label :description,"Implemento:" ,class: "control-label col-lg-4"%>
                   <div class="col-sm-6 col-md-6 col-xs-12 col-lg-6">
-                    <%= select("cost_oper_machine_cont_details","implement_id", options_for_select(@implements), {}, {required: 'true', class: "form-control", include_blank: ''})%>   
+                    <%= select("cost_oper_machine_cont_details","implement_id", options_for_select(@implements), {}, {required: 'true', class: "form-control", include_blank: '',disabled: 'true'})%>   
                   </div>
                </div>
             </div>
@@ -63,7 +63,7 @@
                <div class="form-group">
                   <%= f.label :description,"Cantidad:" ,class: "control-label col-lg-4"%>
                   <div class="col-sm-6 col-md-6 col-xs-12 col-lg-6">
-                     <input id="quantity" value="" class="form-control only_numbers" /> 
+                     <input id="cost_oper_machine_cont_detail_amount" value="" class="form-control only_numbers" /> 
                   </div>
                </div>
             </div>

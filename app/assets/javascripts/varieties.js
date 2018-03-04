@@ -4,7 +4,7 @@ $(document).ready(function ()
   controlador = $("#controller").val();
   form_varieties_validates();
   validate_generic_form(controlador);
-
+  $("#bt_varieties").bootstrapTable();
 });
 
 function form_varieties_validates()

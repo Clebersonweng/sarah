@@ -1,6 +1,6 @@
 var count, sum, code_item = 0; 
-var total = 0.0;
-var subtotal ;
+var TOTAL = 0.0;
+var subtotal =0;
 
 $(document).ready(function() 
 {
@@ -15,16 +15,15 @@ $(document).ready(function()
    });
 
    enabled_button_add_item("type_service_type_of_service_id","btn_add_cost_out");
-   $('#implement').hide();
    $('#btn_add_cost_out').click(function (e) {
     e.preventDefault();
       $('#tb_co_mach_cont').bootstrapTable("append", row_bt_cost_out());
-      $('#type_service_type_of_service_id').val("");
-      $("#quantity").val("");
+      $('#cost_oper_machine_cont_details_type_of_service_id').val("");
+      $("#cost_oper_machine_cont_details_amount").val("");
       
    });
 
-   $('#type_service_type_of_service_id').on("change",function (e) 
+   $('#cost_oper_machine_cont_details_type_of_service_id').on("change",function (e) 
    {
       if(typeof $("#quantity").val() != "")
       {
@@ -35,41 +34,34 @@ $(document).ready(function()
 
    $('#tb_co_mach_cont').on('check.bs.table', function (e, row) 
    {
-      $remove = $('.remove');
-      selections = [];
-      $remove.click(function () {
-      //var ids = getIdSelections($('#tb_suppy_detail'));
-      $('#tb_co_mach_cont').bootstrapTable('remove', {
-            field: 'id',
-            values: [row.id]
+         TOTAL =  parseFloat($("#outsourced_total").text());
+         $remove = $('.remove');
+         selections = [];
+         $remove.click(function () {
+         //var ids = getIdSelections($('#tb_suppy_detail'));
+         $('#tb_co_mach_cont').bootstrapTable('remove', {
+               field: 'id',
+               values: [row.id]
+            });
+            $remove.prop('disabled', true);
+            TOTAL -= row.subtotal;
+            $("#oper_own_total").text(TOTAL.toFixed(0));
          });
-         $remove.prop('disabled', true);
-         var n_total = row.subtotal
-         total = parseInt(total) - eval(n_total);
-         $("#outsourced_total").text(parseInt(total));
-         $("#cost_oper_cont_total").val(parseInt(total));
-      });
    });
-
     /**verifico si la u.m es bolsa, ha, hs y calculo de acuerdo a esto el subtotal*/
-    $('#type_service_type_of_service_id').on("change", function() 
-    { 
+   $('#cost_oper_machine_cont_details_type_of_service_id').on("change", function() 
+   { 
+      if($('#cost_oper_machine_cont_details_type_of_service_id option:selected').data('u_measure') == "HORA")
+      {
+         $("#cost_oper_machine_cont_details_implement_id").attr("disabled",false); 
+      }
+      else
+      {
+         $("#cost_oper_machine_cont_details_implement_id").val(''); 
+         $("#cost_oper_machine_cont_details_implement_id").attr("disabled",true); 
+      }
 
-     Umed =  $("#type_service_type_of_service_id option:selected").data("u_measure"); 
-        switch (Umed) { 
-                case 'KILO': 
-                        console.log("soy calculado en kilos");
-                        break;
-                case 'HORAS': 
-                       console.log("soy calculado en horas");
-                        break;
-                case 'HECTAREAS': 
-                        console.log("soy calculado en kilos");
-                        break;		
-                default:
-                        //alert('No es una unidad de medida aceptada!');
-        }  
-    });
+   });
     /**Calcular el total multiplicado por el area de la parcela*/
 
 
@@ -81,12 +73,11 @@ $(document).ready(function()
 
    $("#agregarCostOperOuts").on("click", function() 
    {
-      typeOfservice = $("#type_service_type_of_service_id option:selected");//mostrar en el td  
-      priceTypeOfService = $("#type_service_type_of_service_id option:selected").data("price"); 
-      UmedTypeOfService = $("#type_service_type_of_service_id option:selected").data("u_measure"); 
-      amount = $("#quantity").val();
-
-      subtotal = priceTypeOfService * amount;
+      typeOfservice           = $("#cost_oper_machine_cont_details_type_of_service_id option:selected");//mostrar en el td  
+      priceTypeOfService      = $("#cost_oper_machine_cont_details_type_of_service_id option:selected").data("price"); 
+      UmedTypeOfService       = $("#cost_oper_machine_cont_details_type_of_service_id option:selected").data("u_measure"); 
+      amount                  = $("#cost_oper_machine_cont_detail_amount").val();
+      subtotal                = priceTypeOfService * amount;
 
       var newRow = addNewCost(typeOfservice.text(),UmedTypeOfService, priceTypeOfService, amount, subtotal.toFixed(2));
 
@@ -101,11 +92,11 @@ $(document).ready(function()
 // el subtotal es el tipo de servicio * UM(Ha) * cantidad
 function row_bt_cost_out()
 { 
-   var type_service_id     =  $("#type_service_type_of_service_id option:selected").val();
-   var type_service_name   =  $("#type_service_type_of_service_id option:selected").text();
-   var price               =  $("#type_service_type_of_service_id option:selected").data("price");
-   var quantity            =  $("#quantity").val();
-   var u_measure           =  $("#type_service_type_of_service_id option:selected").data("u_measure");
+   var type_service_id     =  $("#cost_oper_machine_cont_details_type_of_service_id option:selected").val();
+   var type_service_name   =  $("#cost_oper_machine_cont_details_type_of_service_id option:selected").text();
+   var price               =  $("#cost_oper_machine_cont_details_type_of_service_id option:selected").data("price");
+   var quantity            =  $("#cost_oper_machine_cont_detail_amount").val();
+   var u_measure           =  $("#cost_oper_machine_cont_details_type_of_service_id option:selected").data("u_measure");
    var area                =  $("#farm_area").val();
 
       
@@ -134,21 +125,16 @@ function calculte_subtotal(u_measure,price,area,quantity)
    }
    else if (u_measure == "KILO")
    {
-      $prod = $("#production").val();
-      subtotal = (price * $prod) * quantity;
-
+      subtotal = (price * $("#production").val()) * quantity;
    }
    else if (u_measure == "HORA")
    {
 
-    $("#implement").show();
-    $oper_time               =  $("#cost_oper_machine_cont_details_implement_id option:selected").data("oper_time");
-
-    subtotal = (price * $prod) * quantity;
-
+      var to               =  $("#cost_oper_machine_cont_details_implement_id option:selected").data("oper_time");
+      subtotal             = ((area / to) * quantity).toFixed(0);
    }
 
-   total                  += subtotal;
+   TOTAL                  += subtotal;
    $("#outsourced_total").text(total.toFixed(0));
    $("#cost_oper_cont_total").val(total.toFixed(0));
    return subtotal;

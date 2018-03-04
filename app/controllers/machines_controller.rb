@@ -4,6 +4,7 @@ class MachinesController < ApplicationController
   # GET /machines
   # GET /machines.json
   def index
+    get_all
     @machines = Machine.all
   end
 
@@ -88,6 +89,7 @@ class MachinesController < ApplicationController
   end
   
   def get_all
+    @title = "Consumo"
     @type_machines = TypeMachine.all.collect {|c| [c.description, c.id] }
     @brands = Brand.all.collect {|c| [c.name, c.id] }
     @models = Model.all.collect {|type|[type.name, type.id]}

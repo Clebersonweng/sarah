@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180210185920) do
+ActiveRecord::Schema.define(version: 20180301233801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,22 +60,21 @@ ActiveRecord::Schema.define(version: 20180210185920) do
     t.float    "lubricant"
     t.float    "repair_and_maintenance"
     t.float    "subtotal"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "type_service_id"
+    t.datetime "created_at",                                                      null: false
+    t.datetime "updated_at",                                                      null: false
+    t.integer  "implement_id"
+    t.decimal  "hours_needed",           precision: 10, scale: 3, default: "0.0"
     t.index ["cost_oper_machine_id"], name: "index_cost_oper_machine_details_on_cost_oper_machine_id", using: :btree
+    t.index ["implement_id"], name: "index_cost_oper_machine_details_on_implement_id", using: :btree
     t.index ["machine_id"], name: "index_cost_oper_machine_details_on_machine_id", using: :btree
-    t.index ["type_service_id"], name: "idx_cost_oper_machine_det_on_type_service_id", using: :btree
   end
 
   create_table "cost_oper_machines", force: :cascade do |t|
-    t.float    "total"
+    t.integer  "program_production_id"
+    t.decimal  "total"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
-    t.integer  "chart_of_account_id"
-    t.integer  "program_production_id"
-    t.index ["chart_of_account_id"], name: "index_cost_oper_machines_on_chart_of_account_id", using: :btree
-    t.index ["program_production_id"], name: "idx_cost_oper_machine_on_prog_prod", using: :btree
+    t.index ["program_production_id"], name: "index_cost_oper_machines_on_program_production_id", using: :btree
   end
 
   create_table "estimate_sales", force: :cascade do |t|
@@ -128,13 +127,13 @@ ActiveRecord::Schema.define(version: 20180210185920) do
     t.string   "model"
     t.integer  "machine_id"
     t.datetime "created_at",                                           null: false
-    t.datetime "upand"
+    t.datetime "updated_at",                                           null: false
+    t.string   "brand"
     t.string   "year"
-    t.float    "prdated_at",                                           null: false
-    t.string   "brice"
+    t.float    "price"
     t.decimal  "coef_cccr",                  precision: 15, scale: 10
-    t.decimal  "ope_time",                  precision: 15, scale: 10
-    t.decimal  "workirng_capacity",           precision: 6,  scale: 3
+    t.decimal  "oper_time",                  precision: 15, scale: 10
+    t.decimal  "working_capacity",           precision: 6,  scale: 3
     t.decimal  "working_capacity_effective", precision: 6,  scale: 3
     t.decimal  "field_efficiency",           precision: 6,  scale: 3
     t.index ["machine_id"], name: "index_implements_on_machine_id", using: :btree
@@ -164,11 +163,15 @@ ActiveRecord::Schema.define(version: 20180210185920) do
   end
 
   create_table "man_power_details", force: :cascade do |t|
-    t.integer "type_of_work_id"
-    t.integer "people_id"
-    t.float   "hours_needed"
-    t.float   "subtotal"
-    t.index ["people_id"], name: "index_man_power_details_on_people_id", using: :btree
+    t.integer  "man_power_id"
+    t.integer  "type_of_work_id"
+    t.integer  "person_id"
+    t.decimal  "hours_needed",    precision: 12, scale: 4, default: "0.0"
+    t.decimal  "subtotal",        precision: 20, scale: 4, default: "0.0"
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
+    t.index ["man_power_id"], name: "index_man_power_details_on_man_power_id", using: :btree
+    t.index ["person_id"], name: "index_man_power_details_on_person_id", using: :btree
     t.index ["type_of_work_id"], name: "index_man_power_details_on_type_of_work_id", using: :btree
   end
 
@@ -395,9 +398,9 @@ ActiveRecord::Schema.define(version: 20180210185920) do
   add_foreign_key "cost_oper_machine_cont_details", "type_of_services"
   add_foreign_key "cost_oper_machine_conts", "chart_of_accounts"
   add_foreign_key "cost_oper_machine_conts", "farming_plots", column: "program_production_id"
-  add_foreign_key "cost_oper_machine_details", "cost_oper_machines"
+  add_foreign_key "cost_oper_machine_details", "implements"
   add_foreign_key "cost_oper_machine_details", "machines"
-  add_foreign_key "cost_oper_machines", "chart_of_accounts"
+  add_foreign_key "cost_oper_machines", "program_productions"
   add_foreign_key "estimate_sales", "chart_of_accounts"
   add_foreign_key "estimate_sales", "farming_plots"
   add_foreign_key "estimate_sales", "type_of_crops"
@@ -406,7 +409,8 @@ ActiveRecord::Schema.define(version: 20180210185920) do
   add_foreign_key "machines", "brands"
   add_foreign_key "machines", "fuels"
   add_foreign_key "machines", "models"
-  add_foreign_key "man_power_details", "people", column: "people_id"
+  add_foreign_key "man_power_details", "man_powers"
+  add_foreign_key "man_power_details", "people"
   add_foreign_key "man_power_details", "type_of_works"
   add_foreign_key "man_powers", "chart_of_accounts"
   add_foreign_key "man_powers", "program_productions"

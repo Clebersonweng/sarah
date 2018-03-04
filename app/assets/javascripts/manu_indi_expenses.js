@@ -1,7 +1,7 @@
 $(document).ready(function () {
  
    controlador = $("#controller").val();
-   generic_response_form(controlador);
+   validate_generic_form(controlador);
    form_manu_indirect_expense_validates();
 
 });

@@ -10312,9 +10312,9 @@ $(document).ready(function ()
 {
 
   controlador = $("#controller").val();
-  generic_response_form(controlador);
+  validate_generic_form(controlador);
   form_brands_validates();
-
+  $("#bt_brands").bootstrapTable();
 });
 
 function form_brands_validates()
@@ -11036,202 +11036,6 @@ var agregarProducto = function(idSup, nameSup, dosage,price,consumo,subtotal)
                "</tr>";
             
   };
-$(document).ready(function() {
-   var count, sum = 0;
-   var   machine,
-         areaPlot,
-         timeOper,
-         totalTimeOper; // guarda la multiplicacion del tiempo operativo * el area de la parcela
-   
-   //variables de combustible gasto por parcela por maquina
-   var coefConsum,lubricant,fuel,fuelPrice,hp,costFuelPorHours;
-   //variables de cantidad de veces que se realizo la tarea
-   var amount,subtotal;
-   // variables de implementos
-   var implement,coefCccrImplement,priceImplement,totalCostRepairImplPerHours,totalCostRepairImplPerTimeOper;
-   // variables de maquinas
-   var coefCccrMachine,priceMachine,totalCostRepairMachinePerHours,totalCostRepairMechinePerTimeOper;
-   // RYM - reparacion y mantenimiento 
-   /**verifico si la maquinaria es un pulverizador entonces el costo de rym esta solamente en maquinas
-   y tiene el tiempo operativo si es pulverizador autop, o de arastre   */
-   
-
-   $('#implement_implement_id').on("change", function() 
-   {
-      repair_maint_implement($("#implement_implement_id option:selected").data("price"),$("#implement_implement_id option:selected").data("coef_cccr"));
-      total_time_operativo($("#implement_implement_id option:selected").data("oper_time"), $("#cost_oper_machine_farming_plot_id option:selected").data("area"));
-   });
-
-
-   $('#cost_oper_machine_detail_machine_id').on("change", function()
-   {
-      var pulverizador = "PULVERIZADOR";
-      var cosechadora = "COSECHADORA";
-      var machineNotImplement = $("#cost_oper_machine_detail_machine_id option:selected").data("name");
-   
-      if (machineNotImplement.trim() === pulverizador || machineNotImplement.trim() === cosechadora ) 
-      { 
-         // trim sirve para quitar blancos                        
-         total_cost_machine();
-         totalCostRepairImplPerHours = 1;
-         // si es pulv toma el tiempo de pulveriz
-         //haciendo el calculo test de timepo opertaivo
-         timeOper = $("#cost_oper_machine_detail_machine_id option:selected").data("time_oper");
-         totalTimeOper = calcularTotalTiempoOperativo(timeOper, areaPlot);
-         }
-      else
-      {
-         calculateCostMachine();
-      }       
-   }); 
-       
-
-   /*aqui agrego todos los detalles de costo operativo y agrego fila por fila sumando y presentando el total operativo 
-   para el usuario que tiene maquinaria propia
-   */
-
-   $("#agregarCostOper").on("click", function(event) {
-       event.preventDefault();
-       var totalTimeOperImpl = total_time_operative(timeOper, areaPlot);
-       machine = $("#cost_oper_machine_detail_machine_id option:selected").text();//mostrar en el td   
-       machineValue = $("#cost_oper_machine_detail_machine_id option:selected").val(); //tomar el value para guardar en la bd
-       implementValue = $("#implement_implement_id option:selected").val();
-       /**toma la cantidad de veces que realizo la tarea para multiplicar por 
-        el gasto de combustible, lubricante y rym */
-
-       amount = $("#amount").val();
-       var lubricantValue = lubricant;
-       // realizo la sumatoria de mantenimiento y repacion de la maquinaria y su implemento de cada fila cargada
-       var totalSumRepairMachineAndImplementPerHours = totalCostRepairImplPerHours + totalCostRepairMachinePerHours;
-       
-   //subtotal = ((totalFuel*total de tiempo oper para esta parcela) + lubricant + repair machine and implement) * area parcela
-       var totalFuelPerTotalTimeOper = (parseFloat(costFuelPorHours) * parseFloat(totalTimeOper));
-       var totalLubPerTotalTimeOper = parseFloat(lubricant) * parseFloat(totalTimeOper);
-       var totalRepairMachineAndImplPerTotalTimeOper = ((parseFloat(totalCostRepairMachinePerHours) + parseFloat(totalCostRepairImplPerHours)) * parseFloat(totalTimeOper));
-       // subtotal sin multiplicar la cantidad de tareas
-       var subtotalSinMultAmount = totalFuelPerTotalTimeOper + totalLubPerTotalTimeOper + totalRepairMachineAndImplPerTotalTimeOper;
-    //subtotal multip cantidad de veces que se ejecuto la tarea
-       subtotal = subtotalSinMultAmount * amount;
-       var chargeTable = agregarProducto(machine, implement, amount, costFuelPorHours, lubricant, totalTimeOper.toFixed(2), totalSumRepairMachineAndImplementPerHours.toFixed(2), subtotal);
-    // carga los trs en la tabla
-       $("#detalhes-container tbody:first").append(chargeTable);
-       addNuevasFilas (machineValue,implementValue, amount, costFuelPorHours, lubricantValue, totalSumRepairMachineAndImplementPerHours.toFixed(2), subtotal);//agrego cada fila
-       // resetea los campos despues de  cada add
-       //incrementa al agregar cada fila
-        count++;
-        sum+=subtotal; 
-       
-      $("#TOTAL").text(sum.toFixed(2));  
-      $("#InputTotal").val(sum.toFixed(2));  
-      
-
-       
-   });
-
-   //verifico si la maquinaria es un tractor entonces muestro el select de implemento
-   $('#cost_oper_machine_detail_machine_id').on("change", function() {
-       var nameMachine = $("#cost_oper_machine_detail_machine_id option:selected").data("name");
-       if (nameMachine == 'TRACTOR') { // or this.value == 'volvo'
-           $('#divImplement').show();
-       } else {
-           $('#divImplement').hide();
-       }
-   }); 
-
-   /** Limpio la tabla cargada al hacer click en cancel */
-   $("#cancel").on("click", function(event) {
-       event.preventDefault();
-       $( "#tabla tbody tr" ).each( function(){
-           this.parentNode.removeChild( this ); 
-       });
-   });
-                     // cierre de metodo
-});
-
-function addNewRow(machine,implement, amount, fuel, lubricant, RYM, subtotal) 
-{
-   $("#addFilas").append(
-        "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][machine_id]' id='txt' value="+machine+">"+
-        "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][amount]' id='txt1' value="+amount+">"+
-        "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][lubricant]' id='txt2' value="+lubricant+'>'+      
-        "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][repair_and_maintenance]' id='txt2' value="+RYM+'>'+
-        "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][subtotal]' id='txt2' value="+subtotal+'>'+
-        "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][fuel]' id='txt2' value="+fuel+'>'+
-         "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][implement_id]' id='txt' value="+implement+">"
-
-        );
-}
-
-/**calculo de gastos con reparacion y mantenimiento,
-                se realiza tomando del valor a nuevo de la maquina y multiplicando por el coeficiente*/
-
-
-var addTotal = function(total)
-{
-     return "<tr>" + 
-                 "<td>"  + "</td>" +
-                  "<td>"  + "</td>" + 
-                  "<td>"  + "</td>" +
-                  "<td>"  + "</td>" + 
-                  "<td>"  + "</td>" 
-                 + "<td>"  + "</td>" +
-                  "<td>"  + "</td>" + 
-                 "<td class='total'>" + total + "</td>" + "<td style='text-align: center'>" + "<a href='#'" + "id='quitar'>" + "<i class='icon-minus'></i>" + "</a>" + "</td>" + 
-             "</tr>";
-}
-
-function total_cost_machine(price_machine,coef_cccr_machine,coef_consum,fuel_price,hp) 
-{
-  
-   var res_total_repair_machine = total_cost_repair_machine_per_hours(price_machine,coef_cccr_machine);
-   //calculo el valor de combustible en $ gasto por hora para esta labor con este implemento
-   var res_total_fuel = cost_fuel_por_hours(fuel_price,hp,coef_consum);
-   //calculo de gasto de lubricantes
-   var res_total_lub = total_lubricant(res_total_fuel);
-
-   return res_total_repair_machine+res_total_fuel+res_total_lub;
-}
-
-function total_lubricant(total_cost_fuel_per_hours)
-{
-   lubricant = (parseFloat(total_cost_fuel_per_hours) * 12) / 100; // 12 % del total de combustible
-   return lubricant;
-}
-
-function total_cost_repair_machine_per_hours(price,coef_cccr_machine)
-{
-   return parseFloat(price) * parseFloat(coef_cccr_machine);
-}
-
-function cost_fuel_por_hours(fuel_price,hp,coef_consumption)
-{
-   var data    =    parseFloat(fuel_price) * parseFloat(hp) * parseFloat(coef_consumption);
-   return data;
-}
-
-function total_time_operative (time_oper, size_area)
-{
-  result = parseFloat(time_oper) * parseFloat(size_area) ;
-  return result;
-}
-
-function repair_maint_implement(price_implement, coef_cccr_implement) 
-{
-   totalCostRepairImplPerHours = parseFloat(price_implement) * parseFloat(coef_cccr_implement);
-  return totalCostRepairImplPerHours;
-}
-
-
-function calculate_total_time_oper_implements(implement,coef_cccr_impl,price,time_oper)
-{  
-      
-}
-
-function calculate_total_time_oper_machines(machine,coef_cccr_mach,price,time_oper)
-{  
-      
-}
-;
 $(document)
 .ready(
     function() {
@@ -11250,8 +11054,8 @@ $(document)
       });
 });
 var count, sum, code_item = 0; 
-var total = 0.0;
-var subtotal ;
+var TOTAL = 0.0;
+var subtotal =0;
 
 $(document).ready(function() 
 {
@@ -11266,16 +11070,15 @@ $(document).ready(function()
    });
 
    enabled_button_add_item("type_service_type_of_service_id","btn_add_cost_out");
-   $('#implement').hide();
    $('#btn_add_cost_out').click(function (e) {
     e.preventDefault();
       $('#tb_co_mach_cont').bootstrapTable("append", row_bt_cost_out());
-      $('#type_service_type_of_service_id').val("");
-      $("#quantity").val("");
+      $('#cost_oper_machine_cont_details_type_of_service_id').val("");
+      $("#cost_oper_machine_cont_details_amount").val("");
       
    });
 
-   $('#type_service_type_of_service_id').on("change",function (e) 
+   $('#cost_oper_machine_cont_details_type_of_service_id').on("change",function (e) 
    {
       if(typeof $("#quantity").val() != "")
       {
@@ -11286,41 +11089,34 @@ $(document).ready(function()
 
    $('#tb_co_mach_cont').on('check.bs.table', function (e, row) 
    {
-      $remove = $('.remove');
-      selections = [];
-      $remove.click(function () {
-      //var ids = getIdSelections($('#tb_suppy_detail'));
-      $('#tb_co_mach_cont').bootstrapTable('remove', {
-            field: 'id',
-            values: [row.id]
+         TOTAL =  parseFloat($("#outsourced_total").text());
+         $remove = $('.remove');
+         selections = [];
+         $remove.click(function () {
+         //var ids = getIdSelections($('#tb_suppy_detail'));
+         $('#tb_co_mach_cont').bootstrapTable('remove', {
+               field: 'id',
+               values: [row.id]
+            });
+            $remove.prop('disabled', true);
+            TOTAL -= row.subtotal;
+            $("#oper_own_total").text(TOTAL.toFixed(0));
          });
-         $remove.prop('disabled', true);
-         var n_total = row.subtotal
-         total = parseInt(total) - eval(n_total);
-         $("#outsourced_total").text(parseInt(total));
-         $("#cost_oper_cont_total").val(parseInt(total));
-      });
    });
-
     /**verifico si la u.m es bolsa, ha, hs y calculo de acuerdo a esto el subtotal*/
-    $('#type_service_type_of_service_id').on("change", function() 
-    { 
+   $('#cost_oper_machine_cont_details_type_of_service_id').on("change", function() 
+   { 
+      if($('#cost_oper_machine_cont_details_type_of_service_id option:selected').data('u_measure') == "HORA")
+      {
+         $("#cost_oper_machine_cont_details_implement_id").attr("disabled",false); 
+      }
+      else
+      {
+         $("#cost_oper_machine_cont_details_implement_id").val(''); 
+         $("#cost_oper_machine_cont_details_implement_id").attr("disabled",true); 
+      }
 
-     Umed =  $("#type_service_type_of_service_id option:selected").data("u_measure"); 
-        switch (Umed) { 
-                case 'KILO': 
-                        console.log("soy calculado en kilos");
-                        break;
-                case 'HORAS': 
-                       console.log("soy calculado en horas");
-                        break;
-                case 'HECTAREAS': 
-                        console.log("soy calculado en kilos");
-                        break;		
-                default:
-                        //alert('No es una unidad de medida aceptada!');
-        }  
-    });
+   });
     /**Calcular el total multiplicado por el area de la parcela*/
 
 
@@ -11332,12 +11128,11 @@ $(document).ready(function()
 
    $("#agregarCostOperOuts").on("click", function() 
    {
-      typeOfservice = $("#type_service_type_of_service_id option:selected");//mostrar en el td  
-      priceTypeOfService = $("#type_service_type_of_service_id option:selected").data("price"); 
-      UmedTypeOfService = $("#type_service_type_of_service_id option:selected").data("u_measure"); 
-      amount = $("#quantity").val();
-
-      subtotal = priceTypeOfService * amount;
+      typeOfservice           = $("#cost_oper_machine_cont_details_type_of_service_id option:selected");//mostrar en el td  
+      priceTypeOfService      = $("#cost_oper_machine_cont_details_type_of_service_id option:selected").data("price"); 
+      UmedTypeOfService       = $("#cost_oper_machine_cont_details_type_of_service_id option:selected").data("u_measure"); 
+      amount                  = $("#cost_oper_machine_cont_detail_amount").val();
+      subtotal                = priceTypeOfService * amount;
 
       var newRow = addNewCost(typeOfservice.text(),UmedTypeOfService, priceTypeOfService, amount, subtotal.toFixed(2));
 
@@ -11352,11 +11147,11 @@ $(document).ready(function()
 // el subtotal es el tipo de servicio * UM(Ha) * cantidad
 function row_bt_cost_out()
 { 
-   var type_service_id     =  $("#type_service_type_of_service_id option:selected").val();
-   var type_service_name   =  $("#type_service_type_of_service_id option:selected").text();
-   var price               =  $("#type_service_type_of_service_id option:selected").data("price");
-   var quantity            =  $("#quantity").val();
-   var u_measure           =  $("#type_service_type_of_service_id option:selected").data("u_measure");
+   var type_service_id     =  $("#cost_oper_machine_cont_details_type_of_service_id option:selected").val();
+   var type_service_name   =  $("#cost_oper_machine_cont_details_type_of_service_id option:selected").text();
+   var price               =  $("#cost_oper_machine_cont_details_type_of_service_id option:selected").data("price");
+   var quantity            =  $("#cost_oper_machine_cont_detail_amount").val();
+   var u_measure           =  $("#cost_oper_machine_cont_details_type_of_service_id option:selected").data("u_measure");
    var area                =  $("#farm_area").val();
 
       
@@ -11385,21 +11180,16 @@ function calculte_subtotal(u_measure,price,area,quantity)
    }
    else if (u_measure == "KILO")
    {
-      $prod = $("#production").val();
-      subtotal = (price * $prod) * quantity;
-
+      subtotal = (price * $("#production").val()) * quantity;
    }
    else if (u_measure == "HORA")
    {
 
-    $("#implement").show();
-    $oper_time               =  $("#cost_oper_machine_cont_details_implement_id option:selected").data("oper_time");
-
-    subtotal = (price * $prod) * quantity;
-
+      var to               =  $("#cost_oper_machine_cont_details_implement_id option:selected").data("oper_time");
+      subtotal             = ((area / to) * quantity).toFixed(0);
    }
 
-   total                  += subtotal;
+   TOTAL                  += subtotal;
    $("#outsourced_total").text(total.toFixed(0));
    $("#cost_oper_cont_total").val(total.toFixed(0));
    return subtotal;
@@ -11415,6 +11205,171 @@ function add_new_row(type_service,amount, subtotal)
    )
    count++;
 }
+;
+
+   var code = 1;
+$(document).ready(function() 
+{
+   var count, sum,TOTAL = 0;
+   var fuel,lubricant,repair_and_maintenance,time_oper = 0;
+   var res_total_repair_machine,res_total_repair_implement,res_sum_repair_machine_implement,res_total_fuel,res_total_lub,res_total_hours = 0 ;
+   
+   controlador = $("#controller").val();
+   validate_generic_form(controlador,true);
+
+    $('#bt_cost_oper_machine_own').bootstrapTable();
+    $('#tb_cost_machine').bootstrapTable();               
+
+    $("#btn_add_cost_own").on("click",function(e)
+    { 
+      var machine_id             = $("#cost_oper_machine_detail_machine_id option:selected").val();
+      var machine_text           = $("#cost_oper_machine_detail_machine_id option:selected").text();
+      var machine_price          = $("#cost_oper_machine_detail_machine_id option:selected").data("price");
+      var machine_cons           = $("#cost_oper_machine_detail_machine_id option:selected").data("consumption");
+      var machine_hp             = $("#cost_oper_machine_detail_machine_id option:selected").data("hp");
+      var machine_rm             = $("#cost_oper_machine_detail_machine_id option:selected").data("coef_cccr");
+      var fuel_price             = $("#cost_oper_machine_detail_machine_id option:selected").data("price_fuel");
+      var machine_to             = $("#cost_oper_machine_detail_machine_id option:selected").data("time_oper"); //tiempo operativo hs/has
+      var machine_type_machine   = $("#cost_oper_machine_detail_machine_id option:selected").data("type_machine"); //tiempo operativo hs/has
+
+      var implement_id           = $("#cost_oper_machine_detail_implement_id option:selected").val();
+      var implement_text         = $("#cost_oper_machine_detail_implement_id option:selected").text();
+      var implement_price        = $("#cost_oper_machine_detail_implement_id option:selected").data("price");
+      var implement_rm           = $("#cost_oper_machine_detail_implement_id option:selected").data("coef_cccr");
+      var implement_to           = $("#cost_oper_machine_detail_implement_id option:selected").data("oper_time");
+      var area                   = $("#cost_oper_machine_program_production_id").val();
+      var amount                 = $("#cost_oper_machine_detail_amount").val();
+      new_row_dt(machine_text,implement_text,fuel_price,machine_price,machine_rm,implement_price,machine_hp,machine_cons,implement_rm,machine_to,implement_to,area,machine_id,implement_id,amount);
+   });
+
+   $("#cost_oper_machine_detail_machine_id").on("change",function(e)
+   {
+      var machine_type_machine   = $("#cost_oper_machine_detail_machine_id option:selected").data("type_machine"); //tipo de maquina para ocultar implemento
+
+      if(typeof machine_type_machine != "undefined" && machine_type_machine == 1)
+      {
+        $("#cost_oper_machine_detail_implement_id").prop("disabled",false);
+      }
+      else
+      {
+        $("#cost_oper_machine_detail_implement_id").prop("disabled",true);
+      }
+   });
+
+   $('#tb_cost_machine').on('check.bs.table', function (e, row) 
+   {
+     TOTAL =  parseFloat($("#oper_own_total").text());
+      console.log(TOTAL);
+         $remove = $('.remove');
+         selections = [];
+         $remove.click(function () {
+         //var ids = getIdSelections($('#tb_suppy_detail'));
+         $('#tb_cost_machine').bootstrapTable('remove', {
+               field: 'id',
+               values: [row.id]
+            });
+            $remove.prop('disabled', true);
+            TOTAL -= row.subtotal;
+            $("#oper_own_total").text(TOTAL.toFixed(0));
+         });
+   });
+});
+
+
+function new_row_dt(machine_text,implement_text,fuel_price,machine_price,machine_rm,implement_price,machine_hp,machine_cons,implement_rm,machine_to,implement_to,area,machine_id,implement_id,amount)
+{
+   // se calcula por horas para postior multiplicar por la cantidad de horas trabajadas
+    res_total_repair_machine     = total_cost_repair_machine_per_hours(machine_price,machine_rm); //Rep y Mant valor a nuevo. * coefciente de mantenimiento
+    res_total_repair_implement   = total_repair_implement_por_hours(implement_price, implement_rm);
+   //sumatoria de gastos con reparacion y mantenimiento tanto de maquina como de implementos
+    res_sum_repair_machine_implement = res_total_repair_machine + res_total_repair_implement;
+   //gasto de combustible por hora maquina
+    res_total_fuel               = cost_fuel_por_hours(fuel_price,machine_cons);
+    res_total_lub                = total_lubricant(res_total_fuel);
+   if(typeof machine_to != "undefined" && machine_to > 0)
+   {     
+      res_total_hours = quantity_hours_needed(machine_to,area);
+   }
+   else if(typeof implement_to != "undefined" && implement_to > 0)
+   {
+      res_total_hours   = quantity_hours_needed(implement_to,area);
+   }
+
+   var subtotal = (((res_total_fuel+res_total_lub+res_sum_repair_machine_implement) * res_total_hours).toFixed(0)) * amount;
+   TOTAL += subtotal;
+   $("#oper_own_total").text(TOTAL.toFixed(0));
+
+   var  _row_ =      {
+                        "id": code++,
+                        "code": code++,
+                        "machine": machine_text,   
+                        "machine_id": "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][machine_id]' id='txt' value="+machine_id+">",
+                        "implement": implement_text,  
+                        "implement_id": "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][implement_id]' id='txt' value="+implement_id+">",  
+                        "fuel": res_total_fuel,  
+                        "fuel_id": "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][fuel]' id='txt' value="+res_total_fuel+">", 
+                        "lubricant": res_total_lub,  
+                        "lubricant_id": "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][lubricant]' id='txt' value="+res_total_lub+">",
+                        "rep_and_maint": res_sum_repair_machine_implement,   
+                        "rep_and_maint_id": "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][repair_and_maintenance]' id='txt' value="+res_sum_repair_machine_implement+">",  
+                        "hours_needed": res_total_hours, 
+                        "hours_needed_id": "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][hours_needed]' id='txt' value="+res_total_hours+">", 
+                        "amount": amount,   
+                        "amount_id": "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][amount]' id='txt' value="+amount+">", 
+                        "subtotal": subtotal.toFixed(0),
+                        "subtotal_val":  "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][subtotal]' id='txt' value="+subtotal.toFixed(0)+">",
+                        "total":  "<input type='hidden' size='20' name='cost_oper_machine[total]' id='txt' value="+TOTAL.toFixed(0)+">",
+                        "Action" : '<a class="remove  btn btn-danger delete btn-sm" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></a>',
+                     };
+  
+   $('#tb_cost_machine').bootstrapTable("append", _row_);   
+   $("#cost_oper_machine_detail_machine_id").val("");
+   $("#cost_oper_machine_detail_implement_id").val("");
+   $("#cost_oper_machine_detail_amount").val();
+}
+
+
+function total_lubricant(total_cost_fuel_per_hours)
+{
+   lubricant = (eval(total_cost_fuel_per_hours) * 12) / 100; // 12 % del total de combustible
+   return lubricant;
+}
+
+function total_cost_repair_machine_per_hours(price_new,coef_cccr_machine)
+{
+   return eval(price_new) * eval(coef_cccr_machine);
+}
+
+function total_repair_implement_por_hours(price_new_implement, coef_cccr_implement) 
+{
+   var totalCostRepairImplPerHours;
+   if(isNaN(price_new_implement) || isNaN(coef_cccr_implement))
+   {
+      totalCostRepairImplPerHours = 1;
+   }
+   else
+   {
+      totalCostRepairImplPerHours = eval(price_new_implement) * eval(coef_cccr_implement);
+   }
+
+   return totalCostRepairImplPerHours;
+}
+
+function cost_fuel_por_hours(fuel_price,consumption)
+{
+   var data    =    parseFloat(fuel_price) * parseFloat(consumption);
+   return data;
+}
+
+function quantity_hours_needed(time_oper,area)
+{
+   return eval(time_oper) * eval(area);
+}
+
+
+
+
+
 ;
 var quantity_estimate_prod;
 var total_production;
@@ -11688,7 +11643,7 @@ function run_option_result(response)
 $(document).ready(function ()
 {
   controlador = $("#controller").val();   
-  generic_response_form(controlador);
+  validate_generic_form(controlador);
   form_farming_plots_validates();
 });
 
@@ -11889,7 +11844,7 @@ function form_farming_plots_validates()
 $(document).ready(function ()
 {
   controlador = $("#controller").val();   
-  generic_response_form(controlador);
+  validate_generic_form(controlador);
   form_history_sales_validates();
 
 });
@@ -11952,40 +11907,37 @@ $(document).ready(function ()
 
 var width=0;
 var velocity=0;
-var hectare = 10000; /**un hectarea consiste en 10000 m2*/
-var cte = 0;  /*capacidad de trabajo efectiva**/
+var kilometer = 1000;  //1 km = 1000 m
+var hectare  = 10000; // 10000 metros cuadradosvar cte = 0;  /*capacidad de trabajo efectiva**/
 var to = 0; /**tiempo operativo*/
-var meterPerKm = 1000; /**cantidad de metros que contiene un kilometro*/
 var timeOperative;
-
+var field_eficient; //eficiencia de campo, tiempo perdido para recarga, tierra con curvas y remates normal 85% de 100
 $(document).ready(function ()
 {
 
 	controlador = $("#controller").val();
-	generic_response_form(controlador);
+	validate_generic_form(controlador);
 	form_implements_validates();
+    $('#width_machine,#work_velocity,#real_width_machine,#real_work_velocity').valida_sarah('0123456789.,');
+	$('#save_ctt').on("click",function()
+   {
+      var ctt = total_working_capacity($("#width_machine").val(),$("#work_velocity").val());
+      $("#implement_working_capacity").val(ctt.toFixed(4)).focus();
+      $('form').bootstrapValidator('revalidateField', 'implement[working_capacity]');  
+   });
 
-	$('#velocity').on("focusout",function(event){
-		width = $("#width").val();
-		velocity = $("#velocity").val();
-		cte = (width * velocity * meterPerKm)/hectare;
-		cte.toFixed(4);
-		to = 1/cte;
-		timeOperative = to.toFixed(4);
-		$("#implement_oper_time").val(timeOperative);
-	});
-
-    /**limpiar los campos cargados al hacer click en salir*/
-    $('#exit').on("click",function(event){
-        $("#velocity").val("");
-        $("#width").val("");
-        $("#implement_oper_time").val("");
+    $('#save_cte').on("click",function()
+    {
+      var cte = total_working_capacity_efective($("#real_width_machine").val(),$("#real_work_velocity").val());
+      $("#implement_working_capacity_effective").val(cte.toFixed(4)).focus();
+      $('form').bootstrapValidator('revalidateField', 'implement[working_capacity_effective]');  
     });
 
-    $('#openBtn').on("click",function(event){
-        event.preventDefault();
-		$('#myModal').modal({show:true})
-    });
+	$('#implement_working_capacity_effective').on("focusout",function()
+    {
+		var result = total_time_oper($('#implement_working_capacity_effective').val(),$("#implement_working_capacity").val() );
+   		$("#implement_oper_time").val(result.toFixed(4));
+   	});
 
 });
 
@@ -11994,63 +11946,77 @@ function form_implements_validates()
   $('#form_implements').bootstrapValidator({
     excluded: [':disabled', ':hidden', ':not(:visible)'],
 	    fields: {
-			      "implement[name]": {
-			        validators: {
-			          notEmpty: {
-			            message: 'Este campo es obligatório'
-			          }
-			        }
-			      },
-			    "implement[model]": {
-			        validators: {
-			          notEmpty: {
-			            message: 'Este campo es obligatório'
-			          }
-			        }
-			      },
-			   "implement[oper_time]": {
-			        validators: {
-			          notEmpty: {
-			            message: 'Este campo es obligatório'
-			          }
-			        }
-			      },
-			    "implement[machine_id]": {
-			        validators: {
-			          notEmpty: {
-			            message: 'Este campo es obligatório'
-			          }
-			        }
-			      },
-			    "implement[coef_cccr]": {
-			        validators: {
-			          notEmpty: {
-			            message: 'Este campo es obligatório'
-			          }
-			        }
-			      },
-			      "implement[brand]": {
-			        validators: {
-			          notEmpty: {
-			            message: 'Este campo es obligatório'
-			          }
-			        }
-			     },
-			      "implement[year]": {
-			        validators: {
-			          notEmpty: {
-			            message: 'Este campo es obligatório'
-			          }
-			        }
-			     },
-			      "implement[price]": {
-			        validators: {
-			          notEmpty: {
-			            message: 'Este campo es obligatório'
-			          }
-			        }
-			     }
-			}
+				      "implement[name]": {
+				        validators: {
+				          notEmpty: {
+				            message: 'Este campo es obligatório'
+				          }
+				        }
+				      },
+				    "implement[model]": {
+				        validators: {
+				          notEmpty: {
+				            message: 'Este campo es obligatório'
+				          }
+				        }
+				      },
+				   "implement[oper_time]": {
+				        validators: {
+				          notEmpty: {
+				            message: 'Este campo es obligatório'
+				          }
+				        }
+				      },
+				    "implement[machine_id]": {
+				        validators: {
+				          notEmpty: {
+				            message: 'Este campo es obligatório'
+				          }
+				        }
+				      },
+				    "implement[coef_cccr]": {
+				        validators: {
+				          notEmpty: {
+				            message: 'Este campo es obligatório'
+				          }
+				        }
+				      },
+				      "implement[brand]": {
+				        validators: {
+				          notEmpty: {
+				            message: 'Este campo es obligatório'
+				          }
+				        }
+				     },
+				      "implement[year]": {
+				        validators: {
+				          notEmpty: {
+				            message: 'Este campo es obligatório'
+				          }
+				        }
+				     },
+				      "implement[price]": {
+				        validators: {
+				          notEmpty: {
+				            message: 'Este campo es obligatório'
+				          }
+				        }
+				    }/*,
+		           'machine[working_capacity]': {
+		                    validators: {
+		                        numeric: {
+		                            message: 'El valor no es un número válido'
+		                    }
+		                }
+		            },
+		           'machine[working_capacity_effective]': {
+		                    validators: {
+		                        numeric: {
+		                            message: 'El valor no es un número válido'
+		                        }
+		                    }
+		            }*/
+		    	}
 
   }).on('init.field.fv', function (e, data) {
     e.preventDefault();
@@ -12069,196 +12035,305 @@ function form_implements_validates()
 }
 
 
+function total_working_capacity(width_machine,velocity)
+{
+  var  result = (width_machine * velocity * kilometer) / hectare;
+  return result;
+}
+
+function total_working_capacity_efective(real_width_machine,real_velocity)
+{
+  var result = (real_width_machine * real_velocity * kilometer) / hectare;
+  return result;
+}
+
+function total_time_oper(work_capacity_total_efective,work_capacity_total)
+{
+    if(!isNan(work_capacity_total) && !isNan(work_capacity_total_efective))  
+    {
+	  	field_eficient 	 = (parseFloat(work_capacity_total_efective) / parseFloat(work_capacity_total)); //eficiencia de campo, tiempo perdido por remate,curvas,o recarga de maquinaria
+		return  (field_eficient/work_capacity_total_efective);
+    }
+    else
+    {
+   	   return 0;
+    }
+}  
+
 
 ;
 
-$(document).ready(function ()
+var ready;
+var kilometer = 1000;  //1 km = 1000 m
+var hectare  = 10000; // 10000 metros cuadrados
+ready = $(document).ready(function ()
 {
+   $('#form_machines').bootstrapValidator();
+   controlador = $("#controller").val();
+   validate_generic_form(controlador);
+   form_machines_validates();
+   $('#width_machine,#work_velocity,#real_width_machine,#real_work_velocity').valida_sarah('0123456789.,');
 
-  controlador = $("#controller").val();
-  generic_response_form(controlador);
-  form_machines_validates();
-  
-  md_popover("machine_consumption","Coef consumo lt/hs","Aprox. 0,16% * hp ");
-  md_popover("machine_time_oper","","Si maquinária es pulverizador</br> autopropulsado");
-  
-  $('#md_consumption').on("show.bs.modal",function(){
-    $("#hp_cons_machine").val($("#machine_hp").val());
-  });
+   md_popover("machine_consumption","Coef consumo lt/hs","Aprox. 0,16% * hp ");
+     
+   $('#md_consumption').on("show.bs.modal",function()
+   {
+      $("#hp_cons_machine").val($("#machine_hp").val());
+   });
 
-  $('#md_consumption').on("hidden.bs.modal",function(){
-    calc_cons_fuel_per_hours();
-  });
+   $('#save_ctt').on("click",function()
+   {
+      var ctt = total_working_capacity($("#width_machine").val(),$("#work_velocity").val());
+      $("#machine_working_capacity").val(ctt.toFixed(4));
+      //$('#form_machines').bootstrapValidator('revalidateField', 'machine[working_capacity]');  
+   });
+
+   $('#save_cte').on("click",function()
+   {
+      var cte = total_working_capacity_efective($("#real_width_machine").val(),$("#real_work_velocity").val());
+      $("#machine_working_capacity_effective").val(cte.toFixed(4));
+      //$('form').bootstrapValidator('revalidateField', 'machine[working_capacity_effective]');  
+   });
+
+   $('#md_consumption').on("hidden.bs.modal",function()
+   {
+      calc_cons_fuel_per_hours();
+   });
+
+   $('#machine_working_capacity_effective').on("focusout",function()
+   {
+      var total_to = total_time_oper($("#real_width_machine").val(),$("#real_work_velocity").val());
+      $("#machine_time_oper").val(total_to.toFixed(4));
+      $('form').bootstrapValidator('revalidateField', 'machine[time_oper]');  
+   });
+
+   $('#machine_type_machine_id').on("change",function(e)
+   {
+      
+      if($(this).val() == "3" || $(this).val() == "2")
+      {
+       
+        $('#machine_time_oper,#machine_working_capacity,#machine_working_capacity_effective').attr('readonly', false);
+      }
+      else
+      {
+        $('#machine_time_oper,#machine_working_capacity,#machine_working_capacity_effective').attr('readonly', true);
+      }
+   });
 
 });
 
 function form_machines_validates()
 {
-  $('#form_machines').bootstrapValidator({
+   $('#form_machines').bootstrapValidator({
     framework: 'bootstrap',
     icon: {
-      valid: 'glyphicon glyphicon-ok',
-      invalid: 'glyphicon glyphicon-remove',
-      validating: 'glyphicon glyphicon-refresh'
-    },
-    fields: {
-      'machine[name]': {
-        validators: {
-          notEmpty: {
-            message: 'Este campo es obligatório'
-          }
-        }
+         valid: 'glyphicon glyphicon-ok',
+         invalid: 'glyphicon glyphicon-remove',
+         validating: 'glyphicon glyphicon-refresh'
       },
-      'machine[brand_id]': {
-        validators: {
-          notEmpty: {
-            message: 'Este campo es obligatório'
-          }
-        }
-      },
-      'machine[model_id]': {
-        validators: {
-          notEmpty: {
-            message: 'Este campo es obligatório'
-          },
-          verify_period: {
-            message: 'hay que verificar'
-          }
-        }
-      },
-      'machine[hp]': {
-        validators: {
-          notEmpty: {
-            message: 'Este campo es obligatório'
-          },
-          stringLength: {
-            min: 1,
-            max: 5,
-            message: 'El campo debe contener entre 1 y 4 valores'
-          },
-          numeric: {
-                        message: 'No es un valor numérico válido',
-                        thousandsSeparator: '.',
-                        decimalSeparator: ','
+      fields: 
+      {
+         'machine[name]': {
+           validators: {
+             notEmpty: {
+               message: 'Este campo es obligatório'
+             }
+           }
+         },
+         'machine[brand_id]': {
+           validators: {
+             notEmpty: {
+               message: 'Este campo es obligatório'
+             }
+           }
+         },
+         'machine[model_id]': {
+           validators: {
+             notEmpty: {
+               message: 'Este campo es obligatório'
+             },
+             verify_period: {
+               message: 'hay que verificar'
+             }
+           }
+         },
+         'machine[hp]': {
+           validators: {
+             notEmpty: {
+               message: 'Este campo es obligatório'
+             },
+             stringLength: {
+               min: 1,
+               max: 5,
+               message: 'El campo debe contener entre 1 y 4 valores'
+             },
+             numeric: {
+                           message: 'No es un valor numérico válido',
+                           thousandsSeparator: '.',
+                           decimalSeparator: ','
+                       }
+           }
+         },
+         'machine[price]': {
+           validators: {
+             notEmpty: {
+               message: 'Este campo es obligatorio'
+             },
+             stringLength: {
+               min: 5,
+               max: 15,
+               message: 'El campo debe contener entre 1 y 15 numeros'
+             },
+             regexp: {
+               regexp: /^[0-9.]+$/,
+               message: 'Debe contener solamente numeros'
+             }
+           }
+         },
+         'machine[coeficient_cccr]': {
+           validators: {
+             notEmpty: {
+               message: 'Este campo es obligatório'
+             },
+             stringLength: {
+               min: 1,
+               max: 9,
+               message: 'El campo debe contener entre 1 y 15 numeros'
+             },
+             regexp: {
+               regexp: /^[0-9.]+$/,
+               message: 'Debe contener números decimales'
+             }
+           }
+         },
+         'machine[consumption]': {
+           validators: {
+             notEmpty: {
+               message: 'Este campo es obligatório'
+             },
+             stringLength: {
+               min: 1,
+               max: 9,
+               message: 'El campo debe contener entre 1 y 10 numeros'
+             },
+             regexp: {
+               regexp: /^[0-9.]+$/,
+               message: 'Debe contener solamente numeros'
+             }
+           }
+         },
+         'machine[time_oper]': {
+           validators: {
+             stringLength: {
+               min: 1,
+               max: 9,
+               message: 'El campo debe contener el tiempo operativo con maximo 10 numeros'
+             },
+             regexp: {
+               regexp: /^[0-9.]+$/,
+               message: 'Debe contener solamente numero y punto decimal'
+             }
+           }
+         },
+         'machine[year_purchase]': {
+           validators: {
+             notEmpty: {
+               message: 'Este campo es obligatório'
+             },
+             stringLength: {
+               min: 4,
+               max: 4,
+               message: 'El campo debe contener el año de la maquinária'
+             },
+             regexp: {
+               regexp: /^[0-9.]+$/,
+               message: 'Debe contener solamente numeros'
+             }
+           }
+         },
+         'machine[fuel_id]': {
+            validators: {
+                           notEmpty: {
+                              message: 'Este campo es obligatório'
+                           },
+                           stringLength: {
+                              min: 1,
+                              max: 9,
+                              message: 'El campo debe contener entre 1 y 10 numeros'
+                           },
+                           regexp: {
+                              regexp: /^[0-9.]+$/,
+                              message: 'Debe contener solamente numeros'
+                           }
+                        }
+           },
+           'machine[type_machine_id]': {
+             validators: {
+               notEmpty: {
+                 message: 'Este campo es obligatório'
+               }
+             }
+           },
+           'machine[working_capacity]': {
+                     validators: {
+                        regexp: {
+                           regexp: /^[0-9.]+$/,
+                           message: 'Debe contener solamente números'
+                        }
+                     }
+                },
+           'machine[working_capacity_effective]': {
+                     validators: {
+                        regexp: {
+                           regexp: /^[0-9.]+$/,
+                           message: 'Debe contener solamente números'
+                        }
                     }
-        }
-      },
-      'machine[price]': {
-        validators: {
-          notEmpty: {
-            message: 'Este campo es obligatorio'
-          },
-          stringLength: {
-            min: 5,
-            max: 15,
-            message: 'El campo debe contener entre 1 y 15 numeros'
-          },
-          regexp: {
-            regexp: /^[0-9.]+$/,
-            message: 'Debe contener solamente numeros'
-          }
-        }
-      },
-      'machine[coeficient_cccr]': {
-        validators: {
-          notEmpty: {
-            message: 'Este campo es obligatório'
-          },
-          stringLength: {
-            min: 1,
-            max: 9,
-            message: 'El campo debe contener entre 1 y 15 numeros'
-          },
-          regexp: {
-            regexp: /^[0-9.]+$/,
-            message: 'Debe contener números decimales'
-          }
-        }
-      },
-      'machine[consumption]': {
-        validators: {
-          notEmpty: {
-            message: 'Este campo es obligatório'
-          },
-          stringLength: {
-            min: 1,
-            max: 9,
-            message: 'El campo debe contener entre 1 y 10 numeros'
-          },
-          regexp: {
-            regexp: /^[0-9.]+$/,
-            message: 'Debe contener solamente numeros'
-          }
-        }
-      },
-      'machine[time_oper]': {
-        validators: {
-          stringLength: {
-            min: 1,
-            max: 9,
-            message: 'El campo debe contener el tiempo operativo con maximo 10 numeros'
-          },
-          regexp: {
-            regexp: /^[0-9.]+$/,
-            message: 'Debe contener solamente numero y punto decimal'
-          }
-        }
-      },
-      'machine[year_purchase]': {
-        validators: {
-          notEmpty: {
-            message: 'Este campo es obligatório'
-          },
-          stringLength: {
-            min: 4,
-            max: 4,
-            message: 'El campo debe contener el año de la maquinária'
-          },
-          regexp: {
-            regexp: /^[0-9.]+$/,
-            message: 'Debe contener solamente numeros'
-          }
-        }
-      },
-      'machine[fuel_id]': {
-        validators: {
-          notEmpty: {
-            message: 'Este campo es obligatório'
-          },
-          stringLength: {
-            min: 1,
-            max: 9,
-            message: 'El campo debe contener entre 1 y 10 numeros'
-          },
-          regexp: {
-            regexp: /^[0-9.]+$/,
-            message: 'Debe contener solamente numeros'
-          }
-        }
-      },
-    }
+            }
 
-  })
-  .on('status.field.bv', function (e, data) {
-    if (data.bv.getSubmitButton()) {
-      data.bv.disableSubmitButtons(false);
-    }
+      }
+   })
+   .on('status.field.bv', function (e, data) {
+      if (data.bv.getSubmitButton()) 
+      {
+        data.bv.disableSubmitButtons(false);
+      }
   });
 }
 
 function calc_cons_fuel_per_hours()
 {
  
-  if(typeof $("#machine_hp").val() != "undefined" && $("#machine_hp").val() != "" || typeof $("#coef_cons_mach").val() != "undefined"  && $("#coef_cons_mach").val() != "")
-  {
-    
-    var result  = $("#machine_hp").val() * $("#coef_cons_cccr").val();
-    $("#machine_consumption").val(result); 
-    $('form').bootstrapValidator('revalidateField', 'machine[consumption]');  }
-  
+   if(typeof $("#machine_hp").val() != "undefined" && $("#machine_hp").val() != "" || typeof $("#coef_cons_mach").val() != "undefined"  && $("#coef_cons_mach").val() != "")
+   { 
+      var result  = $("#machine_hp").val() * $("#coef_cons_cccr").val();
+      $("#machine_consumption").val(result.toFixed(4)); 
+      $('form').bootstrapValidator('revalidateField', 'machine[consumption]');  
+   } 
 }
-/*
-*/
+
+function total_working_capacity(width_machine,velocity)
+{
+  var  result = (width_machine * velocity * kilometer) / hectare;
+  return result;
+}
+
+function total_working_capacity_efective(real_width_machine,real_velocity)
+{
+  var result = (real_width_machine * real_velocity * kilometer) / hectare;
+  return result;
+}
+
+function total_time_oper(work_capacity_total_efective,work_capacity_total)
+{
+  
+  if(!isNan(work_capacity_total) && !isNan(work_capacity_total_efective))  
+  var field_eficient = (work_capacity_total_efective / work_capacity_total);
+  var result         = (field_eficient/work_capacity_total)
+  return result;
+}  
+
 ;
 $(document)
 .ready(
@@ -12323,7 +12398,7 @@ function addNewRow(id_type_work, id_employee,hours_needed,subtotal)
 $(document).ready(function () {
  
    controlador = $("#controller").val();
-   generic_response_form(controlador);
+   validate_generic_form(controlador);
    form_manu_indirect_expense_validates();
 
 });
@@ -12508,7 +12583,7 @@ $(document).ready(function ()
 {
 
   controlador = $("#controller").val();
-  generic_response_form(controlador);
+  validate_generic_form(controlador);
   form_models_validates();
 //nameFormatter();
 });
@@ -12566,7 +12641,7 @@ function form_models_validates()
 $(document).ready(function ()
 {
   controlador = $("#controller").val();   
-  generic_response_form(controlador);
+  validate_generic_form(controlador);
   form_people_validates();
 
 });
@@ -12703,7 +12778,7 @@ $(document).ready(function ()
 
  
   controlador = $("#controller").val();
-  generic_response_form(controlador);
+  validate_generic_form(controlador);
   form_products_validates();
 
 });
@@ -12835,7 +12910,7 @@ $(document).ready(function () {
   
   
   controlador = $("#controller").val();
-   generic_response_form(controlador); 
+   validate_generic_form(controlador); 
 
     
   $("#program_production_stock_initial,#program_production_stock_end").off("change").on("change", function () {
@@ -13044,7 +13119,7 @@ $(document).ready(function ()
 {
   
    controlador = $("#controller").val();   
-   generic_response_form(controlador);
+   validate_generic_form(controlador);
    form_supplies_validates();
    enabled_button_add_item("supply_detail_product","add_product");
 
@@ -13217,7 +13292,7 @@ function form_supplies_validates()
 $(document).ready(function ()
 {
   controlador = $("#controller").val();   
-  generic_response_form(controlador);
+  validate_generic_form(controlador);
   form_type_machines_validates();
 
 });
@@ -13227,7 +13302,7 @@ function form_type_machines_validates()
   $('#form_type_machines').bootstrapValidator({
     excluded: [':disabled', ':hidden', ':not(:visible)'],
     fields: {
-      "type-service[description]": {
+      "type_machine[description]": {
         validators: {
           notEmpty: {
             message: 'Este campo es obligatório'
@@ -13238,8 +13313,8 @@ function form_type_machines_validates()
             message: 'El nombre no puede ser menor que 3 y mayor que 30 caracteres'
           },
           regexp: {
-            regexp: /^[a-zA-Z0-9_ ]+$/,
-            message: 'El nombre debe consistir en caracteres alfanuméricos'
+            regexp: /^[a-zA-Z ]+$/,
+            message: 'Solo es permitido letras para este campo'
           }
         }
       }
@@ -13251,7 +13326,8 @@ function form_type_machines_validates()
     }
   }).on('success.field.fv', function (e, data) {
     e.preventDefault();
-    if (data.fv.getInvalidFields().length > 0) {    // There is invalid field
+    if (data.fv.getInvalidFields().length > 0) 
+    {    // There is invalid field
       data.fv.disableSubmitButtons(true);
     }
   }).on('change', 'form', function (e) {
@@ -13263,7 +13339,7 @@ $(document).ready(function ()
 {
 
   controlador = $("#controller").val();
-  generic_response_form(controlador);
+  validate_generic_form(controlador);
   form_type_of_crops_validates();
 });
 
@@ -13311,7 +13387,7 @@ $(document).ready(function ()
 {
 
   controlador = $("#controller").val();
-  generic_response_form(controlador);
+  validate_generic_form(controlador);
   form_type_of_services_validates();
   
   //md_popover("machine_consumption","Coef consumo lt/hs","Aprox. 0,16% * hp ");
@@ -13379,7 +13455,7 @@ $(document).ready(function ()
 {
 
   controlador = $("#controller").val();
-  generic_response_form(controlador);
+  validate_generic_form(controlador);
   form_type_of_works_validates();
   
   //md_popover("machine_consumption","Coef consumo lt/hs","Aprox. 0,16% * hp ");
@@ -13453,6 +13529,7 @@ $(document).ready(function () {
 });
 var controlador;
 var _id;
+var TOTAL = 0;
 
 $(document).ready(function ()
 {
@@ -13507,7 +13584,19 @@ $(document).ready(function ()
       }
       $(this).val(($(this).val()).toUpperCase());
    });
-  
+
+   $(".replace_comma").on('keyup', function (e) {
+      if (e.which = 44) 
+      {
+        $(this).val($(this).val().replace(/,/g, '.'));
+      }
+   });
+   
+   function replace_comma(var_string)
+   {
+
+      a.replace(',','.')
+   }
   /*$(document).ready(function() {
       if (location.hash !== '') $('a[href="' + location.hash + '"]').tab('show');
       return $('a[data-toggle="tab"]').on('shown', function(e) {
@@ -13553,19 +13642,11 @@ function evt_delete_row(evt)
 }
 
 function confirm_modal(id)
-{ //console.log(controlador);
+{ 
   $('#delete_'+id).off().on("click", function (evt) {
-    event.preventDefault();
-   //console.log(id);
-    //_id = $(this).data('id');
-    row = this;
-    //bt = $(this).parent().parent().fadeOut();
-    //bt = $(this).closest('table').attr('id'); //table id
-    //no = $(this).parent().parent().data("index"); //to get row number when we remove it
-    //console.log(bt);
-    //console.log(no);
-
-      dataConfirmModal.confirm({
+   event.preventDefault();
+   row = this;
+   dataConfirmModal.confirm({
                                 title: 'Eliminar un registro?',
                                 text: 'Está seguro que desea eliminar un registro?',
                                 commit: 'Eliminar',
@@ -13663,48 +13744,104 @@ $.fn.valida_sarah = function (cadena) {
   });
 };
 
-validate_generic_form = function (sufixe)
+validate_generic_form = function (sufixe,force)
 {
-  
-   $('#btn_submit_' + sufixe).on('click', function (e) {
+   if(typeof sufixe == "undefined") 
+    console.log("No contiene sufijo");
+   $('#form_'+sufixe+' #btn_submit_'+sufixe).on('click', function (e)
+   {
       e.preventDefault();
       progress(true);
-      console.log(sufixe);
-      if ( $("#form_"+sufixe).data('bootstrapValidator').isValid() )
+      console.log(force);
+      
+      if (typeof force == "undefined")
       {
-         $('#btn_submit_' + sufixe).prop("disabled", false);
-         $('#btn_submit_' + sufixe).submit();
-         delayedRedirect(controlador);
+         force = false;
+      }
+      if(force == false)
+      {
+         if ( $("#form_"+sufixe).data('bootstrapValidator').isValid() )
+         {
+            $('#btn_submit_'+sufixe).prop("disabled", false);
+            $('#btn_submit_'+sufixe).submit();
+
+            $(document).on("ajax:success", 'form#form_'+sufixe, function (event, data, status, xhr, result) 
+            {
+               progress(false);
+               alert_sarah("El registro fue realizado con exito", "success");
+               $("#form_"+sufixe)[0].reset();
+               if(typeof force == "undefined")
+               {
+                  force == false
+               }
+               if(!force)
+               {
+                  $("#form_"+sufixe).data('bootstrapValidator').resetForm();
+               }
+               $("#errors").hide();
+               $('input:visible:enabled:first').focus();
+            })
+            .on('ajax:error', 'form#form_'+sufixe, function (event, jqxhr, settings, exception) 
+            {
+               progress(false);
+               console.log(event);
+               console.log(jqxhr);
+               console.log(settings);
+               alert_sarah("Ocurrió un error al crear el registro!", "danger");
+                /*recorrer los errores en caso de tener*/
+               $.each(jqxhr.responseJSON, function (index, value) {
+                  if (typeof index == "string")
+                  {
+                    $('#errors').html(index + ": " + value);
+                  }
+               });
+            });
+            delayedRedirect(controlador);
+         }
+         else
+         {
+            $('#btn_submit_'+sufixe).prop("disabled", true);
+            $("#form_"+sufixe).data('bootstrapValidator').validate();
+         }   
       }
       else
       {
-         $('#btn_submit_' + sufixe).prop("disabled", true);
-         $("#form_" + sufixe).data('bootstrapValidator').validate();
+         console.log("vacio force");
       }
+      
    });
 
    $('#btn_cancel_' + sufixe).on('click', function (e) {
       e.preventDefault();
-       //$("#form_" + sufixe)[0].reset();
-      // $('#form_' + sufixe).data('bootstrapValidator').resetForm();
-   } );
+      $("#form_"+sufixe)[0].reset();
+      $('#form_'+sufixe).data('bootstrapValidator').resetForm();
+   });
 }
 
-function generic_response_form(sufixe) 
+/* 
+function generic_response_form(sufixe,force) 
 {
-   $(document).on("ajax:success", 'form#form_' + sufixe, function (event, data, status, xhr, result) {
+  $(document).on("ajax:success", 'form#form_' + sufixe, function (event, data, status, xhr, result) {
       progress(false);
       alert_sarah("El registro fue realizado con exito", "success");
       $("#form_" + sufixe)[0].reset();
-      $("#form_" + sufixe).data('bootstrapValidator').resetForm();
+      if(typeof force == "undefined")
+      {
+         force == false
+      }
+      if(!force)
+      {
+         $("#form_" + sufixe).data('bootstrapValidator').resetForm();
+      }
       $("#errors").hide();
       $('input:visible:enabled:first').focus();
-   });
-
-   $(document).on('ajax:error', 'form#form_' + sufixe, function (event, jqxhr, settings, exception) {
+   })
+   .on('ajax:error', 'form#form_' + sufixe, function (event, jqxhr, settings, exception) {
       progress(false);
+      console.log(event);
+      console.log(jqxhr);
+      console.log(settings);
       alert_sarah("Ocurrió un error al crear el registro!", "danger");
-       /*recorrer los errores en caso de tener*/
       $.each(jqxhr.responseJSON, function (index, value) {
          if (typeof index == "string")
          {
@@ -13712,7 +13849,9 @@ function generic_response_form(sufixe)
          }
       });
    });
+   
 }
+*/
 
 function add_errors(id)
 {
@@ -13782,7 +13921,7 @@ function convert_date(fullDate)
 function delayedRedirect(controller){
   setTimeout(function ()
   {
-     window.location = "/"+controller;
+     //window.location = "/"+controller;
   }, 50);
 }
 
@@ -13812,6 +13951,16 @@ window.actionEvents = {
     }
 };
 
+window.formatter = {
+    'click .edit': function (e, value, row, index) {
+      console.log(row);
+    },
+    'click .remove': function (e, value, row, index) { 
+
+       confirm_modal(row.id);
+    }
+};
+
 
 function flatJSON(res) 
 {
@@ -13833,48 +13982,78 @@ var loadBootstrapTable = function (data) {
    });
 };
 
-function totalText(data) 
-{
-  return 'Total';
-}
-
-function footer_output_text(data) 
-{
+function totalTextFormatter(data)
+ {
     return 'Total :';
 }
 
-function sumFormatter(data) 
-{
-    field = this.field;
-    return data.reduce(function (sum, row) {
-        return sum + (+row[field]);
-    }, 0);
+function footerStyle(value, row, index) {
+  index = '0'+index;
+  return index;
 }
 
-$(document).on('turbolinks:click', function(e) 
+function index(data) {
+  index = '0'+index;
+  return index;
+}
+
+function runningFormatter(value, row, index) {
+  TOTAL += row.subtotal
+   console.log(value);
+   console.log(TOTAL.toFixed(0));
+    return TOTAL;
+}
+/*
+window.sumFormatter(data) 
 {
-   setTimeout(function() 
-   {
-       NProgress.start();    
-   }, 600);
+  console.log(data);
+    //field = this.field;
+    //return data.reduce(function (sum, row) {
+     //   return sum + (+row[field]);
+   // }, 0);
+}
+*/
+$(document).on('turbolinks:request-end', function(event) 
+{
+   progress(false);
+});
+
+$(document).on('page:fetch', function() {
+  NProgress.start();
+   setTimeout(function(){
+      NProgress.done();
+   },500);
+});
+
+$(document).on('page:change', function() {
+   NProgress.set(0.4);
+   
+   setTimeout(function(){
+      NProgress.done();
+   },500);
+});
+
+$(document).on('page:restore', function() {
+  NProgress.remove();
+});
+
+$(document).on('turbolinks:request-start', function(event) 
+{
+   NProgress.set(0.4) 
 
    $(".panel-body", this).fadeOut(500,function()
    {
-      NProgress.start(); 
       $(".panel-body").fadeIn(1000);
+        NProgress.done();
    });
-   NProgress.done();
-
 });
 
-$(document).on('turbolinks:render', function(evt) 
+$(document).on('turbolinks:render', function(event) 
 {
    
-   setTimeout(function() 
-   {
-      NProgress.done();
-      NProgress.remove();
-   }, 600);
+  NProgress.done();
+  NProgress.remove();
+
 });
 $(document).ready(function ()
 {
@@ -13882,7 +14061,7 @@ $(document).ready(function ()
   controlador = $("#controller").val();
   form_varieties_validates();
   validate_generic_form(controlador);
-
+  $("#bt_varieties").bootstrapTable();
 });
 
 function form_varieties_validates()

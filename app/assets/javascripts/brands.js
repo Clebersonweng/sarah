@@ -4,7 +4,7 @@ $(document).ready(function ()
   controlador = $("#controller").val();
   generic_response_form(controlador);
   form_brands_validates();
-
+  $("#bt_brands").bootstrapTable();
 });
 
 function form_brands_validates()

@@ -4,6 +4,7 @@ class SuppliesController < ApplicationController
    # GET /supplies
    # GET /supplies.json
    def index
+    get_all
     @supplies = Supply.list_supply_and_detail
    #insumo = Supply.all
    

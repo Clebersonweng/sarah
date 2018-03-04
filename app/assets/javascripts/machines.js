@@ -1,33 +1,59 @@
 
 var ready;
-
+var kilometer = 1000;  //1 km = 1000 m
+var hectare  = 10000; // 10000 metros cuadrados
 ready = $(document).ready(function ()
 {
+   $('#form_machines').bootstrapValidator();
+   controlador = $("#controller").val();
+   generic_response_form(controlador);
+   form_machines_validates();
+   $('#width_machine,#work_velocity,#real_width_machine,#real_work_velocity').valida_sarah('0123456789.,');
 
-  controlador = $("#controller").val();
-  generic_response_form(controlador);
-  form_machines_validates();
-  
-  md_popover("machine_consumption","Coef consumo lt/hs","Aprox. 0,16% * hp ");
+   md_popover("machine_consumption","Coef consumo lt/hs","Aprox. 0,16% * hp ");
      
-   $('#md_consumption').on("show.bs.modal",function(){
-       $("#hp_cons_machine").val($("#machine_hp").val());
+   $('#md_consumption').on("show.bs.modal",function()
+   {
+      $("#hp_cons_machine").val($("#machine_hp").val());
    });
 
-   $('#md_consumption').on("hidden.bs.modal",function(){
-       calc_cons_fuel_per_hours();
+   $('#save_ctt').on("click",function()
+   {
+      var ctt = total_working_capacity($("#width_machine").val(),$("#work_velocity").val());
+      $("#machine_working_capacity").val(ctt.toFixed(4));
+      //$('#form_machines').bootstrapValidator('revalidateField', 'machine[working_capacity]');  
    });
 
-   $('#machine_type_machine_id').on("change",function(e){
+   $('#save_cte').on("click",function()
+   {
+      var cte = total_working_capacity_efective($("#real_width_machine").val(),$("#real_work_velocity").val());
+      $("#machine_working_capacity_effective").val(cte.toFixed(4));
+      //$('form').bootstrapValidator('revalidateField', 'machine[working_capacity_effective]');  
+   });
+
+   $('#md_consumption').on("hidden.bs.modal",function()
+   {
+      calc_cons_fuel_per_hours();
+   });
+
+   $('#machine_working_capacity_effective').on("focusout",function()
+   {
+      var total_to = total_time_oper($("#real_width_machine").val(),$("#real_work_velocity").val());
+      $("#machine_time_oper").val(total_to.toFixed(4));
+      $('form').bootstrapValidator('revalidateField', 'machine[time_oper]');  
+   });
+
+   $('#machine_type_machine_id').on("change",function(e)
+   {
       
       if($(this).val() == "3" || $(this).val() == "2")
       {
        
-         $("#machine_time_oper").parent().parent().removeClass("hide"); 
+        $('#machine_time_oper,#machine_working_capacity,#machine_working_capacity_effective').attr('readonly', false);
       }
       else
       {
-         $("#machine_time_oper").parent().parent().addClass("hide"); 
+        $('#machine_time_oper,#machine_working_capacity,#machine_working_capacity_effective').attr('readonly', true);
       }
    });
 
@@ -35,13 +61,13 @@ ready = $(document).ready(function ()
 
 function form_machines_validates()
 {
-  $('#form_machines').bootstrapValidator({
+   $('#form_machines').bootstrapValidator({
     framework: 'bootstrap',
     icon: {
-      valid: 'glyphicon glyphicon-ok',
-      invalid: 'glyphicon glyphicon-remove',
-      validating: 'glyphicon glyphicon-refresh'
-    },
+         valid: 'glyphicon glyphicon-ok',
+         invalid: 'glyphicon glyphicon-remove',
+         validating: 'glyphicon glyphicon-refresh'
+      },
       fields: 
       {
          'machine[name]': {
@@ -184,26 +210,63 @@ function form_machines_validates()
                  message: 'Este campo es obligatório'
                }
              }
-           }
+           },
+           'machine[working_capacity]': {
+                     validators: {
+                        regexp: {
+                           regexp: /^[0-9.]+$/,
+                           message: 'Debe contener solamente números'
+                        }
+                     }
+                },
+           'machine[working_capacity_effective]': {
+                     validators: {
+                        regexp: {
+                           regexp: /^[0-9.]+$/,
+                           message: 'Debe contener solamente números'
+                        }
+                    }
+            }
+
       }
-})
-  .on('status.field.bv', function (e, data) {
-    if (data.bv.getSubmitButton()) {
-      data.bv.disableSubmitButtons(false);
-    }
+   })
+   .on('status.field.bv', function (e, data) {
+      if (data.bv.getSubmitButton()) 
+      {
+        data.bv.disableSubmitButtons(false);
+      }
   });
 }
 
 function calc_cons_fuel_per_hours()
 {
  
-  if(typeof $("#machine_hp").val() != "undefined" && $("#machine_hp").val() != "" || typeof $("#coef_cons_mach").val() != "undefined"  && $("#coef_cons_mach").val() != "")
-  {
-    
-    var result  = $("#machine_hp").val() * $("#coef_cons_cccr").val();
-    $("#machine_consumption").val(result); 
-    $('form').bootstrapValidator('revalidateField', 'machine[consumption]');  }
-  
+   if(typeof $("#machine_hp").val() != "undefined" && $("#machine_hp").val() != "" || typeof $("#coef_cons_mach").val() != "undefined"  && $("#coef_cons_mach").val() != "")
+   { 
+      var result  = $("#machine_hp").val() * $("#coef_cons_cccr").val();
+      $("#machine_consumption").val(result.toFixed(4)); 
+      $('form').bootstrapValidator('revalidateField', 'machine[consumption]');  
+   } 
 }
-/*
-*/
+
+function total_working_capacity(width_machine,velocity)
+{
+  var  result = (width_machine * velocity * kilometer) / hectare;
+  return result;
+}
+
+function total_working_capacity_efective(real_width_machine,real_velocity)
+{
+  var result = (real_width_machine * real_velocity * kilometer) / hectare;
+  return result;
+}
+
+function total_time_oper(work_capacity_total_efective,work_capacity_total)
+{
+  
+  if(!isNan(work_capacity_total) && !isNan(work_capacity_total_efective))  
+  var field_eficient = (work_capacity_total_efective / work_capacity_total);
+  var result         = (field_eficient/work_capacity_total)
+  return result;
+}  
+

@@ -26,6 +26,13 @@ function form_type_of_crops_validates()
             message: 'El nombre debe consistir en caracteres alfanuméricos'
           }
         }
+      },     
+      "type_of_crop[variety_id]": {
+        validators: {
+          notEmpty: {
+            message: 'Este campo es obligatório'
+          }
+        }
       }
     }
   }).on('init.field.fv', function (e, data) {

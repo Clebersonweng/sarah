@@ -1,11 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  man_power: one
   type_of_work: one
-  employee: 
-  subtotal: 1.5
+  person: one
+  hours_needed: 
+  hours_needed: 
+  subtotal: 
+  subtotal: 
 
 two:
+  man_power: two
   type_of_work: two
-  employee: 
-  subtotal: 1.5
+  person: two
+  hours_needed: 
+  hours_needed: 
+  subtotal: 
+  subtotal: 

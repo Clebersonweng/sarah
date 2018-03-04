@@ -23,43 +23,43 @@ class ManuIndiExpenseDetsController < ApplicationController
 
   # POST /manu_indi_expense_dets
   # POST /manu_indi_expense_dets.json
-  def create
+   def create
     @manu_indi_expense_det = ManuIndiExpenseDet.new(manu_indi_expense_det_params)
 
-    respond_to do |format|
-      if @manu_indi_expense_det.save
-        format.html { redirect_to @manu_indi_expense_det, notice: 'Manu indi expense det was successfully created.' }
-        format.json { render :show, status: :created, location: @manu_indi_expense_det }
-      else
-        format.html { render :new }
-        format.json { render json: @manu_indi_expense_det.errors, status: :unprocessable_entity }
+      respond_to do |format|
+         if @manu_indi_expense_det.save
+           format.html { redirect_to @manu_indi_expense_det, notice: 'Manu indi expense det was successfully created.' }
+           format.json { render :show, status: :created, location: @manu_indi_expense_det }
+         else
+           format.html { render :new }
+           format.json { render json: @manu_indi_expense_det.errors, status: :unprocessable_entity }
+         end
       end
-    end
-  end
+   end
 
   # PATCH/PUT /manu_indi_expense_dets/1
   # PATCH/PUT /manu_indi_expense_dets/1.json
-  def update
-    respond_to do |format|
-      if @manu_indi_expense_det.update(manu_indi_expense_det_params)
-        format.html { redirect_to @manu_indi_expense_det, notice: 'Manu indi expense det was successfully updated.' }
-        format.json { render :show, status: :ok, location: @manu_indi_expense_det }
-      else
-        format.html { render :edit }
-        format.json { render json: @manu_indi_expense_det.errors, status: :unprocessable_entity }
+   def update
+      respond_to do |format|
+         if @manu_indi_expense_det.update(manu_indi_expense_det_params)
+           format.html { redirect_to @manu_indi_expense_det, notice: 'Manu indi expense det was successfully updated.' }
+           format.json { render :show, status: :ok, location: @manu_indi_expense_det }
+         else
+           format.html { render :edit }
+           format.json { render json: @manu_indi_expense_det.errors, status: :unprocessable_entity }
+         end
       end
-    end
-  end
+   end
 
   # DELETE /manu_indi_expense_dets/1
   # DELETE /manu_indi_expense_dets/1.json
-  def destroy
-    @manu_indi_expense_det.destroy
-    respond_to do |format|
-      format.html { redirect_to manu_indi_expense_dets_url, notice: 'Manu indi expense det was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+   def destroy
+      @manu_indi_expense_det.destroy
+      respond_to do |format|
+         format.html { redirect_to manu_indi_expense_dets_url, notice: 'Manu indi expense det was successfully destroyed.' }
+         format.json { head :no_content }
+      end
+   end
 
   private
     # Use callbacks to share common setup or constraints between actions.

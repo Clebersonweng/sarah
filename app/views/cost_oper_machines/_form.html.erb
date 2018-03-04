@@ -1,6 +1,16 @@
-<div class="panel-body">
-   <%= form_for(@cost_oper_machine,html: {class: 'form-horizontal', id: "form_cost_oper_machines", remote: true}) do |f| %>
+ <div class="panel-body">
+   <%= form_for(@cost_oper_machine,html: {class: 'form-horizontal', id:'form_cost_oper_machines', remote: true}) do |f| %>
+        <% if cost_oper_machine.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(cost_oper_machine.errors.count, "error") %> prohibited this cost_oper_machine from being saved:</h2>
 
+            <ul>
+            <% cost_oper_machine.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
       <div class="col-sm-6 col-lg-12 col-md-12 col-xs-12">
          <div class="row">
             <div class="col-lg-5">
@@ -15,7 +25,7 @@
                <div class="form-group">
                   <%= f.label :program_production_id,"Área:" ,class: "control-label col-sm-6 col-lg-8 col-xs-12"%>
                   <div class="col-lg-4 col-md-2">
-                     <input id="farm_area" value="<%=  @farm_area %>" class="form-control" readonly/>
+                     <input id="cost_oper_machine_program_production_id" value="<%=  @farm_area %>" class="form-control" readonly/>
                   </div>
                </div>
             </div>
@@ -23,88 +33,91 @@
          <div class="row">
             <div class="col-lg-5">
                <div class="form-group">
-                  <%= f.label :description,"Maquinária:" ,class: "control-label col-lg-3"%>
+                  <%= f.label "Maquinária:" ,class: "control-label col-lg-3"%>
                   <div class="col-sm-4 col-md-2 col-xs-12 col-lg-9">
-                    <%= select("cost_oper_machine_detail","machine_id", options_for_select(@machines), {}, {required: 'true', class: "form-control", include_blank: ''})%>   
-                  </div>
-               </div>
-            </div>
-            <div class="col-lg-7">
-               <div class="form-group " id="implements">
-                  <%= f.label :description,"Implemento:" ,class: "control-label col-lg-2"%>
-                  <div class="col-sm-4 col-md-2 col-xs-12 col-lg-5">
-                    <%= select("cost_oper_machine_detail","implement_id", options_for_select(@implements), {}, {required: 'true', class: "form-control", include_blank: ''})%>   
+                    <%= select("cost_oper_own","machine_id", options_for_select(@machines), {}, {required: 'true', class: "form-control", include_blank: ''})%>   
                   </div>
                </div>
             </div>
             <div class="col-lg-7">
                <div class="form-group">
-                  <%= f.label :description,"Implemento:" ,class: "control-label col-lg-2"%>
+                  <%= f.label "Implemento:" ,class: "control-label col-lg-2"%>
                   <div class="col-sm-4 col-md-2 col-xs-12 col-lg-5">
-                    <%= select("cost_oper_machine_detail","implement_id", options_for_select(@implements), {}, {required: 'true', class: "form-control", include_blank: ''})%>   
+                    <%= select("cost_oper_own","implement_id", options_for_select(@implements), {}, {required: 'true', class: "form-control", include_blank: ''})%>   
                   </div>
                </div>
             </div>
+            
             <div class="col-lg-3">
                <div class="form-group">
                   <%= f.label :description,"Aplicaciones:" ,class: "control-label col-lg-5"%>
-                  <div class="col-sm-6 col-md-6 col-xs-12 col-lg-7">
-                     <input id="quantity" value="" class="form-control only_numbers" /> 
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                     <input id="cost_oper_machine_own_amount" value="1" class="form-control only_numbers text-right" /> 
                   </div>
                </div>
             </div>
             <div class="form-group col-xs-1 col-sm-1">   
-               <a href="#" class="btn btn-default btn-sm" id="btn_add_cost_own">Agregar</a>
+               <a class="btn btn-default btn-sm" id="btn_add_cost_own">Agregar</a>
             </div>            
          </div>
          <table 
                id="tb_cost_machine" 
-               data-height="300" 
+               data-height="400" 
                data-show-footer="true" 
+               data-footer-style="footerStyle"
                data-show-columns="true" 
                class="table  table-hover table-striped table-condensed display" 
                data-toggle="table"
                data-show-refresh="false" 
                data-pagination="false" 
                data-icons="icons"
-               data-footer-style="footerStyle"
                data-checkbox-header="false"
          >
             <thead>
                <tr>
-                  <th data-field="id" data-checkbox="true"></th>
-                  <th data-field="code">Código</th>
-                  <th data-field="type_of_service_id">Máquinaria</th>
-                  <th data-field="price">Combustible</th>
-                  <th data-field="quantity">Lubricante</th>
-                  <th data-field="quantity">Reparacion y Mant.</th>
-                  <th data-halign='right' data-id="subtotal" data-align='right' data-field="subtotal" >Sub-total</th>
-                  <th data-halign='right' data-align='right' data-field="Action" data-events="remove">Acción</th>
+                  <th data-field="id" data-checkbox="true">#</th>
+                  <th style="width:10%" data-index="index" data-field="code"> Código</th>
+                  <th style="width:15%" data-field="machine">Máquinaria</th>
+                  <th style="width:15%" data-field="machine_id"></th>
+                  <th style="width:15%" data-field="implement">Implemento</th>
+                  <th style="width:15%" data-field="implement_id"></th>
+                  <th style="width:10%" data-align='right'  data-field="fuel">Combustible</th>
+                  <th style="width:10%" data-align='right'  data-field="fuel_id"></th>
+                  <th style="width:10%" data-align='right'  data-field="lubricant">Lubricante</th>
+                  <th style="width:10%" data-field="lubricant_id"></th>
+                  <th style="width:10%" data-align='right'  data-field="rep_and_maint">Reparacion y Mant.</th>
+                  <th style="width:10%" data-align='right' data-class="numeric" data-field="rep_and_maint_id"></th>
+                  <th style="width:10%" data-align='right'  data-field="hours_needed">Horas Necesárias</th>
+                  <th style="width:10%" data-align='right'  data-field="hours_needed_id"></th>
+                  <th style="width:10%" data-align='right'  data-field="amount">Cant</th>
+                  <th style="width:10%" data-align='right'  data-field="amount_id"></th>
+                  <th style="width:10%" data-halign='right' data-footer-formatter="runningFormatter" data-field="subtotal" data-align='right'>Sub-total</th>
+                  <th style="width:10%" data-halign='right' data-align='right' data-field="subtotal_val"></th>
+                  <th style="width:0%"  data-halign='right' data-align='right' data-field="total"></th>
+                  <th style="width:10%" data-halign='right' data-align='right' data-field="Action" data-events="remove">Acción</th>
                </tr>
             </thead>
             <tbody></tbody>
-                 
             <tfoot>
               <tr>
-               <td class="h6 font-weight-bold" colspan="2"><strong>Total :<strong></td>
-               <td colspan="5" class="font-weight-bold text-right">
-                  <strong><span id="outsourced_total"></span><strong>
+               <td class="h6 font-weight-bold" colspan="3"><strong>Total :<strong></td>
+               <td colspan="17" class="font-weight-bold text-right">
+                  <strong><span id="oper_own_total"></span><strong>
                </td>
               </tr>
             </tfoot>
-            <div id="add_row_cost_oper_cont"></div>
          </table>
          
          <%= render('layouts/error_lists')%>
          <%= render('layouts/buttons')%>
+         <div id="addRow">
+            <input type="text" name="cost_oper_machine[program_production_id]" id="program_production_id" 
+               value="<%= @program_production_id%>">
+         </div>
       </div>
    <%end%>
 </div>
    
-<div id="addRow">
-   <input type="text" name="cost_oper_machine_cont[total]" id="cost_oper_cont_total"/>
-   <input type="text" name="cost_oper_machine_cont[program_production_id]" id="program_production_id" 
-   value="<%= @program_production_id%>">
-</div>
+
 
 <input type="hidden" id="controller" value="<%= controller_name%>">
