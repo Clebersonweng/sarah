@@ -69,17 +69,17 @@
                   <% @man_powers_details.each do |man_power_det| %>
                   <tr>
                      <td><%= man_power_det.id%></td>
-                     <td data-style='width: 4%'><%= man_power_det.id%></td>
+                     <td ><%= man_power_det.id%></td>
                      <td><%= man_power_det.person.name %></td>
-                     <td class="hide"><%= man_power_det.person.id %></td>
+                     <td style="display:none"></td>
                      <td><%= man_power_det.type_of_work.name %></td>
-                     <td class="hide"><%= man_power_det.type_of_work.id %></td>
+                     <td style="display:none"></td>
                      <td><%= man_power_det.hours_needed %></td>
-                     <td class="hide"></td>
-                     <td class="hide"></td>
-                     <td class="hide"></td>
-                     <td class="hide"></td>
+                     <td ></td>
+                     <td ></td>
                      <td ><%= man_power_det.subtotal %></td>
+                     <td ></td>
+                     <td ></td>
                   </tr>
                   <% end %>   
                <% end %>
@@ -87,8 +87,8 @@
                  
             <tfoot>
               <tr>
-               <td class="h6 font-weight-bold" colspan="5"><strong>Total :<strong></td>
-               <td colspan="8" class="font-weight-bold text-right">
+               <td class="h6 font-weight-bold" colspan="8"><strong>Total :<strong></td>
+               <td colspan="5" class="font-weight-bold text-right">
                   <strong><span id="man_powers_total"></span><strong>
                </td>
               </tr>

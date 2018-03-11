@@ -22,18 +22,17 @@ class VarietiesController < ApplicationController
     get_all
   end
 
-  def create
-    get_all
-    @variety = Variety.new(variety_params)
-    if @variety.save
-      #format.html { redirect_to @product, notice: 'Supply was successfully created.' }
-      render json: { contenido: @variety, location: variety_url(@variety),result: :ok },status: 200
-    else
-      #format.html { render :new }
-      render json:  @variety.errors, status: :unprocessable_entity 
-      
-    end
-  end
+   def create
+      get_all
+      @variety = Variety.new(variety_params)
+      if @variety.save
+         render :json => {:contenido => @variety,:result => "ok"}
+      else
+        render :json => { :errors => @variety.errors.full_messages }  
+        #format.js { render json: @variety.errors, status: :unprocessable_entity }
+        #render partial: "form", status: 422
+      end
+   end
 
   def update
     get_all

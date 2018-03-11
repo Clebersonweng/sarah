@@ -30,8 +30,17 @@ Rails.application.routes.draw do
   resources :cost_oper_machine_conts do
     resources :cost_oper_machine_cont_details
   end
+
   resources :supplies do
     resources :supply_details
+  end
+
+  resources :man_powers do
+    resources :man_power_details
+  end
+
+  resources :manu_indi_expenses do
+    resources :manu_indi_expense_dets
   end
 
 end

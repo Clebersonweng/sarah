@@ -186,27 +186,27 @@ ActiveRecord::Schema.define(version: 20180301233801) do
     t.index ["program_production_id"], name: "index_man_powers_on_program_production_id", using: :btree
   end
 
-  create_table "manu_indi_expense_dets", force: :cascade do |t|
-    t.integer  "manu_indi_expense_id"
-    t.string   "name"
-    t.boolean  "isFixed"
-    t.float    "subtotal"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-    t.index ["manu_indi_expense_id"], name: "index_manu_indi_expense_dets_on_manu_indi_expense_id", using: :btree
-  end
+   create_table "manu_indi_expense_dets", force: :cascade do |t|
+      t.integer  "manu_indi_expense_id"
+      t.string   "name"
+      t.boolean  "isFixed"
+      t.float    "subtotal"
+      t.datetime "created_at",           null: false
+      t.datetime "updated_at",           null: false
+      t.index ["manu_indi_expense_id"], name: "index_manu_indi_expense_dets_on_manu_indi_expense_id", using: :btree
+   end
 
-  create_table "manu_indi_expenses", force: :cascade do |t|
-    t.integer  "program_production_id"
-    t.integer  "chart_of_account_id"
-    t.float    "total_fixed"
-    t.float    "total_variable"
-    t.float    "totalFixedAndVariable"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.index ["chart_of_account_id"], name: "index_manu_indi_expenses_on_chart_of_account_id", using: :btree
-    t.index ["program_production_id"], name: "index_manu_indi_expenses_on_program_production_id", using: :btree
-  end
+   create_table "manu_indi_expenses", force: :cascade do |t|
+      t.integer  "program_production_id"
+      t.integer  "chart_of_account_id"
+      t.float    "total_fixed"
+      t.float    "total_variable"
+      t.float    "totalFixedAndVariable"
+      t.datetime "created_at",            null: false
+      t.datetime "updated_at",            null: false
+      t.index ["chart_of_account_id"], name: "index_manu_indi_expenses_on_chart_of_account_id", using: :btree
+      t.index ["program_production_id"], name: "index_manu_indi_expenses_on_program_production_id", using: :btree
+   end
 
   create_table "mark_spending_dets", force: :cascade do |t|
     t.integer  "mark_spending_id"

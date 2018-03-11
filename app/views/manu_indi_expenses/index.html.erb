@@ -1,37 +1,48 @@
-<p id="notice"><%= notice %></p>
+<div class="panel-body">
+   <div class="table-responsive">
+      <table    
+              id="tb_manu_indi_expenses"  
+              data-width="100%"
+              class="table table-hover table-striped table-condensed display"
+              data-toggle="table" 
+              data-search="true" 
+              data-toolbar="toolbar1"
+              data-show-toggle="true"
+              data-show-refresh="false"
+              data-pagination="true"
+              onlyInfoPagination="false"
+              data-icons="icons"
+              data-height="380"
+              data-sort-name="name"
+              data-sort-order="desc" 
+              data-card-view="false">
+         <thead>
+            <tr>
+               <th data-field="id" data-checkbox="false">#</th>
+               <th data-field="program_production_id">Parcela</th>
+               <th data-field="total_fixed" >Total de gastos fijos</th> 
+               <th data-field="total_variable" >Total de gastos variables</th>  
+               <th data-field="totalFixedAndVariable" >Total de gastos fijos y variables</th>  
+               <th data-formatter="actionFormatter" data-align="right" data-events="actionEvents">Acción</th>
+            </tr>
+         </thead>
+         <tbody>
+            <% @manu_indi_expenses.each do |manu_indi_expense| %>
+              <tr>
+                <td><%= manu_indi_expense.id %></td>
+                <td><%= manu_indi_expense.program_production.estimate_sale.farming_plot.name %></td>
+                <td><%= manu_indi_expense.total_fixed %></td>
+                <td><%= manu_indi_expense.total_variable %></td>
+                <td><%= manu_indi_expense.totalFixedAndVariable %></td>
+              </tr>
+            <% end %>
+         </tbody>
+      </table>
+   </div>
+</div>
+<input type="hidden" id="controller" value="<%= controller_name%>">
 
-<h1>Manu Indi Expenses</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Program production</th>
-      <th>Chart of account</th>
-      <th>Total fixed</th>
-      <th>Total variable</th>
-      <th>Totalfixedandvariable</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @manu_indi_expenses.each do |manu_indi_expense| %>
-      <tr>
-        <td><%= manu_indi_expense.program_production %></td>
-        <td><%= manu_indi_expense.chart_of_account %></td>
-        <td><%= manu_indi_expense.total_fixed %></td>
-        <td><%= manu_indi_expense.total_variable %></td>
-        <td><%= manu_indi_expense.totalFixedAndVariable %></td>
-        <td><%= link_to 'Show', manu_indi_expense %></td>
-        <td><%= link_to 'Edit', edit_manu_indi_expense_path(manu_indi_expense) %></td>
-        <td><%= link_to 'Destroy', manu_indi_expense, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
 
 <%= link_to 'New Manu Indi Expense', new_manu_indi_expense_path %>
 <%= link_to 'New Man Power', new_man_power_path %>
- <input type="text" id="controller" value="<%= controller_name%>">

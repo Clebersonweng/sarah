@@ -4,11 +4,11 @@ var TOTAL = 0;
 
 $(document).ready(function ()
 {
-   
 
-   $( ".tabs_sarah" ).on("click",function() {
-        $(".panel-body").delay(500).fadeOut();
-        $(".panel-body").delay(1000).fadeIn();
+   $( ".tabs_sarah" ).on("click",function() 
+   {
+      $(".panel-body").delay(500).fadeOut();
+      $(".panel-body").delay(1000).fadeIn();
    });
 
 
@@ -16,6 +16,7 @@ $(document).ready(function ()
    {
       alert("variable controlador no declarada");
    }
+
    //confirm_modal();
    $('.only_numbers').valida_sarah('0123456789.');
    $('.only_letters').valida_sarah('azAZ ');
@@ -113,17 +114,10 @@ function evt_delete_row(evt)
 }
 
 function confirm_modal(id)
-{ //console.log(controlador);
-  $('#delete_'+id).off().on("click", function (evt) {
-    event.preventDefault();
-   //console.log(id);
-    //_id = $(this).data('id');
-    row = this;
-    //bt = $(this).parent().parent().fadeOut();
-    //bt = $(this).closest('table').attr('id'); //table id
-    //no = $(this).parent().parent().data("index"); //to get row number when we remove it
-    //console.log(bt);
-    //console.log(no);
+{ 
+   $('#delete_'+id).off().on("click", function (evt) {
+      event.preventDefault();
+      row = this;
 
       dataConfirmModal.confirm({
                                 title: 'Eliminar un registro?',
@@ -137,7 +131,7 @@ function confirm_modal(id)
                                 onCancel: function () {
                                                       }
                             });
-    });
+   });
 
 }
 
@@ -262,7 +256,10 @@ validate_generic_form = function (sufixe,force)
 
 function generic_response_form(sufixe,force) 
 {
-   $(document).on("ajax:success", 'form#form_' + sufixe, function (event, data, status, xhr, result) {
+   $(document).on("ajax:success", 'form#form_' + sufixe, function (data) 
+   {
+      
+      console.log("ok: "+data);
       progress(false);
       alert_sarah("El registro fue realizado con exito", "success");
       $("#form_" + sufixe)[0].reset();
@@ -278,18 +275,14 @@ function generic_response_form(sufixe,force)
       $('input:visible:enabled:first').focus();
    }).on('ajax:error', 'form#form_' + sufixe, function (event, jqxhr, settings, exception) {
       progress(false);
-      console.log(event);
-      console.log(jqxhr);
-      console.log(settings);
       alert_sarah("Ocurrió un error al crear el registro!", "danger");
-       /*recorrer los errores en caso de tener*/
       $.each(jqxhr.responseJSON, function (index, value) {
          if (typeof index == "string")
          {
            $('#errors').html(index + ": " + value);
          }
       });
-   });
+   });  
 }
 
 function add_errors(id)
@@ -407,6 +400,7 @@ function flatJSON(res)
   return  $.flatJSON({data:res, flat:true});
 }
 
+/*
 var loadBootstrapTable = function (data) {
     
    $('table').bootstrapTable({
@@ -421,6 +415,7 @@ var loadBootstrapTable = function (data) {
       search: true
    });
 };
+*/
 
 function totalTextFormatter(data)
  {
@@ -455,31 +450,58 @@ window.sumFormatter(data)
 */
 $(document).on('turbolinks:request-end', function(event) 
 {
+   console.log("req end :"+event);
    progress(false);
 });
 
-$(document).on('page:fetch', function() {
+$(document).on('page:fetch', function(event) {
+   console.log("req fetch :"+event);
   NProgress.start();
    setTimeout(function(){
       NProgress.done();
    },500);
 });
 
-$(document).on('page:change', function() {
-   NProgress.set(0.4);
+
+var formBindings = function() {
+  $('[data-behavior="turbolinks-form"').on("ajax:success", function(e, data, status, xhr) {
+   console.log(e)
+    return;
+  }).on("ajax:error", function(e, xhr, status, error) {
+    form_id = "#" + this.id;
+    console.log(e)
+    $(form_id).html($(form_id, xhr.responseText).html());
+    return;
+  });
+};
+
+//turbolinks para recargar los eventos de la pagina
+$(document).on ("turbolinks:load", function(event)
+{
+   console.log("req load :"+event);
+   formBindings();
+  //$("table").bootstrapTable();
+});
+
+$(document).on('page:change', function(event) {
+   console.log("req change :"+event);
    
+   NProgress.set(0.4);
    setTimeout(function(){
       NProgress.done();
    },500);
 });
 
-$(document).on('page:restore', function() {
-  NProgress.remove();
+$(document).on('page:restore', function(event) 
+{
+   console.log("req restore :"+event);
+   NProgress.remove();
 });
 
 $(document).on('turbolinks:request-start', function(event) 
 {
-   NProgress.set(0.4) 
+   console.log("req start :"+event);
+   NProgress.set(0.4);
 
    $(".panel-body", this).fadeOut(500,function()
    {
@@ -490,8 +512,6 @@ $(document).on('turbolinks:request-start', function(event)
 
 $(document).on('turbolinks:render', function(event) 
 {
-   
-  NProgress.done();
-  NProgress.remove();
-
+   NProgress.done();
+   NProgress.remove();
 });

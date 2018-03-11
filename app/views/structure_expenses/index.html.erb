@@ -1,31 +1,43 @@
-<p id="notice"><%= notice %></p>
+<div class="panel-body">
+   <div class="table-responsive">
+      <table    
+         data-width="100%"
+         class="table  table-hover table-striped table-condensed display"
+         data-toggle="table" 
+         data-search="true" 
+         data-toolbar="toolbar1"
+         data-show-toggle="false"
+         data-show-refresh="false"
+         data-pagination="true"
+         onlyInfoPagination="false"
+         data-icons="icons"
+         data-height="400"
+         data-sort-name="farming_plot_id"
+         data-sort-order="desc" 
+         data-card-view="false">
+         <thead>
+            <tr>
+               <th data-field="id" data-checkbox="false">#</th>
+               <th data-field="program_production_id">Parcela</th>
+               <th data-field="total" >Monto Total</th>  
+               <th data-formatter="actionFormatter" data-align="right" data-events="actionEvents">Acción</th>
+            </tr>
+         </thead>
+         <tbody>
+            <% @structure_expenses.each do |structure_expense| %>
+               <tr>
+                 <td><%= structure_expense.program_production %></td>
+                 <td><%= structure_expense.total %></td>
+                 <td><%= link_to 'Show', structure_expense %></td>
+                 <td><%= link_to 'Edit', edit_structure_expense_path(structure_expense) %></td>
+                 <td><%= link_to 'Destroy', structure_expense, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+               </tr>
+            <% end %>
+         </tbody>
+      </table>
+   </div>
+</div>
+<input type="hidden" id="controller" value="<%= controller_name%>">
 
-<h1>Structure Expenses</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Program production</th>
-      <th>Chart of account</th>
-      <th>Total</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @structure_expenses.each do |structure_expense| %>
-      <tr>
-        <td><%= structure_expense.program_production %></td>
-        <td><%= structure_expense.chart_of_account %></td>
-        <td><%= structure_expense.total %></td>
-        <td><%= link_to 'Show', structure_expense %></td>
-        <td><%= link_to 'Edit', edit_structure_expense_path(structure_expense) %></td>
-        <td><%= link_to 'Destroy', structure_expense, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
 
 <%= link_to 'New Structure Expense', new_structure_expense_path %>
