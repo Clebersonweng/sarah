@@ -5,6 +5,16 @@ var TOTAL = 0;
 $(document).ready(function ()
 {
 
+
+
+
+
+
+
+
+
+
+
    $( ".tabs_sarah" ).on("click",function() 
    {
       $(".panel-body").delay(500).fadeOut();
@@ -256,10 +266,8 @@ validate_generic_form = function (sufixe,force)
 
 function generic_response_form(sufixe,force) 
 {
-   $(document).on("ajax:success", 'form#form_' + sufixe, function (data) 
+   $(document).on("ajax:success", 'form#form_' + sufixe, function (e, data, status) 
    {
-      
-      console.log("ok: "+data);
       progress(false);
       alert_sarah("El registro fue realizado con exito", "success");
       $("#form_" + sufixe)[0].reset();
@@ -273,15 +281,19 @@ function generic_response_form(sufixe,force)
       }
       $("#errors").hide();
       $('input:visible:enabled:first').focus();
-   }).on('ajax:error', 'form#form_' + sufixe, function (event, jqxhr, settings, exception) {
-      progress(false);
+   }).on('ajax:error', 'form#form_' + sufixe, function (e, data, status) 
+   {
       alert_sarah("Ocurrió un error al crear el registro!", "danger");
-      $.each(jqxhr.responseJSON, function (index, value) {
-         if (typeof index == "string")
-         {
-           $('#errors').html(index + ": " + value);
-         }
-      });
+      progress(false);
+      $model = $('form#form_'+sufixe).data("model");
+
+      $.each(data.responseJSON, function (field, messages) {
+         //$model = "type_machine"; 
+         $input = $('input[name="' + $model + '[' + field + ']"]');
+         $input.closest('.form-group').addClass('has-error').find('.help-block').html( messages.join(' & ') );
+      })
+      //$(data).render_form_errors( data.responseText );
+
    });  
 }
 
@@ -515,3 +527,4 @@ $(document).on('turbolinks:render', function(event)
    NProgress.done();
    NProgress.remove();
 });
+

@@ -1,5 +1,5 @@
 <div class="panel-body">
-   <%= form_for(@type_machine,html: {class: 'form-horizontal', id: "form_type_machines", remote: true}) do |f| %>
+   <%= form_for(@type_machine,html: {class: 'form-horizontal', id: "form_type_machines", remote: true,"data-type": "json",'data-model' => 'type_machine'}) do |f| %>
       <div class="col-sm-6 col-lg-8 col-md-12">
 
          <div class="form-group">
@@ -9,7 +9,7 @@
                 <span class="help-block"> <%= f.object.errors[:description].to_sentence if f.object.errors[:description] %></span>
             </div>
          </div>
-            <%= render('layouts/error_lists')%>
+            
             <%= render('layouts/buttons')%>
       </div>
       <input type="hidden" id="controller" value="<%= controller_name%>">

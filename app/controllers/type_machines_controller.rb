@@ -23,9 +23,13 @@ class TypeMachinesController < ApplicationController
   end
 
   def create
-    @type_machine = TypeMachine.new(type_machine_params)
-    @type_machine.save
-    respond_with(@type_machine)
+    breadcrumb
+      @type_machine = TypeMachine.new(type_machine_params)
+      if @type_machine.save
+         render :json => {:contenido => @type_machine,:result => "ok"}
+      else
+        render json:  @type_machine.errors ,:result =>"error", status: :unprocessable_entity  
+      end
   end
 
   def update

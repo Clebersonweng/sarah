@@ -2,7 +2,7 @@ class TypeMachine < ApplicationRecord
 	has_many :machines
 	before_create :add_zeros_to_code
 	validates_presence_of :description
-	
+    validates :description,uniqueness: true, length: { minimum: 3, maximum: 50}
 
 
 

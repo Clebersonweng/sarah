@@ -15,15 +15,6 @@ function form_type_machines_validates()
         validators: {
           notEmpty: {
             message: 'Este campo es obligatório'
-          },
-          stringLength: {
-            min: 3,
-            max: 30,
-            message: 'El nombre no puede ser menor que 3 y mayor que 30 caracteres'
-          },
-          regexp: {
-            regexp: /^[a-zA-Z ]+$/,
-            message: 'Solo es permitido letras para este campo'
           }
         }
       }

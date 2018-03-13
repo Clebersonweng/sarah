@@ -28,9 +28,7 @@ class VarietiesController < ApplicationController
       if @variety.save
          render :json => {:contenido => @variety,:result => "ok"}
       else
-        render :json => { :errors => @variety.errors.full_messages }  
-        #format.js { render json: @variety.errors, status: :unprocessable_entity }
-        #render partial: "form", status: 422
+        render json:  @variety.errors ,:data =>@variety.errors, status: :unprocessable_entity  
       end
    end
 

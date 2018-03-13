@@ -1,5 +1,5 @@
 <div class="panel-body">
-   <%= form_for(@model,html: {class: 'form-horizontal', id: "form_models", remote: true}) do |f| %>
+   <%= form_for(@model,html: {class: 'form-horizontal', id: "form_models", remote: true,'data-model' => 'model'}) do |f| %>
     <div class="col-sm-6 col-lg-8 col-lg-8">
 
       <div class="form-group">

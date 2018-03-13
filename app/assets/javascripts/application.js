@@ -25,6 +25,4 @@
 //= require nprogress
 //= require nprogress-turbolinks
 
-//= require jquery.turbolinks
-//= require turbolinks
 
