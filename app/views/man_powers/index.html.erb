@@ -1,20 +1,18 @@
 <div class="panel-body">
    <div class="table-responsive">
-      <table    
-         data-width="100%"
-         class="table  table-hover table-striped table-condensed display"
-         data-toggle="table" 
-         data-search="true" 
-         data-toolbar="toolbar1"
-         data-show-toggle="false"
-         data-show-refresh="false"
-         data-pagination="true"
-         onlyInfoPagination="false"
-         data-icons="icons"
-         data-height="400"
-         data-sort-name="farming_plot_id"
-         data-sort-order="desc" 
-         data-card-view="false">
+      <table data-width="100%"  
+         data-flat="true"
+         data-response-handler="flatJSON"
+         data-search="true"                
+         class="table table-hover table-striped table-condensed display" 
+         data-toggle="table"
+         data-show-toggle="true"                
+         data-show-refresh="false" 
+         data-pagination="true" 
+         onlyInfoPagination="false" 
+         data-icons="icons" data-sort-name="code" data-sort-order="desc" 
+         data-card-view="false"
+      >
          <thead>
             <tr>
                <th data-field="id" data-checkbox="false">#</th>

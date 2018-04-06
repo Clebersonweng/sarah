@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180301233801) do
+ActiveRecord::Schema.define(version: 20180223014135) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,10 +70,12 @@ ActiveRecord::Schema.define(version: 20180301233801) do
   end
 
   create_table "cost_oper_machines", force: :cascade do |t|
-    t.integer  "program_production_id"
     t.decimal  "total"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+    t.integer  "chart_of_account_id"
+    t.integer  "program_production_id"
+    t.index ["chart_of_account_id"], name: "index_cost_oper_machines_on_chart_of_account_id", using: :btree
     t.index ["program_production_id"], name: "index_cost_oper_machines_on_program_production_id", using: :btree
   end
 
@@ -186,27 +188,27 @@ ActiveRecord::Schema.define(version: 20180301233801) do
     t.index ["program_production_id"], name: "index_man_powers_on_program_production_id", using: :btree
   end
 
-   create_table "manu_indi_expense_dets", force: :cascade do |t|
-      t.integer  "manu_indi_expense_id"
-      t.string   "name"
-      t.boolean  "isFixed"
-      t.float    "subtotal"
-      t.datetime "created_at",           null: false
-      t.datetime "updated_at",           null: false
-      t.index ["manu_indi_expense_id"], name: "index_manu_indi_expense_dets_on_manu_indi_expense_id", using: :btree
-   end
+  create_table "manu_indi_expense_dets", force: :cascade do |t|
+    t.integer  "manu_indi_expense_id"
+    t.string   "name"
+    t.boolean  "isFixed"
+    t.float    "subtotal"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.index ["manu_indi_expense_id"], name: "index_manu_indi_expense_dets_on_manu_indi_expense_id", using: :btree
+  end
 
-   create_table "manu_indi_expenses", force: :cascade do |t|
-      t.integer  "program_production_id"
-      t.integer  "chart_of_account_id"
-      t.float    "total_fixed"
-      t.float    "total_variable"
-      t.float    "totalFixedAndVariable"
-      t.datetime "created_at",            null: false
-      t.datetime "updated_at",            null: false
-      t.index ["chart_of_account_id"], name: "index_manu_indi_expenses_on_chart_of_account_id", using: :btree
-      t.index ["program_production_id"], name: "index_manu_indi_expenses_on_program_production_id", using: :btree
-   end
+  create_table "manu_indi_expenses", force: :cascade do |t|
+    t.integer  "program_production_id"
+    t.integer  "chart_of_account_id"
+    t.float    "total_fixed"
+    t.float    "total_variable"
+    t.float    "totalFixedAndVariable"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.index ["chart_of_account_id"], name: "index_manu_indi_expenses_on_chart_of_account_id", using: :btree
+    t.index ["program_production_id"], name: "index_manu_indi_expenses_on_program_production_id", using: :btree
+  end
 
   create_table "mark_spending_dets", force: :cascade do |t|
     t.integer  "mark_spending_id"
@@ -398,8 +400,10 @@ ActiveRecord::Schema.define(version: 20180301233801) do
   add_foreign_key "cost_oper_machine_cont_details", "type_of_services"
   add_foreign_key "cost_oper_machine_conts", "chart_of_accounts"
   add_foreign_key "cost_oper_machine_conts", "farming_plots", column: "program_production_id"
+  add_foreign_key "cost_oper_machine_details", "cost_oper_machines"
   add_foreign_key "cost_oper_machine_details", "implements"
   add_foreign_key "cost_oper_machine_details", "machines"
+  add_foreign_key "cost_oper_machines", "chart_of_accounts"
   add_foreign_key "cost_oper_machines", "program_productions"
   add_foreign_key "estimate_sales", "chart_of_accounts"
   add_foreign_key "estimate_sales", "farming_plots"

@@ -2,29 +2,15 @@
 <div class="panel-body">
     <%= form_for(@variety,html: {class: 'form-horizontal',id:'form_varieties', remote:true, "data-type": "json",'data-model' => 'variety'}) do |f| %>
       <div class="col-xs-12 col-lg-8 col-sm-12">
-
-          <div class="form-group">  
-              <%= f.label :code,"Código",class: "control-label col-sm-3" %>
-               <div class="col-xs-12 col-md-12 col-sm-12 col-lg-4">
-                   <%= f.text_field :code,autofocus: true , class: "form-control ", :maxlength => "4", :readonly => "readonly"%>
-                    <div class="help-block  with-errors"> <%= f.object.errors[:code].to_sentence if f.object.errors[:code] %></div>
-                </div>
-            </div>
-
             <div class="form-group">  
-                <%= f.label :descr,"Nombre:",class: "control-label col-sm-3" %>
+               <%= f.label :descr,"Nombre:",class: "control-label col-sm-3" %>
                  <div class="col-xs-12 col-md-12 col-sm-12 col-lg-6">
                      <%= f.text_field :descr,autofocus: true , class: "form-control upper_text", onkeyup: "this.value=this.value.toUpperCase()", :maxlength => "20", :required => true %>
-                      <div class="help-block with-errors"> <%= f.object.errors[:name].to_sentence if f.object.errors[:descr] %></div>
+                     <div class="help-block with-errors"> <%= f.object.errors[:descr].to_sentence if f.object.errors[:descr] %></div>
                   </div>
-              </div>
-
-                <%= render('layouts/error_lists')%>
-
-                <%= render('layouts/buttons')%>
-
-
             </div>
-            <input type="hidden" id="controller" value="<%=controller_name%>">
-           <% end %>
-       </div>
+         </div>
+         <%= render('layouts/buttons')%>
+      <input type="hidden" id="controller" value="<%=controller_name%>">
+   <% end %>
+</div>

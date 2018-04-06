@@ -1,46 +1,46 @@
 <div class="panel-body">
-    <div class="table-responsive">
-          <table    data-width="100%"
-                    class="table  table-hover table-striped table-condensed display"
-                    data-toggle="table" 
-                    data-search="true" 
-                    data-toolbar="toolbar1"
-                    data-show-toggle="true"
-                    data-show-refresh="false"
-                    data-pagination="true"
-                    onlyInfoPagination="false"
-                    data-icons="icons"
-                    data-height="380"
-                    data-sort-name="name"
-                    data-sort-order="desc" 
-                    data-card-view="false">
-            <thead>
-              <tr>
-                  <th data-visible="false" class="hidden" data-field="id">Id</th>
-                  <th data-field="name" data-sortable="true">Nombre</th>
-                  <th data-field="brand_id">Marca</th>
-                  <th data-field="hp">Hp</th>
-                  <th data-halign="right" data-align="right" data-field="consumption">Coef. Consumo</th>
-                  <th data-halign="right" data-align="right" data-field="price" data-visible="false">Precio</th>
-                  <th data-field="coeficient_cccr" data-halign="right" data-align="right" >Coef. Man. y Rep.</th>
-                  <th data-halign="right" data-align="right" data-field="time_oper">T. Oper</th>               
-                  <th data-halign="right" data-align="right"  data-switchable="false" data-formatter="actionFormatter" data-events="actionEvents">Acción</th>
-              </tr>
-          </thead>
-              <tbody>
-                  <% @machines.each do |machine| %>
-                    <tr id="tr_<%=machine.id %>">
-                        <td><%= machine.id%></td>
-                        <td><%= machine.name%></td>
-                        <td><%= machine.brand.name %></td>
-                        <td><%= machine.hp %></td>
-                        <td data-align="right"><%= machine.consumption %></td> 
-                        <td data-align="right" data-visible="false"><%= number_with_precision( machine.price , :precision => 0, :delimiter => '.' ) %></td>
-                        <td data-align="right"><%= machine.coeficient_cccr %></td>
-                        <td data-align="right" data-visible="false"><%= machine.time_oper %></td>
-                    </tr>
-                <% end %>
-            </tbody>
-        </table>
-    </div>
- <input type="hidden" id="controller" value="<%=controller_name%>">
+	<div class="table-responsive">
+		<table data-width="100%"  
+			data-flat="true"
+			data-response-handler="flatJSON"
+			data-search="true"                
+			class="table table-hover table-striped table-condensed display" 
+			data-toggle="table"
+			data-show-toggle="true"                
+			data-show-refresh="false" 
+			data-pagination="true" 
+			onlyInfoPagination="false" 
+			data-icons="icons" data-sort-name="code" data-sort-order="desc" 
+			data-card-view="false"
+		>
+		<thead>
+
+			<tr>
+				<th data-visible="false" class="hidden" data-field="id">Id</th>
+				<th data-field="name" data-sortable="true">Nombre</th>
+				<th data-field="brand_id">Marca</th>
+				<th data-field="hp">Hp</th>
+				<th data-halign="right" data-align="right" data-field="consumption">Coef. Consumo</th>
+				<th data-halign="right" data-align="right" data-field="price" data-visible="false">Precio</th>
+				<th data-field="coeficient_cccr" data-halign="right" data-align="right" >Coef. Man. y Rep.</th>
+				<th data-halign="right" data-align="right" data-field="time_oper">T. Oper</th>               
+				<th data-halign="right" data-align="right"  data-switchable="false" data-formatter="actionFormatter" data-events="actionEvents">Acción</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @machines.each do |machine| %>
+			<tr id="tr_<%=machine.id %>">
+				<td><%= machine.id%></td>
+				<td><%= machine.name%></td>
+				<td><%= machine.brand.name %></td>
+				<td><%= machine.hp %></td>
+				<td data-align="right"><%= machine.consumption %></td> 
+				<td data-align="right" data-visible="false"><%= number_with_precision( machine.price , :precision => 0, :delimiter => '.' ) %></td>
+				<td data-align="right"><%= machine.coeficient_cccr %></td>
+				<td data-align="right" data-visible="false"><%= machine.time_oper %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+<input type="hidden" id="controller" value="<%=controller_name%>">

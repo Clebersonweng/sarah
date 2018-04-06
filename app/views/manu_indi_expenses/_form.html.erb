@@ -1,5 +1,5 @@
 <div class="panel-body">
-   <%= form_for( @manu_indi_expense, html: { id: 'form_manu_indi_expenses', remote:true}) do |f| %>
+   <%= form_for( @manu_indi_expense, html: { id: 'form_manu_indi_expenses', remote:true,"data-type": "json",'data-model' => 'manu_indi_expense'}) do |f| %>
 
       <div class="col-sm-6 col-lg-12 col-md-12 col-xs-12">
          <% if manu_indi_expense.errors.any? %>
@@ -13,15 +13,12 @@
                </ul>
             </div>
          <% end %>
-         <input name="manu_indi_expense[program_production_id]" value="<%= @program_production_id%>"/>
-         <input name="manu_indi_expense[total_fixed]" value="30000"/>
-         <input name="manu_indi_expense[total_variable]" value="40000"/>
-         <input name="manu_indi_expense[totalFixedAndVariable]" value="50000"/>
+
             <div class="row">
                <div class="col-md-4">
                   <div class="form-group">
                      <%= f.label :program_production_id,"Descripción del gasto :" ,class: " col-sm-6 col-lg-5 col-xs-12"%>
-                        <input type="text" name="manu_indi[descr_expense]" id="manu_indi_expense_det_descr_expense" class="form-control"/>
+                        <input type="text" name="manu_indi[descr_expense]" id="manu_indi_descr_expense" class="form-control"/>
                   </div>
                </div>
                <div class="col-md-2">
@@ -34,16 +31,19 @@
                <div class="col-md-2">
                   <div class="form-group">
                      <%= f.label :program_production_id,"Monto del gasto :" ,class: "col-sm-6 col-lg-8 col-xs-12"%>
-                     <input type="text" name="manu_indi[subtotal]" id="manu_indi_expense_det_subtotal"  class="form-control text-right">
+                     <input type="text" name="manu_indi[subtotal]" id="manu_indi_subtotal"  class="form-control text-right">
                   </div>
                </div>
                   <btn><a class="btn btn-default btn-sm align_btn" id="btn_add_manu_indi_expense">Agregar</a></btn>
             </div>
+
             <table 
-                  id="tb_manu_indi_expense" 
+                  id="tb_manu_indi_expense"
+                  data-width="100%"
+                  class="table  table-hover table-striped table-condensed display"
+                  data-toggle="table" 
                   data-height="300" 
                   data-show-footer="true" 
-                  class="table  table-hover table-striped table-condensed display" 
                   data-show-refresh="false" 
                   data-pagination="false" 
                   data-icons="icons"
@@ -53,31 +53,68 @@
             >
                <thead>
                   <tr>
-                     <th data-field="id" data-checkbox="true"></th>
-                     <th data-field="code">Código</th>
+                     <th data-field="id" data-checkbox="true" data-checkbox-header="false"></th>
+                     <th data-field="code">#</th>
                      <th data-field="descr_expense">Descripción del gasto</th>
-                     <th data-field="descr_expense_id">Descripción del gasto</th>
+                     <th data-field="descr_expense_id"></th>
                      <th data-field="type_expense">Tipo del gasto</th>
-                     <th data-field="type_expense_id">Tipo del gasto</th>
+                     <th data-field="type_expense_id"></th>
                      <th data-field="subtotal">Monto</th>
-                     <th data-field="subtotal_id">Monto</th>
+                     <th data-field="subtotal_id"></th>
                      <th data-halign='right' data-align='right' data-field="Action" data-events="remove">Acción</th>
                   </tr>
                </thead>
                <tbody>
-                  
+                  <% if (controller.action_name == "edit") %>
+                        <% @manu_details.each do |manu_indi_expense_dets| %>
+                        <tr>
+                           <td style="display:none"><%= manu_indi_expense_dets.id%></td>
+                           <td ><%= manu_indi_expense_dets.id%></td>
+                           <td ><%= manu_indi_expense_dets.name %></td>
+                           <td style="display:none"><!--vacio al crear nuevo --></td>
+                           <td>  <%= 
+                                    if manu_indi_expense_dets.isFixed == true 
+                                       @fixed 
+                                    else
+                                       @variable
+                                    end
+                                 %>            
+                           </td>
+                           <td style="display:none"><!--vacio al crear nuevo --></td>
+                           <td><%=manu_indi_expense_dets.subtotal %></td>
+                           <td style="display:none"></td>
+                        </tr>
+                     <% end %>   
+                  <% end %>
                </tbody>                    
                <tfoot>
+                  <tr>
+                     <td class="h6 font-weight-bold" colspan="2"><strong>TOTAL FIJO :<strong></td>
+                     <td colspan="11" class="font-weight-bold text-right">
+                     <strong><span class="manu_indi_expe_total_fixed"> <%= @total_fixed %></span><strong>
+                     </td>
+                  </tr>
                  <tr>
-                  <td class="h6 font-weight-bold" colspan="2"><strong>Total :<strong></td>
-                  <td colspan="8" class="font-weight-bold text-right">
-                     <strong><span id="manu_indi_expe_total"></span><strong>
+                     <td class="h6 font-weight-bold" colspan="2"><strong>TOTAL VARIABLE :<strong></td>
+                     <td colspan="11" class="font-weight-bold text-right">
+                        <strong><span class="manu_indi_expe_total_variable"><%= @total_variable %></span><strong>
+                     </td>
+                 </tr>
+                <tr>
+                  <td class="h6 font-weight-bold" colspan="2"><strong>TOTAL FIJO & VARIABLE :<strong></td>
+                  <td colspan="11" class="font-weight-bold text-right">
+                     <strong><span class="manu_indi_expe_total_fixed_and_variable"><%= @total_fixed_and_variable %></span><strong>
                   </td>
                  </tr>
                </tfoot>
                <div id="add_row_cost_oper_cont"></div>
             </table>
          <%= render('layouts/buttons')%>
+         <input type="hidden" name="manu_indi_expense[program_production_id]"  value="<%= @program_production_id%>"/>
+         <input type="hidden" name="manu_indi_expense[total_fixed]" class="manu_indi_expe_total_fixed" value="<%= @total_fixed%>"/>
+         <input type="hidden" name="manu_indi_expense[total_variable]" class="manu_indi_expe_total_variable" value="<%= @total_variable%>"/>
+         <input type="hidden" name="manu_indi_expense[total]" class="manu_indi_expe_total_fixed_and_variable" value="<%= @total_fixed_and_variable%>"/>
+
       </div>
 
    <% end %>

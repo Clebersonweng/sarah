@@ -1,11 +1,14 @@
-var code_man_power=0;
-var total_hours_needed=0;
-$(document).ready( function() {
+var code_man_power        = 0;
+var total_hours_needed    = 0;
+var COUNT                 = 0;
+
+$(document).ready( function() 
+{
 
    controlador = $("#controller").val();
    generic_response_form(controlador,true);
    form_man_power_validates();
-   var count,TOTAL= 0;
+   var TOTAL= 0;
 
       $("#btn_man_power").on("click",function() 
       {
@@ -17,12 +20,12 @@ $(document).ready( function() {
          var hours_needed          = $("#hours_needed").val();
          //$('#tb_man_power').bootstrapTable("append", row_bt_cost_out());
           row_bt_man_power(type_work_id,type_work,employee_id,employee,hours_needed,salary);
+          COUNT++;
       });
 
       $('#tb_man_power').on('check.bs.table', function (e, row) 
       {
            TOTAL =  parseFloat($("#man_powers_total").text());
-            console.log(TOTAL);
                $remove = $('.remove');
                selections = [];
                $remove.click(function () {
@@ -49,18 +52,18 @@ function row_bt_man_power(type_work_id,type_work,employee_id,employee,hours_need
       
 
    var  _data_ =  {
-                     "id": ++code_man_power,
-                     "code": "00"+code_man_power,
+                     "id": code_man_power,
+                     "code": code_man_power,
                      "employee": employee,   
-                     "employee_id": "<input type='hidden' size='20' name='man_power[man_power_details_attributes]["+count+"][person_id]' id='txt' value="+employee_id+">",  
+                     "employee_id": "<input type='hidden' size='20' name='man_power[man_power_details_attributes]["+COUNT+"][person_id]' id='txt' value="+employee_id+">",  
                      "type_of_work": type_work,   
-                     "type_of_work_id":   "<input type='hidden' size='20' name='man_power[man_power_details_attributes]["+count+"][type_of_work_id]' id='txt' value="+type_work_id+">",   
+                     "type_of_work_id":   "<input type='hidden' size='20' name='man_power[man_power_details_attributes]["+COUNT+"][type_of_work_id]' id='txt' value="+type_work_id+">",   
                      "salary": salary,   
                      "hours_needed": hours_needed,  //horas necesaria de trabajo para este tipo de servicio y este empleado
-                     "hours_needed_id":   "<input type='hidden' size='20' name='man_power[man_power_details_attributes]["+count+"][hours_needed]' id='txt2' value="+hours_needed+'>',  
+                     "hours_needed_id":   "<input type='hidden' size='20' name='man_power[man_power_details_attributes]["+COUNT+"][hours_needed]' id='txt2' value="+hours_needed+'>',  
                      "total_hours_needed":   "<input type='hidden' size='20' name='man_power[total_hours_needed]' id='txt2' value="+total_hours_needed+'>',  //total horas necesarias para la labor de todos los funcionarios durante el periodo
                      "subtotal": subtotal.toFixed(0),
-                     "subtotal_id": "<input type='hidden' size='20' name='man_power[man_power_details_attributes]["+count+"][subtotal]' id='txt2' value="+subtotal.toFixed(0)+'>',
+                     "subtotal_id": "<input type='hidden' size='20' name='man_power[man_power_details_attributes]["+COUNT+"][subtotal]' id='txt2' value="+subtotal.toFixed(0)+'>',
                      "total":  "<input type='hidden' size='20' name='man_power[total]' id='txt' value="+TOTAL.toFixed(0)+">",
                      "Action" : '<a class="remove  btn btn-danger delete btn-sm" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></a>',
                   };
@@ -75,7 +78,8 @@ function form_man_power_validates()
   $('#form_man_powers').bootstrapValidator({
     excluded: [':disabled', ':hidden', ':not(:visible)'],
     fields: {
-      "man_power[hours_needed]": {
+      "man_power[hours_needed]": 
+      {
         validators: {
           notEmpty: {
             message: 'Necesita cargar la cantidad de horas!'

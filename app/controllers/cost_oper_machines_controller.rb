@@ -1,22 +1,22 @@
 class CostOperMachinesController < ApplicationController
-  before_action :authenticate_user!
+   before_action :authenticate_user!
 
-  before_action :set_cost_oper_machine, only: [:show, :edit, :update, :destroy]
+   before_action :set_cost_oper_machine, only: [:show, :edit, :update, :destroy]
 
-  respond_to :html
+   respond_to :html
 
-  def index
-    get_all
-    @cost_oper_machines = CostOperMachine.all
-    respond_with(@cost_oper_machines)
-  end
+   def index
+      get_all
+      @cost_oper_machines = CostOperMachine.all
+      respond_with(@cost_oper_machines)
+   end
 
-  def show
-    respond_with(@cost_oper_machine)
-  end
+   def show
+      respond_with(@cost_oper_machine)
+   end
 
    def new
-    get_all
+      get_all
       @cost_oper_machine = CostOperMachine.new
       program                 = ProgramProduction.last()
       @quantity_production    = program.program_production
@@ -25,35 +25,41 @@ class CostOperMachinesController < ApplicationController
       farm                    = FarmingPlot.find(sale.farming_plot_id)
       @farm_name              = farm.name
       @farm_area              = farm.area
-    @cost_oper_machine = CostOperMachine.new
-    respond_with(@cost_oper_machine)
+      @cost_oper_machine = CostOperMachine.new
+      respond_with(@cost_oper_machine)
    end
 
-  def edit
-    get_all
-  end
+   def edit
+      get_all
+      cost_oper_machine_master                 = CostOperMachine.find(params[:id])
+      @cost_oper_machine_details               = CostOperMachineDetail.where(cost_oper_machine_id: cost_oper_machine_master.id)
+      @program_production_id                   = cost_oper_machine_master.program_production_id
+      @farm_name                               = cost_oper_machine_master.program_production.estimate_sale.farming_plot.name
+      @farm_area                               = cost_oper_machine_master.program_production.estimate_sale.farming_plot.area
+      @total                                   = cost_oper_machine_master.total
+    end
 
-  def create
-    get_all
-    @cost_oper_machine = CostOperMachine.new(cost_oper_machine_params)
-    @cost_oper_machine.save
-    respond_with(@cost_oper_machine)
-  end
+   def create
+      get_all
+      @cost_oper_machine = CostOperMachine.new(cost_oper_machine_params)
+      @cost_oper_machine.save
+      respond_with(@cost_oper_machine)
+   end
 
-  def update
-    get_all
-    @cost_oper_machine.update(cost_oper_machine_params)
-    respond_with(@cost_oper_machine)
-  end
+   def update
+      get_all
+      @cost_oper_machine.update(cost_oper_machine_params)
+      respond_with(@cost_oper_machine)
+   end
 
-  def destroy
-    @cost_oper_machine.destroy
-    respond_with(@cost_oper_machine)
-  end
+   def destroy
+      @cost_oper_machine.destroy
+      respond_with(@cost_oper_machine)
+   end
 
    private
       def set_cost_oper_machine
-         @cost_oper_machine = CostOperMachine.find(params[:id])
+      @cost_oper_machine = CostOperMachine.find(params[:id])
       end
 
       def cost_oper_machine_params

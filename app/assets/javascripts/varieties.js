@@ -3,7 +3,7 @@ $(document).ready(function ()
 
   controlador = $("#controller").val();
   form_varieties_validates();
-  validate_generic_form(controlador);
+  generic_response_form(controlador);
   $("#bt_varieties").bootstrapTable();
 });
 
@@ -29,11 +29,10 @@ function form_varieties_validates()
         }
       }
     }
-  }).on('init.field.fv', function (e, data) {
+  }).on('init.field.fv', function (e, data) 
+  {
     e.preventDefault();
-    if (data.fv.getInvalidFields().length > 0) {    // There is invalid field
-      data.fv.disableSubmitButtons(true);
-    }
+    data.fv.disableSubmitButtons(true);
   }).on('success.field.fv', function (e, data) {
     e.preventDefault();
     if (data.fv.getInvalidFields().length > 0) {    // There is invalid field

@@ -1,5 +1,5 @@
 <div class="panel-body">
-    <%= form_for(@estimate_sale,html: {class: 'form-horizontal', id: "form_estimate_sales", remote: true}) do |f| %>
+    <%= form_for(@estimate_sale,html: {class: 'form-horizontal', id: "form_estimate_sales", remote: true,"data-type": "json",'data-model' => 'estimate_sale'}) do |f| %>
       <div class="col-xs-12 col-lg-8 col-sm-12">
 
           <div class="form-group"id="gr_code">
@@ -77,8 +77,6 @@
                      </div>
                      <span class="help-block"> <%= f.object.errors[:gross_sale].to_sentence if f.object.errors[:gross_sale] %></span>
                  </div>
-
-                  <%= render('layouts/error_lists')%>
 
                 <%= render('layouts/buttons')%>
                 <%end%>

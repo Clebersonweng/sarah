@@ -12,8 +12,8 @@
     this.clear_previous_errors();
   };
 
-  $.fn.render_form_errors = function(errors){
-  		console.log(errors);
+  $.fn.render_form_errors = function(errors)
+  {
     $form = this;
     this.clear_previous_errors();
     $model = this.data('model');

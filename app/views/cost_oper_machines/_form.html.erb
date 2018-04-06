@@ -1,5 +1,5 @@
  <div class="panel-body">
-   <%= form_for(@cost_oper_machine,html: {class: 'form-horizontal', id:'form_cost_oper_machines', remote: true}) do |f| %>
+   <%= form_for(@cost_oper_machine,html: {class: 'form-horizontal', id:'form_cost_oper_machines', remote: true,"data-type": "json",'data-model' => 'cost_oper_machine'}) do |f| %>
         <% if cost_oper_machine.errors.any? %>
           <div id="error_explanation">
             <h2><%= pluralize(cost_oper_machine.errors.count, "error") %> prohibited this cost_oper_machine from being saved:</h2>
@@ -61,17 +61,17 @@
             </div>            
          </div>
          <table 
-               id="tb_cost_machine" 
-               data-height="400" 
-               data-show-footer="true" 
-               data-footer-style="footerStyle"
-               data-show-columns="true" 
-               class="table  table-hover table-striped table-condensed display" 
-               data-toggle="table"
-               data-show-refresh="false" 
-               data-pagination="false" 
-               data-icons="icons"
-               data-checkbox-header="false"
+            data-width="100%"  
+            data-search="false"                
+            class="table table-hover table-striped table-condensed display" 
+            data-toggle="table"
+            data-show-toggle="false"                
+            data-show-refresh="false" 
+            data-pagination="true" 
+            onlyInfoPagination="false" 
+            data-icons="icons" data-sort-name="code" data-sort-order="desc" 
+            data-card-view="false"
+            data-checkbox-header="false"
          >
             <thead>
                <tr>
@@ -89,20 +89,49 @@
                   <th style="width:10%" data-align='right' data-class="numeric" data-field="rep_and_maint_id"></th>
                   <th style="width:10%" data-align='right'  data-field="hours_needed">Horas Necesárias</th>
                   <th style="width:10%" data-align='right'  data-field="hours_needed_id"></th>
-                  <th style="width:10%" data-align='right'  data-field="amount">Cant</th>
+                  <th style="width:10%" data-align='right'  data-field="amount">Aplic</th>
                   <th style="width:10%" data-align='right'  data-field="amount_id"></th>
                   <th style="width:10%" data-halign='right' data-footer-formatter="runningFormatter" data-field="subtotal" data-align='right'>Sub-total</th>
                   <th style="width:10%" data-halign='right' data-align='right' data-field="subtotal_val"></th>
-                  <th style="width:0%"  data-halign='right' data-align='right' data-field="total"></th>
                   <th style="width:10%" data-halign='right' data-align='right' data-field="Action" data-events="remove">Acción</th>
                </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+               <% if (controller.action_name == "edit") %>
+                     <% @cost_oper_machine_details.each do |details| %>
+                        <tr>
+                           <td><%= details.id%></td>
+                           <td><%= details.id%></td>
+                           <td><%= details.machine.name%></td>
+                           <td></td>
+                           <td><%= details.implement.name%></td>
+                           <td></td>
+                           <td><%= details.fuel%></td>
+                           <td></td>
+                           <td><%= details.lubricant%></td>
+                           <td></td>
+                           <td><%= details.repair_and_maintenance %></td>
+                           <td></td>
+                           <td><%= details.hours_needed %></td>                           
+                           <td></td>
+                           <td><%= details.amount%></td>
+                           <td></td>
+                           <td><%= details.subtotal%></td>
+                           <td></td>
+                           <td>
+                              <a class="change_status btn btn-danger btn-sm" href="" title="Cambiar status" >
+                                 <i class="fa fa-minus-square"></i>
+                              </a>
+                           </td>
+                        </tr>
+                     <% end %>   
+               <% end %>
+            </tbody>
             <tfoot>
               <tr>
                <td class="h6 font-weight-bold" colspan="3"><strong>Total :<strong></td>
                <td colspan="17" class="font-weight-bold text-right">
-                  <strong><span id="oper_own_total"></span><strong>
+                  <strong><span id="oper_own_total"><%= @total %></span><strong>
                </td>
               </tr>
             </tfoot>
@@ -111,8 +140,8 @@
          <%= render('layouts/error_lists')%>
          <%= render('layouts/buttons')%>
          <div id="addRow">
-            <input type="text" name="cost_oper_machine[program_production_id]" id="program_production_id" 
-               value="<%= @program_production_id%>">
+            <input type="text" name="cost_oper_machine[program_production_id]" id="program_production_id" value="<%= @program_production_id%>">
+            <input type="text" name="cost_oper_machine[total]" class="oper_own_total" value="<%= @total%>">
          </div>
       </div>
    <%end%>

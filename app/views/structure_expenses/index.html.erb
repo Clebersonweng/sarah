@@ -1,20 +1,18 @@
 <div class="panel-body">
    <div class="table-responsive">
-      <table    
-         data-width="100%"
-         class="table  table-hover table-striped table-condensed display"
-         data-toggle="table" 
-         data-search="true" 
-         data-toolbar="toolbar1"
-         data-show-toggle="false"
-         data-show-refresh="false"
-         data-pagination="true"
-         onlyInfoPagination="false"
-         data-icons="icons"
-         data-height="400"
-         data-sort-name="farming_plot_id"
-         data-sort-order="desc" 
-         data-card-view="false">
+      <table data-width="100%"  
+         data-flat="true"
+         data-response-handler="flatJSON"
+         data-search="true"                
+         class="table table-hover table-striped table-condensed display" 
+         data-toggle="table"
+         data-show-toggle="true"                
+         data-show-refresh="false" 
+         data-pagination="true" 
+         onlyInfoPagination="false" 
+         data-icons="icons" data-sort-name="code" data-sort-order="desc" 
+         data-card-view="false"
+      >
          <thead>
             <tr>
                <th data-field="id" data-checkbox="false">#</th>
@@ -26,11 +24,9 @@
          <tbody>
             <% @structure_expenses.each do |structure_expense| %>
                <tr>
-                 <td><%= structure_expense.program_production %></td>
+                 <td><%= structure_expense.id %></td>
+                 <td><%= structure_expense.program_production.estimate_sale.farming_plot.name %></td>
                  <td><%= structure_expense.total %></td>
-                 <td><%= link_to 'Show', structure_expense %></td>
-                 <td><%= link_to 'Edit', edit_structure_expense_path(structure_expense) %></td>
-                 <td><%= link_to 'Destroy', structure_expense, method: :delete, data: { confirm: 'Are you sure?' } %></td>
                </tr>
             <% end %>
          </tbody>
@@ -39,5 +35,3 @@
 </div>
 <input type="hidden" id="controller" value="<%= controller_name%>">
 
-
-<%= link_to 'New Structure Expense', new_structure_expense_path %>

@@ -1,51 +1,49 @@
 <div class="panel-body">
-    <div class="table-responsive">
-          <table    data-width="100%"
-                    class="table  table-hover table-striped table-condensed display"
-                    data-toggle="table" 
-                    data-search="true" 
-                    data-toolbar="toolbar1"
-                    data-show-toggle="true"
-                    data-show-refresh="false"
-                    data-pagination="true"
-                    onlyInfoPagination="false"
-                    data-icons="icons"
-                    data-height="380"
-                    data-sort-name="name"
-                    data-sort-order="desc" 
-                    data-card-view="false">
-            <thead>
-                <tr>
-                    <th data-visible="false" class="hidden" data-field="id">Id</th>
-                    <th data-visible="false" data-field="code">Código</th>
-                    <th data-field="date" data-sortable="true" class="text-center">Periódo</th>
-                    <th data-field="farming_plot_id">Parcela agrícola</th> 
-                    <th data-switchable="false" data-field="type_of_crop_id.name">Tipo de cultivo</th> 
-                    <th data-visible="false" data-halign="right" data-field="estimate_production" >Est. produc x ha</th>         
-                    <th data-checkbox="false"  data-halign="right" data-field="total_production">Total prod.</th>
-                    <th data-checkbox="false"  data-halign="right" data-switchable="false" data-field="price"> Precio(KG)</th>
-                    <th data-align="right" data-field="gross_sale">Ingreso Bruto</th>
-                    <th data-halign="right" data-align="right"  data-switchable="false" data-formatter="actionFormatter" data-events="actionEvents">Acción</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% @estimate_sales.each do |sales| %>
-                  <tr>
-                      <td><%= sales.id%></td>
-                      <td><%= sales.code%></td>
-                      <td><%= sales.full_periods.to_s %></td>
-                      <td><%= sales.farming_plot.name %></td>
-                      <td><%= sales.type_of_crop.name %></td>
-                       <td><%= number_with_precision(sales.estimate_production, :precision => 0, :delimiter => '.' ) %></td>
-                      <td><%= number_with_precision( sales.total_production, :precision => 0, :delimiter => '.' ) %></td>
-                      <td><%= number_with_precision( sales.price, :precision => 0, :delimiter => '.' ) %></td>
-                      <td><%= number_with_precision(sales.gross_sale, :precision => 0, :delimiter => '.' ) %></td>
-                      
-                    </tr>
-                  <% end %>
-              </tbody>                        
-          </table>
-      </div> 
-   <input type="hidden" id="controller" value="<%= controller_name%>">
+	<div class="table-responsive">
+		<table data-width="100%"  
+		data-flat="true"
+		data-response-handler="flatJSON"
+		data-search="true"                
+		class="table table-hover table-striped table-condensed display" 
+		data-toggle="table"
+		data-show-toggle="true"                
+		data-show-refresh="false" 
+		data-pagination="true" 
+		onlyInfoPagination="false" 
+		data-icons="icons" data-sort-name="code" data-sort-order="desc" 
+		data-card-view="false"
+		>
+		<thead>
+			<tr>
+				<th data-visible="false" class="hidden" data-field="id">Id</th>
+				<th data-visible="false" data-field="code">Código</th>
+				<th data-field="date" data-sortable="true" class="text-center">Periódo</th>
+				<th data-field="farming_plot_id">Parcela agrícola</th> 
+				<th data-switchable="false" data-field="type_of_crop_id.name">Tipo de cultivo</th> 
+				<th data-visible="false" data-halign="right" data-field="estimate_production" >Est. produc x ha</th>         
+				<th data-checkbox="false"  data-halign="right" data-field="total_production">Total prod.</th>
+				<th data-checkbox="false"  data-halign="right" data-switchable="false" data-field="price"> Precio(KG)</th>
+				<th data-align="right" data-field="gross_sale">Ingreso Bruto</th>
+				<th data-halign="right" data-align="right"  data-switchable="false" data-formatter="actionFormatter" data-events="actionEvents">Acción</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @estimate_sales.each do |sales| %>
+			<tr>
+				<td><%= sales.id%></td>
+				<td><%= sales.code%></td>
+				<td><%= sales.full_periods.to_s %></td>
+				<td><%= sales.farming_plot.name %></td>
+				<td><%= sales.type_of_crop.name %></td>
+				<td><%= number_with_precision(sales.estimate_production, :precision => 0, :delimiter => '.' ) %></td>
+				<td><%= number_with_precision( sales.total_production, :precision => 0, :delimiter => '.' ) %></td>
+				<td><%= number_with_precision( sales.price, :precision => 0, :delimiter => '.' ) %></td>
+				<td><%= number_with_precision(sales.gross_sale, :precision => 0, :delimiter => '.' ) %></td>
+				
+			</tr>
+			<% end %>
+		</tbody>                        
+	</table>
+</div> 
+<input type="hidden" id="controller" value="<%= controller_name%>">
 </div>
- 

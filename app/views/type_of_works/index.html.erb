@@ -1,42 +1,40 @@
 <div class="panel-body">
-    <div class="table-responsive">
-        <table      data-width="100%"
-                    class="table  table-hover table-striped table-condensed display"
-                    data-toggle="table" 
-                    data-search="true" 
-                    data-toolbar="#toolbar"
-                    data-show-toggle="true"
-                    data-show-refresh="false"
-                    data-pagination="true"
-                    onlyInfoPagination="false"
-                    data-icons="icons"
-                    data-sort-name="name"
-                    data-sort-order="desc" 
-                    data-height="380"
-                    id="table_models"
-                    data-card-view="false">
-                <thead>
-                        <tr>
-                            <th data-visible="false" data-field="id">Codigo</th>
-                            <th data-halign="left" data-align="left" data-field="name" data-sortable="true">Nombre</th> 
-                            <th data-halign="left" data-align="left" data-field="price_hours" data-sortable="true" > Precio por hora</th>
-                           <th data-field="description" > Descripción</th>
-                            <th data-halign="right" data-align="right" data-formatter="actionFormatter" data-events="actionEvents">Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% @type_of_works.each do |types| %>
-                          <tr>
-                              <td><%= types.id%></td>
-                              <td class="col-md-3"><%= types.name %></td>
-                              <td class="col-md-2"><%= number_with_precision(types.price_hours, :precision => 0, :delimiter => '.' )  %></td>
-                              <td class="col-md-5"><%= types.description %></td>
-                          </tr>
-                        <% end %>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+	<div class="table-responsive">
+		<table data-width="100%"  
+		data-flat="true"
+		data-response-handler="flatJSON"
+		data-search="true"                
+		class="table table-hover table-striped table-condensed display" 
+		data-toggle="table"
+		data-show-toggle="true"                
+		data-show-refresh="false" 
+		data-pagination="true" 
+		onlyInfoPagination="false" 
+		data-icons="icons" data-sort-name="code" data-sort-order="desc" 
+		data-card-view="false"
+		>
+		<thead>
+			<tr>
+				<th data-visible="false" data-field="id">Codigo</th>
+				<th data-halign="left" data-align="left" data-field="name" data-sortable="true">Nombre</th> 
+				<th data-halign="left" data-align="left" data-field="price_hours" data-sortable="true" > Precio por hora</th>
+				<th data-field="description" > Descripción</th>
+				<th data-halign="right" data-align="right" data-formatter="actionFormatter" data-events="actionEvents">Acción</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @type_of_works.each do |types| %>
+			<tr>
+				<td><%= types.id%></td>
+				<td class="col-md-3"><%= types.name %></td>
+				<td class="col-md-2"><%= number_with_precision(types.price_hours, :precision => 0, :delimiter => '.' )  %></td>
+				<td class="col-md-5"><%= types.description %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+</div>
+</div>
 </div>
 <input type="hidden" id="controller" value="<%= controller_name%>">   

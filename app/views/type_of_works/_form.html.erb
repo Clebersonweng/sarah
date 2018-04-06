@@ -1,5 +1,5 @@
 <div class="panel-body">
-    <%= form_for(@type_of_work,html: {class: 'form-horizontal',id:'form_type_of_works', remote:true}) do |f| %>
+    <%= form_for(@type_of_work,html: {class: 'form-horizontal',id:'form_type_of_works', remote:true,"data-type": "json",'data-model' => 'type_of_work'}) do |f| %>
       <div class="col-xs-12 col-lg-8 col-sm-12">
 
             <div class="form-group">  

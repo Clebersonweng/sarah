@@ -1,5 +1,5 @@
 <div class="panel-body">
-    <%= form_for( @farming_plot, html: {class: 'form-horizontal', id: 'form_farming_plots', remote:true}) do |f| %>
+    <%= form_for( @farming_plot, html: {class: 'form-horizontal', id: 'form_farming_plots', remote:true,"data-type": "json",'data-model' => 'farming_plot'}) do |f| %>
       <div class="col-xs-12 col-lg-8 col-sm-12">
 
           <div class="form-group">  
@@ -33,10 +33,10 @@
                    <%= f.label :description,"Descripción:",class: "col-sm-3 control-label"  %>
                     <div class="col-xs-12 col-md-12 col-sm-12 col-lg-6">
                         <%= f.text_area :description,autofocus: true , class: "form-control" %>
+                        <p class="help-block"> <%= f.object.errors[:description].to_sentence if f.object.errors[:description] %></p>   
                      </div>
                  </div>
 
-                 <%= render('layouts/error_lists')%>
                  <%= render('layouts/buttons')%>
           
                  <input type="hidden" id="controller" value="<%= controller_name%>">

@@ -275,7 +275,7 @@
                                 <li>
                                     <a href="#"><i class="fa  fa-truck  " aria-hidden="true" ></i> Máquinas & Implementos <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
-                                        <li class="<%= 'active' if params[:controller] == 'brands' && params[:action] == 'index' || 'new' %>"><%= link_to 'Marca', brands_path %></li>
+                                        <li class="<%= 'active' if params[:controller] == 'brands' && params[:action] == 'index' || params[:action] == 'new' %>"><%= link_to 'Marca', brands_path %></li>
                                         <li class="<%= 'active' if params[:controller] == 'models' && params[:action] == 'index' %>"><%= link_to 'Modelo', models_path %></li>
                                         <li class="<%= 'active' if params[:controller] == 'implements' && params[:action] == 'index' %>"><%= link_to 'Implemento', implements_path %></li>
                                         <li class="<%= 'active' if params[:controller] == 'machines' && params[:action] == 'index' %>"><%= link_to 'Maquinária', machines_path %></li> 

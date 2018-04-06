@@ -1,37 +1,31 @@
 <div class="panel-body">
     <div class="table-responsive">
-          <table    data-width="100%"
-                    class="table  table-hover table-striped table-condensed display"
-                    data-toggle="table" 
-                    data-search="true" 
-                    data-toolbar="#toolbar1"
-                    data-show-toggle="true"
-                    data-show-refresh="false"
-                    data-pagination="true"
-                    onlyInfoPagination="false"
-                    data-icons="icons"
-                    data-height="380"
-                    data-sort-name="name"
-                    data-sort-order="desc" 
-                    data-card-view="false">
-        <thead>
-            <tr>
-                <th style="widhth:0%" data-visible="true" class="hidden" data-field="id">Código</th>
-                <th style="widhth:40%" data-sortable="true"  data-field="code">Código</th> 
-                <th style="widhth:40%" data-field="description">Descripción</th> 
-                <th style="widhth:10%" data-halign="right" data-align="right" data-formatter="actionFormatter" data-events="actionEvents">Acción</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% @type_machines.each do |type_machine| %>
-             <tr>
-                  <td><%= type_machine.id%></td>
-                  <td><%= type_machine.code %></td>
-                  <td><%= type_machine.description %></td>
-                 
-              </tr>
-             <% end %>
-         </tbody>
-     </table>
- </div>
- <input type="hidden" id="controller" value="<%= controller_name%>">
+        <table  
+                id="bt_varieties"
+                data-width="100%"
+                class="table  table-hover table-striped table-condensed display bt_table"
+                data-toggle="table" 
+                data-search="true" 
+                data-toolbar="toolbar1"
+                data-show-toggle="true"
+                data-url="type_machines"
+                data-show-refresh="false"
+                data-pagination="true"
+                onlyInfoPagination="false"
+                data-icons="icons"
+                data-sort-name="code"
+                data-sort-order="desc"
+                data-card-view="false">
+            <thead>
+			<tr>
+				<th data-field="id">#</th> 
+				<th data-field="code">Código</th> 
+				<th data-field="description">Descripción</th> 
+			</tr>
+		</thead>
+		<tbody>
+
+		</tbody>
+	</table>
+</div>
+<input type="hidden" id="controller" value="<%= controller_name%>">

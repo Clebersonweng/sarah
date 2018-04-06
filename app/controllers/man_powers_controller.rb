@@ -33,6 +33,7 @@ class ManPowersController < ApplicationController
       get_all
       @man_power = ManPower.find(params[:id])
       @man_powers_details = ManPowerDetail.where(man_power_id: @man_power.id)
+      @total = @man_power.total
       
       #render :json => {:data => @man_powers_details}
    end
@@ -43,15 +44,16 @@ class ManPowersController < ApplicationController
     get_all
     @man_power = ManPower.new(man_power_params)
 
-    respond_to do |format|
+    #respond_to do |format|
       if @man_power.save
         #format.html { redirect_to @man_power, notice: 'Man power was successfully created.' }
-        format.json { render :show, status: :created, redirect_to: @man_power }
+        #redirect_to man_power_path(@man_power, format: :json)
+        render json: { contenido: @man_power, location: man_power_url(@man_power),result: :ok },status: 200
       else
         #format.html { render :new }
-        format.json { render json: @man_power.errors, status: :unprocessable_entity }
+        render json:  @man_power.errors, status: :unprocessable_entity 
       end
-    end
+    #end
   end
 
   # PATCH/PUT /man_powers/1

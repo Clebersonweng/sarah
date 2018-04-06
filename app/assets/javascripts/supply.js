@@ -9,13 +9,13 @@ $(document).ready(function ()
    controlador = $("#controller").val();   
    generic_response_form(controlador);
    form_supplies_validates();
-   enabled_button_add_item("supply_detail_product","add_product");
+   //enabled_button_add_item("supply_detail_product","add_product");
 
    
 
    $('#supply_detail_product').on("change",function (e) 
    {
-      enabled_button_add_item("supply_detail_product","add_product");
+      //enabled_button_add_item("supply_detail_product","add_product");
    });
 
    $('#add_product').click(function () {

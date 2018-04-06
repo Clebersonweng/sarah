@@ -42,12 +42,9 @@ class TypeOfCropsController < ApplicationController
     @type_of_crop = TypeOfCrop.new(type_of_crop_params)
 
     if @type_of_crop.save
-      #format.html { redirect_to @product, notice: 'Supply was successfully created.' }
       render json: { contenido: @type_of_crop, location: type_of_crop_url(@type_of_crop),result: :ok },status: 200
     else
-      #format.html { render :new }
       render json:  @type_of_crop.errors, status: :unprocessable_entity 
-      
     end
   end
 
@@ -85,7 +82,7 @@ class TypeOfCropsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def type_of_crop_params
-    params.require(:type_of_crop).permit(:code, :name, :variety_id)
+    params.require(:type_of_crop).permit( :name, :variety_id)
   end
 
   def get_all

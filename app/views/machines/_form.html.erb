@@ -1,99 +1,112 @@
+	<%= form_for(@machine,html: {class: 'form-horizontal', id: "form_machines", remote: true,"data-type": "json",'data-model' => 'machine'}) do |f| %>
+	<div class="col-sm-6 col-md-6">
+		<div class="form-group">
+			<%= f.label :name,"Nombre :" ,class: "control-label col-sm-3 col-md-3"%>
+			<div class="col-sm-7">
+				<%= f.text_field :name, autofocus: true, class: "form-control upper_text"%>
+				<span class="help-block"> <%= f.object.errors[:period].to_sentence if f.object.errors[:period] %></span>   
+			</div>
+		</div>
+		<div class="form-group">
+			<%= f.label :type_machine_id,"Clasificación :" ,class: "control-label col-sm-3 col-md-3"%>
+			<div class="col-sm-6">
+				<%= f.select :type_machine_id, options_for_select(@type_machines, f.object.type_machine_id), {}, { :class => 'form-control', :required => true }%>
+				<span class="help-block"> <%= f.object.errors[:period].to_sentence if f.object.errors[:period] %></span>   
+			</div>
+		</div>
+		<div class="form-group">
+			<%= f.label :brand_id,"Marca :" ,class: "control-label col-sm-3 col-md-3"%>
+			<div class="col-sm-6">
+				<%= f.select :brand_id, options_for_select(@brands, f.object.brand_id), {}, { :class => 'form-control', :required => true }%>
+				<span class="help-block"> <%= f.object.errors[:period].to_sentence if f.object.errors[:period] %></span>   
+			</div>
+		</div>
+		<div class="form-group">
+			<%= f.label :model_id,"Modelo :" ,class: "control-label col-sm-3 col-md-3"%>
+			<div class="col-sm-6">
+				<%= f.select :model_id, options_for_select(@models, f.object.model_id), {}, { :class => 'form-control', :required => true }%>
+				<span class="help-block"> <%= f.object.errors[:period].to_sentence if f.object.errors[:period] %></span>   
 
-<div class="panel-body">
-   <%= form_for(@machine,html: {class: 'form-horizontal', id: "form_machines", remote: true}) do |f| %>
-   
-         <div class="col-sm-6 col-md-6">
-        
-            <div class="form-group">
-               <%= f.label :name,"Nombre :" ,class: "control-label col-sm-3 col-md-3"%>
-               <div class="col-sm-7">
-                  <%= f.text_field :name, autofocus: true, class: "form-control upper_text"%>
-               </div>
-            </div>
-
-            <div class="form-group">
-               <%= f.label :type_machine_id,"Clasificación :" ,class: "control-label col-sm-3 col-md-3"%>
-               <div class="col-sm-6">
-                     <%= f.select :type_machine_id, options_for_select(@type_machines, f.object.type_machine_id), {}, { :class => 'form-control', :required => true }%>
-               </div>
-            </div>
-            <div class="form-group">
-               <%= f.label :brand_id,"Marca :" ,class: "control-label col-sm-3 col-md-3"%>
-               <div class="col-sm-6">
-                     <%= f.select :brand_id, options_for_select(@brands, f.object.brand_id), {}, { :class => 'form-control', :required => true }%>
-               </div>
-            </div>
-
-            <div class="form-group">
-                <%= f.label :model_id,"Modelo :" ,class: "control-label col-sm-3 col-md-3"%>
-                <div class="col-sm-6">
-                     <%= f.select :model_id, options_for_select(@models, f.object.model_id), {}, { :class => 'form-control', :required => true }%>
-                </div>
-            </div>
-
-            <div class="form-group">
-               <%= f.label :hp,"HP :" ,class: "control-label col-sm-3 col-md-3 "%>
-               <div class="col-sm-3 col-md-3">
-                  <%= f.text_field :hp, placeholder: "ej: 85", class: 'form-control text-right only_numbers replace_comma',:required => true %> 
-               </div>
-            </div>
-
-            <div class="form-group">
-               <%= f.label :price,"Precio :" ,class: "control-label col-sm-3 col-md-3"%>
-               <div class="col-sm-5">
-                   <%= f.text_field :price, class: 'form-control text-right only_numbers',:required => true %> 
-               </div>
-            </div> 
-            <div class="form-group">
-               <%= f.label :consumption, "Consumo (hs) :", class: "control-label col-sm-3 col-md-3"%>
-               <div class="col-sm-5 col-md-5">
-                     <%= f.text_field :consumption,placeholder: " ej: 0.16%", class: 'form-control text-right only_numbers replace_comma',:required => true %> 
-               </div>
-               <a href="#" class="btn btn-default col-xs-offset-2 col-lg-offset-0" data-toggle="modal" data-target="#md_consumption"><i class="fa fa-calculator" aria-hidden="true"></i></a>   
-            </div>
-            <div class="form-group">
-                  <%= f.label :year_purchase,"Año de compra :",class: "control-label col-sm-3 col-md-3"%>
-                  <div class="col-sm-4">
-                   <%= f.text_field :year_purchase, class: "form-control text-right only_numbers","data-fv-date-format": "YYYY",:required => true  %>    
-                  </div>
-            </div>
-         </div>
-         <div class="col-sm-6 col-md-6">
-            <div class="form-group">
-               <%= f.label :coeficient_cccr, "Coef. Reparación y Mantenim:", class: "control-label col-sm-5" %>
-               <div class="col-sm-5">
-                  <%= f.text_field :coeficient_cccr, class: 'form-control text-right only_numbers',:required => true %> 
-               </div>
-            </div>
-            <div class="form-group">
-               <%= f.label :fuel_id,"Combust :" ,class: "control-label col-sm-5"%>
-               <div class="col-sm-5">
-                  <%= f.select :fuel_id, options_for_select(@fuels, f.object.fuel_id), {}, { :class => 'form-control', :required => true }%>
-               </div>
-            </div>
-            <div class="form-group">
-               <%= f.label :working_capacity,"Capacidad de Trabajo (Has/hs):" ,class: "control-label col-sm-6 col-md-6"%>
-               <div class="col-sm-3">
-                  <%= f.text_field :working_capacity, class: 'form-control text-right only_numbers' %>
-               </div>
-               <a class="btn btn-default col-xs-offset-2 col-lg-offset-0" data-toggle="modal" data-target="#md_ctt"><i class="fa fa-calculator" aria-hidden="true"></i></a>   
-            </div>
-            <div class="form-group">
-               <%= f.label :working_capacity_effective,"Capacidad de Trabajo Efectiva Has/hs:",class: "control-label col-sm-6 col-md-6"%>
-               <div class="col-sm-3 col-md-3">
-                  <%= f.text_field :working_capacity_effective, class: "form-control text-right only_numbers"  %>  
-               </div>
-               <a class="btn btn-default col-xs-offset-2 col-lg-offset-0" data-toggle="modal" data-target="#md_cte"><i class="fa fa-calculator" aria-hidden="true"></i></a>   
-            </div>
-            <div class="form-group">
-               <%= f.label :time_oper,"Tiempo Operativo (Hs/ha):" ,class: "control-label col-sm-7"%>
-               <div class="col-sm-3 col-md-3">
-                  <%= f.text_field :time_oper, class: "form-control only_numbers" %>    
-               </div>
-            </div>      
-         </div>
-      <%= render('layouts/error_lists')%>
-      <%= render('layouts/buttons2col')%>
-   <% end %>
-</div>
-<input type="hidden" id="controller" value="<%=controller_name%>">
+			</div>
+		</div>
+		<div class="form-group">
+			<%= f.label :hp,"HP :" ,class: "control-label col-sm-3 col-md-3 "%>
+			<div class="col-sm-3 col-md-3">
+				<%= f.text_field :hp, placeholder: "ej: 85", class: 'form-control text-right only_numbers replace_comma',:required => true %>
+				<span class="help-block"> <%= f.object.errors[:period].to_sentence if f.object.errors[:period] %></span>   
+			</div>
+		</div>
+		<div class="form-group">
+			<%= f.label :price,"Precio :" ,class: "control-label col-sm-3 col-md-3"%>
+			<div class="col-sm-5">
+				<%= f.text_field :price, class: 'form-control text-right only_numbers',:required => true %>
+				<span class="help-block"> <%= f.object.errors[:period].to_sentence if f.object.errors[:period] %></span>   
+			</div>
+		</div>
+		<div class="form-group">
+			<%= f.label :consumption, "Consumo (hs) :", class: "control-label col-sm-3 col-md-3"%>
+			<div class="col-sm-5 col-md-5">
+				<%= f.text_field :consumption,placeholder: " ej: 0.16%", class: 'form-control text-right only_numbers replace_comma',:required => true %>
+				<span class="help-block"> <%= f.object.errors[:period].to_sentence if f.object.errors[:period] %></span>   
+			</div>
+			<a class="btn btn-default col-xs-offset-2 col-lg-offset-0" data-target="#md_consumption" data-toggle="modal" href="#">
+				<i aria-hidden="true" class="fa fa-calculator">
+				</i>
+			</a>
+		</div>
+		<div class="form-group">
+			<%= f.label :year_purchase,"Año de compra :",class: "control-label col-sm-3 col-md-3"%>
+			<div class="col-sm-4">
+				<%= f.text_field :year_purchase, class: "form-control text-right only_numbers","data-fv-date-format": "YYYY",:required => true  %>
+				<span class="help-block"> <%= f.object.errors[:period].to_sentence if f.object.errors[:period] %></span>   
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-6 col-md-6">
+			<div class="form-group">
+				<%= f.label :coeficient_cccr, "Coef. Reparación y Mantenim:", class: "control-label col-sm-5" %>
+				<div class="col-sm-5">
+					<%= f.text_field :coeficient_cccr, class: 'form-control text-right only_numbers',:required => true %>
+					<span class="help-block"> <%= f.object.errors[:period].to_sentence if f.object.errors[:period] %></span>   
+				</div>
+			</div>
+			<div class="form-group">
+				<%= f.label :fuel_id,"Combust :" ,class: "control-label col-sm-5"%>
+				<div class="col-sm-5">
+					<%= f.select :fuel_id, options_for_select(@fuels, f.object.fuel_id), {}, { :class => 'form-control', :required => true }%>
+					<span class="help-block"> <%= f.object.errors[:period].to_sentence if f.object.errors[:period] %></span>   
+				</div>
+			</div>
+			<div class="form-group">
+				<%= f.label :working_capacity,"Capacidad de Trabajo (Has/hs):" ,class: "control-label col-sm-6 col-md-6"%>
+				<div class="col-sm-3">
+					<%= f.text_field :working_capacity, class: 'form-control text-right only_numbers' %>
+					<span class="help-block"> <%= f.object.errors[:period].to_sentence if f.object.errors[:period] %></span>   
+				</div>
+				<a class="btn btn-default col-xs-offset-2 col-lg-offset-0" data-target="#md_ctt" data-toggle="modal">
+					<i aria-hidden="true" class="fa fa-calculator">
+					</i>
+				</a>
+			</div>
+			<div class="form-group">
+				<%= f.label :working_capacity_effective,"Capacidad de Trabajo Efectiva Has/hs:",class: "control-label col-sm-6 col-md-6"%>
+				<div class="col-sm-3 col-md-3">
+					<%= f.text_field :working_capacity_effective, class: "form-control text-right only_numbers"  %>
+					<span class="help-block"> <%= f.object.errors[:period].to_sentence if f.object.errors[:period] %></span>   
+				</div>
+				<a class="btn btn-default col-xs-offset-2 col-lg-offset-0" data-target="#md_cte" data-toggle="modal">
+					<i aria-hidden="true" class="fa fa-calculator">
+					</i>
+				</a>
+			</div>
+			<div class="form-group">
+				<%= f.label :time_oper,"Tiempo Operativo (Hs/ha):" ,class: "control-label col-sm-7"%>
+				<div class="col-sm-3 col-md-3">
+					<%= f.text_field :time_oper, class: "form-control only_numbers" %>
+					<span class="help-block"> <%= f.object.errors[:period].to_sentence if f.object.errors[:period] %></span>   
+				</div>
+			</div>
+	</div>
+		<%= render('layouts/buttons2col')%>
+		<% end %>
+	<input id="controller" type="hidden" value="<%=controller_name%>"/>

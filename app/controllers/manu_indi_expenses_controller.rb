@@ -1,4 +1,6 @@
 class ManuIndiExpensesController < ApplicationController
+
+  before_action :authenticate_user!
   before_action :set_manu_indi_expense, only: [:show, :edit, :update, :destroy]
 
    # GET /manu_indi_expenses
@@ -19,13 +21,30 @@ class ManuIndiExpensesController < ApplicationController
     program                 = ProgramProduction.last()
     @program_production_id  = program.id
 
+
     @manu_indi_expense = ManuIndiExpense.new
    end
 
    # GET /manu_indi_expenses/1/edit
    def edit
-    get_all
-   end
+      get_all
+
+      program                 = ProgramProduction.last()
+      @program_production_id  = program.id
+
+      @fixed = "FIJO"
+      @variable = "VARIABLE"
+
+      @manu                               = ManuIndiExpense.find(params[:id])
+      @manu_details                       = ManuIndiExpenseDet.where(manu_indi_expense_id: @manu.id)
+      @total_fixed_and_variable           = @manu.totalFixedAndVariable
+      @total_fixed                        = @manu.total_fixed
+      @expense_total_varible              = @manu.total_variable
+      
+
+      return :json => {:contenido => @manu_details,:result => "edit"}
+
+      end
 
    # POST /manu_indi_expenses
    # POST /manu_indi_expenses.json
@@ -35,7 +54,7 @@ class ManuIndiExpensesController < ApplicationController
       respond_to do |format|
          if @manu_indi_expense.save
             format.html { redirect_to @manu_indi_expense, notice: 'Manu indi expense was successfully created.' }
-            format.json { render :show, status: :created, location: @manu_indi_expense }
+            format.json { render :index, status: :created, location: @manu_indi_expenses }
          else
             format.html { render :new }
             format.json { render json: @manu_indi_expense.errors, status: :unprocessable_entity }
@@ -49,7 +68,7 @@ class ManuIndiExpensesController < ApplicationController
       respond_to do |format|
          if @manu_indi_expense.update(manu_indi_expense_params)
             format.html { redirect_to @manu_indi_expense, notice: 'Manu indi expense was successfully updated.' }
-            format.json { render :show, status: :ok, location: @manu_indi_expense }
+            format.json { render :index, status: :ok, location: @manu_indi_expense }
          else
             format.html { render :edit }
             format.json { render json: @manu_indi_expense.errors, status: :unprocessable_entity }
@@ -75,7 +94,7 @@ class ManuIndiExpensesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
    def manu_indi_expense_params                                                                                                                 
-      params.require(:manu_indi_expense).permit(:program_production_id, :chart_of_account_id, :total_fixed, :total_variable, :totalFixedAndVariable,manu_indi_expense_det_attributes: [:name, :isFixed, :subtotal])
+      params.require(:manu_indi_expense).permit(:program_production_id, :chart_of_account_id, :total_fixed, :total_variable, :totalFixedAndVariable,{ manu_indi_expense_dets_attributes: [:name, :isFixed, :subtotal]})
    end
    def get_all
       @path = " / crear estimación / gastos indirectos de producción"

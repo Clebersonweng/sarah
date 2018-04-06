@@ -32,7 +32,7 @@ class MachinesController < ApplicationController
 
     if @machine.save
       #format.html { redirect_to @product, notice: 'Supply was successfully created.' }
-      render json: { contenido: @successfully, location: machine_url(@machine),result: :ok },status: 200
+      render json: { contenido: @machine, location: machine_url(@machine),result: :ok },status: 200
     else
       #format.html { render :new }
       render json:  @machine.errors, status: :unprocessable_entity 

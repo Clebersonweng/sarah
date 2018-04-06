@@ -20,8 +20,38 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  date:
-    order:
-      - :day
-      - :month
-      - :year
+  errors:
+    # The default format to use in full error messages.
+    format: "%{attribute} %{message}"
+
+    # The values :model, :attribute and :value are always available for interpolation
+    # The value :count is available when applicable. Can be used for pluralization.
+    messages:
+      model_invalid: "Validación fallo: %{errors}"
+      inclusion: "No está incluido en la lista"
+      exclusion: "Es reservado"
+      invalid: "Es inválido"
+      confirmation: "No se encontro el %{attribute}"
+      accepted: "Debe ser aceptado"
+      empty: "No es permito vacío"
+      blank: "No puede estar en blanco"
+      present: "Debe estar en blanco"
+      too_long:
+        one: "Es muy largo (maximum is 1 character)"
+        other: "Es muy largo (máximo es %{count} caracteres)"
+      too_short:
+        one: "Es muy corto (mínimo es 1 caractér)"
+        other: "Es muy corto (minimo es %{count} caracteres)"
+      wrong_length:
+        one: "Es una longitud incorrecta (Debe ser de 1 caracter)"
+        other: "Es una longitud incorrecta (Debe ser de %{count} caracteres)"
+      not_a_number: "No es un número"
+      not_an_integer: "Debe ser un entero"
+      greater_than: "Debe ser mayor que %{count}"
+      greater_than_or_equal_to: "Debe ser mayor o igual a %{count}"
+      equal_to: "Debe ser igual a  %{count}"
+      less_than: "Debe ser menor que %{count}"
+      less_than_or_equal_to: "Debe ser menor o igual a %{count}"
+      other_than: "Debe ser diferente a %{count}"
+      odd: "Debe ser ímpar"
+      even: "Debe ser par"

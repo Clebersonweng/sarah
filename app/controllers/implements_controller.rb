@@ -22,7 +22,6 @@ class ImplementsController < ApplicationController
   def new
     get_all
     @implement = Implement.new
-    
   end
 
 

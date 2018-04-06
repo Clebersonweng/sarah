@@ -1,125 +1,1 @@
-
-<% if cost_oper_machine_cont.errors.any? %>
-  <div id="error_explanation">
-      <h2><%= pluralize(cost_oper_machine_cont.errors.count, "error") %> prohibited this man_power from being saved:</h2>
-
-      <ul>
-          <% cost_oper_machine_cont.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-      </ul>
-  </div>
-<% end %>
-
-<div class="panel-body">
-   <%= form_for(@cost_oper_machine_cont,html: {class: 'form-horizontal', id: "form_cost_oper_machine_conts", remote: true}) do |f| %>
-
-      <div class="col-sm-6 col-lg-12 col-md-12 col-xs-12">
-         <div class="row">
-            <div class="col-lg-5">
-               <div class="form-group">
-                  <%= f.label :program_production_id,"Parcela:" ,class: "control-label col-sm-6 col-lg-5 col-xs-12"%>
-                  <div class="col-lg-6">
-                     <input value="<%= @farm_name %>" class="form-control" readonly/>
-                  </div>
-               </div>
-            </div>
-            <div class="col-lg-3">
-               <div class="form-group">
-                  <%= f.label :program_production_id,"Área:" ,class: "control-label col-sm-6 col-lg-4 col-xs-12"%>
-                  <div class="col-lg-6 col-md-2">
-                     <input id="farm_area" value="<%=  @farm_area %>" class="form-control" readonly/>
-                  </div>
-               </div>
-            </div>
-            <div class="col-lg-4">
-               <div class="form-group">
-                  <%= f.label :program_production_id,"Producción:" ,class: "control-label col-sm-6 col-lg-4 col-xs-12"%>
-                  <div class="col-lg-6 col-md-2">
-                     <input id="program_production_id" name="cost_oper_machine_cont[program_production_id]" 
-                     value="<%=  @quantity_production %>" class="form-control" readonly/>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="row">
-            <div class="col-lg-5">
-               <div class="form-group">
-                  <%= f.label :description,"Tipo de servicio:" ,class: "control-label col-lg-5"%>
-                  <div class="col-sm-4 col-md-2 col-xs-12 col-lg-6">
-                    <%= select("cost_oper_machine_cont_details","type_of_service_id", options_for_select(@type_services), {}, {required: 'true', class: "form-control", include_blank: ''})%>   
-                  </div>
-               </div>
-            </div>
-            <div class="col-lg-3">
-               <div class="form-group">
-                  <%= f.label :description,"Implemento:" ,class: "control-label col-lg-4"%>
-                  <div class="col-sm-6 col-md-6 col-xs-12 col-lg-6">
-                    <%= select("cost_oper_machine_cont_details","implement_id", options_for_select(@implements), {}, {required: 'true', class: "form-control", include_blank: '',disabled: 'true'})%>   
-                  </div>
-               </div>
-            </div>
-            <div class="col-lg-3">
-               <div class="form-group">
-                  <%= f.label :description,"Cantidad:" ,class: "control-label col-lg-4"%>
-                  <div class="col-sm-6 col-md-6 col-xs-12 col-lg-6">
-                     <input id="cost_oper_machine_cont_detail_amount" value="" class="form-control only_numbers" /> 
-                  </div>
-               </div>
-            </div>
-            <div class="form-group col-xs-1 col-sm-1">   
-               <a href="#" class="btn btn-default btn-sm" id="btn_add_cost_out">Agregar</a>
-            </div>            
-         </div>
-         <table 
-               id="tb_co_mach_cont" 
-               data-height="300" 
-               data-show-footer="true" 
-               class="table  table-hover table-striped table-condensed display" 
-               data-toggle="table"
-               data-show-refresh="false" 
-               data-pagination="false" 
-               data-icons="icons"
-               data-footer-style="footerStyle"
-               data-unique-id="tb_co_mach_cont"
-               data-checkbox-header="false"
-         >
-            <thead>
-               <tr>
-                  <th data-field="id" data-checkbox="true"></th>
-                  <th data-field="code">Código</th>
-                  <th data-field="type_of_service_id">Tipo de servício</th>
-                  <th data-field="price">Precio</th>
-                  <th data-field="quantity">Cantidad</th>
-                  <th data-halign='right' data-id="subtotal" data-align='right' data-field="subtotal" >Sub-total</th>
-                  <th data-halign='right' data-align='right' data-field="Action" data-events="remove">Acción</th>
-               </tr>
-            </thead>
-            <tbody></tbody>
-                 
-            <tfoot>
-              <tr>
-               <td class="h6 font-weight-bold" colspan="2"><strong>Total :<strong></td>
-               <td colspan="5" class="font-weight-bold text-right">
-                  <strong><span id="outsourced_total"></span><strong>
-               </td>
-              </tr>
-            </tfoot>
-            <div id="add_row_cost_oper_cont"></div>
-         </table>
-         
-         <%= render('layouts/error_lists')%>
-         <%= render('layouts/buttons')%>
-      </div>
-   <%end%>
-</div>
-   
-   <div id="addRow">
-      <input type="text" name="cost_oper_machine_cont[total]" id="cost_oper_cont_total"/>
-      <input type="text" name="cost_oper_machine_cont[program_production_id]" id="program_production_id" 
-      value="<%= @program_production_id%>"   
-   </div>
-
-   />
-
-<input type="hidden" id="controller" value="<%= controller_name%>">
+   <%= form_for(@cost_oper_machine_cont,html: {class: 'form-horizontal',"data-fv-framework": "bootstrap", id: "form_cost_oper_machine_conts", remote: true,"data-type": "json",'data-model' => 'cost_oper_machine_cont'}) do |f| %>      <div class="col-sm-6 col-lg-12 col-md-12 col-xs-12">         <div class="row">            <div class="col-lg-5">               <div class="form-group">                  <%= f.label :program_production_id,"Parcela:" ,class: "control-label col-sm-6 col-lg-5 col-xs-12"%>                  <div class="col-lg-6">                     <input value="<%= @farm_name %>" class="form-control" readonly/>                  </div>               </div>            </div>            <div class="col-lg-3">               <div class="form-group">                  <%= f.label :program_production_id,"Área:" ,class: "control-label col-sm-6 col-lg-4 col-xs-12"%>                  <div class="col-lg-6 col-md-2">                     <input id="farm_area" value="<%=  @farm_area %>" class="form-control" readonly/>                  </div>               </div>            </div>            <div class="col-lg-4">               <div class="form-group">                  <%= f.label :program_production_id,"Producción:" ,class: "control-label col-sm-6 col-lg-4 col-xs-12"%>                  <div class="col-lg-6 col-md-2">                     <input id="program_production_id" name="cost_oper_machine_cont[program_production_id]"                      value="<%=  @quantity_production %>" class="form-control" readonly/>                  </div>               </div>            </div>         </div>         <div class="row">            <div class="col-lg-5">               <div class="form-group">                  <%= f.label :program_production_id,"Tipo de servicio:" ,class: "control-label col-lg-5"%>                  <div class="col-sm-4 col-md-2 col-xs-12 col-lg-6">                    <%= select("cost_oper_cont_detail","type_of_service_id", options_for_select(@type_services), {}, {required: 'true', class: "form-control", include_blank: ''})%>                     </div>               </div>            </div>            <div class="col-lg-3">               <div class="form-group">                  <%= f.label :description,"Implemento:" ,class: "control-label col-lg-4"%>                  <div class="col-sm-6 col-md-6 col-xs-12 col-lg-6">                    <%= select("cost_oper_cont_detail","implement_id", options_for_select(@implements), {}, {required: 'true', class: "form-control", include_blank: '',disabled: 'true'})%>                     </div>               </div>            </div>            <div class="col-lg-3">               <div class="form-group">                  <%= f.label :description,"Cantidad:" ,class: "control-label col-lg-4"%>                  <div class="col-sm-6 col-md-6 col-xs-12 col-lg-6">                     <input id="cost_oper_cont_detail_amount" name="cost_oper_cont_detail[amount]" value="1" class="form-control only_numbers"                     data-fv-message="The username is not valid"                required data-fv-notempty-message="The username is required and cannot be empty"                pattern="^[a-zA-Z0-9]+$" data-fv-regexp-message="The username can only consist of alphabetical, number" />                  </div>               </div>            </div>            <div class="form-group col-xs-1 col-sm-1">                  <a href="#" class="btn btn-default btn-sm" id="btn_add_cost_out">Agregar</a>            </div>                     </div>         <table                id="tb_co_mach_cont"                data-height="500"                data-show-footer="true"                class="table  table-hover table-striped table-condensed display"                data-toggle="table"               data-show-refresh="false"                data-pagination="false"                data-icons="icons"               data-footer-style="footerStyle"               data-unique-id="tb_co_mach_cont"               data-checkbox-header="false"         >            <thead>               <tr>                  <th data-field="id" data-checkbox="true"></th>                  <th data-field="code">#</th>                  <th data-field="type_of_service">Tipo de servício</th>                  <th data-field="type_of_service_id"></th>                  <th data-field="price">Precio del servicio</th>                  <th data-field="amount">Cantidad realizada</th>                  <th data-field="amount_id"></th>                  <th data-halign='right' data-id="subtotal" data-align='right' data-field="subtotal" >Sub-total</th>                  <th data-field="subtotal_id"></th>                  <th data-halign='right' data-align='right' data-field="Action" data-events="remove">Acción</th>               </tr>            </thead>            <tbody>               <% if (controller.action_name == "edit") %>                     <% @cost_oper_machine_cont_details.each do |details| %>                        <tr>                           <td><%= details.id %></td>                           <td><%= details.id %></td>                           <td><%= details.type_of_service.name %></td>                           <td></td>                           <td><%= number_with_precision( details.type_of_service.price, :precision => 0, :delimiter => '.' ) %></td>                           <td><%= number_with_precision( details.amount, :precision => 0, :delimiter => '.' ) %></td>                           <td></td>                           <td><%=number_with_precision( details.subtotal, :precision => 0, :delimiter => '.' ) %></td>                           <td></td>                           <td>                              <a class="change_status btn btn-danger btn-sm" href="" title="Cambiar status" >                                 <i class="fa fa-1x fa-minus"></i>                              </a>                           </td>                        </tr>                     <% end %>                  <% end %>                           </tbody>                             <tfoot>              <tr>               <td class="h6 font-weight-bold" colspan="2"><strong>Total :<strong></td>               <td colspan="8" class="font-weight-bold text-right">                  <strong><span class="outsourced_total"><%=number_with_precision( @total, :precision => 0, :delimiter => '.' ) %></span><strong>               </td>              </tr>            </tfoot>         </table>         <%= render('layouts/buttons')%>         <input type="text" name="cost_oper_machine_cont[total]" class="outsourced_total"  id="total_edit" value="<%= @total %>"/>         <input type="text" name="cost_oper_machine_cont[program_production_id]" id="program_production_id" value="<%= @program_production_id%>" />        </div>   <%end%><input type="hidden" id="controller" value="<%= controller_name%>">

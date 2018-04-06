@@ -1,9 +1,12 @@
 class StructureExpensesController < ApplicationController
+
+  before_action :authenticate_user!
   before_action :set_structure_expense, only: [:show, :edit, :update, :destroy]
 
   # GET /structure_expenses
   # GET /structure_expenses.json
   def index
+    get_all
     @structure_expenses = StructureExpense.all
   end
 
@@ -14,11 +17,21 @@ class StructureExpensesController < ApplicationController
 
   # GET /structure_expenses/new
   def new
-    @structure_expense = StructureExpense.new
+    detalles
+    get_all
+    @structure_expense      = StructureExpense.new
+    program                 = ProgramProduction.last()
+    @program_production_id  = program.id
+
   end
 
   # GET /structure_expenses/1/edit
   def edit
+    get_all
+    @struct                                  = StructureExpense.find(params[:id])
+    @structure_details                       = StruExpenseDet.where(structure_expense_id: @struct.id)
+    @total                                   = @struct.total
+    @program_production_id                   = @struct.program_production_id
   end
 
   # POST /structure_expenses
@@ -28,10 +41,10 @@ class StructureExpensesController < ApplicationController
 
     respond_to do |format|
       if @structure_expense.save
-        format.html { redirect_to @structure_expense, notice: 'Structure expense was successfully created.' }
+        #format.html { redirect_to @structure_expense, notice: 'Structure expense was successfully created.' }
         format.json { render :show, status: :created, location: @structure_expense }
       else
-        format.html { render :new }
+        #format.html { render :new }
         format.json { render json: @structure_expense.errors, status: :unprocessable_entity }
       end
     end
@@ -42,10 +55,10 @@ class StructureExpensesController < ApplicationController
   def update
     respond_to do |format|
       if @structure_expense.update(structure_expense_params)
-        format.html { redirect_to @structure_expense, notice: 'Structure expense was successfully updated.' }
+        #format.html { redirect_to @structure_expense, notice: 'Structure expense was successfully updated.' }
         format.json { render :show, status: :ok, location: @structure_expense }
       else
-        format.html { render :edit }
+        #format.html { render :edit }
         format.json { render json: @structure_expense.errors, status: :unprocessable_entity }
       end
     end
@@ -56,10 +69,15 @@ class StructureExpensesController < ApplicationController
   def destroy
     @structure_expense.destroy
     respond_to do |format|
-      format.html { redirect_to structure_expenses_url, notice: 'Structure expense was successfully destroyed.' }
+      #f#ormat.html { redirect_to structure_expenses_url, notice: 'Structure expense was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
+  
+  def detalles
+    
+  end
+
 
    private
       # Use callbacks to share common setup or constraints between actions.
@@ -69,7 +87,7 @@ class StructureExpensesController < ApplicationController
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def structure_expense_params
-      params.require(:structure_expense).permit(:program_production_id, :chart_of_account_id, :total)
+      params.require(:structure_expense).permit(:program_production_id, :total,{ stru_expense_dets_attributes: [:name, :amount, :subtotal]})
       end
       def get_all
          @path = " / crear estimación / gastos de estructura"

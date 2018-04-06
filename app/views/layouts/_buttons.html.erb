@@ -9,7 +9,8 @@
 	     <%= link_to "<i class='fa fa-trash-o' aria-hidden='true'></i>  Cancelar".html_safe, "../#{controller_name}",:type => "button",:class =>"btn btn-danger" %>
 	   <% end %>
 
-	   <%= link_to "<i class='fa fa-floppy-o' aria-hidden='true'></i>  Guardar".html_safe, "../#{controller_name}",:type => "button",:class =>"btn btn-success",:id => "btn_submit_#{controller_name}" %>
+	   <%= link_to "<i class='fa fa-floppy-o' aria-hidden='true'></i>  Guardar".html_safe, "../#{controller_name}",:type => "button",:class =>"btn btn-success",:id => "btn_submit_#{controller_name}" ,
+      data: { disable_with: "Guardando.." } %>
 
 	</div>
 </div>

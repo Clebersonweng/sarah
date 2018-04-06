@@ -1,34 +1,38 @@
-
 <div class="panel-body">
     <div class="table-responsive">
-        <table class="table table-striped table-condensed" data-toggle="table" data-url="fuels"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
-            <thead>
-                <tr>
-                    <th data-field="name" >Nombre</th> 
-                    <th data-field="price" >Precio</th>                            
-                    <th data-field="description"  data-sortable="true">Descripción</th>                            
-                    <th>Acción</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% @fuels.each do |fuel| %>
-                 <tr>
-                     <td><%= fuel.id%></td>
-                     <td><%= fuel.name %></td>
-                     <td><%= fuel.price %></td>
-                     <td><%= fuel.description %></td>                              
-                     <td class="col-md-1">
-                         <%= link_to edit_fuel_path(fuel) do %>
-                          <i class="fa fa-2x fa-edit"></i>
-                         <% end %>
-                         <%= link_to    fuel, method: :delete, data: { confirm: 'Are you sure?' }  do%>
-                          <i class="fa fa-2x fa-minus"></i>
-                         <% end %>
-                     </td>
-
-                 </tr>
-                <% end %>
-            </tbody>
-        </table>
-    </div>
+        <table data-width="100%"  
+        data-flat="true"
+        data-response-handler="flatJSON"
+        data-search="true"                
+        class="table table-hover table-striped table-condensed display" 
+        data-toggle="table"
+        data-show-toggle="true"                
+        data-show-refresh="false" 
+        data-pagination="true" 
+        onlyInfoPagination="false" 
+        data-icons="icons" data-sort-name="code" data-sort-order="desc" 
+        data-card-view="false"
+        >
+        <thead>
+            <tr>
+                <th data-field="id">#</th> 
+                <th data-field="name" >Nombre</th> 
+                <th data-field="price" >Precio</th>                            
+                <th data-field="description"  data-sortable="true">Descripción</th>                            
+                <th data-halign="right" data-align="right"  data-switchable="false" data-formatter="actionFormatter" data-events="actionEvents">Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @fuels.each do |fuel| %>
+            <tr>
+               <td><%= fuel.id%></td>
+               <td><%= fuel.name %></td>
+               <td><%= fuel.price %></td>
+               <td><%= fuel.description %></td>                             
+               <td></td>                             
+           </tr>
+           <% end %>
+       </tbody>
+   </table>
 </div>
+<input type="hidden" id="controller" value="<%= controller_name%>">

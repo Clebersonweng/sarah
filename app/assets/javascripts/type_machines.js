@@ -15,6 +15,15 @@ function form_type_machines_validates()
         validators: {
           notEmpty: {
             message: 'Este campo es obligatório'
+          },
+          stringLength: {
+            min: 3,
+            max: 30,
+            message: 'El campo debe contener como minimo tres caracteres'
+          },
+          regexp: {
+            regexp: /^[a-zA-Z ]+$/,
+            message: 'Debe contener solamente letras'
           }
         }
       }

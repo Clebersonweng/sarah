@@ -77,7 +77,7 @@ class VarietiesController < ApplicationController
     end
 
     def variety_params
-      params.require(:variety).permit(:code, :descr)
+      params.require(:variety).permit(:descr)
     end
     def get_all
       @path = "/ catastros / parcela / variedades"

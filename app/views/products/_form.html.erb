@@ -1,7 +1,7 @@
 
 
 <div class="panel-body">
-    <%= form_for( @product, html: {class: 'form-horizontal', id: 'form_products', remote:true}) do |f| %>
+    <%= form_for( @product, html: {class: 'form-horizontal', id: 'form_products', remote:true,"data-type": "json",'data-model' => 'product'}) do |f| %>
           
           <div class="col-lg-6 col-xs-12 col-sm-6">
 
@@ -64,7 +64,6 @@
                   </div> 
             </div>
         </div>
-        <%= render('layouts/error_lists')%>
         <%= render('layouts/buttons2col') %>           
     <% end %>
 

@@ -111,7 +111,6 @@ function new_row_dt(machine_text,implement_text,fuel_price,machine_price,machine
                         "amount_id": "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][amount]' id='txt' value="+amount+">", 
                         "subtotal": subtotal.toFixed(0),
                         "subtotal_val":  "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+count+"][subtotal]' id='txt' value="+subtotal.toFixed(0)+">",
-                        "total":  "<input type='hidden' size='20' name='cost_oper_machine[total]' id='txt' value="+TOTAL.toFixed(0)+">",
                         "Action" : '<a class="remove  btn btn-danger delete btn-sm" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></a>'
                      };
   

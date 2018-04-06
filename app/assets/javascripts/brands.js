@@ -10,7 +10,7 @@ $(document).ready(function ()
 function form_brands_validates()
 {
 
-  $('#form_brands').bootstrapValidator({
+   $('#form_brands').bootstrapValidator({
     excluded: [':disabled', ':hidden', ':not(:visible)'],
     fields: {
       "brand[name]": {

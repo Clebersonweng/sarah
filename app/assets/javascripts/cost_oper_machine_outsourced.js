@@ -1,64 +1,55 @@
-var count, sum, code_item = 0; 
-var TOTAL = 0.0;
-var subtotal =0;
+var COUNT, SUM    = 0; 
+var TOTAL         = 0;
+var subtotal      = 0;
 
 $(document).ready(function() 
 {
-   
+   var valor_edit = $("#total_edit").val();
 
-   $('#tb_co_mach_cont').bootstrapTable({
-      formatNoMatches: function () {
-        return "No cuenta con registros";
-      },
-      cache: false,
-      remove: actionEvents
-   });
-
-   enabled_button_add_item("type_service_type_of_service_id","btn_add_cost_out");
-   $('#btn_add_cost_out').click(function (e) {
-    e.preventDefault();
-      $('#tb_co_mach_cont').bootstrapTable("append", row_bt_cost_out());
-      $('#cost_oper_machine_cont_details_type_of_service_id').val("");
-      $("#cost_oper_machine_cont_details_amount").val("");
-      
-   });
-
-   $('#cost_oper_machine_cont_details_type_of_service_id').on("change",function (e) 
+   if(valor_edit !== "")
    {
-      if(typeof $("#quantity").val() != "")
+      TOTAL += parseFloat(valor_edit);
+   }
+
+   $('#cost_oper_cont_detail_implement_id').on("change",function (e) 
+   {
+      if(typeof $("#cost_oper_cont_detail_implement_id").val() != "")
       {
-         enabled_button_add_item("type_service_type_of_service_id","btn_add_cost_out");   
+         enabled_button_add_item("cost_oper_cont_detail_amount","btn_add_cost_out");   
       }
       
    });
 
    $('#tb_co_mach_cont').on('check.bs.table', function (e, row) 
    {
-         TOTAL =  parseFloat($("#outsourced_total").text());
-         $remove = $('.remove');
-         selections = [];
-         $remove.click(function () {
-         //var ids = getIdSelections($('#tb_suppy_detail'));
-         $('#tb_co_mach_cont').bootstrapTable('remove', {
-               field: 'id',
-               values: [row.id]
-            });
-            $remove.prop('disabled', true);
-            TOTAL -= row.subtotal;
-            $("#oper_own_total").text(TOTAL.toFixed(0));
-         });
-   });
-    /**verifico si la u.m es bolsa, ha, hs y calculo de acuerdo a esto el subtotal*/
-   $('#cost_oper_machine_cont_details_type_of_service_id').on("change", function() 
-   { 
-      if($('#cost_oper_machine_cont_details_type_of_service_id option:selected').data('u_measure') == "HORA")
+      TOTAL =  parseFloat($("#outsourced_total").text());
+      $remove = $('.remove');
+      selections = [];
+      $remove.click(function () {
+      //var ids = getIdSelections($('#tb_suppy_detail'));
+      $('#tb_co_mach_cont').bootstrapTable('remove', 
       {
-         $("#cost_oper_machine_cont_details_implement_id").attr("disabled",false); 
+         field: 'id',
+         values: [row.id]
+      });
+      $remove.prop('disabled', true);
+      TOTAL -= row.subtotal;
+      $("#oper_own_total").text(TOTAL.toFixed(0));
+      
+      });
+   });
+
+    /**verifico si la u.m es bolsa, ha, hs y calculo de acuerdo a esto el subtotal*/
+   $('#cost_oper_cont_detail_type_of_service_id').on("change", function() 
+   { 
+      if($('#cost_oper_cont_detail_type_of_service_id option:selected').data('u_measure') == "HORA")
+      {
+         $("#cost_oper_cont_detail_implement_id").attr("disabled",false); 
       }
       else
       {
-         $("#cost_oper_machine_cont_details_implement_id").val(''); 
-         $("#cost_oper_machine_cont_details_implement_id").attr("disabled",true); 
+         $("#cost_oper_cont_detail_implement_id").val(''); 
+         $("#cost_oper_cont_detail_implement_id").attr("disabled",true); 
       }
 
    });
@@ -71,48 +62,53 @@ $(document).ready(function()
     * y aqui solo agrego el tipo de servicio la cantidad de vezes realizada, la cual me calcula el total pago de servicios de terceros realizados
     */
 
-   $("#agregarCostOperOuts").on("click", function() 
+   $("#btn_add_cost_out").on("click", function() 
    {
-      typeOfservice           = $("#cost_oper_machine_cont_details_type_of_service_id option:selected");//mostrar en el td  
-      priceTypeOfService      = $("#cost_oper_machine_cont_details_type_of_service_id option:selected").data("price"); 
-      UmedTypeOfService       = $("#cost_oper_machine_cont_details_type_of_service_id option:selected").data("u_measure"); 
-      amount                  = $("#cost_oper_machine_cont_detail_amount").val();
-      subtotal                = priceTypeOfService * amount;
-
-      var newRow = addNewCost(typeOfservice.text(),UmedTypeOfService, priceTypeOfService, amount, subtotal.toFixed(2));
-
-      count++;
-      sum+=subtotal; 
-
-      $("#TOTAL").text(sum.toFixed(2));  
-      $("#InputTotal").val(sum.toFixed(2));  
+      if(is_valid_fields())
+      {
+         $type_of_service        = $("#cost_oper_cont_detail_type_of_service_id option:selected");
+         $type_service_id        = $type_of_service.val();
+         $type_service_name      = $type_of_service.text();
+         $price                  = $type_of_service.data("price"); 
+         $u_measure              = $type_of_service.data("u_measure"); 
+         $amount                 = $("#cost_oper_cont_detail_amount").val();
+         $area                   = $("#farm_area").val();
+         
+         row_bt_cost_out($type_service_id,$type_service_name,$price,$u_measure,$area,$amount);
+         $("#cost_oper_cont_detail_amount").val(1);
+         COUNT++;
+      }
+      else
+      {
+         $('form').bootstrapValidator('revalidateField', 'cost_oper_cont_detail[type_of_service_id]');
+         $('form').bootstrapValidator('revalidateField', 'cost_oper_cont_detail[amount]');
+         console.log("no es valido, falta agregar los datos para inserta en la tabla");
+      }
    });
 
 });
+
 // el subtotal es el tipo de servicio * UM(Ha) * cantidad
-function row_bt_cost_out()
+function row_bt_cost_out(type_service_id,type_service_name,price,u_measure,area,amount)
 { 
-   var type_service_id     =  $("#cost_oper_machine_cont_details_type_of_service_id option:selected").val();
-   var type_service_name   =  $("#cost_oper_machine_cont_details_type_of_service_id option:selected").text();
-   var price               =  $("#cost_oper_machine_cont_details_type_of_service_id option:selected").data("price");
-   var quantity            =  $("#cost_oper_machine_cont_detail_amount").val();
-   var u_measure           =  $("#cost_oper_machine_cont_details_type_of_service_id option:selected").data("u_measure");
-   var area                =  $("#farm_area").val();
-
-      
-
+   
+   var subtotal = calculte_subtotal(u_measure,price,area,amount);
    var  _data_ = {
-                     "id": ++code_item,
-                     "code": "00"+code_item,
-                     "type_of_service_id": type_service_name,   
-                     "price": price,   
-                     "quantity": quantity,  
-                     "subtotal": calculte_subtotal(u_measure,price,area,quantity),
-                     "Action" : '<a class="remove  btn btn-danger delete btn-sm" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></a>',
+                     "id": COUNT,
+                     "code": COUNT,
+                     "type_of_service": type_service_name,   
+                     "type_of_service_id": "<input type='hidden' size='20' name='cost_oper_machine_cont[cost_oper_machine_cont_details_attributes]["+COUNT+"][type_of_service_id]' id='txt' value="+type_service_id+">",  
+                     "price": price,  
+                     "amount": amount,  
+                     "amount_id": "<input type='hidden' size='20' name='cost_oper_machine_cont[cost_oper_machine_cont_details_attributes]["+COUNT+"][amount]' id='txt' value="+amount+">",  
+                     "subtotal": subtotal,
+                     "subtotal_id": "<input type='hidden' size='20' name='cost_oper_machine_cont[cost_oper_machine_cont_details_attributes]["+COUNT+"][subtotal]' id='txt' value="+subtotal+">",  
+                     "Action" : '<a class="remove  btn btn-danger delete btn-sm" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></a>'
                   };
-   add_new_row ( type_service_id, quantity, subtotal);//agrego cada fila
-   return _data_ ;
 
+   $('#tb_co_mach_cont').bootstrapTable("append", _data_);
+   $('#cost_oper_cont_detail_type_of_service_id').val("");
+   $("#cost_oper_cont_detail_amount").val("");
 }
 
 
@@ -125,28 +121,37 @@ function calculte_subtotal(u_measure,price,area,quantity)
    }
    else if (u_measure == "KILO")
    {
-      subtotal = (price * $("#production").val()) * quantity;
+      subtotal = (price * $("#program_production_id").val()) * quantity;
    }
    else if (u_measure == "HORA")
    {
-
-      var to               =  $("#cost_oper_machine_cont_details_implement_id option:selected").data("oper_time");
+      var to               =  $("#cost_oper_cont_detail_detail_implement_id option:selected").data("oper_time");
       subtotal             = ((area / to) * quantity).toFixed(0);
    }
 
    TOTAL                  += subtotal;
-   $("#outsourced_total").text(total.toFixed(0));
-   $("#cost_oper_cont_total").val(total.toFixed(0));
+   $(".outsourced_total").text(TOTAL);
+   $("#total_edit").val(TOTAL);
    return subtotal;
 
 }
 
-function add_new_row(type_service,amount, subtotal)
+function is_valid_fields()
 {
-   $("#addRow").append(
-     "<input type='text' size='20' name='cost_oper_machine_cont[cost_oper_machine_cont_details_attributes]["+count+"][type_of_service_id]' id='txt' value="+type_service+">"+
-     "<input type='text' size='20' name='cost_oper_machine_cont[cost_oper_machine_cont_details_attributes]["+count+"][amount]' id='txt1' value="+amount+">"+
-     "<input type='text' size='20' name='cost_oper_machine_cont[cost_oper_machine_cont_details_attributes]["+count+"][subtotal]' id='txt1' value="+subtotal+">"+"</br>"    
-   )
-   count++;
+   $type_of_service     = $('#cost_oper_cont_detail_type_of_service_id');
+   $amount              = $("#cost_oper_cont_detail_amount");
+
+   if(typeof $type_of_service != "undefined" && $type_of_service.val() != "" && typeof $amount != "undefined" && $amount.val() != "" )
+   {
+      return true;
+   }
+   else
+   {
+      return false;
+   }
+
 }
+
+
+
+

@@ -1,4 +1,6 @@
 class MarkSpendingsController < ApplicationController
+
+  before_action :authenticate_user!
   before_action :set_mark_spending, only: [:show, :edit, :update, :destroy]
 
   # GET /mark_spendings

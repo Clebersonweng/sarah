@@ -1,49 +1,48 @@
 <div class="panel-body">
     <div class="table-responsive">
-          <table    data-width="100%"
-                    class="table  table-hover table-striped table-condensed display"
-                    data-toggle="table" 
-                    data-search="true" 
-                    data-toolbar="toolbar1"
-                    data-show-toggle="true"
-                    data-show-refresh="false"
-                    data-pagination="true"
-                    onlyInfoPagination="false"
-                    data-icons="icons"
-                    data-height="380"
-                    data-sort-name="name"
-                    data-sort-order="desc" 
-                    data-card-view="false">
-            <thead>
-                <tr>
-                    <th style="widhth:0%" data-visible="false" class="hidden" data-field="id">Código</th>
-                    <th style="widhth:20%" data-field="machine_id">Máquina</th>
-                    <th style="widhth:20%" data-sortable="true" data-field="brand">Marca</th>
-                    <th style="widhth:10%" data-sortable="true" data-field="name">Nombre</th>
-                    <th style="widhth:10%" data-halign="left" data-align="right" data-sortable="true" data-field="model">Modelo</th>
-                    <th style="widhth:10%" data-halign="left" data-align="right" data-field="oper_time">Tiempo Op.</th>
-                    <th style="widhth:10%" data-halign="left" data-align="right" data-field="coef_cccr">Coef. RM</th>
-                    <th style="widhth:10%" data-field="year">Año</th>
-                    <th style="widhth:5%" data-halign="left" data-align="right" data-field="price">Precio</th>
-                    <th style="widhth:3%" data-halign="right" data-align="right" data-formatter="actionFormatter" data-events="actionEvents">Acción</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% @implements.each do |implement| %>
-                    <tr>
-                        <td style="widhth:0%"><%= implement.id %></td>
-                        <td style="widhth:20%"><%= implement.machine.model.name %></td>
-                        <td style="widhth:20%"><%= implement.brand %></td>
-                        <td style="widhth:10%"><%= implement.name %></td>                    
-                        <td style="widhth:10%"><%= implement.model %></td>
-                        <td style="widhth:10%"><%= implement.oper_time %></td>
-                        <td style="widhth:10%"><%= implement.coef_cccr%></td>                   
-                        <td style="widhth:10%"><%= implement.year %></td>
-                        <td style="widhth:5%"><%= number_with_precision(implement.price, :precision => 0, :delimiter => '.') %></td>
-                    </tr>
-                <% end %>
-             </tbody>
-         </table>
-     </div>
- </div>
- <input type="hidden" id="controller" value="<%=controller_name%>">
+        <table data-width="100%"  
+        data-flat="true"
+        data-response-handler="flatJSON"
+        data-search="true"                
+        class="table table-hover table-striped table-condensed display" 
+        data-toggle="table"
+        data-show-toggle="true"                
+        data-show-refresh="false" 
+        data-pagination="true" 
+        onlyInfoPagination="false" 
+        data-icons="icons" data-sort-name="code" data-sort-order="desc" 
+        data-card-view="false"
+        >
+        <thead>
+            <tr>
+                <th style="widhth:0%" data-visible="false" class="hidden" data-field="id">Código</th>
+                <th style="widhth:20%" data-field="machine_id">Máquina</th>
+                <th style="widhth:20%" data-sortable="true" data-field="brand">Marca</th>
+                <th style="widhth:10%" data-sortable="true" data-field="name">Nombre</th>
+                <th style="widhth:10%" data-halign="left" data-align="right" data-sortable="true" data-field="model">Modelo</th>
+                <th style="widhth:10%" data-halign="left" data-align="right" data-field="oper_time">Tiempo Op.</th>
+                <th style="widhth:10%" data-halign="left" data-align="right" data-field="coef_cccr">Coef. RM</th>
+                <th style="widhth:10%" data-field="year">Año</th>
+                <th style="widhth:5%" data-halign="left" data-align="right" data-field="price">Precio</th>
+                <th style="widhth:3%" data-halign="right" data-align="right" data-formatter="actionFormatter" data-events="actionEvents">Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @implements.each do |implement| %>
+            <tr>
+                <td style="widhth:0%"><%= implement.id %></td>
+                <td style="widhth:20%"><%= implement.machine.model.name %></td>
+                <td style="widhth:20%"><%= implement.brand %></td>
+                <td style="widhth:10%"><%= implement.name %></td>                    
+                <td style="widhth:10%"><%= implement.model %></td>
+                <td style="widhth:10%"><%= implement.oper_time %></td>
+                <td style="widhth:10%"><%= implement.coef_cccr%></td>                   
+                <td style="widhth:10%"><%= implement.year %></td>
+                <td style="widhth:5%"><%= number_with_precision(implement.price, :precision => 0, :delimiter => '.') %></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+</div>
+<input type="hidden" id="controller" value="<%=controller_name%>">

@@ -1,5 +1,6 @@
 class StructureExpense < ApplicationRecord
-  belongs_to :program_production
-  belongs_to :chart_of_account
-  has_many :structure_expense_dets
+  	belongs_to :program_production
+  	has_many :stru_expense_dets, inverse_of: :structure_expense, :dependent => :destroy
+	accepts_nested_attributes_for :stru_expense_dets, reject_if: proc { |attributes| attributes['name'].blank? }
+ 
 end
