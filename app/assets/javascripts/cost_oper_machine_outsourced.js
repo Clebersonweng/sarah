@@ -82,7 +82,6 @@ $(document).ready(function()
       {
          $('form').bootstrapValidator('revalidateField', 'cost_oper_cont_detail[type_of_service_id]');
          $('form').bootstrapValidator('revalidateField', 'cost_oper_cont_detail[amount]');
-         console.log("no es valido, falta agregar los datos para inserta en la tabla");
       }
    });
 

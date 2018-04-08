@@ -1,4 +1,3 @@
-<div class="panel-body">
    <%= form_for(@man_power,html: {class: 'form-horizontal', id: "form_man_powers", remote: true,"data-type": "json",'data-model' => 'man_power'}) do |f| %>
 
       <div class="col-sm-6 col-lg-12 col-md-12 col-xs-12">
@@ -25,8 +24,7 @@
                <div class="form-group">
                   <%= f.label :description,"Horas Necesárias:" ,class: "control-label col-lg-5"%>
                   <div class="col-sm-6 col-md-6 col-xs-12 col-lg-6">
-                  <input id="hours_needed" name="man_power_details[hours_needed]" class="form-control only_numbers" value="1"/> 
-                  <input type="hidden" id="man_power_program_production_id" name="man_power[program_production_id]" class="form-control" value="<%= @program_production_id %>"/> 
+                     <input id="hours_needed" name="man_power_details[hours_needed]" class="form-control only_numbers" value="1" required/> 
                   </div>
                </div>
             </div>
@@ -35,6 +33,7 @@
             </div>            
          </div>
          <table 
+            id="tb_man_power"
             data-width="100%"  
             data-search="false"                
             class="table table-hover table-striped table-condensed display" 
@@ -46,21 +45,19 @@
             data-icons="icons" data-sort-name="code" data-sort-order="desc" 
             data-card-view="false"
             data-checkbox-header="false"
-         >
+            >
             <thead>
                <tr>
-                  <th data-field="id" data-checkbox="true"></th>
-                  <th data-field="code">Código</th>
+                  <th data-field="id" data-checkbox="true">#</th>
                   <th data-field="employee">Empleado</th>
-                  <th data-field="employee_id"></th>
-                  <th data-field="type_of_work">Tipo de trabajo</th>
+                  <th data-field="employee_id" ></th>
+                  <th data-field="type_of_work" >Tipo de trabajo</th>
                   <th data-field="type_of_work_id"></th>
+                  <th data-field="salary" >Sueldo(Hs)</th>
                   <th data-field="hours_needed">Horas necesárias</th>
                   <th data-field="hours_needed_id"></th>
-                  <th data-field="total_hours_needed"></th>
                   <th data-halign='right' data-align='right' data-field="subtotal" >Sub-total</th>
                   <th data-halign='right' data-align='right' data-field="subtotal_id" ></th>
-                  <th data-halign='right' data-align='right' data-field="total" ></th>
                   <th data-halign='right' data-align='right' data-field="Action" data-events="remove">Acción</th>
                </tr>
             </thead>
@@ -68,17 +65,15 @@
                <% if (controller.action_name == "edit") %>
                   <% @man_powers_details.each do |man_power_det| %>
                   <tr>
-                     <td><%= man_power_det.id%></td>
                      <td ><%= man_power_det.id%></td>
                      <td><%= man_power_det.person.name %></td>
-                     <td style="display:none"></td>
+                     <td ></td>
                      <td><%= man_power_det.type_of_work.name %></td>
-                     <td style="display:none"></td>
-                     <td><%= man_power_det.hours_needed %></td>
+                     <td></td>
+                     <td><%= number_with_precision( man_power_det.type_of_work.price_hours, :precision => 0, :delimiter => '.' ) %></td>                  
+                     <td><%= number_with_precision(man_power_det.hours_needed, :precision => 0, :delimiter => '.' ) %></td>                  
                      <td ></td>
-                     <td ></td>
-                     <td ><%= man_power_det.subtotal %></td>
-                     <td ></td>
+                     <td><%= number_with_precision( man_power_det.subtotal, :precision => 0, :delimiter => '.' ) %></td>                  
                      <td ></td>
                      <td >
                         <a class="change_status btn btn-danger btn-sm" href="" title="Cambiar status" >
@@ -94,14 +89,17 @@
               <tr>
                <td class="h6 font-weight-bold" colspan="8"><strong>Total :<strong></td>
                <td colspan="5" class="font-weight-bold text-right">
-                  <strong><span id="man_powers_total"><%= @total %></span><strong>
+                  <strong><span id="total"><%= @total %></span><strong>
                </td>
               </tr>
             </tfoot>
          </table>
          
          <%= render('layouts/buttons')%>
+         <input type="hidden" name='man_power[program_production_id]' value="<%= @program_production_id %>" />
+         <input type="hidden" name='man_power[total]' class="man_powers_total" value="<%= @total %>"/>
+         <input type="hidden" name="man_power[total_hours_needed]" class="total_hours_needed" value="<%= @total_hours_needed %>"/>  
       </div>
    <%end%>
-</div> 
 <input type="hidden" id="controller" value="<%= controller_name%>">
+

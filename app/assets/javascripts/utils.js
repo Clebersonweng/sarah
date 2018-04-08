@@ -274,6 +274,7 @@ function generic_response_form(sufixe,force)
       $("#form_" + sufixe).data('bootstrapValidator').resetForm();
       $('input:visible:enabled:first').focus();
       $.rails.enableElement($('a[data-disable-with]'));
+      seta_valores(data);
       console.log(data);
    })
    .on('ajax:error', 'form#form_' + sufixe, function (e, data, status) 
@@ -407,6 +408,41 @@ function index(data) {
 index = '0'+index;
 return index;
 }
+
+function seta_valores(_data_)
+{
+   /*console.log(_data_);
+   if(typeof _data_ == "object")
+   {
+      $.each(_data_, function (field, value) 
+      {
+         console.log($("#"+field));
+         $("#"+field).val(value);
+      });
+   }*/
+  
+}
+
+function cellStyle(value, row, index) {
+    var classes = ['active', 'success', 'info', 'warning', 'danger'];
+    
+    if (index % 2 === 0 && index / 2 < classes.length) {
+        return {
+            classes: classes[index / 2]
+        };
+    }
+    return {};
+}
+
+function set_numeric(value)
+{
+   var  n_value = value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")
+   return n_value;
+}
+
+
+
+
 
 /*
 var loadBootstrapTable = function (data) {

@@ -64,7 +64,7 @@ class TypeOfWorksController < ApplicationController
   end
 
   def destroy
-    @type_of_work        = Brand.find(params[:id]) 
+    @type_of_work        = TypeOfWork.find(params[:id]) 
     if check_rel(params[:id]) 
         respond_to do |format|
             if @type_of_work.destroy

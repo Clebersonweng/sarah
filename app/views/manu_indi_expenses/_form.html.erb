@@ -18,38 +18,38 @@
                <div class="col-md-4">
                   <div class="form-group">
                      <%= f.label :program_production_id,"Descripción del gasto :" ,class: " col-sm-6 col-lg-5 col-xs-12"%>
-                        <input type="text" name="manu_indi[descr_expense]" id="manu_indi_descr_expense" class="form-control"/>
+                        <input type="text" name="manu_indi[descr_expense]" id="manu_indi_descr_expense" class="form-control" required/>
                   </div>
                </div>
                <div class="col-md-2">
                   <div class="form-group">
                      <%= f.label :program_production_id,"Tipo de gasto:" ,class: "col-sm-6 col-lg-8 col-xs-12" %>
-                    <%= select("manu_indi", "type_expense", options_for_select([['FIJO', 1], ['VARIABLE', 0]]),{}, {class: "form-control"})%>
+                    <%= select("manu_indi", "type_expense", options_for_select([['FIJO', 1], ['VARIABLE', 0]]),{}, {class: "form-control",required: true})%>
 
                   </div>
                </div>
-               <div class="col-md-2">
+               <div class="col-md-3">
                   <div class="form-group">
                      <%= f.label :program_production_id,"Monto del gasto :" ,class: "col-sm-6 col-lg-8 col-xs-12"%>
-                     <input type="text" name="manu_indi[subtotal]" id="manu_indi_subtotal"  class="form-control text-right">
+                     <input type="text" name="manu_indi[subtotal]" id="manu_indi_subtotal"  class="form-control text-right" required/>
                   </div>
                </div>
                   <btn><a class="btn btn-default btn-sm align_btn" id="btn_add_manu_indi_expense">Agregar</a></btn>
             </div>
 
             <table 
-                  id="tb_manu_indi_expense"
-                  data-width="100%"
-                  class="table  table-hover table-striped table-condensed display"
-                  data-toggle="table" 
-                  data-height="300" 
-                  data-show-footer="true" 
-                  data-show-refresh="false" 
-                  data-pagination="false" 
-                  data-icons="icons"
-                  data-footer-style="footerStyle"
-                  data-unique-id="id"
-                  data-checkbox-header="false"
+            id="tb_manu_indi_expense"
+            data-width="100%"  
+            data-search="false"                
+            class="table table-hover table-striped table-condensed display" 
+            data-toggle="table"
+            data-show-toggle="false"                
+            data-show-refresh="false" 
+            data-pagination="true" 
+            onlyInfoPagination="false" 
+            data-icons="icons" data-sort-name="code" data-sort-order="desc" 
+            data-card-view="false"
+            data-checkbox-header="false"
             >
                <thead>
                   <tr>
@@ -83,6 +83,11 @@
                            <td style="display:none"><!--vacio al crear nuevo --></td>
                            <td><%=manu_indi_expense_dets.subtotal %></td>
                            <td style="display:none"></td>
+                           <td>
+                              <a class="change_status btn btn-danger btn-sm" href="" title="Cambiar status" >
+                                 <i class="fa fa-minus-square"></i>
+                              </a>
+                           </td>
                         </tr>
                      <% end %>   
                   <% end %>
@@ -110,11 +115,10 @@
                <div id="add_row_cost_oper_cont"></div>
             </table>
          <%= render('layouts/buttons')%>
-         <input type="hidden" name="manu_indi_expense[program_production_id]"  value="<%= @program_production_id%>"/>
-         <input type="hidden" name="manu_indi_expense[total_fixed]" class="manu_indi_expe_total_fixed" value="<%= @total_fixed%>"/>
-         <input type="hidden" name="manu_indi_expense[total_variable]" class="manu_indi_expe_total_variable" value="<%= @total_variable%>"/>
-         <input type="hidden" name="manu_indi_expense[total]" class="manu_indi_expe_total_fixed_and_variable" value="<%= @total_fixed_and_variable%>"/>
-
+         <%= f.hidden_field :program_production_id, :value => @program_production_id %>
+         <%= f.hidden_field :total_fixed, :value => @total_fixed ,:class => "manu_indi_expe_total_fixed" %>
+         <%= f.hidden_field :total_variable, :value => @total_variable, :class => "manu_indi_expe_total_variable" %>
+         <%= f.hidden_field :total, :value => @total_fixed_and_variable, :class => "manu_indi_expe_total_fixed_and_variable"%>
       </div>
 
    <% end %>
