@@ -65,9 +65,9 @@
                <% if (controller.action_name == "edit") %>
                   <% @man_powers_details.each do |man_power_det| %>
                   <tr>
-                     <td ><%= man_power_det.id%></td>
+                     <td><%= man_power_det.id%></td>
                      <td><%= man_power_det.person.name %></td>
-                     <td ></td>
+                     <td></td>
                      <td><%= man_power_det.type_of_work.name %></td>
                      <td></td>
                      <td><%= number_with_precision( man_power_det.type_of_work.price_hours, :precision => 0, :delimiter => '.' ) %></td>                  

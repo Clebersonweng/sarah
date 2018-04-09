@@ -81,7 +81,7 @@
                                  %>            
                            </td>
                            <td style="display:none"><!--vacio al crear nuevo --></td>
-                           <td><%=manu_indi_expense_dets.subtotal %></td>
+                           <td><%= number_with_precision( manu_indi_expense_dets.subtotal, :precision => 0, :delimiter => '.' ) %></td>                  
                            <td style="display:none"></td>
                            <td>
                               <a class="change_status btn btn-danger btn-sm" href="" title="Cambiar status" >

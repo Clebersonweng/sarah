@@ -98,6 +98,7 @@ class ManuIndiExpensesController < ApplicationController
    end
    def get_all
       @path = " / crear estimación / gastos indirectos de producción"
+      @edit_name = "Editar gastos indirectos de produccción"
       @select_list = { Fijo: 1, Variable: 0 }
    end
 end

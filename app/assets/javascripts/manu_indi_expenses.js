@@ -1,7 +1,7 @@
-var  COUNT  = 0;
+var  COUNT  						= 0;
 var  TOTAL_FIXE_AND_VARIABLE  = 0;
-var  TOTAL_FIXED  = 0;
-var  TOTAL_VARIABLE  = 0;
+var  TOTAL_FIXED  				= 0;
+var  TOTAL_VARIABLE  			= 0;
 
 $(document).ready(function () {
  
@@ -13,17 +13,27 @@ $(document).ready(function () {
 
 	$("#btn_add_manu_indi_expense").on("click",function() 
 	{
-		var descr_expense         = $("#manu_indi_descr_expense").val();
-		var type_expense          = $("#manu_indi_type_expense option:selected").text();
-		var type_expense_id       = $("#manu_indi_type_expense option:selected").val();
-		var amount                = $("#manu_indi_subtotal").val();
-
-		if(typeof descr_expense != "undefined" || descr_expense != ""  && typeof amount != "undefined" || amount != "")
+		if(is_valid_fields())
 		{
-			row_bt_manu_indi_expense(descr_expense,type_expense,type_expense_id,amount);
-			COUNT++;   
+			var descr_expense         = $("#manu_indi_descr_expense").val();
+			var type_expense          = $("#manu_indi_type_expense option:selected").text();
+			var type_expense_id       = $("#manu_indi_type_expense option:selected").val();
+			var amount                = $("#manu_indi_subtotal").val();
+
+			if(typeof descr_expense != "undefined" || descr_expense != ""  && typeof amount != "undefined" || amount != "")
+			{
+				row_bt_manu_indi_expense(descr_expense,type_expense,type_expense_id,amount);
+				COUNT++;   
+			}	
 		}
+		else
+		{
+         $('form').bootstrapValidator('revalidateField', 'manu_indi[descr_expense]');
+         $('form').bootstrapValidator('revalidateField', 'manu_indi[type_expense]');
+		}
+		
 	});
+
 	$('#tb_manu_indi_expense').on('check.bs.table', function (e, row) 
 	{
 			TOTAL_FIXE_AND_VARIABLE =  parseFloat($(".manu_indi_expe_total_fixed_and_variable").text());
@@ -189,10 +199,21 @@ function verify_type_expense(type,amount,action)
 	}
 }
 
+function is_valid_fields()
+{
+   $description		     = $("#manu_indi_descr_expense");
+   $type_expense		     = $("#manu_indi_type_expense");
+   $amount                = $("#manu_indi_subtotal");
 
-
-
-
+   if(typeof $description != "undefined" && $description.val() != "" && typeof $type_expense != "undefined" && $type_expense.val() != "" && typeof $amount != "undefined" && $amount.val() != "" )
+   {
+      return true;
+   }
+   else
+   {
+      return false;
+   }
+}
 
 
 

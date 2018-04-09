@@ -3,16 +3,16 @@
 
       <div class="col-sm-6 col-lg-12 col-md-12 col-xs-12">
             <div class="row">
-               <div class="col-md-4">
+               <div class="col-md-4 col-sm-4">
                   <div class="form-group">
                      <%= f.label :program_production_id,"Descripción del gasto :" ,class: " col-sm-6 col-lg-5 col-xs-12"%>
-                        <input type="text" name="struc_expense[descr_expense]" id="struc_expense_descr_expense" class="form-control"/>
+                        <input type="text" name="struc_expense[descr_expense]" id="struc_expense_descr_expense" class="form-control" required/>
                   </div>
                </div>
-               <div class="col-md-2">
+               <div class="col-md-3 col-sm-3">
                   <div class="form-group">
                      <%= f.label :program_production_id,"Monto del gasto :" ,class: "col-sm-6 col-lg-8 col-xs-12"%>
-                     <input type="text" name="struc_expense[subtotal]" id="struc_expense_subtotal"  class="form-control text-right">
+                     <input type="text" name="struc_expense[subtotal]" id="struc_expense_subtotal"  class="form-control text-right" required>
                   </div>
                </div>
                   <btn><a class="btn btn-default btn-sm align_btn" id="btn_add_structure">Agregar</a></btn>
@@ -20,16 +20,16 @@
 
             <table 
                   id="tb_structure_expense"
-                  data-width="100%"
-                  class="table  table-hover table-striped table-condensed display"
-                  data-toggle="table" 
-                  data-height="500" 
-                  data-show-footer="true" 
+                  data-width="100%"  
+                  data-search="false"                
+                  class="table table-hover table-striped table-condensed display" 
+                  data-toggle="table"
+                  data-show-toggle="false"                
                   data-show-refresh="false" 
-                  data-pagination="false" 
-                  data-icons="icons"
-                  data-footer-style="footerStyle"
-                  data-unique-id="id"
+                  data-pagination="true" 
+                  onlyInfoPagination="false" 
+                  data-icons="icons" data-sort-name="code" data-sort-order="desc" 
+                  data-card-view="false"
                   data-checkbox-header="false"
                >
                <thead>
@@ -48,20 +48,23 @@
                   <% if (controller.action_name == "edit") %>
                         <% @structure_details.each do |structure_details| %>
                            <tr>
-                              <td><%= structure_details.id%></td>
+                              <td><%= structure_details.id%></td> 
                               <td><%= structure_details.id%></td>
                               <td><%= structure_details.name%></td>
                               <td></td>
                               <td></td>
-                              <td><%= structure_details.subtotal%></td>
+                              <td><%= number_with_precision( structure_details.subtotal, :precision => 0, :delimiter => '.' ) %></td> 
                               <td></td>
                               <td>
-                              <a class="change_status btn btn-danger btn-sm" href="" title="Cambiar status" >
-                                 <i class="fa fa-minus-square"></i>
-                              </a>
-                           </td>
+                                 <a class="change_status btn btn-danger btn-sm" href="" title="Cambiar status" >
+                                    <i class="fa fa-minus-square"></i>
+                                 </a>
+                              </td>
                            </tr>
-                        <% end %>   
+                        <% end %> 
+                     <%= f.text_field :total, :value => @total ,:id => "structure_expense_total" %>
+                  <% else %>
+                     <%= f.text_field :total, :value => 0 ,:id => "structure_expense_total" %>
                   <% end %>
 
                </tbody>                    
@@ -69,14 +72,19 @@
                   <tr>
                      <td class="h6 font-weight-bold" colspan="2"><strong>TOTAL:<strong></td>
                      <td colspan="11" class="font-weight-bold text-right">
-                        <strong><span class="structure_expense_total"><%= @total %></span></strong>
+                        <strong>
+                           <span class="structure_expense_total">
+                              <%= number_with_precision( @total, :precision => 0, :delimiter => '.' ) %>             
+                           </span>
+                        </strong>
                      </td>
                   </tr>
                </tfoot>
             </table>
          <%= render('layouts/buttons')%>
-         <%= f.text_field  :program_production_id, value:  @program_production_id %>
-         <%= f.text_field  :total, value: @total, id: "structure_expense_total" %>
+         <%= f.hidden_field :program_production_id, :value => @program_production_id %>
+         
+
       </div>
    <% end %>
 </div>
