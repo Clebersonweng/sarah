@@ -111,5 +111,6 @@ class CostOperMachineContsController < ApplicationController
 		@implements   = Implement.all.collect {|p| [ p.name, p.id ,{"data-oper_time"=> p.oper_time }] } 
 		@unit_measure = UnitOfMeasurement.all.collect { |p| [p.name, p.id ]}
 		@path = " / crear estimación / costo operativo de máquinas tercerizadas"
+	  	@edit_name = "Editar costo operativo de máquina tercerizada"
 	end
 end

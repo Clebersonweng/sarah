@@ -99,9 +99,10 @@ class ManPowersController < ApplicationController
 	 	params.require(:man_power).permit(:program_production_id, :total_hours_needed, :total,man_power_details_attributes: [:type_of_work_id,:hours_needed, :person_id, :subtotal])
 	 end
 	 def get_all
-	 	@employee = Person.all.collect { |type|[type.name, type.id]}
-	 	@type_of_work = TypeOfWork.all.collect{ |type|[type.name, type.id,{"data-salary"=> type.price_hours }]}
-	 	@path = " / crear estimación / mano de obra"
+	 	@employee 			= Person.all.collect { |type|[type.name, type.id]}
+	 	@type_of_work 		= TypeOfWork.all.collect{ |type|[type.name, type.id,{"data-salary"=> type.price_hours }]}
+	 	@path 				= " / crear estimación / mano de obra"
+	    @edit_name     	= "Editar mano de obra"
 	 end
 
 	end

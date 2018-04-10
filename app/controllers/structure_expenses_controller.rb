@@ -91,6 +91,7 @@ class StructureExpensesController < ApplicationController
 	end
 	def get_all
 		@path = " / crear estimación / gastos de estructura"
+		@edit_name = "Editar gastos de estructura"
 	end
 
 end

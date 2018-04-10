@@ -92,5 +92,6 @@ class TypeOfWorksController < ApplicationController
   end
   def get_all
     @path = "/ catastros / tipos / tipo de trabajo"
+    @edit_name      = "Editar tipo de trabajo"
   end
 end

@@ -86,6 +86,8 @@ private
   
   def get_all
   	@path = " / catastros / máquinas & implementos / marcas"
+  	@edit_name = "Editar marcas"
+
   end
 
 end

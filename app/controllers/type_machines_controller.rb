@@ -54,6 +54,7 @@ class TypeMachinesController < ApplicationController
     end
    def breadcrumb
       @path = "/ catastros / máquinas & implementos / clasificación"
+      @edit_name      = "Editar clasificación"
    end
 
 end

@@ -80,6 +80,7 @@ class VarietiesController < ApplicationController
       params.require(:variety).permit(:descr)
     end
     def get_all
-      @path = "/ catastros / parcela / variedades"
+      @path           = "/ catastros / parcela / variedades"
+      @edit_name      = "Editar variedad"
     end
 end

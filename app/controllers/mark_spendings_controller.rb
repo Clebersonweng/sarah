@@ -75,6 +75,7 @@ class MarkSpendingsController < ApplicationController
     end
     def 
       @path = " / crear estimación / gastos de comercialización"
+      @edit_name      = "Editar gastos de comercialización"
     end
 
 end

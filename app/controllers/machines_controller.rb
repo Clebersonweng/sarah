@@ -95,5 +95,6 @@ class MachinesController < ApplicationController
     @models = Model.all.collect {|type|[type.name, type.id]}
     @fuels  = Fuel.all.collect {|p| [p.name, p.id, {"data-price"=>p.price}]}
     @path   = "/ catastros / máquinas & implementos / maquinárias"
+    @edit_name      = "Editar maquinárias"
   end
 end

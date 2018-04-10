@@ -79,6 +79,7 @@ class PeopleController < ApplicationController
 
     def get_all
       @path = " / personas / personas"
+      @edit_name      = "Editar persona"
     end
 
 end

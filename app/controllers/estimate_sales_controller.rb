@@ -109,7 +109,8 @@ class EstimateSalesController < ApplicationController
   def get_all
     @farming_plots = FarmingPlot.all.collect {|p| [ p.name, p.id, {"data-area-parcela"=>p.area} ] }
     @charts = ChartOfAccount.all.collect {|type|[type.name, type.id]}
-    @history_sales = HistorySale.all.collect {|type| [type.quantity, type.id, {"data-date"=>type.date} ] }
-    @path = " / crear estimación / estimación de ventas"
+    @history_sales  = HistorySale.all.collect {|type| [type.quantity, type.id, {"data-date"=>type.date} ] }
+    @path           = " / crear estimación / estimación de ventas"
+    @edit_name      = "Editar estimación de ventas"
   end
 end

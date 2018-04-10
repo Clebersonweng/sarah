@@ -94,6 +94,6 @@ end
   def get_all
     @brands = Brand.all.collect {|p| [ p.name, p.id ] }
     @path = "/ catastros / máquinas & implementos / modelos"
-
+    @edit_name      = "Editar modelo"
   end
 end

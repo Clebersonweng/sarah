@@ -79,7 +79,8 @@ class HistorySalesController < ApplicationController
     end
 
     def get_all
-      @path = "/ catastros / parcela / histórico de producción"
+      @path           = "/ catastros / parcela / histórico de producción"
+      @edit_name      = "Editar histórico de producción"
     end
 
 end

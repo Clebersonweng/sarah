@@ -97,8 +97,9 @@ class ManuIndiExpensesController < ApplicationController
       params.require(:manu_indi_expense).permit(:program_production_id, :chart_of_account_id, :total_fixed, :total_variable, :totalFixedAndVariable,{ manu_indi_expense_dets_attributes: [:name, :isFixed, :subtotal]})
    end
    def get_all
-      @path = " / crear estimación / gastos indirectos de producción"
-      @edit_name = "Editar gastos indirectos de produccción"
-      @select_list = { Fijo: 1, Variable: 0 }
+      @path             = " / crear estimación / gastos indirectos de producción"
+      @edit_name        = "Editar gastos indirectos de produccción"
+      @select_list      = { Fijo: 1, Variable: 0 }
+      @edit_name        = "Editar gastos indirectos de producción"
    end
 end

@@ -88,6 +88,6 @@ class TypeOfCropsController < ApplicationController
   def get_all
     @varieties = Variety.all.collect {|p| [ p.descr, p.id ] }
     @path = "/ catastros / parcela / tipo de cultivo"
-
+    @edit_name      = "Editar tipo de cultivo"
   end
 end

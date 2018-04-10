@@ -92,7 +92,7 @@ class TypeOfServicesController < ApplicationController
     def get_all
       @path = " / catastros / tipos / tipo de servicio"
       @unit_measurements = UnitOfMeasurement.all.collect { |p| [ p.name, p.id ] }
-
+    @edit_name      = "Editar tipo de servicio"
     end
     
 end

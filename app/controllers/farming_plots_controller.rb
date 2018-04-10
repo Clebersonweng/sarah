@@ -78,6 +78,6 @@ class FarmingPlotsController < ApplicationController
    @person = Person.all.collect { |type| [type.name, type.id]}
    @charts = ChartOfAccount.all.collect {|type| [type.name, type.id]}
    @path = "/ catastros / parcela / parcela agrícola"
-
+   @edit_name      = "Editar parcela agrícola"
   end
 end

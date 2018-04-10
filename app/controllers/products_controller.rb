@@ -75,5 +75,6 @@ class ProductsController < ApplicationController
   def get_all
     @unit_of_measurements = UnitOfMeasurement.all.collect{|type| [type.name, type.id]}
     @path = " / catastros / productos / productos"
+    @edit_name      = "Editar producto"
   end
 end

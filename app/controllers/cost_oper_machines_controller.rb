@@ -71,5 +71,6 @@ class CostOperMachinesController < ApplicationController
          @implements = Implement.all.collect {|p| [ p.get_all_names, p.id, {"data-oper_time"=>p.oper_time, "data-coef_cccr" => p.coef_cccr, "data-price" => p.price} ] }
          #@charts = ChartOfAccount.all.collect {|p| [ p.name, p.id, ] }
          @path = " / crear estimación / costo operativo maquinária propia"
+         @edit_name = "Editar costo operativo de maquinaria propia"
       end
 end

@@ -62,9 +62,9 @@
                               </td>
                            </tr>
                         <% end %> 
-                     <%= f.text_field :total, :value => @total ,:id => "structure_expense_total" %>
+                     <%= f.hidden_field :total, :value => @total ,:id => "structure_expense_total" %>
                   <% else %>
-                     <%= f.text_field :total, :value => 0 ,:id => "structure_expense_total" %>
+                     <%= f.hidden_field :total, :value => 0 ,:id => "structure_expense_total" %>
                   <% end %>
 
                </tbody>                    

@@ -4,6 +4,7 @@ class FuelsController < ApplicationController
 	# GET /fuels
 	# GET /fuels.json
 	def index
+		get_all
 		@fuels = Fuel.all
 	end
 
@@ -15,11 +16,13 @@ class FuelsController < ApplicationController
 
 	# GET /fuels/new
 	def new
+		get_all
 		@fuel = Fuel.new
 	end
 
 	# GET /fuels/1/edit
 	def edit
+		get_all
 	end
 
 	# POST /fuels
@@ -70,5 +73,8 @@ class FuelsController < ApplicationController
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def fuel_params
 		params.require(:fuel).permit(:name, :price, :description)
+	end
+	def get_all
+		@edit_name      = "Editar combustible"
 	end
 end

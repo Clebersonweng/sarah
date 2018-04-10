@@ -88,5 +88,6 @@ class ImplementsController < ApplicationController
     def get_all
       @machines = Machine.all.collect {|type| [type.model.name, type.id]}
       @path = "/ catastros / máquinas & implementos / implementos"
+      @edit_name      = "Editar implementos"
     end
 end

@@ -104,5 +104,6 @@ class ProgramProductionsController < ApplicationController
   end
   def get_all
     @path = " / crear estimación / programa de producción"
+    @edit_name      = "Editar programa de producción"
   end
 end
