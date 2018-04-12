@@ -1,31 +1,38 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Mark Spendings</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Estimate sale</th>
-      <th>Chart of account</th>
-      <th>Total</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @mark_spendings.each do |mark_spending| %>
-      <tr>
-        <td><%= mark_spending.estimate_sale %></td>
-        <td><%= mark_spending.chart_of_account %></td>
-        <td><%= mark_spending.total %></td>
-        <td><%= link_to 'Show', mark_spending %></td>
-        <td><%= link_to 'Edit', edit_mark_spending_path(mark_spending) %></td>
-        <td><%= link_to 'Destroy', mark_spending, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Mark Spending', new_mark_spending_path %>
+  <div class="table-responsive">
+	 <table data-width="100%"  
+		data-flat="true"
+		data-response-handler="flatJSON"
+		data-search="true"                
+		class="table table-hover table-striped table-condensed display" 
+		data-toggle="table"
+		data-show-toggle="true"                
+		data-show-refresh="false" 
+		data-pagination="true" 
+		onlyInfoPagination="false" 
+		data-icons="icons" data-sort-name="code" data-sort-order="desc" 
+		data-card-view="false"
+	 >
+			<thead>
+				<tr>
+					<th data-field="id" data-checkbox="false">#</th>
+					<th data-field="program_production_id">Parcela</th>
+					<th data-field="total_fixed" >Total de gastos fijos</th> 
+					<th data-field="total_variable" >Total de gastos variables</th>  
+					<th data-field="totalFixedAndVariable" >Total de gastos fijos y variables</th>  
+					<th data-formatter="actionFormatter" data-align="right" data-events="actionEvents">Acción</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @mark_spendings.each do |data| %>
+				  <tr>
+					 <td><%= data.id %></td>
+					 <td><%= data.program_production.estimate_sale.farming_plot.name %></td>
+					 <td><%= number_with_precision( data.total_fixed, :precision => 0, :delimiter => '.' ) %></td>                  
+					 <td><%= number_with_precision( data.total_variable, :precision => 0, :delimiter => '.' ) %></td>                  
+					 <td><%= number_with_precision( data.total, :precision => 0, :delimiter => '.' ) %></td>                  
+				  </tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+<input type="hidden" id="controller" value="<%= controller_name%>">

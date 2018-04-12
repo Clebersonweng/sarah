@@ -1,4 +1,3 @@
-<div class="panel-body">
    <%= form_for( @structure_expense, html: { id: 'form_structure_expenses', remote:true,"data-type": "json",'data-model' => 'structure_expense'  } ) do |f| %>
 
       <div class="col-sm-6 col-lg-12 col-md-12 col-xs-12">
@@ -87,5 +86,4 @@
 
       </div>
    <% end %>
-</div>
 <input type="hidden" id="controller" value="<%=controller_name%>">

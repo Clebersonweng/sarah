@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180223014135) do
+ActiveRecord::Schema.define(version: 20180410041647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -223,13 +223,15 @@ ActiveRecord::Schema.define(version: 20180223014135) do
   end
 
   create_table "mark_spendings", force: :cascade do |t|
-    t.integer  "estimate_sale_id"
     t.integer  "chart_of_account_id"
     t.float    "total"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.integer  "program_production_id"
+    t.decimal  "total_fixed",           precision: 25, scale: 5
+    t.decimal  "total_variable",        precision: 25, scale: 5
     t.index ["chart_of_account_id"], name: "index_mark_spendings_on_chart_of_account_id", using: :btree
-    t.index ["estimate_sale_id"], name: "index_mark_spendings_on_estimate_sale_id", using: :btree
+    t.index ["program_production_id"], name: "index_mark_spendings_on_program_production_id", using: :btree
   end
 
   create_table "models", force: :cascade do |t|
@@ -423,7 +425,7 @@ ActiveRecord::Schema.define(version: 20180223014135) do
   add_foreign_key "manu_indi_expenses", "program_productions"
   add_foreign_key "mark_spending_dets", "mark_spendings"
   add_foreign_key "mark_spendings", "chart_of_accounts"
-  add_foreign_key "mark_spendings", "estimate_sales"
+  add_foreign_key "mark_spendings", "program_productions"
   add_foreign_key "models", "brands"
   add_foreign_key "people", "users"
   add_foreign_key "program_productions", "estimate_sales"

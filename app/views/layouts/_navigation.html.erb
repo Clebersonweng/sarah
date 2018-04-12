@@ -261,11 +261,11 @@
                                 <li>
                                     <a href="#"><i class="fa fa-pagelines" aria-hidden="true"></i> Parcela <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
-                                        <li class="<%= 'active' if params[:controller] == 'farming_plots' && params[:action] == 'index'%>"><%= link_to 'Parcela Agrícola', farming_plots_path %></li>
+                                        <li class="<%= '' if params[:controller] == 'farming_plots' && params[:action] == 'index'%>"><%= link_to 'Parcela Agrícola', farming_plots_path %></li>
 
-                                        <li class="<%= 'active' if params[:controller] == 'type_of_crops' && params[:action] == 'index' %>"><%= link_to 'Tipo de Cultivo', type_of_crops_path %></li>
-                                        <li class="<%= 'active' if params[:controller] == 'varieties' && params[:action] == 'index' %>"><%= link_to 'Variedades', varieties_path %></li>
-                                        <li class="<%= 'active' if params[:controller] == 'history_sales' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to '<i class="fa fa-book" aria-hidden="true"></i> Histórico de Produción'.html_safe, history_sales_path %></li>
+                                        <li class="<%= '' if params[:controller] == 'type_of_crops' && params[:action] == 'index' %>"><%= link_to 'Tipo de Cultivo', type_of_crops_path %></li>
+                                        <li class="<%= '' if params[:controller] == 'varieties' && params[:action] == 'index' %>"><%= link_to 'Variedades', varieties_path %></li>
+                                        <li class="<%= '' if params[:controller] == 'history_sales' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to '<i class="fa fa-book" aria-hidden="true"></i> Histórico de Produción'.html_safe, history_sales_path %></li>
                         
             
                                     </ul>
@@ -275,10 +275,10 @@
                                 <li>
                                     <a href="#"><i class="fa  fa-truck  " aria-hidden="true" ></i> Máquinas & Implementos <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
-                                        <li class="<%= 'active' if params[:controller] == 'brands' && params[:action] == 'index' || params[:action] == 'new' %>"><%= link_to 'Marca', brands_path %></li>
-                                        <li class="<%= 'active' if params[:controller] == 'models' && params[:action] == 'index' %>"><%= link_to 'Modelo', models_path %></li>
-                                        <li class="<%= 'active' if params[:controller] == 'implements' && params[:action] == 'index' %>"><%= link_to 'Implemento', implements_path %></li>
-                                        <li class="<%= 'active' if params[:controller] == 'machines' && params[:action] == 'index' %>"><%= link_to 'Maquinária', machines_path %></li> 
+                                        <li class="<%= '' if params[:controller] == 'brands' && params[:action] == 'index' || params[:action] == 'new' %>"><%= link_to 'Marca', brands_path %></li>
+                                        <li class="<%= '' if params[:controller] == 'models' && params[:action] == 'index' %>"><%= link_to 'Modelo', models_path %></li>
+                                        <li class="<%= '' if params[:controller] == 'implements' && params[:action] == 'index' %>"><%= link_to 'Implemento', implements_path %></li>
+                                        <li class="<%= '' if params[:controller] == 'machines' && params[:action] == 'index' %>"><%= link_to 'Maquinária', machines_path %></li> 
                                      <li><%= link_to 'Clasificación', type_machines_path %></li>
 
             
@@ -289,22 +289,22 @@
                                 <li>
                                     <a href="#"><i class="fa fa-book" aria-hidden="true"></i> Productos <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
-                                         <li class="<%= 'active' if params[:controller] == 'products' && params[:action] == 'index' %>"><%= link_to 'Productos', products_path %></li>
+                                         <li class="<%= '' if params[:controller] == 'products' && params[:action] == 'index' %>"><%= link_to 'Productos', products_path %></li>
                                     </ul>
                                     <!-- /.nav-third-level -->
                                 </li> 
                                 <li>
                                     <a href="#"><i class="fa fa-male" aria-hidden="true"></i> Personas <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
-                                        <li class="<%= 'active' if params[:controller] == 'people' && params[:action] == 'index' %>"><%= link_to 'Personas', people_path %></li>
+                                        <li class="<%= '' if params[:controller] == 'people' && params[:action] == 'index' %>"><%= link_to 'Personas', people_path %></li>
                                     </ul>
                                     <!-- /.nav-third-level -->
                                 </li>
                                  <li>
                                     <a href="#">Tipos <span class="fa arrow"></span></a>
                                     <ul class="nav nav-second-level">
-                                        <li class="<%= 'active' if params[:controller] == 'type_of_services' && params[:action] == 'index' %>"><%= link_to 'Tipo de Servicio', type_of_services_path %></li>
-                                         <li class="<%= 'active' if params[:controller] == 'type_of_works' && params[:action] == 'index' %>"><%= link_to 'Tipo de Trabajo', type_of_works_path %></li>
+                                        <li class="<%= '' if params[:controller] == 'type_of_services' && params[:action] == 'index' %>"><%= link_to 'Tipo de Servicio', type_of_services_path %></li>
+                                         <li class="<%= '' if params[:controller] == 'type_of_works' && params[:action] == 'index' %>"><%= link_to 'Tipo de Trabajo', type_of_works_path %></li>
 
             
                                     </ul>
@@ -320,24 +320,27 @@
                             <ul class="nav nav-second-level">
                               
                                 <li>
-                                    <li class="<%= 'active' if params[:controller] == 'estimate_sales' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to 'Estimación de Ventas', estimate_sales_path %></li>
+                                    <li class="<%= '' if params[:controller] == 'estimate_sales' && params[:action] == 'index' || params[:action] == 'new' %>"><%= link_to 'Estimación de Ventas', estimate_sales_path %></li>
 
-                                     <li class="<%= 'active' if params[:controller] == 'program_productions' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to 'Programa de Producción', program_productions_path %></li>
+                                     <li class="<%= '' if params[:controller] == 'program_productions' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to 'Programa de Producción', program_productions_path %></li>
 
-                                     <li class="<%= 'active' if params[:controller] == 'supplies' && params[:action] == 'index' %>"><%= link_to 'Insumos', supplies_path %></li>
+                                     <li class="<%= '' if params[:controller] == 'supplies' && params[:action] == 'index' %>"><%= link_to 'Insumos', supplies_path %></li>
 
 
-                                     <li class="<%= 'active' if params[:controller] == 'cost_oper_machine_conts' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to 'Costo Oper. Maquinária Tercerizada', cost_oper_machine_conts_path %></li>
-s
-                                     <li class="<%= 'active' if params[:controller] == 'cost_oper_machines' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to 'Costo Oper. Maquinária Propia', cost_oper_machines_path %></li>
+                                     <li class="<%= '' if params[:controller] == 'cost_oper_machine_conts' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to 'Costo Oper. Maquinária Tercerizada', cost_oper_machine_conts_path %></li>
 
-                                     <li class="<%= 'active' if params[:controller] == 'man_powers' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to 'Mano de Obra', man_powers_path %></li>
+                                     <li class="<%= '' if params[:controller] == 'cost_oper_machines' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to 'Costo Oper. Maquinária Propia', cost_oper_machines_path %></li>
+
+                                     <li class="<%= '' if params[:controller] == 'man_powers' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to 'Mano de Obra', man_powers_path %></li>
 
                                      
 
-                                     <li class="<%= 'active' if params[:controller] == 'manu_indi_expenses' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to 'Gastos Indirectos', manu_indi_expenses_path %></li>
+                                     <li class="<%= '' if params[:controller] == 'manu_indi_expenses' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to 'Gastos Indirectos', manu_indi_expenses_path %></li>
                                      
-                                     <li class="<%= 'active' if params[:controller] == 'structure_expenses' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to 'Gastos de Estructura', structure_expenses_path %></li>
+                                     <li class="<%= '' if params[:controller] == 'structure_expenses' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to 'Gastos de Estructura', structure_expenses_path %></li>
+
+                                    <li class="<%= '' if params[:controller] == 'mark_spendings' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to 'Gastos de comercialización', mark_spendings_path %></li>
+
                                      
                                     <!-- /.nav-third-level -->
                                 </li>

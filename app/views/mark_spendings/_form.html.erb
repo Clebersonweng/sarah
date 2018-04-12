@@ -1,32 +1,147 @@
-<%= form_for(mark_spending) do |f| %>
-  <% if mark_spending.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(mark_spending.errors.count, "error") %> prohibited this mark_spending from being saved:</h2>
+<%= form_for( @mark_spending, html: { id: 'form_mark_spendings', remote:true,"data-type": "json",'data-model' => 'mark_spending'  } ) do |f| %>
+		<% if mark_spending.errors.any? %>
+			<div id="error_explanation">
+				<h2><%= pluralize(mark_spending.errors.count, "error") %> prohibited this mark_spending from being saved:</h2>
 
-      <ul>
-      <% mark_spending.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+				<ul>
+					<% mark_spending.errors.full_messages.each do |message| %>
+					<li><%= message %></li>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+<div class="col-sm-12 col-lg-12 col-md-12 col-xs-12">
+	<div class="row">
+		<div class="col-md-4 col-sm-4">
+			<div class="form-group">
+				<%= f.label :program_production_id,"Parcela :" ,class: " col-sm-6 col-lg-5 col-xs-12"%>
+				<input type="text" name="farming_plot" id="farming_plot" class="form-control" value="<%= @farming_plot %>" readonly/>
+			</div>
+		</div>
+		<div class="col-md-3 col-sm-3">
+			<div class="form-group">
+				<%= f.label :program_production_id,"Cantidad estimada a vender :" ,class: "col-sm-8 col-lg-8 col-xs-12"%>
+				<input type="text" name="estima_sale" id="estima_sale" class="form-control text-right" value="<%= @estimate_sale %>" readonly/>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4 col-sm-4">
+			<div class="form-group">
+				<%= f.label :program_production_id,"Descripción del gasto :" ,class: " col-sm-6 col-lg-5 col-xs-12"%>
+				<input type="text" name="mark_spend[descr]" id="mark_spend_descr" class="form-control" required/>
+			</div>
+		</div>
+		<div class="col-md-3 col-sm-3">
+			<div class="form-group">
+				<%= f.label :program_production_id,"Tipo de gasto :" ,class: "col-sm-8 col-lg-8 col-xs-12"%>
+				<%= select("mark_spend", "type_expense", options_for_select(@type_expenses),{}, {class: "form-control",required: true})%>
+			</div>
+		</div>
+		<div class="col-md-3 col-sm-3">
+			<div class="form-group">
+				<%= f.label :program_production_id,"Monto del gasto :" ,class: "col-sm-6 col-lg-8 col-xs-12"%>
+				<input type="text" name="mark_spend[subtotal]" id="mark_spend_subtotal"  class="form-control text-right" required>
+			</div>
+		</div>
+		<btn><a class="btn btn-default btn-sm align_btn" id="btn_add_row">Agregar</a></btn>
+	</div>
 
-  <div class="field">
-    <%= f.label :estimate_sale_id %>
-    <%= f.text_field :estimate_sale_id %>
-  </div>
+	<table 
+		id="table_MS"
+		data-width="100%"  
+		data-search="false"                
+		class="table table-hover table-striped table-condensed display" 
+		data-toggle="table"
+		data-show-toggle="false"                
+		data-show-refresh="false" 
+		data-pagination="true" 
+		onlyInfoPagination="false" 
+		data-icons="icons" data-sort-name="code" data-sort-order="desc" 
+		data-card-view="false"
+		data-checkbox-header="false"
+	>
+	<thead>
+		<tr>
+			<th data-field="id" data-checkbox="true" data-checkbox-header="false">#</th>
+			<th data-field="descr_expense">Descripción del gasto</th>
+			<th data-field="descr_expense_id"></th>
+			<th data-field="type_expense">Tipo de gasto</th>
+			<th data-field="type_expense_id"></th>
+			<th data-field="amount"></th>
+			<th data-field="subtotal">Monto</th>
+			<th data-field="subtotal_id"></th>
+			<th data-halign='right' data-align='right' data-field="Action" data-events="remove">Acción</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% if (controller.action_name == "edit") %>
+			<% @mark_spending_details.each do |details| %>
+				<tr>
+					<td><%= details.id%></td> 
+					<td><%= details.descr%></td>
+					<td></td>
+					<td><%= details.is_fixed ? "fijo" : "variable" %></td>
+					<td></td>
+					<td></td>
+					<td><%= number_with_precision( details.subtotal, :precision => 0, :delimiter => '.' ) %></td> 
+					<td></td>
+					<td>
+						<a class="change_status btn btn-danger btn-sm" href="" title="Cambiar status" >
+							<i class="fa fa-minus-square"></i>
+						</a>
+					</td>
+				</tr>
+			<% end %> 
+			<div class="hide">
+				<%= f.text_field :total_fixed, :value => @total_fixed ,:id => "total_fixed" %>
+				<%= f.text_field :total_variable, :value => @total_variable ,:id => "total_variable" %>
+				<%= f.text_field :total, :value => @total ,:id => "total" %>
+			</div>
+			<% else %>
+			<div class="hide">
+				<%= f.text_field :total, :value => 0 ,:id => "total" %>
+				<%= f.text_field :total_fixed, :value => 0 ,:id => "total_fixed" %>
+				<%= f.text_field :total_variable, :value => 0 ,:id => "total_variable" %>
+			</div>
+		<% end %>
 
-  <div class="field">
-    <%= f.label :chart_of_account_id %>
-    <%= f.text_field :chart_of_account_id %>
-  </div>
-
-  <div class="field">
-    <%= f.label :total %>
-    <%= f.text_field :total %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+	</tbody>                    
+		<tfoot>
+			<tr class="success">
+				<td class="h6 font-weight-bold" colspan="2"><strong>TOTAL FIJO :<strong></td>
+				<td colspan="7" class="font-weight-bold text-right text-primary">
+					<strong>
+						<span class="total_fixed">
+							<%= number_with_precision( @total_fixed, :precision => 0, :delimiter => '.' ) %>             
+						</span>
+					</strong>
+				</td>
+			</tr>
+			<tr class="warning">
+				<td class="h6 font-weight-bold" colspan="2"><strong>TOTAL VARIABLE :<strong></td>
+				<td colspan="7" class="font-weight-bold text-right">
+					<strong>
+						<span class="total_variable">
+							<%= number_with_precision( @total_variable, :precision => 0, :delimiter => '.' ) %>             
+						</span>
+					</strong>
+				</td>
+			</tr>
+			<tr class="info">
+				<td class="h6 font-weight-bold" colspan="2"><strong>TOTAL FIJO & VARIABLE :<strong></td>
+				<td colspan="7" class="font-weight-bold text-right">
+					<strong>
+						<span class="total">
+							<%= number_with_precision( @total, :precision => 0, :delimiter => '.' ) %>             
+						</span>
+					</strong>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+	<%= render('layouts/buttons')%>
+	<%= f.hidden_field :program_production_id, :value => @program_production_id %>
+</div>
 <% end %>
+<input type="hidden" id="controller" value="<%=controller_name%>">
