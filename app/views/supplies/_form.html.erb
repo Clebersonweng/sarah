@@ -1,100 +1,99 @@
 
-	<%= form_for(@supply,html: {class: 'form-horizontal', id: "form_supplies", remote: true,"data-type": "json",'data-model' => 'supply'}) do |f| %>
-	<div class="col-xs-12 col-lg-12 col-sm-12">
+<%= form_for(@supply,html: { id: "form_supplies", remote: true,"data-type": "json",'data-model' => 'supply'}) do |f| %>
+<div class="col-xs-12 col-lg-12 col-sm-12">
 
-		<div class="form-group" data-no-turbolink>
-			<%= f.label :program_production_id, "Parcela Agrícola :" ,class: "control-label col-sm-3"%>
-			<div class="col-sm-4 col-lg-4 col-md-4">
-				<input class="form-control" id="farm_name" value="<%= @farm_name %>" readonly/>
-			</div>
+	<div class="col-md-4 col-sm-4">
+		<div class="form-group">
+			<%= f.label :program_production_id,"Area :" ,class: " col-sm-6 col-lg-5 col-xs-12"%>
+			<input class="form-control" id="farm_area" name="farming_plot_area" value="<%= @farm_area %>" readonly/>
 		</div>
-		<div class="form-group" data-no-turbolink>
-			<%= f.label :program_production_id, "Area :" ,class: "control-label col-sm-3"%>
-			<div class="col-sm-4 col-lg-2 col-md-4">
-				<input class="form-control" id="farm_area" name="farming_plot_area" value="<%= @farm_area %>" readonly/>
-			</div>
+	</div>
+	<div class="col-md-4 col-sm-4">
+		<div class="form-group">
+			<%= f.label :program_production_id,"Cant a producir :" ,class: "col-sm-8 col-lg-8 col-xs-12"%>
+			<input class="form-control" id="farm_prog_total_production" value="<%= @quantity_production %>" readonly/>
 		</div>
-		<div class="form-group" data-no-turbolink>
-			<%= f.label :program_production_id, "Programa de Producción :" ,class: "control-label col-sm-3"%>
-			<div class="col-sm-4 col-lg-2 col-md-4">
-				<input class="form-control" value="<%= @program_production_id%>" type="hidden" name="supply[program_production_id]" id="supply_program_production_id" required/>
-				<input class="form-control" id="farm_prog_total_production" value="<%= @quantity_production %>" readonly/>
-			</div>
+	</div>
+	<div class="col-md-3 col-sm-3">
+		<div class="form-group">
+			<%= f.label :program_production_id,"Producto :" ,class: "col-sm-6 col-lg-8 col-xs-12"%>
+			<%= select("supply_detail", "product", options_for_select(@products),{}, {class: "form-control",required: true})%>
 		</div>
-		<div class="form-group" data-no-turbolink >
-			<span class="col-md-1 control-label"></span>
-			<div class="col-md-8">
-				<div class="form-group row">
-					<span class="col-md-1 control-label"></span>
-					<label for="inputKey" class="col-md-2 control-label">Producto</label>
-					<div class="col-md-3">
-						<%= select("supply_detail", "product", @products, {include_blank: '-SELECCIONAR-'},{ :class => 'form-control', :required => true })%>
-					</div>
-					<div class="form-group col-xs-1 col-sm-1">   
-						<a type='button' class="btn btn-default disabled" id="add_product" >ADD</a>
-					</div>
-				</div>
-			</div>
+	</div>
+	<btn><a class="btn btn-default btn-sm align_btn" id="add_product">Agregar</a></btn>
 
-			<table id="tb_suppy_detail" 
-			data-height="500" 
-			data-show-footer="true" 
-			class="table  table-hover table-striped table-condensed display" 
-			data-toggle="table"
-			data-show-refresh="false" 
-			data-pagination="false" 
-			data-icons="icons"
-			data-footer-style="footerStyle"
-			data-unique-id="tb_sp_detail"
-			data-checkbox-header="false"
-			>
-			<thead>
-				<tr>
-					<th data-field="id" data-checkbox="true">#</th>
-					<th data-field="product_id">Insumo</th>
-					<th data-field="quantity_needed">Cantidad Necesária</th>
-					<th data-field="unit_measure">U.M</th>
-					<th data-halign='right' data-id="subtotal" data-footer-formatter="sumFormatter" data-align='right' data-field="subtotal" >Sub-total</th>
-					<th data-halign='right' data-align='right' data-field="Action" data-events="remove">Acción</th>
-				</tr>
-			</thead>
-			<tbody>
-				<% if (controller.action_name == "edit") %>
-					<% @supply_details.each do |details| %>
-					<tr>
-						<td><%= details.id %></td>
-						<td><%= details.product.tradename %></td>
-						<td><%= details.quantity_needed %></td>
-						<td><%= details.product.unit_of_measurement.abbreviation %></td>
-						<td><%= number_with_precision( details.subtotal, :precision => 0, :delimiter => '.' ) %></td>
-						<td>
-							<a class="change_status btn btn-danger btn-sm" href="" title="Cambiar status" >
-								<i class="fa fa-1x fa-minus"></i>
-							</a>
-						</td>
-					</tr>
-					<% end %>   
-				<% end %>
-			</tbody>
-
-			<tfoot>
-				<tr>
-					<td class="h6 font-weight-bold" colspan="2"><strong>Total :<strong></td>
-						<td colspan="6" class="font-weight-bold text-right">
-							<strong><span id="supplies_total"><%= @total %></span><strong>
-							</td>
-						</tr>
-					</tfoot>
-				</table>
-
-
-			</div>           
-			<div id="addRow"></div>
-			<%= render('layouts/buttons')%>
-		</div>  
-		<input type="hidden" id="controller" value="<%= controller_name%>">
-		<input type="hidden" name="supply[total]" id="supply_total" value="<%= @total%>"/>
+	<table id="tb_suppy_detail" 
+      data-width="100%"  
+      data-search="false"                
+      class="table table-hover table-striped table-condensed display" 
+      data-toggle="table"
+      data-show-toggle="false"                
+      data-show-refresh="false" 
+      data-pagination="true" 
+      onlyInfoPagination="false" 
+      data-icons="icons" data-sort-name="code" data-sort-order="desc" 
+      data-card-view="false"
+      data-checkbox-header="false"
+	>
+	<thead>
+		<tr>
+			<th data-field="id" data-checkbox="true">#</th>
+			<th data-field="product">Insumos</th>
+			<th data-field="product_id"></th>
+			<th data-field="quantity_needed">Cantidad Necesária</th>
+			<th data-field="quantity_needed_id"></th>
+			<th data-field="unit_measure">U.M</th>
+			<th data-halign='right' data-id="subtotal" data-footer-formatter="sumFormatter" data-align='right' data-field="subtotal" >Sub-total</th>
+			<th data-halign='right' data-field="subtotal_id"></th>
+			<th data-halign='right' data-align='right' data-field="Action" data-events="remove">Acción</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% if (controller.action_name == "edit") %>
+		<% @supply_details.each do |details| %>
+		<tr>
+			<td><%= details.id %></td>
+			<td><%= details.product.tradename %></td>
+			<td></td>
+			<td><%= details.quantity_needed %></td>
+			<td></td>
+			<td><%= details.product.unit_of_measurement.abbreviation %></td>
+			<td><%= number_with_precision( details.subtotal, :precision => 0, :delimiter => '.' ) %></td>
+			<td></td>
+			<td>
+				<a class="change_status btn btn-danger btn-sm" href="" title="Cambiar status" >
+					<i class="fa fa-1x fa-minus"></i>
+				</a>
+			</td>
+		</tr>
+		<% end %> 
+		<div class="hide">
+			<%= f.text_field :total, :value => @total ,:id => "total" %>
+		</div>
+		<% else %>
+		<div class="hide">
+			<%= f.text_field :total, :value => 0 ,:id => "total" %>
+		</div>
 		<% end %>
+	</tbody>
+
+	<tfoot>
+		<tr>
+			<td class="h6 font-weight-bold" colspan="2"><strong>Total :<strong></td>
+				<td colspan="7" class="font-weight-bold text-right">
+					<strong><span class="total"><%= @total %></span><strong>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+
+
+	</div>           
+	<div id="addRow"></div>
+	<%= render('layouts/buttons')%>
+</div>  
+<input type="hidden" id="controller" value="<%= controller_name%>">
+<% end %>
 
 
 

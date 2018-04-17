@@ -32,9 +32,6 @@ class ManuIndiExpensesController < ApplicationController
       program                 = ProgramProduction.last()
       @program_production_id  = program.id
 
-      @fixed = "FIJO"
-      @variable = "VARIABLE"
-
       @manu                               = ManuIndiExpense.find(params[:id])
       @manu_details                       = ManuIndiExpenseDet.where(manu_indi_expense_id: @manu.id)
       @total_fixed_and_variable           = @manu.totalFixedAndVariable

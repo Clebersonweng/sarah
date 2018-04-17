@@ -72,14 +72,7 @@
                            <td ><%= manu_indi_expense_dets.id%></td>
                            <td ><%= manu_indi_expense_dets.name %></td>
                            <td style="display:none"><!--vacio al crear nuevo --></td>
-                           <td>  <%= 
-                                    if manu_indi_expense_dets.isFixed == true 
-                                       @fixed 
-                                    else
-                                       @variable
-                                    end
-                                 %>            
-                           </td>
+                           <td><%= manu_indi_expense_dets.isFixed ? "fijo" : "variable"%></td>
                            <td style="display:none"><!--vacio al crear nuevo --></td>
                            <td><%= number_with_precision( manu_indi_expense_dets.subtotal, :precision => 0, :delimiter => '.' ) %></td>                  
                            <td style="display:none"></td>

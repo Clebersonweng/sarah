@@ -59,17 +59,17 @@ class SuppliesController < ApplicationController
 	 def create
 	 #get_all
 
-	 @supply = Supply.new(supply_params)
-	 respond_to do |format|
-		if @supply.save
-						 #format.html { redirect_to @supply, notice: 'Supply was successfully created.' }
-						 format.json { render json: @supply }
-						else
-						 #format.html { render :new }
-						 format.json { render json: @supply.errors, status: :unprocessable_entity }
-						end
+ 		@supply = Supply.new(supply_params)
+ 		respond_to do |format|
+					if @supply.save
+					#format.html { redirect_to @supply, notice: 'Supply was successfully created.' }
+						format.json { render json: @supply }
+					else
+						#format.html { render :new }
+						format.json { render json: @supply.errors, status: :unprocessable_entity }
 					end
-				end
+		end
+	end
 
 	 # PATCH/PUT /supplies/1
 	 # PATCH/PUT /supplies/1.json
@@ -125,7 +125,7 @@ class SuppliesController < ApplicationController
 			def get_all
 				@charts = ChartOfAccount.all.collect{|c| [c.name, c.id]}
 				@programs = ProgramProduction.all.collect{|c| [c.program_production, c.id]}
-				@products = Product.all.collect { |p| [ p.tradename, p.id, {"data-price"=> p.price, "data-dosage" => p.dosage} ] }
+				@products = Product.all.collect { |p| [ p.tradename, p.id, {"data-price"=> p.price, "data-dosage" => p.dosage,"data-measure" => p.unit_of_measurement.abbreviation} ] }
 				@path = " / crear estimación / insumos"
 				 @edit_name      = "Editar insumo"
 			end
