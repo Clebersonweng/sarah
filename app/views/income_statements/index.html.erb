@@ -1,0 +1,40 @@
+  <div class="table-responsive">
+	 <table data-width="100%"  
+		data-flat="true"
+		data-response-handler="flatJSON"
+		data-search="true"                
+		class="table table-hover table-striped table-condensed display" 
+		data-toggle="table"
+		data-show-toggle="true"                
+		data-show-refresh="false" 
+		data-pagination="true" 
+		onlyInfoPagination="false" 
+		data-icons="icons" data-sort-name="code" data-sort-order="desc" 
+		data-card-view="false"
+		id="tb_income_statements"
+	   >
+			<thead>
+				<tr>
+					<th data-field="id" data-checkbox="false">#</th>
+					<th data-field="farming_plot_id" data-visible="false">Parcela</th>
+					<th data-field="farming_plot_name">Parcela</th>
+					<th data-field="type_of_crop_id">Tipo de cultivo</th>
+					<th data-align="right" data-formatter="btn_income">Acción</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @incomes.each do |data| %>
+				  <tr>
+					 <td><%= data.id %></td>
+					 <td><%= data.estimate_sale.farming_plot.id %></td>
+					 <td><%= data.estimate_sale.farming_plot.name %></td>
+					 <td><%= data.estimate_sale.type_of_crop.name %></td>
+					 <td></td>
+				  </tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+<input type="hidden" id="controller" value="<%= controller_name%>">
+<%=render 'income_statements/income_result' %>
+<%=render 'income_statements/income_statistics' %>

@@ -329,6 +329,20 @@ function actionFormatter(value, row, index)
    ].join('');
 };
 
+function btn_income(value, row, index) 
+{  
+   return   [
+               '<a class="edit btn btn-info btn-sm btn_statistics" title="grafico de gastos" data-id='+row.farming_plot_id+' >',
+               '  <i class="fa fa-line-chart" aria-hidden="true"></i>',
+               '</a> ',
+               '<a class="edit btn btn-warning btn-sm btn_income" title="ver cuenta de resultados" data-id='+row.farming_plot_id+' >',
+               '  <i class="fa fa-table" aria-hidden="true"></i>',
+               '</a> '
+
+            ].join('');
+};
+
+
 function convert_date(fullDate)
 {
    var dateTimeSplit = fullDate.split('/');
@@ -400,13 +414,13 @@ function totalTextFormatter(data)
 }
 
 function footerStyle(value, row, index) {
-index = '0'+index;
-return index;
+   index = '0'+index;
+   return index;
 }
 
 function index(data) {
-index = '0'+index;
-return index;
+   index = '0'+index;
+   return index;
 }
 
 function seta_valores(_data_)
