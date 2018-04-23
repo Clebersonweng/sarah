@@ -17,69 +17,179 @@ class ProgramProduction < ApplicationRecord
 	# validates :variation_stock, numericality: true
 
 	def self.result_income_statements(farming_plot_id)
-		ProgramProduction.find_by_sql([ " 	
-
-		   select 
-                farming_plots.name As parcela,type_of_crops.name AS tipo_de_cultivo, ingreso_bruto,total_g_maquina_propia,total_g_maquina_terceros,total_g_insumos,total_g_comercializacion,total_g_estructura,total_g_indirectos_produccion
+		ProgramProduction.find_by_sql( 
+            " 	
+            SELECT 
+                farming_plots.name As parcela
+                ,type_of_crops.name AS tipo_de_cultivo
+                ,venta_bruta
+                ,devoluciones
+                ,descuentos
+                ,(venta_bruta-(devoluciones-descuentos)) AS ventas_netas
+                ,total_g_maquina_propia
+                ,total_g_maquina_terceros
+                ,total_g_insumos
+                ,total_g_mano_obra
+                ,total_g_comercializacion
+                ,total_g_estructura
+                ,total_g_indirectos_produccion
+                ,to_char(((total_g_maquina_propia+total_g_maquina_terceros+total_g_insumos+total_g_mano_obra)/farming_plots.area), 'FM999999999.00') AS costo_x_ha
+                ,(total_g_maquina_propia+total_g_maquina_terceros+total_g_insumos+total_g_mano_obra+total_g_comercializacion+total_g_estructura) AS total_costo_prod_unid_vend_parcela
+                ,((venta_bruta-(devoluciones-descuentos)) - (total_g_maquina_propia+total_g_maquina_terceros+total_g_insumos+total_g_mano_obra+total_g_comercializacion+total_g_estructura)) AS margen_producto
             from 
-            	farming_plots
+                farming_plots
                 ,type_of_crops
                 ,estimate_sales
-               ,(SELECT 
-                 	gross_sale AS ingreso_bruto  
-                 from 
-                 estimate_sales
+                --,program_productions
+                ,(SELECT 
+                    coalesce(gross_sale,0) AS venta_bruta 
+                    ,0 as devoluciones
+                    ,0 as descuentos
+                    from 
+                    estimate_sales
+                    ,farming_plots
+                    
+                    where  
+                    estimate_sales.farming_plot_id = farming_plots.id
+                    AND farming_plots.id = '#{farming_plot_id}'
                 ) as fooo
-             --gastos a restar de la cuenta
-               ,(SELECT 
-                 	coalesce(sum(subtotal),0) AS total_g_maquina_propia 
-                 from  
-                 	cost_oper_machines com 
-                    ,cost_oper_machine_details comd  
-                 where  
-                 	com.id = comd.cost_oper_machine_id 
+                 --gastos a restar de la cuenta
+                ,(SELECT 
+                        coalesce(sum(subtotal),0) AS total_g_maquina_propia 
+                    from  
+                        cost_oper_machines com 
+                        ,cost_oper_machine_details comd 
+                        ,program_productions,estimate_sales,farming_plots
+                    where  
+                        com.id = comd.cost_oper_machine_id 
+                    AND program_productions.id = com.program_production_id
+                    AND estimate_sales.id = program_productions.estimate_sale_id
+                    AND farming_plots.id = '#{farming_plot_id}'
                 ) as aaa 
-               ,(select 
-                 	sum(subtotal) AS total_g_maquina_terceros 
-                 from 
-                 	cost_oper_machine_conts cmc,cost_oper_machine_cont_details cmcd 
-                 where 
-                 	cmc.id = cmcd.cost_oper_machine_cont_id 
+                ,(select 
+                        coalesce(sum(subtotal),0) AS total_g_maquina_terceros 
+                    from 
+                        cost_oper_machine_conts cmc,cost_oper_machine_cont_details cmcd
+                        ,program_productions,estimate_sales,farming_plots
+                    where 
+                        cmc.id = cmcd.cost_oper_machine_cont_id  
+                    AND 
+                        program_productions.id = cmc.program_production_id
+                    AND 
+                        estimate_sales.id = program_productions.estimate_sale_id
+                    AND 
+                        estimate_sales.farming_plot_id = farming_plots.id
+                    AND 
+                        farming_plots.id = '#{farming_plot_id}'
                 ) as bbb
-               ,(select 
-                 	sum(subtotal) as total_g_insumos 
-                 from 
-                 	supplies s, supply_details sd 
-                 where 
-                 	s.id = sd.supply_id) as ccc
-               ,(select 
-                    sum(subtotal) AS total_g_comercializacion
+                ,(select 
+                    coalesce(sum(subtotal),0) as total_g_insumos 
+                from 
+                    supplies s, supply_details sd
+                    ,program_productions,estimate_sales,farming_plots
+                where 
+                    s.id = sd.supply_id
+                AND 
+                    program_productions.id = s.program_production_id
+                AND 
+                    estimate_sales.id = program_productions.estimate_sale_id
+                AND 
+                    estimate_sales.farming_plot_id = farming_plots.id
+                AND 
+                    farming_plots.id = '#{farming_plot_id}'
+                ) as ccc
+                ,(select 
+                    coalesce(sum(subtotal),0) AS total_g_comercializacion
                 from 
                     mark_spendings ms
                     ,mark_spending_dets msd 
+                    ,program_productions,estimate_sales,farming_plots
                 where 
                     ms.id = msd.mark_spending_id
-               ) as dddd
-               ,(select 
-                    sum(subtotal) AS total_g_estructura
-                from 
-                    structure_expenses se
-                    ,stru_expense_dets sed 
-                where 
-                    se.id = sed.structure_expense_id
-                ) AS eeee
+                AND 
+                    program_productions.id = ms.program_production_id
+                AND 
+                    estimate_sales.id = program_productions.estimate_sale_id
+                AND 
+                    estimate_sales.farming_plot_id = farming_plots.id
+                AND 
+                    farming_plots.id = '#{farming_plot_id}'
+                ) as dddd
                 ,(select 
-                    sum(subtotal) AS total_g_indirectos_produccion 
+                        coalesce(sum(subtotal),0) AS total_g_estructura
+                    from 
+                        structure_expenses se
+                        ,stru_expense_dets sed 
+                        ,program_productions,estimate_sales,farming_plots
+                    where 
+                    se.id = sed.structure_expense_id
+                AND 
+                    program_productions.id = se.program_production_id
+                AND 
+                    estimate_sales.id = program_productions.estimate_sale_id
+                AND 
+                    estimate_sales.farming_plot_id = farming_plots.id
+                AND 
+                    farming_plots.id = '#{farming_plot_id}'
+                ) AS eeee
+             ,(select 
+                    coalesce(sum(subtotal),0) AS total_g_indirectos_produccion 
                 from 
                     manu_indi_expenses mi
-                    , manu_indi_expense_dets mid
-                 where 
-                     mi.id = mid.manu_indi_expense_id
-          		) as gggg
-          where 
-              farming_plots.id = '#{farming_plot_id}'
-              AND type_of_crops.id = estimate_sales.type_of_crop_id
-		 "])
+                    ,manu_indi_expense_dets mid
+                    ,program_productions,estimate_sales,farming_plots
+                where 
+                    mi.id = mid.manu_indi_expense_id
+                AND 
+                    program_productions.id = mi.program_production_id
+                AND 
+                    estimate_sales.id = program_productions.estimate_sale_id
+                AND 
+                    estimate_sales.farming_plot_id = farming_plots.id
+                AND 
+                    farming_plots.id = '#{farming_plot_id}'
+                ) as gggg
+             ,(select 
+                    coalesce(sum(subtotal),0) AS total_g_mano_obra 
+                from 
+                    man_powers mp
+                    ,man_power_details mpd
+                    ,program_productions,estimate_sales,farming_plots
+                where 
+                    mp.id = mpd.man_power_id
+                AND 
+                    program_productions.id = mp.program_production_id
+                AND 
+                    estimate_sales.id = program_productions.estimate_sale_id
+                AND 
+                    estimate_sales.farming_plot_id = farming_plots.id
+                AND 
+                    farming_plots.id = '#{farming_plot_id}'
+                ) as jjj
+             where 
+                farming_plots.id = '#{farming_plot_id}'
+             AND type_of_crops.id = estimate_sales.type_of_crop_id
+             --  AND estimate_sales.farming_plot_id = farming_plots.id
+             -- AND program_productions.id = estimate_sales.id
+            group by 
+            parcela
+            ,tipo_de_cultivo
+            ,venta_bruta
+            ,devoluciones
+            ,descuentos
+            ,ventas_netas
+            ,total_g_maquina_propia
+            ,total_g_maquina_terceros
+            ,total_g_insumos
+            ,total_g_mano_obra
+            ,total_g_comercializacion
+            ,total_g_estructura
+            ,total_g_indirectos_produccion
+            ,costo_x_ha
+            ,total_costo_prod_unid_vend_parcela
+            ,margen_producto
+             
+		 ")
 	end
 
 end

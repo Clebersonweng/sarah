@@ -63,7 +63,8 @@ function btn_evt_calculate_total_production()
 	$("#estimate_sale_estimate_production").off("keyup").on("keyup", function () {
 		if ($("#estimate_sale_farming_plot_id option:selected").data('area-parcela') !== "" || $("#estimate_sale_farming_plot_id option:selected").data('area-parcela') !== "undefined")
 		{
-			$("#estimate_sale_total_production").val(calcute_total_prod($("#estimate_sale_farming_plot_id option:selected").data('area-parcela'), $("#estimate_sale_estimate_production").val()))
+			var total_val_production = calcute_total_prod($("#estimate_sale_farming_plot_id option:selected").data('area-parcela'), $("#estimate_sale_estimate_production").val());
+			$("#estimate_sale_total_production").val(total_val_production.toFixed(2));
 
 		}
 	});

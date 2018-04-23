@@ -76,5 +76,6 @@ class FuelsController < ApplicationController
 	end
 	def get_all
 		@edit_name      = "Editar combustible"
+		@path 			 = "/ Combustible"
 	end
 end

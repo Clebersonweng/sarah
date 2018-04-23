@@ -1,10 +1,11 @@
-
+var count, sum,TOTAL = 0;
    var code = 1;
-$(document).ready(function() 
-{
-   var count, sum,TOTAL = 0;
    var fuel,lubricant,repair_and_maintenance,time_oper = 0;
    var res_total_repair_machine,res_total_repair_implement,res_sum_repair_machine_implement,res_total_fuel,res_total_lub,res_total_hours = 0 ;
+   
+$(document).ready(function() 
+{
+   
    
    controlador = $("#controller").val();
    generic_response_form(controlador,true);
@@ -52,7 +53,6 @@ $(document).ready(function()
    $('#tb_cost_machine').on('check.bs.table', function (e, row) 
    {
      TOTAL =  parseFloat($("#oper_own_total").text());
-      console.log(TOTAL);
          $remove = $('.remove');
          selections = [];
          $remove.click(function () {

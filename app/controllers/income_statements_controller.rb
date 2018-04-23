@@ -4,8 +4,9 @@ class IncomeStatementsController < ApplicationController
   	end
   	def get_income_statement
 		farming_plot   = params[:farming_plot_id]
-		@valor 			= ProgramProduction.result_income_statements(farming_plot)
-      render json:   @valor
+		@incomes 		= ProgramProduction.result_income_statements(farming_plot)
+      @resultado 		= @incomes[0]
+      render json:   @resultado
    end
 
 end

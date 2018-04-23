@@ -1,4 +1,3 @@
-<div class="panel-body">
     <%= form_for( @implement, html: {class: 'form-horizontal', id: 'form_implements', remote:true,"data-type": "json",'data-model' => 'implement'}) do |f| %>
 
     <div class="col-sm-12 col-lg-12 col-xs-12">
@@ -92,5 +91,4 @@
         <%= render('layouts/buttons2col')%>
     </div>
   <%end%>           
-</div>
 <input type="hidden" id="controller" value="<%=controller_name%>">

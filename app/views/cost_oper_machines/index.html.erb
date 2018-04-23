@@ -1,6 +1,7 @@
-<div class="panel-body">
-	<div class="table-responsive">
-		<table data-width="100%"  
+<div class="table-responsive">
+	<table 
+	   data-width="100%" 
+      data-height="540" 
 		data-flat="true"
 		data-response-handler="flatJSON"
 		data-search="true"                
@@ -10,26 +11,27 @@
 		data-show-refresh="false" 
 		data-pagination="true" 
 		onlyInfoPagination="false" 
-		data-icons="icons" data-sort-name="code" data-sort-order="desc" 
+		data-icons="icons" data-sort-name="code" 
+		data-sort-order="desc" 
 		data-card-view="false"
-		>
-		<thead>
-			<tr>
-				<th data-field="id" data-checkbox="false">#</th>
-				<th data-field="farming_plot_id" data-sortable="true" >Parcela</th> 
-				<th data-field="total"> Total</th>                                                      
-				<th data-formatter="actionFormatter" data-align="right" data-events="actionEvents">Acción</th>
-			</tr>
-		</thead>
-		<tbody>
-			<% @cost_oper_machines.each do |cost_own_machine| %>
-			<tr>
-				<td><%= cost_own_machine.id %></td>
-				<td><%= cost_own_machine.program_production.estimate_sale.farming_plot.name%></td>
-				<td><%= cost_own_machine.total %></td>
-			</tr>
-			<% end %>
-		</tbody>
-	</table>
+	>
+	<thead>
+		<tr>
+			<th data-field="id" data-checkbox="false">#</th>
+			<th data-field="farming_plot_id" data-sortable="true" >Parcela</th> 
+			<th data-field="total"> Total</th>                                                      
+			<th data-formatter="actionFormatter" data-align="right" data-events="actionEvents">Acción</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @cost_oper_machines.each do |cost_own_machine| %>
+		<tr>
+			<td><%= cost_own_machine.id %></td>
+			<td><%= cost_own_machine.program_production.estimate_sale.farming_plot.name%></td>
+			<td><%= cost_own_machine.total %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
 </div>
 <input type="hidden" id="controller" value="<%=controller_name%>">

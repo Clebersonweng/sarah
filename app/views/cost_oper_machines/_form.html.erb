@@ -1,19 +1,7 @@
- <div class="panel-body">
    <%= form_for(@cost_oper_machine,html: {class: 'form-horizontal', id:'form_cost_oper_machines', remote: true,"data-type": "json",'data-model' => 'cost_oper_machine'}) do |f| %>
-        <% if cost_oper_machine.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(cost_oper_machine.errors.count, "error") %> prohibited this cost_oper_machine from being saved:</h2>
-
-            <ul>
-            <% cost_oper_machine.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-            </ul>
-          </div>
-        <% end %>
-      <div class="col-sm-6 col-lg-12 col-md-12 col-xs-12">
+      <div class="col-sm-12 col-md-12 col-xs-12">
          <div class="row">
-            <div class="col-lg-5">
+            <div class="col-sm-6 col-md-6">
                <div class="form-group">
                   <%= f.label :program_production_id,"Parcela:" ,class: "control-label col-sm-6 col-lg-3 col-xs-12"%>
                   <div class="col-lg-6">
@@ -21,7 +9,7 @@
                   </div>
                </div>
             </div>
-            <div class="col-lg-7">
+            <div class="col-sm-6 col-md-6">
                <div class="form-group">
                   <%= f.label :program_production_id,"Área:" ,class: "control-label col-sm-6 col-lg-8 col-xs-12"%>
                   <div class="col-lg-4 col-md-2">
@@ -31,26 +19,26 @@
             </div>
          </div>
          <div class="row">
-            <div class="col-lg-5">
+            <div class="col-sm-6 col-md-6">
                <div class="form-group">
-                  <%= f.label "Maquinária:" ,class: "control-label col-lg-3"%>
-                  <div class="col-sm-4 col-md-2 col-xs-12 col-lg-9">
+                  <%= f.label "Maquinária:" ,class: "control-label col-sm-3 col-md-3"%>
+                  <div class="col-sm-8 col-md-8 col-xs-12">
                     <%= select("cost_oper_own","machine_id", options_for_select(@machines), {}, {required: 'true', class: "form-control", include_blank: ''})%>   
                   </div>
                </div>
             </div>
-            <div class="col-lg-7">
+            <div class="col-sm-6 col-md-6">
                <div class="form-group">
-                  <%= f.label "Implemento:" ,class: "control-label col-lg-2"%>
-                  <div class="col-sm-4 col-md-2 col-xs-12 col-lg-5">
+                  <%= f.label "Implemento:" ,class: "control-label col-sm-4 col-md-4"%>
+                  <div class="col-sm-8 col-md-8 col-xs-12">
                     <%= select("cost_oper_own","implement_id", options_for_select(@implements), {}, {required: 'true', class: "form-control", include_blank: ''})%>   
                   </div>
                </div>
             </div>
             
-            <div class="col-lg-3">
+            <div class="col-sm-6 col-md-6">
                <div class="form-group">
-                  <%= f.label :description,"Aplicaciones:" ,class: "control-label col-lg-5"%>
+                  <%= f.label :description,"Aplicaciones:" ,class: "control-label col-sm-3 col-md-3"%>
                   <div class="col-sm-3 col-md-3 col-xs-12">
                      <input id="cost_oper_machine_own_amount" value="1" class="form-control only_numbers text-right" /> 
                   </div>
@@ -60,7 +48,8 @@
                <a class="btn btn-default btn-sm" id="btn_add_cost_own">Agregar</a>
             </div>            
          </div>
-         <table 
+         <table
+            id="tb_cost_machine" 
             data-width="100%"  
             data-search="false"                
             class="table table-hover table-striped table-condensed display" 
@@ -145,8 +134,4 @@
          </div>
       </div>
    <%end%>
-</div>
-   
-
-
 <input type="hidden" id="controller" value="<%= controller_name%>">

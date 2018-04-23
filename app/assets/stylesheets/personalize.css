@@ -240,7 +240,8 @@ a {
     margin-right: 9px;
 }
 
-
-
+.table tbody tr td.table-indent{
+    padding-left:50px;
+}
 
 
