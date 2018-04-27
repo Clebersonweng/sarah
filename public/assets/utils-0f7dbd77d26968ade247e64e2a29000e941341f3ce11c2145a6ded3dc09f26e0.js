@@ -24,6 +24,7 @@ $(document).ready(function ()
          console.log("no es valido");
          $("#form_" + controlador).data('bootstrapValidator').validate();
          $.rails.enableElement($('a[data-disable-with]'));
+
       }
    });
 
@@ -584,3 +585,4 @@ NProgress.done();
 NProgress.remove();
 });
 */
+;

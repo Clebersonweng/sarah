@@ -1,5 +1,4 @@
    <%= form_for(@cost_oper_machine,html: {class: 'form-horizontal', id:'form_cost_oper_machines', remote: true,"data-type": "json",'data-model' => 'cost_oper_machine'}) do |f| %>
-      <div class="col-sm-12 col-md-12 col-xs-12">
          <div class="row">
             <div class="col-sm-6 col-md-6">
                <div class="form-group">
@@ -31,16 +30,16 @@
                <div class="form-group">
                   <%= f.label "Implemento:" ,class: "control-label col-sm-4 col-md-4"%>
                   <div class="col-sm-8 col-md-8 col-xs-12">
-                    <%= select("cost_oper_own","implement_id", options_for_select(@implements), {}, {required: 'true', class: "form-control", include_blank: ''})%>   
+                    <%= select("cost_oper_own","implement_id", options_for_select(@implements), {}, {required: 'true',disabled: "disabled", class: "form-control", include_blank: ''})%>   
                   </div>
                </div>
             </div>
             
-            <div class="col-sm-6 col-md-6">
+            <div class="col-sm-6 col-md-4">
                <div class="form-group">
-                  <%= f.label :description,"Aplicaciones:" ,class: "control-label col-sm-3 col-md-3"%>
-                  <div class="col-sm-3 col-md-3 col-xs-12">
-                     <input id="cost_oper_machine_own_amount" value="1" class="form-control only_numbers text-right" /> 
+                  <%= f.label :description,"Aplicaciones:" ,class: "control-label col-sm-6 col-md-5"%>
+                  <div class="col-sm-4 col-md-5 col-xs-12">
+                     <input id="cost_oper_machine_own_amount" name="cost_oper_own[amount]" value="1" class="form-control only_numbers text-right" /> 
                   </div>
                </div>
             </div>
@@ -114,24 +113,26 @@
                            </td>
                         </tr>
                      <% end %>   
-               <% end %>
+                     <%= f.text_field :total, :value => @total ,:id => "cost_oper_machine_total" %>
+                  <% else %>
+                     <%= f.text_field :total, :value => 0 ,:id => "cost_oper_machine_total" %>
+                  <% end %>
             </tbody>
             <tfoot>
               <tr>
                <td class="h6 font-weight-bold" colspan="3"><strong>Total :<strong></td>
                <td colspan="17" class="font-weight-bold text-right">
-                  <strong><span id="oper_own_total"><%= @total %></span><strong>
+                  <strong>
+                     <span class="cost_oper_machine_total">
+                        <%= number_with_precision( @total, :precision => 0, :delimiter => '.' ) %>             
+                     </span>
+                  <strong>
                </td>
               </tr>
             </tfoot>
          </table>
          
-         <%= render('layouts/error_lists')%>
          <%= render('layouts/buttons')%>
-         <div id="addRow">
-            <input type="text" name="cost_oper_machine[program_production_id]" id="program_production_id" value="<%= @program_production_id%>">
-            <input type="text" name="cost_oper_machine[total]" class="oper_own_total" value="<%= @total%>">
-         </div>
-      </div>
-   <%end%>
+         <%= f.text_field :program_production_id, :value => @program_production_id %>
+<%end%>
 <input type="hidden" id="controller" value="<%= controller_name%>">

@@ -22,33 +22,44 @@ class ProgramProduction < ApplicationRecord
             SELECT 
                 farming_plots.name As parcela
                 ,type_of_crops.name AS tipo_de_cultivo
-                ,venta_bruta
+                ,round(CAST (venta_bruta AS numeric), 4) as venta_bruta
                 ,devoluciones
                 ,descuentos
-                ,(venta_bruta-(devoluciones-descuentos)) AS ventas_netas
-                ,total_g_maquina_propia
-                ,total_g_maquina_terceros
-                ,total_g_insumos
-                ,total_g_mano_obra
-                ,total_g_comercializacion
-                ,total_g_estructura
-                ,total_g_indirectos_produccion
-                ,to_char(((total_g_maquina_propia+total_g_maquina_terceros+total_g_insumos+total_g_mano_obra)/farming_plots.area), 'FM999999999.00') AS costo_x_ha
-                ,(total_g_maquina_propia+total_g_maquina_terceros+total_g_insumos+total_g_mano_obra+total_g_comercializacion+total_g_estructura) AS total_costo_prod_unid_vend_parcela
-                ,((venta_bruta-(devoluciones-descuentos)) - (total_g_maquina_propia+total_g_maquina_terceros+total_g_insumos+total_g_mano_obra+total_g_comercializacion+total_g_estructura)) AS margen_producto
-            from 
+                ,ventas_netas
+                ,ROUND(CAST(total_g_maquina_propia AS numeric), 2) as total_g_maquina_propia
+                ,ROUND(CAST(total_g_maquina_terceros AS numeric), 2) as total_g_maquina_terceros
+                ,ROUND(CAST(total_g_insumos AS numeric), 2) as total_g_insumos
+                ,ROUND(CAST(total_g_mano_obra AS numeric), 2) as total_g_mano_obra
+                ,ROUND(CAST(total_g_comercializacion AS numeric), 2) as total_g_comercializacion
+                ,ROUND(CAST(total_g_estructura AS numeric), 2) as total_g_estructura
+                ,0 as dotacion_amortizaciones
+                ,ROUND(CAST(total_g_indirectos_produccion AS numeric), 2) as total_g_indirectos_produccion
+                ,ROUND(CAST(total_g_comercializacion AS numeric), 2) as total_g_comercializacion
+                ,ROUND(CAST((total_g_maquina_propia+total_g_maquina_terceros+total_g_insumos+total_g_mano_obra)/farming_plots.area AS numeric), 2) AS costo_x_ha
+                ,ROUND(CAST(total_g_maquina_propia+total_g_maquina_terceros+total_g_insumos+total_g_mano_obra AS numeric), 2) AS total_costo_prod_unid_vend_parcela
+                ,ventas_netas - ROUND(CAST(total_g_maquina_propia+total_g_maquina_terceros+total_g_insumos+total_g_mano_obra AS numeric), 2) AS margen_producto
+                ,((ventas_netas - (total_g_maquina_propia+total_g_maquina_terceros+total_g_insumos+total_g_mano_obra ) ) - (total_g_indirectos_produccion + total_g_estructura )) AS resultado_explotacion
+               ,0 as ingresos_financieros
+               ,0 as gastos_extraordinarios
+                ,((ventas_netas - (total_g_maquina_propia+total_g_maquina_terceros+total_g_insumos+total_g_mano_obra ) ) - (total_g_indirectos_produccion + total_g_estructura )) as resultado_ante_impuestos
+               , 0 AS resultado_sociedades
+               ,((ventas_netas - (total_g_maquina_propia+total_g_maquina_terceros+total_g_insumos+total_g_mano_obra ) ) - (total_g_indirectos_produccion + total_g_estructura )) as resultado_despues_impuestos
+       
+            FROM
                 farming_plots
                 ,type_of_crops
                 ,estimate_sales
                 --,program_productions
                 ,(SELECT 
                     coalesce(gross_sale,0) AS venta_bruta 
-                    ,0 as devoluciones
-                    ,0 as descuentos
+                    , devoluciones
+                    , descuentos
+                    ,ROUND(CAST(gross_sale-(devoluciones-descuentos) as numeric),2) as ventas_netas
                     from 
-                    estimate_sales
+                     estimate_sales
                     ,farming_plots
-                    
+                    , (select 0  as devoluciones) as sss
+                    , (select 0 as descuentos) as dds
                     where  
                     estimate_sales.farming_plot_id = farming_plots.id
                     AND farming_plots.id = '#{farming_plot_id}'

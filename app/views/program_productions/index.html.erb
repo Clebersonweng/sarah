@@ -14,13 +14,14 @@
                 data-card-view="false">
             <thead>
             <tr>
-                <th data-field="id" data-visible="false" >Estim. de venta</th> 
-                <th data-field="program_production_id" data-sortable="false" >Estim. de venta</th> 
+                <th data-field="id" data-visible="false" ></th> 
+                <th data-field="farming_plot_id" >Parcela</th> 
+                <th data-field="type_of_crop_id" >Cultivo</th> 
                 <th data-align="right" data-sortable="true" data-field="stock_initial" >Exist. Final</th> 
-                <th data-align="right"  data-sortable="true"data-field="stock_end" >Exist. inicial</th>  
+                <th data-align="right"  data-sortable="true" data-field="stock_end">Exist. inicial</th>  
                 <th data-align="right" data-sortable="true" data-field="variation_stock" >Variación exist.</th>  
-                <th data-align="right" class=""data-field="program_production">Prog. de producción</th>                            
-                 <th data-halign="right" data-align="right" data-formatter="actionFormatter" data-events="actionEvents">Acción</th>
+                <th data-align="right" class="" data-field="program_production">Prog. de producción</th>                            
+                <th data-halign="right" data-align="right" data-formatter="actionFormatter" data-events="actionEvents">Acción</th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +29,7 @@
              <tr>
                  <td><%=  prog_product.id %></td>
                  <td><%=  prog_product.estimate_sale.farming_plot.name %></td>
+                 <td><%=  prog_product.estimate_sale.type_of_crop.name %></td>
                  <td><%= number_with_precision(prog_product.stock_end, :precision => 0, :delimiter => '.') %></td>
                  <td><%= number_with_precision(prog_product.stock_initial, :precision => 0, :delimiter => '.') %></td>
                  <td><%= number_with_precision(prog_product.variation_stock, :precision => 0, :delimiter => '.')  %></td>
@@ -36,5 +38,5 @@
              <% end %>
          </tbody>
      </table>
-     <input type="hidden" id="controller" value="<%= controller_name%>">
+        <input type="hidden" id="controller" value="<%= controller_name%>">
     </div>

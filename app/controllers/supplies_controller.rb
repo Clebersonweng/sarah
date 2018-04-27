@@ -28,7 +28,7 @@ class SuppliesController < ApplicationController
 
 		unless last_id_prog_production.nil?
 			programId = ProgramProduction.find(last_id_prog_production)
-			@last_program_production_id = programId.id
+			@program_production_id = programId.id
 			@last_program_production_total = programId.program_production
 		end
 
@@ -88,11 +88,11 @@ class SuppliesController < ApplicationController
 	 # DELETE /supplies/1
 	 # DELETE /supplies/1.json
 	 def destroy
-		@orders = Order.where(customer_id: @customer.id)
-		@orders.each do |order|
-			order.destroy
+		@details = SupplyDetail.where(supply_id: @supply.id)
+		@details.each do |det|
+			det.destroy
 		end
-		@customer.destroy
+		@supply.destroy
 	 end
 
 	 def calculate_subtotal

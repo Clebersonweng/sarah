@@ -5,13 +5,13 @@
 	<div class="col-md-4 col-sm-4">
 		<div class="form-group">
 			<%= f.label :program_production_id,"Area :" ,class: " col-sm-6 col-lg-5 col-xs-12"%>
-			<input class="form-control" id="farm_area" name="farming_plot_area" value="<%= @farm_area %>" readonly/>
+			<input class="form-control" id="farm_area" name="farming_plot_area" value="<%= @farm_area %>" readonly required/>
 		</div>
 	</div>
 	<div class="col-md-4 col-sm-4">
 		<div class="form-group">
 			<%= f.label :program_production_id,"Cant a producir :" ,class: "col-sm-8 col-lg-8 col-xs-12"%>
-			<input class="form-control" id="farm_prog_total_production" value="<%= @quantity_production %>" readonly/>
+			<input class="form-control" id="farm_prog_total_production" value="<%= @quantity_production %>" readonly required/>
 		</div>
 	</div>
 	<div class="col-md-3 col-sm-3">
@@ -81,7 +81,7 @@
 		<tr>
 			<td class="h6 font-weight-bold" colspan="2"><strong>Total :<strong></td>
 				<td colspan="7" class="font-weight-bold text-right">
-					<strong><span class="total"><%= @total %></span><strong>
+					<strong><span class="total"><%= number_with_precision( @total, :precision => 0, :delimiter => '.' ) %></span><strong>
 					</td>
 				</tr>
 			</tfoot>
@@ -89,7 +89,7 @@
 
 
 	</div>           
-	<div id="addRow"></div>
+	<%= f.hidden_field :program_production_id, :value => @program_production_id %>
 	<%= render('layouts/buttons')%>
 </div>  
 <input type="hidden" id="controller" value="<%= controller_name%>">

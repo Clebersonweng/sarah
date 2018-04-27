@@ -53,8 +53,17 @@ class CostOperMachinesController < ApplicationController
    end
 
    def destroy
-      @cost_oper_machine.destroy
-      respond_with(@cost_oper_machine)
+      #respond_with(@cost_oper_machine)
+      @details = CostOperMachineDetail.where(cost_oper_machine_id: @cost_oper_machine.id)
+      @details.each do |det|
+         det.destroy
+      end
+     
+      if @cost_oper_machine.destroy
+         render json: { respuesta: @cost_oper_machine, location: cost_oper_machine_url(@cost_oper_machine),result: :"El registro fue eliminado con exito" },status: 200
+      else
+         render json: { respuesta: @cost_oper_machine, location: cost_oper_machine_url(@cost_oper_machine),result: :"Ocurrió un error al eliminar el registro" },status: 500
+      end
    end
 
    private

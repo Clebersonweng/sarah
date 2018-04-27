@@ -69,22 +69,83 @@ function income_result(farming_plot_id)
 	         $("#margin_product").text(set_numeric(response.margen_producto));
 	         $("#total_exp_indi").text(set_numeric(response.total_g_indirectos_produccion));
 	         $("#total_stru").text(set_numeric(response.total_g_estructura));
-	         $("#total_depre").text(0);
-	         $("#total_res_exp").text(0);
-	         $("#total_fin_inco").text(0);
-	         $("#total_extra_expe").text(0);
-	         $("#res_before_trib").text(0);
-	         $("#total_res_comp").text(0);
-	         $("#total_res_trib").text(0);
+	         $("#total_depre").text(response.dotacion_amortizaciones);
+	         $("#total_res_exp").text(set_numeric(response.resultado_explotacion));
+	         $("#total_fin_inco").text(response.ingresos_financieros);
+	         $("#total_extra_expe").text(set_numeric(response.gastos_extraordinarios));
+	         $("#res_before_trib").text(set_numeric(response.resultado_ante_impuestos));
+	         $("#total_res_comp").text(set_numeric(response.resultado_sociedades));
+	         $("#total_res_trib").text(set_numeric(response.resultado_despues_impuestos));
 
+	         //porcientos
+	         $("#porciento_descuentos").text((response.descuentos*100)/response.venta_bruta); 
+	         $("#porciento_devoluciones").text((response.devoluciones*100)/response.venta_bruta); 
+	         
+	         var ventas_porciento = ((response.ventas_netas*100)/response.venta_bruta);
+	         $("#porciento_ventas_netas").text(ventas_porciento.toFixed(2));
+	         
+	         var costo_parcela_porciento =  ((response.total_costo_prod_unid_vend_parcela*100)/response.ventas_netas);
+	         $("#costo_parcela_porciento").text(costo_parcela_porciento.toFixed(2)); 
+	         
+	         var insumo_porciento =  ((response.total_g_insumos*100)/response.ventas_netas);
+	         $("#porciento_insumos").text(insumo_porciento.toFixed(2)); 
+	        
+	         var porciento_maquina_tercerizada =  ((response.total_g_maquina_terceros*100)/response.ventas_netas);
+	         $("#porciento_maquina_tercerizada").text(porciento_maquina_tercerizada.toFixed(2)); 
+
+	         var porciento_maquina_propia =  ((response.total_g_maquina_propia*100)/response.ventas_netas);
+	         $("#porciento_maquina_propia").text(porciento_maquina_propia.toFixed(2)); 
+
+				var porciento_mano_obra =  ((response.total_g_mano_obra*100)/response.ventas_netas);
+	         $("#porciento_mano_obra").text(porciento_mano_obra.toFixed(2)); 
+
+				var porciento_transporte =  ((response.total_g_comercializacion*100)/response.ventas_netas);
+	         $("#porciento_transporte").text(porciento_transporte.toFixed(2)); 
+				
+				var porciento_margen_producto =  ((response.margen_producto*100)/response.ventas_netas);
+	         $("#porciento_margen_producto").text(porciento_margen_producto.toFixed(2)); 
+
+				var porciento_depreciacion =  ((response.dotacion_amortizaciones*100)/response.ventas_netas);
+	         $("#porciento_depreciacion").text(porciento_depreciacion.toFixed(2)); 
+
+				var porciento_gastos_indi_produccion =  ((response.total_g_indirectos_produccion*100)/response.ventas_netas);
+	         $("#porciento_gastos_indi_produccion").text(porciento_gastos_indi_produccion.toFixed(2)); 
+
+				var porciento_gastos_estructura =  ((response.total_g_estructura*100)/response.ventas_netas);
+	         $("#porciento_gastos_estructura").text(porciento_gastos_estructura.toFixed(2)); 
+
+				var porciento_resultado_explotacion =  ((response.resultado_explotacion*100)/response.ventas_netas);
+	         $("#porciento_resultado_explotacion").text(porciento_resultado_explotacion.toFixed(2)); 
+
+ 				var porciento_ingresos_financieros =  ((response.ingresos_financieros*100)/response.ventas_netas);
+	         $("#porciento_ingresos_financieros").text(porciento_ingresos_financieros.toFixed(2)); 
+
+				var porciento_gastos_extraordinarios =  ((response.gastos_extraordinarios*100)/response.ventas_netas);
+	         $("#porciento_gastos_extraordinarios").text(porciento_gastos_extraordinarios.toFixed(2)); 
+				
+				var porciento_resultado_ante_impuestos =  ((response.resultado_ante_impuestos*100)/response.ventas_netas);
+	         $("#porciento_resultado_ante_impuestos").text(porciento_resultado_ante_impuestos.toFixed(2)); 
+				
+				var porciento_resultado_sociedades =  ((response.resultado_sociedades*100)/response.ventas_netas);
+	         $("#porciento_resultado_sociedades").text(porciento_resultado_sociedades.toFixed(2)); 
+				
+				var porciento_resultado_despues_impuestos =  ((response.resultado_despues_impuestos*100)/response.ventas_netas);
+	         $("#porciento_resultado_despues_impuestos").text(porciento_resultado_despues_impuestos.toFixed(2)); 
+
+				
       		$("#title_modal").append(" - Parcela: "+response.parcela+" - Cultivo: "+ response.tipo_de_cultivo);
 
-	      },
-	      error: function (resp) 
-	      {
+      },
+      error: function (resp) 
+      {
 	         progress(false);
-	         console.log(response);	         
-	      }
-	   });
+	         console.log(resp);
+            alert_sarah("Ocurrio un error al recuperar los registros de la cuenta de resultados!", "error");
+      },
+      always: function(resp)
+      {
+      	
+      }
+   });
 }
 
