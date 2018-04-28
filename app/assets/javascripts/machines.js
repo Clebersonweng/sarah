@@ -1,3 +1,14 @@
+/*
+
+capacidad total de trabajo = ((ancho maquina * velocidad de trabajo * km) / 10000 m2)
+capacidad de trabajo efectiva = ((ancho maquina real* velocidad de trabajo real * km) / 10000 m2)
+eficiencia de campo = CTE/CTT
+Tiempo Operativo = eficiencia de campo / CTE
+
+consumo de combustible por horas = hp * coeficiente de consumo
+*/
+
+
 
 var ready;
 var kilometer = 1000;  //1 km = 1000 m
@@ -16,17 +27,23 @@ ready = $(document).ready(function ()
 		$("#hp_cons_machine").val($("#machine_hp").val());
 	});
 
-	$('#save_ctt').on("click",function()
+	$('#save_ctt_machine').on("click",function()
 	{
 		var ctt = total_working_capacity($("#width_machine").val(),$("#work_velocity").val());
-		$("#machine_working_capacity").val(ctt.toFixed(4));
+		$("#machine_working_capacity").val(ctt);
 		//$('#form_machines').bootstrapValidator('revalidateField', 'machine[working_capacity]');  
 	});
 
-	$('#save_cte').on("click",function()
+	$('#save_cte_machine').on("click",function()
 	{
 		var cte = total_working_capacity_efective($("#real_width_machine").val(),$("#real_work_velocity").val());
 		$("#machine_working_capacity_effective").val(cte.toFixed(4));
+		
+		var total_to = total_time_oper($("#real_width_machine").val(),$("#real_work_velocity").val());
+		$("#machine_time_oper").val(total_to.toFixed(4));
+		
+		////var time_oper = total_time_oper($("#machine_working_capacity_effective").val(),$("#machine_working_capacity").val());
+		//$("#machine_time_oper").val(time_oper);
 		//$('form').bootstrapValidator('revalidateField', 'machine[working_capacity_effective]');  
 	});
 
@@ -37,8 +54,8 @@ ready = $(document).ready(function ()
 
 	$('#machine_working_capacity_effective').on("focusout",function()
 	{
-		var total_to = total_time_oper($("#real_width_machine").val(),$("#real_work_velocity").val());
-		$("#machine_time_oper").val(total_to.toFixed(4));
+		//var total_to = total_time_oper($("#real_width_machine").val(),$("#real_work_velocity").val());
+		//$("#machine_time_oper").val(total_to);
 		//$('form').bootstrapValidator('revalidateField', 'machine[time_oper]');  
 	});
 
@@ -268,13 +285,19 @@ function total_working_capacity_efective(real_width_machine,real_velocity)
 
 function total_time_oper(work_capacity_total_efective,work_capacity_total)
 {
+	//var efficient_field = 0;
 
-	if(!isNan(work_capacity_total) && !isNan(work_capacity_total_efective)) 
+	if(work_capacity_total != "" && work_capacity_total_efective != "") 
 	{
-		var field_eficient = (work_capacity_total_efective / work_capacity_total);
-		var result         = (field_eficient/work_capacity_total)
+
+		var efficient_field 		= (parseInt(work_capacity_total_efective) / parseInt(work_capacity_total));
+		var result         	= (efficient_field/work_capacity_total_efective);
 		return result;	
-	} 	
+	}
+	else
+	{
+		console.log("no realizo el calculo de teimpo operativo");
+	}
 
 }  
 
