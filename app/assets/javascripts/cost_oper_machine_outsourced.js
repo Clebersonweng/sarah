@@ -64,7 +64,7 @@ $(document).ready(function()
 
    $("#btn_add_cost_out").on("click", function() 
    {
-      if(is_valid_fields())
+      if(is_valid_fields_mach_cont())
       {
          $type_of_service        = $("#cost_oper_cont_detail_type_of_service_id option:selected");
          $type_service_id        = $type_of_service.val();
@@ -77,9 +77,11 @@ $(document).ready(function()
          row_bt_cost_out($type_service_id,$type_service_name,$price,$u_measure,$area,$amount);
          $("#cost_oper_cont_detail_amount").val(1);
          COUNT++;
+         console.log("es valido");
       }
       else
       {
+         console.log("no es valido");
          $('form').bootstrapValidator('revalidateField', 'cost_oper_cont_detail[type_of_service_id]');
          $('form').bootstrapValidator('revalidateField', 'cost_oper_cont_detail[amount]');
       }
@@ -135,11 +137,11 @@ function calculte_subtotal(u_measure,price,area,quantity)
 
 }
 
-function is_valid_fields()
+function is_valid_fields_mach_cont()
 {
    $type_of_service     = $('#cost_oper_cont_detail_type_of_service_id');
    $amount              = $("#cost_oper_cont_detail_amount");
-
+   console.log("holaaaa");
    if(typeof $type_of_service != "undefined" && $type_of_service.val() != "" && typeof $amount != "undefined" && $amount.val() != "" )
    {
       return true;
@@ -148,7 +150,6 @@ function is_valid_fields()
    {
       return false;
    }
-
 }
 
 
