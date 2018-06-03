@@ -7,8 +7,8 @@ class IncomeStatementsController < ApplicationController
 
   	def get_income_statement
   		get_all
-		farming_plot   = params[:farming_plot_id]
-		@incomes 		= ProgramProduction.result_income_statements(farming_plot)
+		type_of_crop_id   = params[:type_of_crop_id]
+		@incomes 		= ProgramProduction.result_income_statements(type_of_crop_id)
       @resultado 		= @incomes[0]
       render json:   @resultado
    end

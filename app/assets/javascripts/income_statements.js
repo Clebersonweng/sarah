@@ -15,8 +15,8 @@ $(document).ready(function ()
 	{
 		progress(true);
 		$(".modal_income").modal("show");
-		var plot_id = $(this).data("id");
-		income_result(plot_id);
+		var type_of_crop_id = $(this).data("id");
+		income_result(type_of_crop_id);
 	});
 
 	$(".btn_statistics").on("click",function()
@@ -46,12 +46,12 @@ $(document).ready(function ()
 
 });
 
-function income_result(farming_plot_id)
+function income_result(type_of_crop_id)
 {
 	$.post({
 	      url: "get_income_statement",
 	      datatype: 'json',
-	      data: {"farming_plot_id":farming_plot_id},
+	      data: {"type_of_crop_id":type_of_crop_id},
 	      success: function (response) 
 	      {
 	         progress(false);

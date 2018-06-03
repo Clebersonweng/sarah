@@ -336,10 +336,10 @@ function actionFormatter(value, row, index)
 function btn_income(value, row, index) 
 {  
    return   [
-               '<a class="edit btn btn-info btn-sm btn_statistics" title="grafico de gastos" data-id='+row.farming_plot_id+' >',
+               '<a class="edit btn btn-info btn-sm btn_statistics" title="grafico de gastos" data-id='+row.type_of_crop_id+' >',
                '  <i class="fa fa-line-chart" aria-hidden="true"></i>',
                '</a> ',
-               '<a class="edit btn btn-warning btn-sm btn_income" title="ver cuenta de resultados" data-id='+row.farming_plot_id+' >',
+               '<a class="edit btn btn-warning btn-sm btn_income" title="ver cuenta de resultados" data-id='+row.type_of_crop_id+' >',
                '  <i class="fa fa-table" aria-hidden="true"></i>',
                '</a> '
 
