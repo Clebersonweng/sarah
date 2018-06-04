@@ -198,6 +198,14 @@ ALTER TABLE cost_oper_machine_cont_details_id_seq OWNER TO ultimate;
 
 ALTER SEQUENCE cost_oper_machine_cont_details_id_seq OWNED BY cost_oper_machine_cont_details.id;
 
+CREATE TABLE type_of_works (
+    id integer NOT NULL,
+    name character varying,
+    price_hours double precision,
+    description text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
 
 --
 -- TOC entry 226 (class 1259 OID 51398)
@@ -1404,14 +1412,6 @@ ALTER SEQUENCE type_of_services_id_seq OWNED BY type_of_services.id;
 -- Name: type_of_works; Type: TABLE; Schema: public; Owner: ultimate
 --
 
-CREATE TABLE type_of_works (
-    id integer NOT NULL,
-    name character varying,
-    price_hours double precision,
-    description text,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
 
 
 ALTER TABLE type_of_works OWNER TO ultimate;

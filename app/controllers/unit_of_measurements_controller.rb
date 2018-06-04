@@ -4,6 +4,7 @@ class UnitOfMeasurementsController < ApplicationController
   # GET /type_of_crops
   # GET /type_of_crops.json
   def index
+   get_all
     @unit_of_measurements = UnitOfMeasurement.all    
   end
 
@@ -15,12 +16,14 @@ class UnitOfMeasurementsController < ApplicationController
 
   # GET /type_of_crops/new
   def new
+   get_all
     @unit_of_measurement = UnitOfMeasurement.new
     
   end
 
   # GET /type_of_crops/1/edit
   def edit
+   get_all
     @unit_of_measurement = UnitOfMeasurement.find(params[:id]);
     @name = @unit_of_measurement.name;
     @abbreviation = @unit_of_measurement.abbreviation;
