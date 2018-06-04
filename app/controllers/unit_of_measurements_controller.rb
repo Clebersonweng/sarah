@@ -10,11 +10,7 @@ class UnitOfMeasurementsController < ApplicationController
   # GET /type_of_crops/1
   # GET /type_of_crops/1.json
   def show
-    @unit_of_measurements = UnitOfMeasurement.find(params[:id])
-    respond_to do |format|
-      format.html { redirect_to  action:"index"}
-      #format.json { render json: @types_crops}
-    end
+    
   end
 
   # GET /type_of_crops/new
@@ -35,113 +31,63 @@ class UnitOfMeasurementsController < ApplicationController
   # POST /type_of_crops.json
   def create  
    
-    @name = params[:unit_of_measurement][:name];
-    @abbreviation = params[:unit_of_measurement][:abbreviation];
-    @coefficient = params[:unit_of_measurement][:coefficient];
-    #Creamos el objeto con los valores a ingresar.
-    @unit_of_measurement = UnitOfMeasurement.new({
-        :name => @name,
-        :abbreviation => @abbreviation,
-        :coefficient => @coefficient
-      });
-        
-    respond_to do |format|
+    #get_all
+      @unit_of_measurement = UnitOfMeasurement.new(unit_of_measurement_params)
       if @unit_of_measurement.save
-        flash[:notice] = "Unidad de medida creada con exito"
-        format.html { redirect_to  action:"index"}
+         render :json => {:contenido => @unit_of_measurement,:result => "ok"}
       else
-        flash[:alert] = "Error al crear la unidad de medida"
-        format.html { render :new }
+         render json:  @unit_of_measurement.errors ,:data =>@unit_of_measurement.errors, status: :unprocessable_entity  
       end
-    end
   end
 
   # PATCH/PUT /type_of_crops/1
   # PATCH/PUT /type_of_crops/1.json
   def update
-    @name = params[:unit_of_measurement]["name"];
-    @abbreviation = params[:unit_of_measurement]["abbreviation"];
-    @coefficient = params[:unit_of_measurement]["coefficient"];
-   
-    @unit_of_measurement = UnitOfMeasurement.find(params[:id]);
-    @unit_of_measurement.code = @name;
-    @unit_of_measurement.name = @abbreviation;
-    @unit_of_measurement.variety = @coefficient
-    respond_to do |format|
-      if @unit_of_measurement.save
-        #format.html { redirect_to @unit_of_measurements, notice: 'Unidad de medida actualizada con exito.' }
-        format.json { render :show, status: :created, location: @unit_of_measurement }
+    if @unit_of_measurement.update(unit_of_measurement_params)
+         render json: { contenido: @unit_of_measurement, location: unit_of_measurement_url(@unit_of_measurement),result: :ok },status: 200
       else
-        #format.html { render :new }
-        format.json { render json: @unit_of_measurements.errors, status: :unprocessable_entity }
+         render json:  @unit_of_measurement.errors, status: :unprocessable_entity 
       end
-    end
   end
 
   # DELETE /type_of_crops/1
   # DELETE /type_of_crops/1.json
-  def destroy
-    @unit_of_measurement = UnitOfMeasurement.find(params[:id])
-    @unit_of_measurement.destroy
-    respond_to do |format|
-      flash[:notice] = "Successfull be destroyed"
-      format.html { redirect_to  action:"index"}
-    end
-  end
+   def check_rel(_id)
+      exist_relation = Product.where(:unit_of_measurement_id => _id)
+      return true if exist_relation.count == 0
+       false
+   end
+
+   def destroy
+      @unit_of_measurement        = UnitOfMeasurement.find(params[:id]) 
+      if check_rel(params[:id]) 
+         respond_to do |format|
+            if @unit_of_measurement.destroy
+               format.json { head :no_content }
+               else
+               render json: { contenido: @unit_of_measurement, location: unit_of_measurement_url(@unit_of_measurement),message: :"no puede ser eliminado" },status: 400
+            end
+         end  
+         else
+         render json:  @unit_of_measurement.errors, status: :bad_request 
+      end
+
+   end
+
 
   private
   # Use callbacks to share common setup or constraints between actions.
-  def set_unit_of_measurement
-    @unit_of_measurement = UnitOfMeasurement.find(params[:id])
-  end
+   def set_unit_of_measurement
+      @unit_of_measurement = UnitOfMeasurement.find(params[:id])
+   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
-  def unit_of_measurement_params
-    params.require(:unit_of_measurement).permit(:name, :abbreviation, :coefficient)
-  end
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+   def unit_of_measurement_params
+      params.require(:unit_of_measurement).permit(:name, :abbreviation, :coefficient)
+   end
+
+   def get_all
+         @path           = "/ catastros / parcela / unidad de medida"
+         @edit_name      = "Editar unidad de medida"
+   end
 end
