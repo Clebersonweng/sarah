@@ -20,8 +20,10 @@
 //= require_tree .
 //= require data-confirm-modal
 
-//= require bootstrap-datepicker
+//= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.es.js
+
+
 
 //= require nprogress
 //= require nprogress-turbolinks
