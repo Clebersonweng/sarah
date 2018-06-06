@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/bokmann/font-awesome-rails.git
+  revision: 8ffeaf32fdcf5402c81ee254874e3a69af50c90d
+  branch: master
+  specs:
+    font-awesome-rails (4.7.0.4)
+      railties (>= 3.2, < 6.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -65,8 +73,6 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.7.0)
-    font-awesome-rails (4.7.0.0)
-      railties (>= 3.2, < 5.1)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     i18n (0.7.0)
@@ -174,7 +180,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   data-confirm-modal
   devise
-  font-awesome-rails
+  font-awesome-rails!
   jbuilder (~> 2.5)
   jquery-rails
   jquery-turbolinks
@@ -194,4 +200,4 @@ RUBY VERSION
    ruby 2.3.0p0
 
 BUNDLED WITH
-   1.15.4
+   1.16.1

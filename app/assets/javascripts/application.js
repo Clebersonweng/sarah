@@ -21,6 +21,7 @@
 //= require data-confirm-modal
 
 //= require bootstrap-datepicker
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.es.js
 
 //= require nprogress
 //= require nprogress-turbolinks
