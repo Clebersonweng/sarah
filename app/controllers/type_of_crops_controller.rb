@@ -8,7 +8,7 @@ class TypeOfCropsController < ApplicationController
   def index
     get_all
     @type_of_crops = TypeOfCrop.all
-    @type_of_crops.as_json(only: [:id, :code, :name, :variety_id,:"['variety']['descr']"],:include => { :variety => { :only => :descr }})
+    @type_of_crops.as_json(only: [:id, :code, :name])
 
     respond_with(@type_of_crops)
   end
@@ -86,7 +86,7 @@ class TypeOfCropsController < ApplicationController
   end
 
   def get_all
-    @varieties = Variety.all.collect {|p| [ p.descr, p.id ] }
+    #@varieties = Variety.all.collect {|p| [ p.descr, p.id ] }
     @path = "/ catastros / parcela / tipo de cultivo"
     @edit_name      = "Editar tipo de cultivo"
   end

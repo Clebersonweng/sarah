@@ -6,7 +6,7 @@ class EstimateSale < ApplicationRecord
 	validates_presence_of :estimate_production, :price, :gross_sale, :date_init,:date_end
 	before_create :add_zeros_to_code
 	validates :code, uniqueness: true, length: { maximum: 7 }
-	validates :estimate_production, length: { minimum: 1 },length: { maximum: 7 } 
+	validates :estimate_production, length: { minimum: 1, maximum: 7}
 	validates :price, :format => { :with => /\A\d+(?:\.\d{0,2})?\z/ }, :numericality => {:greater_than => 0}
   
   

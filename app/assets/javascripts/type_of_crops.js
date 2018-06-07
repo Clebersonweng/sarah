@@ -1,38 +1,31 @@
 $(document).ready(function ()
 {
 
-  controlador = $("#controller").val();
-  generic_response_form(controlador);
-  form_type_of_crops_validates();
+   controlador = $("#controller").val();
+   generic_response_form(controlador);
+   form_type_of_crops_validates();
 });
 
 function form_type_of_crops_validates()
 {
-  $('#form_type_of_crops').bootstrapValidator({
-    excluded: [':disabled', ':hidden', ':not(:visible)'],
-    fields: {
-      "type_of_crop[name]": {
-        validators: {
-          notEmpty: {
-            message: 'Este campo es obligatório'
-          },
-          stringLength: {
-            min: 3,
-            max: 30,
-            message: 'El nombre no puede ser menor que 3 y mayor que 50 caracteres'
-          },
-          regexp: {
-            regexp: /^[a-zA-Z0-9_ ]+$/,
-            message: 'El nombre debe consistir en caracteres alfanuméricos'
-          }
-        }
-      },     
-      "type_of_crop[variety_id]": {
-        validators: {
-          notEmpty: {
-            message: 'Este campo es obligatório'
-          }
-        }
+   $('#form_type_of_crops').bootstrapValidator({
+      excluded: [':disabled', ':hidden', ':not(:visible)'],
+      fields: {
+         "type_of_crop[name]": {
+           validators: {
+             notEmpty: {
+               message: 'Este campo es obligatório'
+             },
+             stringLength: {
+               min: 3,
+               max: 30,
+               message: 'El nombre no puede ser menor que 3 y mayor que 50 caracteres'
+            },
+             regexp: {
+               regexp: /^[a-zA-Z0-9_ ]+$/,
+               message: 'El nombre debe consistir en caracteres alfanuméricos'
+            }
+         }
       }
     }
   }).on('init.field.fv', function (e, data) {

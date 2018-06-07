@@ -27,7 +27,7 @@
                     <td><%= history_sale.id %></td>
                     <td><%= history_sale.period %></td>
                     <td><%= history_sale.date %></td>
-                    <td><%= history_sale.quantity %></td>
+                    <td><%= number_with_precision(history_sale.quantity, :precision => 0, :delimiter => '.' ) %></td>
                   </tr>
                   <% end %>
               </tbody>                        
