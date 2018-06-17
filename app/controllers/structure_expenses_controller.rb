@@ -17,7 +17,6 @@ class StructureExpensesController < ApplicationController
 
 	# GET /structure_expenses/new
 	def new
-		detalles
 		get_all
 		@structure_expense      = StructureExpense.new
 		program                 = ProgramProduction.last()
@@ -74,10 +73,6 @@ class StructureExpensesController < ApplicationController
 			#f#ormat.html { redirect_to structure_expenses_url, notice: 'Structure expense was successfully destroyed.' }
 			format.json { head :no_content }
 		end
-	end
-
-	def detalles
-
 	end
 
 

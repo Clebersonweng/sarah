@@ -21,15 +21,19 @@ class SuppliesController < ApplicationController
 	def new
 		get_all
 		@supply = Supply.new
-		farming_plot = Supply.view_farming_plot_area
+		#farming_plot = Supply.view_farming_plot_area
 
-		last_id_prog_production = ProgramProduction.last()
+		program 		= ProgramProduction.last()
 
 
-		unless last_id_prog_production.nil?
-			programId = ProgramProduction.find(last_id_prog_production)
-			@program_production_id = programId.id
-			@last_program_production_total = programId.program_production
+		unless program.nil?
+         @quantity_production    = program.program_production
+         @program_production_id  = program.id
+         sale                    = EstimateSale.find(program.estimate_sale_id)
+         farm                    = FarmingPlot.find(sale.farming_plot_id)
+         @farm_name              = farm.name
+         @farm_area              = farm.area
+         #respond_with(@cost_oper_machine)
 		end
 
 	 end
