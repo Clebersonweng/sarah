@@ -1,13 +1,13 @@
 class ManuIndiExpensesController < ApplicationController
 
-  before_action :authenticate_user!
-  before_action :set_manu_indi_expense, only: [:show, :edit, :update, :destroy]
+   before_action :authenticate_user!
+   before_action :set_manu_indi_expense, only: [:show, :edit, :update, :destroy]
 
    # GET /manu_indi_expenses
    # GET /manu_indi_expenses.json
    def index
-    get_all
-    @manu_indi_expenses = ManuIndiExpense.all
+      get_all
+      @manu_indi_expenses = ManuIndiExpense.all
    end
 
    # GET /manu_indi_expenses/1
@@ -17,20 +17,20 @@ class ManuIndiExpensesController < ApplicationController
 
    # GET /manu_indi_expenses/new
    def new
-    get_all
-    program                 = ProgramProduction.last()
-    @program_production_id  = program.id
-
-
-    @manu_indi_expense = ManuIndiExpense.new
+      get_all
+      @manu_indi_expense      = ManuIndiExpense.new
+      program                 = ProgramProduction.last()
+      unless program.nil?
+        @program_production_id  = program.id
+      end
    end
 
    # GET /manu_indi_expenses/1/edit
    def edit
       get_all
 
-      program                 = ProgramProduction.last()
-      @program_production_id  = program.id
+      program                             = ProgramProduction.last()
+      @program_production_id              = program.id
 
       @manu                               = ManuIndiExpense.find(params[:id])
       @manu_details                       = ManuIndiExpenseDet.where(manu_indi_expense_id: @manu.id)
@@ -41,7 +41,7 @@ class ManuIndiExpensesController < ApplicationController
 
       return :json => {:contenido => @manu_details,:result => "edit"}
 
-      end
+   end
 
    # POST /manu_indi_expenses
    # POST /manu_indi_expenses.json
@@ -84,12 +84,12 @@ class ManuIndiExpensesController < ApplicationController
    end
 
    private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_manu_indi_expense
+   # Use callbacks to share common setup or constraints between actions.
+   def set_manu_indi_expense
       @manu_indi_expense = ManuIndiExpense.find(params[:id])
-    end
+   end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+   # Never trust parameters from the scary internet, only allow the white list through.
    def manu_indi_expense_params                                                                                                                 
       params.require(:manu_indi_expense).permit(:program_production_id, :chart_of_account_id, :total_fixed, :total_variable, :totalFixedAndVariable,{ manu_indi_expense_dets_attributes: [:name, :isFixed, :subtotal]})
    end

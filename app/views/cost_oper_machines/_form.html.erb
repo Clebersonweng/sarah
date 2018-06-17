@@ -133,6 +133,6 @@
          </table>
          
          <%= render('layouts/buttons')%>
-         <%= f.text_field :program_production_id, :value => @program_production_id %>
+         <%= f.hidden_field :program_production_id, :value => @program_production_id %>
 <%end%>
 <input type="hidden" id="controller" value="<%= controller_name%>">

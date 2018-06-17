@@ -106,17 +106,32 @@ function form_estimate_sale_validates()
 			validating: 'glyphicon glyphicon-refresh'
 		},
 		fields: {
-			'estimate_sale[date]': {
-				validators: {
-					notEmpty: {
-						message: 'Este campo es obligatório'
-					},
-					date: {
-						format: 'MM/DD/YYYY',
-						message: 'No es una fecha válida'
-					}
-				}
-			},
+         "estimate_sale[date_init]": {
+             validators: {
+                  notEmpty: {
+                     message: 'Este campo es obligatório'
+                  },
+                  date: {
+                     format: 'DD/MM/YYYY',
+                     message: 'La fecha no es valida',
+                     min: '01/01/2010',
+                     max: '10/12/2050'
+                  }
+               }
+         },
+         "estimate_sale[date_end]": {
+             validators: {
+                  notEmpty: {
+                     message: 'Este campo es obligatório'
+                  },
+                  date: {
+                     format: 'DD/MM/YYYY',
+                     message: 'La fecha no es valida',
+                     min: '01/01/2010',
+                     max: '10/12/2050'
+                  }
+               }
+         },
 			'estimate_sale[farming_plot_id]': {
 				validators: {
 					notEmpty: {

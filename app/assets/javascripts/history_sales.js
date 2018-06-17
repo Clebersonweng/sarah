@@ -3,13 +3,6 @@ $(document).ready(function ()
    controlador = $("#controller").val();   
    generic_response_form(controlador);
    form_history_sales_validates();
-   $('.datepicker')
-      .datepicker({
-         format: 'dd/mm/yyyy'
-      })
-      .on('changeDate', function(e) {
-         $('form').bootstrapValidator('revalidateField', 'history_sale[date]');  
-      });
 });
 
 

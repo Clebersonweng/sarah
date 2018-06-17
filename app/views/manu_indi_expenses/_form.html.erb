@@ -17,11 +17,11 @@
             <div class="row">
                <div class="col-md-4">
                   <div class="form-group">
-                     <%= f.label :program_production_id,"Descripción del gasto :" ,class: " col-sm-6 col-lg-5 col-xs-12"%>
+                     <%= f.label :program_production_id,"Descripción del gasto :" ,class: " col-sm-6 col-lg-10 col-xs-12"%>
                         <input type="text" name="manu_indi[descr_expense]" id="manu_indi_descr_expense" class="form-control" required/>
                   </div>
                </div>
-               <div class="col-md-2">
+               <div class="col-md-3">
                   <div class="form-group">
                      <%= f.label :program_production_id,"Tipo de gasto:" ,class: "col-sm-6 col-lg-8 col-xs-12" %>
                     <%= select("manu_indi", "type_expense", options_for_select([['FIJO', 1], ['VARIABLE', 0]]),{}, {class: "form-control",required: true})%>
@@ -30,7 +30,7 @@
                </div>
                <div class="col-md-3">
                   <div class="form-group">
-                     <%= f.label :program_production_id,"Monto del gasto :" ,class: "col-sm-6 col-lg-8 col-xs-12"%>
+                     <%= f.label :program_production_id,"Monto del gasto :" ,class: "col-sm-6 col-lg-10 col-xs-12"%>
                      <input type="text" name="manu_indi[subtotal]" id="manu_indi_subtotal"  class="form-control text-right" required/>
                   </div>
                </div>
@@ -47,7 +47,7 @@
             data-show-refresh="false" 
             data-pagination="true" 
             onlyInfoPagination="false" 
-            data-icons="icons" data-sort-name="code" data-sort-order="desc" 
+            data-icons="icons" data-sort-name="code" data-sort-order="asc" 
             data-card-view="false"
             data-checkbox-header="false"
             >

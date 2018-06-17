@@ -1,7 +1,7 @@
-var  COUNT  						= 0;
-var  TOTAL_FIXE_AND_VARIABLE  = 0;
-var  TOTAL_FIXED  				= 0;
-var  TOTAL_VARIABLE  			= 0;
+var  COUNT_MIE  									= 0;
+var  TOTAL_FIXE_AND_VARIABLE_MIE  		= 0;
+var  TOTAL_FIXED_MIE  							= 0;
+var  TOTAL_VARIABLE_MIE  						= 0;
 
 $(document).ready(function () {
  
@@ -13,7 +13,8 @@ $(document).ready(function () {
 
 	$("#btn_add_manu_indi_expense").on("click",function() 
 	{
-		if(is_valid_fields())
+		console.log("ok");
+		if(is_valid_fields_mie())
 		{
 			var descr_expense         = $("#manu_indi_descr_expense").val();
 			var type_expense          = $("#manu_indi_type_expense option:selected").text();
@@ -23,7 +24,7 @@ $(document).ready(function () {
 			if(typeof descr_expense != "undefined" || descr_expense != ""  && typeof amount != "undefined" || amount != "")
 			{
 				row_bt_manu_indi_expense(descr_expense,type_expense,type_expense_id,amount);
-				COUNT++;   
+				COUNT_MIE++;   
 			}	
 		}
 		else
@@ -57,18 +58,18 @@ $(document).ready(function () {
 					$remove.prop('disabled', true);
 					if(row.type_expense == "FIJO")
 					{
-						TOTAL_FIXED -= $value_fixe;   
+						TOTAL_FIXED_MIE -= $value_fixe;   
 					}
 					else
 					{
-						TOTAL_VARIABLE -= $value_variable;
+						TOTAL_VARIABLE_MIE -= $value_variable;
 					}
 					
 
-					TOTAL_FIXE_AND_VARIABLE = TOTAL_FIXED + TOTAL_VARIABLE;
-					$(".manu_indi_expe_total_fixed").text(TOTAL_FIXED.toFixed(0));
-					$(".manu_indi_expe_total_variable").text(TOTAL_VARIABLE.toFixed(0));
-					$(".manu_indi_expe_total_fixed_and_variable").text(TOTAL_FIXE_AND_VARIABLE.toFixed(0));
+					TOTAL_FIXE_AND_VARIABLE_MIE = TOTAL_FIXED_MIE + TOTAL_VARIABLE_MIE;
+					$(".manu_indi_expe_total_fixed").text(TOTAL_FIXED_MIE.toFixed(0));
+					$(".manu_indi_expe_total_variable").text(TOTAL_VARIABLE_MIE.toFixed(0));
+					$(".manu_indi_expe_total_fixed_and_variable").text(TOTAL_FIXE_AND_VARIABLE_MIE.toFixed(0));
 				});
 	}); 
 
@@ -78,11 +79,11 @@ function row_bt_manu_indi_expense(descr_expense,type_expense,type_expense_id,amo
 {
 	//TOTAL += parseFloat(amount);
 	verify_type_expense(type_expense_id,amount,"new");
-	TOTAL_FIXE_AND_VARIABLE = TOTAL_FIXED + TOTAL_VARIABLE;
+	TOTAL_FIXE_AND_VARIABLE_MIE = TOTAL_FIXED_MIE + TOTAL_VARIABLE_MIE;
 
-	$(".manu_indi_expe_total_fixed").text(TOTAL_FIXED);
-	$(".manu_indi_expe_total_variable").text(TOTAL_VARIABLE);
-	$(".manu_indi_expe_total_fixed_and_variable").text(TOTAL_FIXE_AND_VARIABLE);
+	$(".manu_indi_expe_total_fixed").text(TOTAL_FIXED_MIE);
+	$(".manu_indi_expe_total_variable").text(TOTAL_VARIABLE_MIE);
+	$(".manu_indi_expe_total_fixed_and_variable").text(TOTAL_FIXE_AND_VARIABLE_MIE);
 
 	var  _data_ =  {
 							"id"                       : COUNT,
@@ -92,7 +93,7 @@ function row_bt_manu_indi_expense(descr_expense,type_expense,type_expense_id,amo
 							"type_expense"             : type_expense,   
 							"type_expense_id"          : "<input type='hidden' size='20' name='manu_indi_expense[manu_indi_expense_dets_attributes]["+COUNT+"][isFixed]' value="+type_expense_id+">",  
 							"subtotal"                 : amount,   
-							"subtotal_id"              : "<input type='hidden' size='20' name='manu_indi_expense[manu_indi_expense_dets_attributes]["+COUNT+"][subtotal]' value="+TOTAL_FIXED+">",   
+							"subtotal_id"              : "<input type='hidden' size='20' name='manu_indi_expense[manu_indi_expense_dets_attributes]["+COUNT+"][subtotal]' value="+TOTAL_FIXED_MIE+">",   
 							"Action"                   : '<a class="remove  btn btn-danger delete btn-sm" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></a>',
 						};
   
@@ -190,16 +191,16 @@ function verify_type_expense(type,amount,action)
 	{
 		if(type == 1)
 		{
-			TOTAL_FIXED += parseFloat(amount);
+			TOTAL_FIXED_MIE += parseFloat(amount);
 		}
 		else
 		{
-			TOTAL_VARIABLE += parseFloat(amount);
+			TOTAL_VARIABLE_MIE += parseFloat(amount);
 		}
 	}
 }
 
-function is_valid_fields()
+function is_valid_fields_mie()
 {
    $description		     = $("#manu_indi_descr_expense");
    $type_expense		     = $("#manu_indi_type_expense");

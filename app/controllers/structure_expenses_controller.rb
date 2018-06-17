@@ -21,7 +21,9 @@ class StructureExpensesController < ApplicationController
 		get_all
 		@structure_expense      = StructureExpense.new
 		program                 = ProgramProduction.last()
-		@program_production_id  = program.id
+	   unless program.nil?
+			@program_production_id  = program.id
+		end
 	end
 
 	# GET /structure_expenses/1/edit

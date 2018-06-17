@@ -19,14 +19,16 @@ class CostOperMachinesController < ApplicationController
       get_all
       @cost_oper_machine = CostOperMachine.new
       program                 = ProgramProduction.last()
-      @quantity_production    = program.program_production
-      @program_production_id  = program.id
-      sale                    = EstimateSale.find(program.estimate_sale_id)
-      farm                    = FarmingPlot.find(sale.farming_plot_id)
-      @farm_name              = farm.name
-      @farm_area              = farm.area
-      @cost_oper_machine = CostOperMachine.new
-      respond_with(@cost_oper_machine)
+      unless program.nil?
+         @quantity_production    = program.program_production
+         @program_production_id  = program.id
+         sale                    = EstimateSale.find(program.estimate_sale_id)
+         farm                    = FarmingPlot.find(sale.farming_plot_id)
+         @farm_name              = farm.name
+         @farm_area              = farm.area
+         @cost_oper_machine      = CostOperMachine.new
+         respond_with(@cost_oper_machine)
+      end
    end
 
    def edit

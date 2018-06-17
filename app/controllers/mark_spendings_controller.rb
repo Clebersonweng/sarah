@@ -19,14 +19,16 @@ class MarkSpendingsController < ApplicationController
 	def new
 		get_all
 		@mark_spending 				= MarkSpending.new
-		program							= ProgramProduction.last()
+		if(ProgramProduction.exists?(1))
+			program_production			= ProgramProduction.last()
+			@program_production_id		= program_production.id.present?
+			sale            	         = EstimateSale.find(program_production.estimate_sale_id)
+			farm            	         = FarmingPlot.find(sale.farming_plot_id)
 
-		@program_production_id		= program.id
-		sale            	         = EstimateSale.find(program.estimate_sale_id)
-		farm            	         = FarmingPlot.find(sale.farming_plot_id)
-
-		@estimate_sale 				= sale.total_production
-		@farming_plot					= farm.name
+			@estimate_sale 				= sale.total_production
+			@farming_plot					= farm.name
+		end 
+		
 	end
 
 	# GET /mark_spendings/1/edit

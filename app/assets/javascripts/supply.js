@@ -34,11 +34,6 @@ $(document).ready(function ()
       }
    });
 
-   if(typeof controlador != "undefined" && controlador == "supplies")
-   {
-      call_view_data_farm_plot("calculate_subtotal",""); 
-   }
-
    $('#tb_suppy_detail').on('check.bs.table', function (e, row) 
    {
       $remove = $('.remove');
@@ -90,7 +85,6 @@ function row_table(product,product_id,price,dosage,area,measure)
       "subtotal_id": "<input type='hidden' name='supply[supply_details_attributes]["+COUNT+"][subtotal]' value="+subtotal+">",
       "Action" : '<a class="remove  btn btn-danger delete btn-sm" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></a>',
    };
-   console.log(COUNT);
    $('#tb_suppy_detail').bootstrapTable("append", _data_);
 
 
@@ -113,28 +107,6 @@ function delete_row_table(obj)
 }
 
 
-function call_view_data_farm_plot(path,data)
-{   
-   $.ajax({
-      type: "POST",
-      dataType: 'JSON',
-      data: data,
-      url: "/" + controlador + "/"+path,
-      success: function (response) {
-         $("#farm_name").val(response["0"].farm_name) ;
-         $("#farm_area").val(response["0"].farm_area) ;
-         $("#farm_prog_total_production").val(response["0"].prog_total_production);  
-      },
-      error: function (response) 
-      {
-         alert_sarah("Ocurrió un error al calcular el subtotal de insumos para este producto", "danger");    
-      },
-      fail: function (response)
-      {
-         alert_sarah(response.msg, "danger");
-      }
-   });          
-}
 /*
 function addNewRow(product_id,quantity, subtotal) 
 {

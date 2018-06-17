@@ -99,15 +99,13 @@ $(document).ready(function ()
       }
    });
 
-   function replace_comma(var_string)
-   {
-      var_string.replace(',','.')
-   }
-   
-   function replace_point(var_string)
-   {
-      var_string.replace('.',',');
-   }
+   $('.datepicker')
+   .datepicker({
+      format: 'dd/mm/yyyy'
+   }).on('changeDate', function(e) {
+     console.log(e.currentTarget.form.id);        
+      $(e.currentTarget.form.id).bootstrapValidator('revalidateField', 'e.target.id');  
+   });   
 
    //sirve para saber el estado de carga de la tabla
    $('.table').on('load-success.bs.table', function(e, data)
@@ -152,7 +150,15 @@ $(document).ready(function ()
 
 });
 
+function replace_comma(var_string)
+{
+   var_string.replace(',','.')
+}
 
+function replace_point(var_string)
+{
+   var_string.replace('.',',');
+}
 function evt_delete_row(evt)
 {
    if(typeof evt != undefined)

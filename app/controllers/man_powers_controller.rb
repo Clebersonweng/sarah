@@ -18,14 +18,14 @@ class ManPowersController < ApplicationController
 
   end
 
-  # GET /man_powers/new
-  def new
-  	get_all
-  	@man_power = ManPower.new
-  	program_production = ProgramProduction.last
-  	@program_production_id = program_production.id
-  	
-	 #@mp = ConsRawMaterialDetail.where(cons_raw_material_id: @cons_raw_material.id)
+  	# GET /man_powers/new
+  	def new
+	  	get_all
+	  	@man_power = ManPower.new
+	  	program_production = ProgramProduction.last
+		unless program_production.nil?
+  			@program_production_id = program_production.id
+  		end
 	end
 
 	# GET /man_powers/1/edit

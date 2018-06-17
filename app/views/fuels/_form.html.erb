@@ -1,6 +1,5 @@
 
 <%= form_for(@fuel,html: {class: 'form-horizontal',id:'form_fuels', remote:true,"data-type": "json",'data-model' => 'fuel'}) do |f| %>
-	<div class="col-sm-12 col-xs-12">
 		<div class="form-group">  
 			<%= f.label :name,class: "control-label col-sm-3" %>
 			<div class="col-sm-4">
@@ -25,7 +24,6 @@
 			</div>
 		</div>
 		<%= render('layouts/buttons')%>
-	</div>
 
 <% end %>
 <input type="hidden" id="controller" value="<%= controller_name%>">

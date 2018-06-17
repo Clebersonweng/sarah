@@ -1,7 +1,5 @@
 
 <%= form_for(@supply,html: { id: "form_supplies", remote: true,"data-type": "json",'data-model' => 'supply'}) do |f| %>
-<div class="col-xs-12 col-lg-12 col-sm-12">
-
 	<div class="col-md-4 col-sm-4">
 		<div class="form-group">
 			<%= f.label :program_production_id,"Area :" ,class: " col-sm-6 col-lg-5 col-xs-12"%>
@@ -88,12 +86,10 @@
 		</table>
 
 
-	</div>           
 	<%= f.hidden_field :program_production_id, :value => @program_production_id %>
 	<%= render('layouts/buttons')%>
-</div>  
-<input type="hidden" id="controller" value="<%= controller_name%>">
 <% end %>
+<input type="hidden" id="controller" value="<%= controller_name%>">
 
 
 

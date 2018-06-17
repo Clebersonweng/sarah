@@ -3,13 +3,13 @@
 	<div class="row">
 		<div class="col-md-4 col-sm-4">
 			<div class="form-group">
-				<%= f.label :program_production_id,"Parcela :" ,class: " col-sm-6 col-lg-5 col-xs-12"%>
+				<%= f.label :program_production_id,"Parcela :" ,class: " col-sm-6 col-lg-8 col-xs-12"%>
 				<input type="text" name="farming_plot" id="farming_plot" class="form-control" value="<%= @farming_plot %>" readonly/>
 			</div>
 		</div>
-		<div class="col-md-3 col-sm-3">
+		<div class="col-md-4 col-sm-4">
 			<div class="form-group">
-				<%= f.label :program_production_id,"Cantidad estimada a vender :" ,class: "col-sm-8 col-lg-8 col-xs-12"%>
+				<%= f.label :program_production_id,"Cantidad estimada a vender :" ,class: "col-sm-8 col-lg-12 col-xs-12"%>
 				<input type="text" name="estima_sale" id="estima_sale" class="form-control text-right" value="<%= @estimate_sale %>" readonly/>
 			</div>
 		</div>
@@ -17,19 +17,19 @@
 	<div class="row">
 		<div class="col-md-4 col-sm-4">
 			<div class="form-group">
-				<%= f.label :program_production_id,"Descripción del gasto :" ,class: " col-sm-6 col-lg-5 col-xs-12"%>
+				<%= f.label :program_production_id,"Descripción del gasto :" ,class: " col-sm-6 col-lg-8 col-xs-12"%>
 				<input type="text" name="mark_spend[descr]" id="mark_spend_descr" class="form-control" required/>
 			</div>
 		</div>
 		<div class="col-md-3 col-sm-3">
 			<div class="form-group">
-				<%= f.label :program_production_id,"Tipo de gasto :" ,class: "col-sm-8 col-lg-8 col-xs-12"%>
+				<%= f.label :program_production_id,"Tipo de gasto :" ,class: "col-sm-8 col-lg-9 col-xs-12"%>
 				<%= select("mark_spend", "type_expense", options_for_select(@type_expenses),{}, {class: "form-control",required: true})%>
 			</div>
 		</div>
 		<div class="col-md-3 col-sm-3">
 			<div class="form-group">
-				<%= f.label :program_production_id,"Monto del gasto :" ,class: "col-sm-6 col-lg-8 col-xs-12"%>
+				<%= f.label :program_production_id,"Monto del gasto :" ,class: "col-sm-6 col-lg-9 col-xs-12"%>
 				<input type="text" name="mark_spend[subtotal]" id="mark_spend_subtotal"  class="form-control text-right" required>
 			</div>
 		</div>
