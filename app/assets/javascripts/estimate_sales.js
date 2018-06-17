@@ -77,14 +77,13 @@ function evt_click_to_row_table() {
 		quantity_estimate_prod = $("#estimate_sale_estimate_production").val();
 		if (quantity_estimate_prod != "" && typeof quantity_estimate_prod != "undefined" && quantity_estimate_prod != (isNaN))
 		{
-		// $('#openHistory').prop("disabled", false); 
-		var area = $("#estimate_sale_farming_plot_id option:selected").data('area-parcela');
-		var estimacionDeProduccion = $("#estimate_sale_estimate_production").val();
-		var estimacionPorArea = parseFloat(estimacionDeProduccion) * parseFloat(area);
-		$("#estimate_sale_total_production").val(estimacionPorArea);
-		$('form').bootstrapValidator('revalidateField', 'estimate_sale[total_production]');
-	}
-});
+			var area = $("#estimate_sale_farming_plot_id option:selected").data('area-parcela');
+			var estimacionDeProduccion = $("#estimate_sale_estimate_production").val();
+			var estimacionPorArea = parseFloat(estimacionDeProduccion) * parseFloat(area);
+			$("#estimate_sale_total_production").val(estimacionPorArea);
+			$('form').bootstrapValidator('revalidateField', 'estimate_sale[total_production]');
+		}
+	});
 }
 
 function btn_evt_calculate_total_gross_sale() {
