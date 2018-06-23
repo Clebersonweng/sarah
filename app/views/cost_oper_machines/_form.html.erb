@@ -57,31 +57,31 @@
             data-show-refresh="false" 
             data-pagination="true" 
             onlyInfoPagination="false" 
-            data-icons="icons" data-sort-name="code" data-sort-order="asc" 
+            data-icons="icons" data-sort-name="machine" data-sort-order="desc" 
             data-card-view="false"
             data-checkbox-header="false"
          >
             <thead>
                <tr>
                   <th data-field="id" data-checkbox="true">#</th>
-                  <th style="width:10%" data-index="index" data-field="code"> Código</th>
-                  <th style="width:15%" data-field="machine">Máquinaria</th>
-                  <th style="width:15%" data-field="machine_id"></th>
-                  <th style="width:15%" data-field="implement">Implemento</th>
-                  <th style="width:15%" data-field="implement_id"></th>
-                  <th style="width:10%" data-align='right'  data-field="fuel">Combustible</th>
-                  <th style="width:10%" data-align='right'  data-field="fuel_id"></th>
-                  <th style="width:10%" data-align='right'  data-field="lubricant">Lubricante</th>
-                  <th style="width:10%" data-field="lubricant_id"></th>
-                  <th style="width:10%" data-align='right'  data-field="rep_and_maint">Reparacion y Mant.</th>
-                  <th style="width:10%" data-align='right' data-class="numeric" data-field="rep_and_maint_id"></th>
-                  <th style="width:10%" data-align='right'  data-field="hours_needed">Horas Necesárias</th>
-                  <th style="width:10%" data-align='right'  data-field="hours_needed_id"></th>
-                  <th style="width:10%" data-align='right'  data-field="amount">Aplic</th>
-                  <th style="width:10%" data-align='right'  data-field="amount_id"></th>
-                  <th style="width:10%" data-halign='right' data-footer-formatter="runningFormatter" data-field="subtotal" data-align='right'>Sub-total</th>
-                  <th style="width:10%" data-halign='right' data-align='right' data-field="subtotal_val"></th>
-                  <th style="width:10%" data-halign='right' data-align='right' data-field="Action" data-events="remove">Acción</th>
+                  <th data-index="index" data-field="code"> Código</th>
+                  <th data-field="machine">Máquinaria</th>
+                  <th data-field="machine_id" class="hide"></th>
+                  <th data-field="implement">Implemento</th>
+                  <th data-field="implement_id" class="hide"></th>
+                  <th data-align='right'  data-field="fuel">Combustible</th>
+                  <th data-align='right'  data-field="fuel_id" class="hide"></th>
+                  <th data-align='right'  data-field="lubricant">Lubricante</th>
+                  <th data-field="lubricant_id" class="hide"></th>
+                  <th data-align='right' data-field="rep_and_maint">Reparacion y Mant.</th>
+                  <th data-align='right' data-field="rep_and_maint_id" class="hide"></th>
+                  <th data-align='right' data-field="hours_needed">Horas Necesárias</th>
+                  <th data-align='right' data-field="hours_needed_id" class="hide"></th>
+                  <th data-align='right' data-field="amount">Aplic</th>
+                  <th data-align='right' data-field="amount_id" class="hide"></th>
+                  <th data-halign='right' data-footer-formatter="runningFormatter" data-field="subtotal" data-align='right'>Sub-total</th>
+                  <th style="width:10%" data-halign='right' data-align='right' data-field="subtotal_val" class="hide"></th>
+                  <th data-width="80" data-halign='right' data-align='right' data-field="Action" data-events="remove">Acción</th>
                </tr>
             </thead>
             <tbody>
@@ -112,10 +112,14 @@
                               </a>
                            </td>
                         </tr>
-                     <% end %>   
-                     <%= f.text_field :total, :value => @total ,:id => "cost_oper_machine_total" %>
+                     <% end %>
+                     <div class="hide">
+                        <%= f.text_field :total, :value => @total ,:id => "cost_oper_machine_total" %>
+                     </div>
                   <% else %>
-                     <%= f.text_field :total, :value => 0 ,:id => "cost_oper_machine_total" %>
+                     <div class="hide">
+                        <%= f.text_field :total, :value => 0 ,:id => "cost_oper_machine_total" %>
+                     </div>
                   <% end %>
             </tbody>
             <tfoot>

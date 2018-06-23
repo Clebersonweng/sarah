@@ -16,21 +16,23 @@
             <tr>
                <th data-field="id" data-checkbox="false">#</th>
                <th data-field="program_production_id">Parcela</th>
+               <th data-field="type_of_crop_id">Cultivo</th>
                <th data-field="total_fixed" >Total de gastos fijos</th> 
                <th data-field="total_variable" >Total de gastos variables</th>  
                <th data-field="totalFixedAndVariable" >Total de gastos fijos y variables</th>  
-               <th data-formatter="actionFormatter" data-align="right" data-events="actionEvents">Acción</th>
+               <th data-width='80' data-formatter="actionFormatter" data-align="right" data-events="actionEvents">Acción</th>
             </tr>
          </thead>
          <tbody>
             <% @manu_indi_expenses.each do |manu_indi_expense| %>
-              <tr>
-                <td><%= manu_indi_expense.id %></td>
-                <td><%= manu_indi_expense.program_production.estimate_sale.farming_plot.name %></td>
-                <td><%= number_with_precision( manu_indi_expense.total_fixed, :precision => 0, :delimiter => '.' ) %></td>                  
-                <td><%= number_with_precision( manu_indi_expense.total_variable, :precision => 0, :delimiter => '.' ) %></td>                  
-                <td><%= number_with_precision( manu_indi_expense.totalFixedAndVariable, :precision => 0, :delimiter => '.' ) %></td>                  
-              </tr>
+               <tr>
+                  <td><%= manu_indi_expense.id %></td>
+                  <td><%= manu_indi_expense.program_production.estimate_sale.farming_plot.name %></td>
+                  <td><%= manu_indi_expense.program_production.type_of_crop.farming_plot.name %></td>
+                  <td><%= number_with_precision( manu_indi_expense.total_fixed, :precision => 0, :delimiter => '.' ) %></td>                  
+                  <td><%= number_with_precision( manu_indi_expense.total_variable, :precision => 0, :delimiter => '.' ) %></td>                  
+                  <td><%= number_with_precision( manu_indi_expense.totalFixedAndVariable, :precision => 0, :delimiter => '.' ) %></td>                  
+               </tr>
             <% end %>
          </tbody>
       </table>

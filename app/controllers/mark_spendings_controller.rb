@@ -18,14 +18,15 @@ class MarkSpendingsController < ApplicationController
 	# GET /mark_spendings/new
 	def new
 		get_all
-		@mark_spending 				= MarkSpending.new
-		if(ProgramProduction.exists?(1))
-			program_production			= ProgramProduction.last()
-			@program_production_id		= program_production.id.present?
+		@mark_spending 					= MarkSpending.new
+		program_production				= ProgramProduction.last()
+	  
+	   unless program_production.nil?
+			@program_production_id		= program_production.id
 			sale            	         = EstimateSale.find(program_production.estimate_sale_id)
 			farm            	         = FarmingPlot.find(sale.farming_plot_id)
 
-			@estimate_sale 				= sale.total_production
+			@total_est_production 				= sale.total_production
 			@farming_plot					= farm.name
 		end 
 		
@@ -34,14 +35,17 @@ class MarkSpendingsController < ApplicationController
 	# GET /mark_spendings/1/edit
 	def edit
 		get_all
-		mark_spending 			                    = MarkSpending.find(params[:id])
-		@mark_spending_details                   = MarkSpendingDet.where(mark_spending_id: mark_spending.id)
-		#@mark_spending_details.is_fixed			  = if @mark_spending_details == true "hola"
-		@total_fixed                             = mark_spending.total_fixed
-		@total_variable                          = mark_spending.total_variable
-		@total                                   = @mark_spending_details.sum(:subtotal)
-
-		@program_production_id                   = mark_spending.program_production_id
+		mark_spending                       = MarkSpending.find(params[:id]) 
+      @mark_spending_details               = MarkSpendingDet.where(mark_spending_id: mark_spending.id)
+		prog 				           	         = ProgramProduction.find(mark_spending.program_production_id)
+		sales				           	         = EstimateSale.find(prog.estimate_sale_id)
+		
+		@program_production_id					= mark_spending.program_production_id
+		@total_est_production					= prog.program_production
+		@farming_plot								= sales.farming_plot.name
+      @total_fixed                        = mark_spending.total_fixed
+      @total_variable                     = mark_spending.total_variable
+      @total                              = @mark_spending_details.sum(:subtotal)
 	end
 
 	# POST /mark_spendings
@@ -77,7 +81,12 @@ class MarkSpendingsController < ApplicationController
 	# DELETE /mark_spendings/1
 	# DELETE /mark_spendings/1.json
 	def destroy
+		@details = MarkSpendingDet.where(mark_spending_id: @mark_spending.id)
+		@details.each do |det|
+			det.destroy
+		end
 		@mark_spending.destroy
+
 		respond_to do |format|
 			format.html { redirect_to mark_spendings_url, notice: 'Mark spending was successfully destroyed.' }
 			format.json { head :no_content }
@@ -96,7 +105,7 @@ class MarkSpendingsController < ApplicationController
 	end
 
 	def get_all
-		@type_expenses    = { Fijo: 1, Variable: 0 } 
+		@type_expenses    = { FIJO: 1, VARIABLE: 0 } 
 		@path           = " / crear estimación / gastos de comercialización"
 		@edit_name      = "Editar gastos de comercialización"
 	end

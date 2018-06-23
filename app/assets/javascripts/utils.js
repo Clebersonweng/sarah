@@ -17,7 +17,6 @@ $(document).ready(function ()
       {
          console.log("es valido");
          $('#btn_submit_' + controlador).submit();
-         delayedRedirect(controlador);
       }
       else
       {
@@ -32,15 +31,26 @@ $(document).ready(function ()
       console.log("click evento cambiar");
    });
 
-   $( ".tabs_sarah" ).on("click",function() 
+  $( "#submenu_index" ).on("click",function() 
    {
       function complete() 
       {
          $("table").bootstrapTable();
       }
 
-      $(".panel-body").fadeOut( 1600, "linear", complete );
-      $(".panel-body").fadeIn("slow",3000);
+      $(".panel-body").fadeOut( 500, "linear", complete );
+      $(".panel-body").fadeIn("slow",500);
+
+   });
+  $( "#submenu_new" ).on("click",function() 
+   {
+      function complete() 
+      {
+         $("table").bootstrapTable();
+      }
+
+      $(".panel-body").fadeOut( 500, "linear", complete );
+      $(".panel-body").fadeIn("slow",500);
 
    });
 
@@ -103,7 +113,6 @@ $(document).ready(function ()
    .datepicker({
       format: 'dd/mm/yyyy'
    }).on('changeDate', function(e) {
-     console.log(e.currentTarget.form.id);        
       $(e.currentTarget.form.id).bootstrapValidator('revalidateField', 'e.target.id');  
    });   
 
@@ -279,13 +288,17 @@ function generic_response_form(sufixe,force)
    $(document).on("ajax:success", 'form#form_' + sufixe, function (e, data, status) 
    {
       progress(false);
-      alert_sarah("El registro fue realizado con exito", "success");
+      delayedRedirect();
+      setTimeout(function ()
+      {
+         alert_sarah("El registro fue realizado con exito", "success");
+      }, 500);
+
       $("#form_" + sufixe)[0].reset();
       $("#form_" + sufixe).data('bootstrapValidator').resetForm();
       $('input:visible:enabled:first').focus();
       $.rails.enableElement($('a[data-disable-with]'));
       seta_valores(data);
-      console.log(data);
    })
    .on('ajax:error', 'form#form_' + sufixe, function (e, data, status) 
    {
@@ -365,13 +378,13 @@ function convert_date(fullDate)
    return currentDate;
 }
 
-function delayedRedirect(controller)
+function delayedRedirect()
 {
    setTimeout(function ()
    {
-   // $("#submenu_index").trigger("click");
-   //$("#submenu_new").removeClass("active");
-   }, 70);
+      url = "/"+controlador;
+      $(location).attr("href", url);       
+   }, 1500);
 }
 
 function enabled_button_add_item(input_id,id)

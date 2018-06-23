@@ -1,5 +1,5 @@
 var  COUNT_MIE  									= 0;
-var  TOTAL_FIXE_AND_VARIABLE_MIE  		= 0;
+var  TOTAL_FIXE_AND_VARIABLE_MIE  			= 0;
 var  TOTAL_FIXED_MIE  							= 0;
 var  TOTAL_VARIABLE_MIE  						= 0;
 
@@ -13,7 +13,6 @@ $(document).ready(function () {
 
 	$("#btn_add_manu_indi_expense").on("click",function() 
 	{
-		console.log("ok");
 		if(is_valid_fields_mie())
 		{
 			var descr_expense         = $("#manu_indi_descr_expense").val();
@@ -37,40 +36,7 @@ $(document).ready(function () {
 
 	$('#tb_manu_indi_expense').on('check.bs.table', function (e, row) 
 	{
-			TOTAL_FIXE_AND_VARIABLE =  parseFloat($(".manu_indi_expe_total_fixed_and_variable").text());
-			
-			$fixe_to_delete = row.total_fixed; // tomo el elemento
-			$value_fixe = $($fixe_to_delete).attr("value"); // agarro el valor para restar del total
-
-			$variable_to_delete = row.total_variable;
-			$value_variable = $($variable_to_delete).attr("value");
-			
-			//verify_type_expense(type_expense_id,amount,"new");
-
-				$remove = $('.remove');
-				selections = [];
-				$remove.click(function () {
-				//var ids = getIdSelections($('#tb_suppy_detail'));
-				$('#tb_manu_indi_expense').bootstrapTable('remove', {
-						field: 'id',
-						values: [row.id]
-					});
-					$remove.prop('disabled', true);
-					if(row.type_expense == "FIJO")
-					{
-						TOTAL_FIXED_MIE -= $value_fixe;   
-					}
-					else
-					{
-						TOTAL_VARIABLE_MIE -= $value_variable;
-					}
-					
-
-					TOTAL_FIXE_AND_VARIABLE_MIE = TOTAL_FIXED_MIE + TOTAL_VARIABLE_MIE;
-					$(".manu_indi_expe_total_fixed").text(TOTAL_FIXED_MIE.toFixed(0));
-					$(".manu_indi_expe_total_variable").text(TOTAL_VARIABLE_MIE.toFixed(0));
-					$(".manu_indi_expe_total_fixed_and_variable").text(TOTAL_FIXE_AND_VARIABLE_MIE.toFixed(0));
-				});
+		
 	}); 
 
 });
@@ -86,8 +52,8 @@ function row_bt_manu_indi_expense(descr_expense,type_expense,type_expense_id,amo
 	$(".manu_indi_expe_total_fixed_and_variable").text(TOTAL_FIXE_AND_VARIABLE_MIE);
 
 	var  _data_ =  {
-							"id"                       : COUNT,
-							"code"                     : COUNT,
+							"id"                       : COUNT_MIE,
+							"code"                     : COUNT_MIE,
 							"descr_expense"            : descr_expense,   
 							"descr_expense_id"         : "<input type='hidden' size='100' name='manu_indi_expense[manu_indi_expense_dets_attributes]["+COUNT+"][name]' value='"+descr_expense+"' >",   
 							"type_expense"             : type_expense,   
@@ -101,7 +67,7 @@ function row_bt_manu_indi_expense(descr_expense,type_expense,type_expense_id,amo
 
 	$('#tb_manu_indi_expense').bootstrapTable("append", _data_);  
 	$("#manu_indi_descr_expense").val("");
-	$("#manu_indi_type_expense").val("1");
+	$("#manu_indi_type_expense").val(1);
 	$("#manu_indi_subtotal").val("");
 }
 

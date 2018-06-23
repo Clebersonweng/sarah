@@ -11,7 +11,7 @@ $(document).ready( function()
 
    $("#btn_man_power").on("click",function() 
    {
-   	if(is_valid_fields())
+   	if(is_valid_fields_mp())
    	{
 	      var type_work_id         = $("#man_power_details_type_of_work_id option:selected").val();
 	      var type_work            = $("#man_power_details_type_of_work_id option:selected").text();
@@ -111,9 +111,9 @@ function form_man_power_validates()
    });
 }
 
-function is_valid_fields()
+function is_valid_fields_mp()
 {
-   $employee     		= $("#man_power_details_employee_id");
+   $employee     		 = $("#man_power_details_employee_id");
    $type_of_work     = $("#man_power_details_type_of_work_id");
    $hours_needed     = $("#hours_needed");
 

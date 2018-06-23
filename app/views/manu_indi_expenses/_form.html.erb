@@ -1,19 +1,6 @@
-<div class="panel-body">
-   <%= form_for( @manu_indi_expense, html: { id: 'form_manu_indi_expenses', remote:true,"data-type": "json",'data-model' => 'manu_indi_expense'}) do |f| %>
+<%= form_for( @manu_indi_expense, html: { id: 'form_manu_indi_expenses', remote:true,"data-type": "json",'data-model' => 'manu_indi_expense'}) do |f| %>
 
       <div class="col-sm-6 col-lg-12 col-md-12 col-xs-12">
-         <% if manu_indi_expense.errors.any? %>
-            <div id="error_explanation">
-               <h2><%= pluralize(manu_indi_expense.errors.count, "error") %> prohibited this manu_indi_expense from being saved:</h2>
-
-               <ul>
-                  <% manu_indi_expense.errors.full_messages.each do |message| %>
-                     <li><%= message %></li>
-                  <% end %>
-               </ul>
-            </div>
-         <% end %>
-
             <div class="row">
                <div class="col-md-4">
                   <div class="form-group">
@@ -31,7 +18,7 @@
                <div class="col-md-3">
                   <div class="form-group">
                      <%= f.label :program_production_id,"Monto del gasto :" ,class: "col-sm-6 col-lg-10 col-xs-12"%>
-                     <input type="text" name="manu_indi[subtotal]" id="manu_indi_subtotal"  class="form-control text-right" required/>
+                     <input type="text" name="manu_indi[subtotal]" id="manu_indi_subtotal"  class="form-control text-right only_numbers" required/>
                   </div>
                </div>
                   <btn><a class="btn btn-default btn-sm align_btn" id="btn_add_manu_indi_expense">Agregar</a></btn>
@@ -54,14 +41,14 @@
                <thead>
                   <tr>
                      <th data-field="id" data-checkbox="true" data-checkbox-header="false"></th>
-                     <th data-field="code">#</th>
+                     <th data-field="code">Cod.</th>
                      <th data-field="descr_expense">Descripción del gasto</th>
-                     <th data-field="descr_expense_id"></th>
+                     <th data-field="descr_expense_id" class="hide"></th>
                      <th data-field="type_expense">Tipo del gasto</th>
-                     <th data-field="type_expense_id"></th>
-                     <th data-field="subtotal">Monto</th>
-                     <th data-field="subtotal_id"></th>
-                     <th data-halign='right' data-align='right' data-field="Action" data-events="remove">Acción</th>
+                     <th data-field="type_expense_id" class="hide"></th>
+                     <th data-field="subtotal" data-halign='right'>Monto</th>
+                     <th data-field="subtotal_id" class="hide"></th>
+                     <th data-width="80" data-halign='right' data-align='right' data-field="Action" data-events="remove">Acción</th>
                   </tr>
                </thead>
                <tbody>
@@ -83,24 +70,35 @@
                            </td>
                         </tr>
                      <% end %>   
-                  <% end %>
+                  <div class="hide">
+                     <%= f.text_field :total_fixed, :value => @total_fixed ,:class => "total_fixed" %>
+                     <%= f.text_field :total_variable, :value => @total_variable, :class => "total_variable" %>
+                     <%= f.text_field :totalFixedAndVariable, :value => @total_fixed_and_variable, :class => "total"%>
+                  </div>
+                  <% else %>
+                  <div class="d">
+                     <%= f.text_field :totalFixedAndVariable, :value => 0 ,:id => "total" %>
+                     <%= f.text_field :total_fixed, :value => 0 ,:id => "total_fixed" %>
+                     <%= f.text_field :total_variable, :value => 0 ,:id => "total_variable" %>
+                  </div>
+               <% end %>
                </tbody>                    
                <tfoot>
                   <tr>
-                     <td class="h6 font-weight-bold" colspan="2"><strong>TOTAL FIJO :<strong></td>
-                     <td colspan="11" class="font-weight-bold text-right">
+                     <td class="h6 font-weight-bold" colspan="4"><strong>TOTAL FIJO :<strong></td>
+                     <td colspan="9" class="font-weight-bold text-right">
                      <strong><span class="manu_indi_expe_total_fixed"> <%= @total_fixed %></span><strong>
                      </td>
                   </tr>
                  <tr>
-                     <td class="h6 font-weight-bold" colspan="2"><strong>TOTAL VARIABLE :<strong></td>
-                     <td colspan="11" class="font-weight-bold text-right">
+                     <td class="h6 font-weight-bold" colspan="4"><strong>TOTAL VARIABLE :<strong></td>
+                     <td colspan="9" class="font-weight-bold text-right">
                         <strong><span class="manu_indi_expe_total_variable"><%= @total_variable %></span><strong>
                      </td>
                  </tr>
                 <tr>
-                  <td class="h6 font-weight-bold" colspan="2"><strong>TOTAL FIJO & VARIABLE :<strong></td>
-                  <td colspan="11" class="font-weight-bold text-right">
+                  <td class="h6 font-weight-bold" colspan="4"><strong>TOTAL FIJO & VARIABLE :<strong></td>
+                  <td colspan="9" class="font-weight-bold text-right">
                      <strong><span class="manu_indi_expe_total_fixed_and_variable"><%= @total_fixed_and_variable %></span><strong>
                   </td>
                  </tr>
@@ -109,11 +107,7 @@
             </table>
          <%= render('layouts/buttons')%>
          <%= f.hidden_field :program_production_id, :value => @program_production_id %>
-         <%= f.hidden_field :total_fixed, :value => @total_fixed ,:class => "manu_indi_expe_total_fixed" %>
-         <%= f.hidden_field :total_variable, :value => @total_variable, :class => "manu_indi_expe_total_variable" %>
-         <%= f.hidden_field :total, :value => @total_fixed_and_variable, :class => "manu_indi_expe_total_fixed_and_variable"%>
       </div>
 
    <% end %>
-</div>
 <input type="hidden" id="controller" value="<%=controller_name%>">

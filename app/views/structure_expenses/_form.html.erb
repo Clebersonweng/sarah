@@ -11,7 +11,7 @@
                <div class="col-md-3 col-sm-3">
                   <div class="form-group">
                      <%= f.label :program_production_id,"Monto del gasto :" ,class: "col-sm-6 col-lg-10 col-xs-12"%>
-                     <input type="text" name="struc_expense[subtotal]" id="struc_expense_subtotal"  class="form-control text-right" required>
+                     <input type="text" name="struc_expense[subtotal]" id="struc_expense_subtotal"  class="form-control text-right only_numbers" required>
                   </div>
                </div>
                   <btn><a class="btn btn-default btn-sm align_btn" id="btn_add_structure">Agregar</a></btn>
@@ -61,10 +61,14 @@
                               </td>
                            </tr>
                         <% end %> 
-                     <%= f.hidden_field :total, :value => @total ,:id => "structure_expense_total" %>
-                  <% else %>
-                     <%= f.hidden_field :total, :value => 0 ,:id => "structure_expense_total" %>
-                  <% end %>
+                        <div class="hide">
+                           <%= f.hidden_field :total, :value => @total ,:id => "structure_expense_total" %>
+                        </div>
+                     <% else %>
+                        <div class="hide">
+                           <%= f.hidden_field :total, :value => 0 ,:id => "structure_expense_total" %>
+                        </div>
+                     <% end %>
 
                </tbody>                    
                <tfoot>

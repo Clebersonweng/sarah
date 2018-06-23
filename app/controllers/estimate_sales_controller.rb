@@ -83,18 +83,18 @@ class EstimateSalesController < ApplicationController
   end
   
 
-  # DELETE /estimate_sales/1
-  # DELETE /estimate_sales/1.json
-  def destroy
-    @estimate_sale = EstimateSale.find(params[:id])
-    respond_to do |format|
-      if @estimate_sale.destroy        
-        format.js
-      else
-        format.js
+   # DELETE /estimate_sales/1
+   # DELETE /estimate_sales/1.json
+   def destroy
+      @estimate_sale = EstimateSale.find(params[:id])
+      respond_to do |format|
+         if @estimate_sale.destroy        
+            format.js
+         else
+            format.js
+         end
       end
-    end
-  end
+   end
 
   private
   # Use callbacks to share common setup or constraints between actions.

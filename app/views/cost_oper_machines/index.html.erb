@@ -18,7 +18,7 @@
 				<th data-field="farming_plot_id" data-sortable="true" >Parcela</th> 
 				<th data-field="farming_plot_id" data-sortable="true" >Tipo de cultivo</th> 
 				<th data-field="total"> Total</th>                                                      
-				<th data-formatter="actionFormatter" data-align="right" data-events="actionEvents">Acción</th>
+				<th data-width='80' data-formatter="actionFormatter" data-align="right" data-events="actionEvents">Acción</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -27,7 +27,7 @@
 				<td><%= cost_own_machine.id %></td>
 				<td><%= cost_own_machine.program_production.estimate_sale.farming_plot.name%></td>
 				<td><%= cost_own_machine.program_production.estimate_sale.type_of_crop.name%></td>
-				<td><%= cost_own_machine.total %></td>
+				<td><%= number_with_precision(cost_own_machine.total, :precision => 0, :delimiter => '.' ) %></td>
 			</tr>
 			<% end %>
 		</tbody>

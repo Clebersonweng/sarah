@@ -51,7 +51,7 @@ class ManuIndiExpensesController < ApplicationController
       respond_to do |format|
          if @manu_indi_expense.save
             format.html { redirect_to @manu_indi_expense, notice: 'Manu indi expense was successfully created.' }
-            format.json { render :index, status: :created, location: @manu_indi_expenses }
+            format.json { render :show, status: :created, location: @manu_indi_expense }
          else
             format.html { render :new }
             format.json { render json: @manu_indi_expense.errors, status: :unprocessable_entity }
@@ -96,7 +96,7 @@ class ManuIndiExpensesController < ApplicationController
    def get_all
       @path             = " / crear estimación / gastos indirectos de producción"
       @edit_name        = "Editar gastos indirectos de produccción"
-      @select_list      = { Fijo: 1, Variable: 0 }
+      @select_list      = { FIJO: 1, VARIABLE: 0 }
       @edit_name        = "Editar gastos indirectos de producción"
    end
 end

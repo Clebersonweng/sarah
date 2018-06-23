@@ -10,7 +10,7 @@
 		<div class="col-md-4 col-sm-4">
 			<div class="form-group">
 				<%= f.label :program_production_id,"Cantidad estimada a vender :" ,class: "col-sm-8 col-lg-12 col-xs-12"%>
-				<input type="text" name="estima_sale" id="estima_sale" class="form-control text-right" value="<%= @estimate_sale %>" readonly/>
+				<input type="text" name="estima_sale" id="estima_sale" class="form-control text-right" value="<%= @total_est_production %>" readonly/>
 			</div>
 		</div>
 	</div>
@@ -30,37 +30,37 @@
 		<div class="col-md-3 col-sm-3">
 			<div class="form-group">
 				<%= f.label :program_production_id,"Monto del gasto :" ,class: "col-sm-6 col-lg-9 col-xs-12"%>
-				<input type="text" name="mark_spend[subtotal]" id="mark_spend_subtotal"  class="form-control text-right" required>
+				<input type="text" name="mark_spend[subtotal]" id="mark_spend_subtotal"  class="form-control text-right only_numbers" required>
 			</div>
 		</div>
-		<btn><a class="btn btn-default btn-sm align_btn" id="btn_add_row">Agregar</a></btn>
+		<btn><a class="btn btn-default btn-sm align_btn" id="btn_add_row_ms">Agregar</a></btn>
 	</div>
 
 	<table 
-		id="table_MS"
-		data-width="100%"  
-		data-search="false"                
-		class="table table-hover table-striped table-condensed display" 
-		data-toggle="table"
-		data-show-toggle="false"                
-		data-show-refresh="false" 
-		data-pagination="true" 
-		onlyInfoPagination="false" 
-		data-icons="icons" data-sort-name="code" data-sort-order="desc" 
-		data-card-view="false"
-		data-checkbox-header="false"
+	      id="table_MS"
+      	      data-width="100%"  
+	      data-search="false"                
+	      class="table table-hover table-striped table-condensed display" 
+	      data-toggle="table"
+	      data-show-toggle="false"                
+	      data-show-refresh="false" 
+	      data-pagination="true" 
+	      onlyInfoPagination="false" 
+	      data-icons="icons" data-sort-name="code" data-sort-order="asc" 
+	      data-card-view="false"
+	      data-checkbox-header="false"
 	>
 	<thead>
 		<tr>
 			<th data-field="id" data-checkbox="true" data-checkbox-header="false">#</th>
-			<th data-field="descr_expense">Descripción del gasto</th>
-			<th data-field="descr_expense_id"></th>
+			<th data-field="descr_expense" colspan="2">Descripción del gasto</th>
+			<th data-field="descr_expense_id" class="hide"></th>
 			<th data-field="type_expense">Tipo de gasto</th>
-			<th data-field="type_expense_id"></th>
-			<th data-field="amount"></th>
-			<th data-field="subtotal">Monto</th>
-			<th data-field="subtotal_id"></th>
-			<th data-halign='right' data-align='right' data-field="Action" data-events="remove">Acción</th>
+			<th data-field="type_expense_id" class="hide"></th>
+			<th data-field="amount" class="hide"></th>
+			<th data-field="subtotal" data-align="right">Monto</th>
+			<th data-field="subtotal_id" class="hide"></th>
+			<th data-width="30" data-halign='right' data-align='right' data-field="Action" data-events="remove">Acción</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -111,9 +111,7 @@
 				<td class="h6 font-weight-bold" colspan="2"><strong>TOTAL VARIABLE :<strong></td>
 				<td colspan="7" class="font-weight-bold text-right">
 					<strong>
-						<span class="total_variable">
-							<%= number_with_precision( @total_variable, :precision => 0, :delimiter => '.' ) %>             
-						</span>
+						<span class="total_variable"><%= number_with_precision( @total_variable, :precision => 0, :delimiter => '.' ) %></span>
 					</strong>
 				</td>
 			</tr>
@@ -121,16 +119,14 @@
 				<td class="h6 font-weight-bold" colspan="2"><strong>TOTAL FIJO & VARIABLE :<strong></td>
 				<td colspan="7" class="font-weight-bold text-right">
 					<strong>
-						<span class="total">
-							<%= number_with_precision( @total, :precision => 0, :delimiter => '.' ) %>             
-						</span>
+						<span class="total"><%= number_with_precision( @total, :precision => 0, :delimiter => '.' ) %></span>
 					</strong>
 				</td>
 			</tr>
 		</tfoot>
 	</table>
 	<%= render('layouts/buttons')%>
-	<%= f.hidden_field :program_production_id, :value => @program_production_id %>
+	<%= f.text_field :program_production_id, :value => @program_production_id ,:class => "hidden"%>
 </div>
 <% end %>
 <input type="hidden" id="controller" value="<%=controller_name%>">

@@ -1,5 +1,5 @@
-var  COUNT  		= 0;
-var TOTAL_SE 	   = 0;
+var  COUNT_SE  		= 0;
+var TOTAL_SE         = 0;
 $(document).ready(function () {
  
    controlador 			= $("#controller").val();
@@ -12,10 +12,10 @@ $(document).ready(function () {
    {
       var descr_expense         = $("#struc_expense_descr_expense").val();
       var subtotal                = $("#struc_expense_subtotal").val();
-      if(is_valid_fields())
+      if(is_valid_fields_se())
       {
          row_bt_structure_expense(descr_expense,subtotal);
-         COUNT++;   
+         COUNT_SE++;   
       }
       else
       {
@@ -24,44 +24,19 @@ $(document).ready(function () {
       }
    });
 
-      $('#tb_structure_expense').on('check.bs.table', function (e, row) 
+   $('#tb_structure_expense').on('check.bs.table', function (e, row) 
+   {
+      $('.remove').click(function () 
       {
-         TOTAL_SE =  parseFloat($(".manu_indi_expe_total_fixed_and_variable").text());
-         
-         $fixe_to_delete = row.total_fixed; // tomo el elemento
-         $value_fixe = $($fixe_to_delete).attr("value"); // agarro el valor para restar del total
-
-         $variable_to_delete = row.total_variable;
-         $value_variable = $($variable_to_delete).attr("value");
-         
-         //verify_type_expense(type_expense_id,amount,"new");
-
-            $remove = $('.remove');
-            selections = [];
-         $remove.click(function () {
-            //var ids = getIdSelections($('#tb_suppy_detail'));
-            $('#tb_manu_indi_expense').bootstrapTable('remove', 
-            {
-               field: 'id',
-               values: [row.id]
-            });
-            $remove.prop('disabled', true);
-            if(row.type_expense == "FIJO")
-            {
-               TOTAL_FIXED -= $value_fixe;   
-            }
-            else
-            {
-               TOTAL_VARIABLE -= $value_variable;
-            }
-            
-
-            TOTAL_FIXE_AND_VARIABLE = TOTAL_FIXED + TOTAL_VARIABLE;
-            $(".manu_indi_expe_total_fixed").text(TOTAL_FIXED.toFixed(0));
-            $(".manu_indi_expe_total_variable").text(TOTAL_VARIABLE.toFixed(0));
-            $(".manu_indi_expe_total_fixed_and_variable").text(TOTAL_FIXE_AND_VARIABLE.toFixed(0));
+         $('#tb_structure_expense').bootstrapTable('remove', 
+         {
+           field: 'id',
+           values: [row.id]
          });
-      }); 
+         rest_type_expense_se(row.subtotal);
+         $('.remove').prop('disabled', true);
+      });
+   }); 
 
 });
 
@@ -72,13 +47,13 @@ function row_bt_structure_expense(descr_expense,subtotal)
    $("#structure_expense_total").val(TOTAL_SE);
 
    var  _data_ =  {
-							"id"                       : COUNT,
-							"code"                     : COUNT,
+							"id"                       : COUNT_SE,
+							"code"                     : COUNT_SE,
 							"descr_expense"            : descr_expense,   
-							"descr_expense_id"         : "<input type='hidden' size='100' name='structure_expense[stru_expense_dets_attributes]["+COUNT+"][name]' value='"+descr_expense+"' >",   
-							"amount"                   : "<input type='hidden' size='20' name='structure_expense[stru_expense_dets_attributes]["+COUNT+"][amount]' value='1' >",  
+							"descr_expense_id"         : "<input type='hidden' size='100' name='structure_expense[stru_expense_dets_attributes]["+COUNT_SE+"][name]' value='"+descr_expense+"' >",   
+							"amount"                   : "<input type='hidden' size='20' name='structure_expense[stru_expense_dets_attributes]["+COUNT_SE+"][amount]' value='1' >",  
 							"subtotal"                 : subtotal,   
-							"subtotal_id"              : "<input type='hidden' size='20' name='structure_expense[stru_expense_dets_attributes]["+COUNT+"][subtotal]' value="+subtotal+">",   
+							"subtotal_id"              : "<input type='hidden' size='20' name='structure_expense[stru_expense_dets_attributes]["+COUNT_SE+"][subtotal]' value="+subtotal+">",   
 							"Action"                   : '<a class="remove  btn btn-danger delete btn-sm" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></a>',
                   };
 
@@ -86,6 +61,14 @@ function row_bt_structure_expense(descr_expense,subtotal)
    $("#struc_expense_descr_expense").val("");
    $("#struc_expense_subtotal").val("");
 }
+
+function rest_type_expense_se(subtotal)
+{
+   TOTAL_SE -= subtotal;
+   $(".structure_expense_total").text(TOTAL_SE); 
+   $("#structure_expense_total").val(TOTAL_SE); 
+}
+
 /*
 function form_manu_indirect_expense_validates()
 {
@@ -145,7 +128,7 @@ function form_manu_indirect_expense_validates()
   });
 }
 */
-function is_valid_fields()
+function is_valid_fields_se()
 {
    $description            = $("#struc_expense_descr_expense");
    $amount                 = $("#struc_expense_subtotal");

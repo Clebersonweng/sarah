@@ -18,16 +18,16 @@
 				<th data-halign="left" data-align="left" data-field="name" data-sortable="true">Nombre</th> 
 				<th data-halign="left" data-align="right" data-field="price_hours" data-sortable="true" > Precio por hora</th>
 				<th data-field="description" > Descripción</th>
-				<th data-halign="right" data-align="right" data-formatter="actionFormatter" data-events="actionEvents">Acción</th>
+				<th data-width='80' data-halign="right" data-formatter="actionFormatter" data-events="actionEvents">Acción</th>
 			</tr>
 		</thead>
 		<tbody>
 			<% @type_of_works.each do |types| %>
 			<tr>
 				<td><%= types.id%></td>
-				<td class="col-md-3"><%= types.name %></td>
-				<td class="col-md-2"><%= number_with_precision(types.price_hours, :precision => 0, :delimiter => '.' )  %></td>
-				<td class="col-md-5"><%= types.description %></td>
+				<td ><%= types.name %></td>
+				<td ><%= number_with_precision(types.price_hours, :precision => 0, :delimiter => '.' )  %></td>
+				<td ><%= types.description %></td>
 			</tr>
 			<% end %>
 		</tbody>
