@@ -36,11 +36,11 @@
                      <th data-field="id" data-checkbox="true" data-checkbox-header="false"></th>
                      <th data-field="code">#</th>
                      <th data-field="descr_expense">Descripción del gasto</th>
-                     <th data-field="descr_expense_id"></th>
-                     <th data-field="amount"></th>
-                     <th data-field="subtotal">Monto</th>
-                     <th data-field="subtotal_id"></th>
-                     <th data-halign='right' data-align='right' data-field="Action" data-events="remove">Acción</th>
+                     <th data-field="descr_expense_id" class="hide"></th>
+                     <th data-field="amount" class="hide"></th>
+                     <th data-field="subtotal" data-align='right'>Monto</th>
+                     <th data-field="subtotal_id" class="hide"></th>
+                     <th data-width="60" data-halign='center' data-field="Action" data-events="remove">Acción</th>
                   </tr>
                </thead>
                <tbody>
@@ -61,12 +61,12 @@
                               </td>
                            </tr>
                         <% end %> 
-                        <div class="hide">
-                           <%= f.hidden_field :total, :value => @total ,:id => "structure_expense_total" %>
+                        <div class="">
+                           <%= f.text_field :total, :value => @total ,:id => "structure_expense_total" %>
                         </div>
                      <% else %>
                         <div class="hide">
-                           <%= f.hidden_field :total, :value => 0 ,:id => "structure_expense_total" %>
+                           <%= f.text_field :total, :value => 0 ,:id => "structure_expense_total" %>
                         </div>
                      <% end %>
 

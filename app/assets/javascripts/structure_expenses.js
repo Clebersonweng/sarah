@@ -33,7 +33,7 @@ $(document).ready(function () {
            field: 'id',
            values: [row.id]
          });
-         rest_type_expense_se(row.subtotal);
+         rest_total_se(row.subtotal);
          $('.remove').prop('disabled', true);
       });
    }); 
@@ -42,9 +42,7 @@ $(document).ready(function () {
 
 function row_bt_structure_expense(descr_expense,subtotal)
 {
-   TOTAL_SE += parseInt(subtotal);
-   $(".structure_expense_total").html(TOTAL_SE);
-   $("#structure_expense_total").val(TOTAL_SE);
+   total_se(subtotal)
 
    var  _data_ =  {
 							"id"                       : COUNT_SE,
@@ -62,72 +60,20 @@ function row_bt_structure_expense(descr_expense,subtotal)
    $("#struc_expense_subtotal").val("");
 }
 
-function rest_type_expense_se(subtotal)
+function rest_total_se(subtotal)
 {
    TOTAL_SE -= subtotal;
    $(".structure_expense_total").text(TOTAL_SE); 
    $("#structure_expense_total").val(TOTAL_SE); 
 }
 
-/*
-function form_manu_indirect_expense_validates()
+function total_se(subtotal)
 {
-
-  $('#form_structure_expenses').bootstrapValidator({
-    excluded: [':disabled', ':hidden', ':not(:visible)'],
-    fields: 
-    {
-      'structure_expense[program_production_id]': 
-      {
-        validators: {
-          notEmpty: {
-            message: 'Este campo es obligatório'
-          }
-        }
-      },
-      'structure_expense[total]': 
-      {
-        validators: {
-          notEmpty: {
-            message: 'Este campo es obligatório'
-          }
-        }
-      },
-      'struc_expense[descr_expense]': 
-      {
-        validators: {
-          stringLength: {
-            min: 1,
-            message: 'Este campo es obligatorio'
-          }
-        }
-      },
-      'struc_expense[subtotal]': 
-      {
-        validators: {
-          stringLength: {
-            min: 1,
-            message: 'Este campo es obligatorio'
-          }
-        }
-      }
-    }
-  }).on('init.field.fv', function (e, data) {
-    e.preventDefault();
-    if (data.fv.getInvalidFields().length > 0) {    // There is invalid field
-      data.fv.disableSubmitButtons(true);
-    }
-  }).on('success.field.fv', function (e, data) {
-    e.preventDefault();
-    if (data.fv.getInvalidFields().length > 0) {    // There is invalid field
-      data.fv.disableSubmitButtons(true);
-    }
-  }).on('change', 'form', function (e) {
-    e.preventDefault();
-    //$("#form_products").bootstrapValidator('revalidateField', 'investments');
-  });
+   TOTAL_SE += parseFloat(subtotal);
+   $(".structure_expense_total").text(TOTAL_SE);
+   $("#structure_expense_total").val(TOTAL_SE);
 }
-*/
+
 function is_valid_fields_se()
 {
    $description            = $("#struc_expense_descr_expense");

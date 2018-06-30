@@ -16,7 +16,8 @@
             <tr>
                <th data-field="id" data-checkbox="false">#</th>
                <th data-field="program_production_id">Parcela</th>
-               <th data-field="total" >Monto Total</th>  
+               <th data-field="type_of_crop_id">Cultivo</th>
+               <th data-field="total" data-align="right">Monto Total</th>  
                <th data-width='80' data-formatter="actionFormatter" data-align="right" data-events="actionEvents" >Acción</th>
             </tr>
          </thead>
@@ -25,6 +26,7 @@
                <tr>
                  <td><%= structure_expense.id %></td>
                  <td><%= structure_expense.program_production.estimate_sale.farming_plot.name %></td>
+                 <td><%= structure_expense.program_production.estimate_sale.type_of_crop.name %></td>
                  <td><%= number_with_precision( structure_expense.total, :precision => 0, :delimiter => '.' )  %></td>
                </tr>
             <% end %>
