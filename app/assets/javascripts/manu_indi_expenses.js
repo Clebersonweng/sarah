@@ -1,11 +1,21 @@
 var  COUNT_MIE  									= 0;
-var  TOTAL_FIXE_AND_VARIABLE_MIE  			= 0;
+var  TOTAL_MIE  									= 0;
 var  TOTAL_FIXED_MIE  							= 0;
 var  TOTAL_VARIABLE_MIE  						= 0;
 
 $(document).ready(function () {
  
-	controlador = $("#controller").val();
+	controlador 				= $("#controller").val();
+	var FIELD_FIXE_TOTAL 	= $("#total_fixed").val();
+	TOTAL_FIXED_MIE		   = parseInt(FIELD_FIXE_TOTAL); // tomar valor en caso de edicion
+
+	var FIELD_V_TOTAL 		= $("#total_variable").val();
+	TOTAL_VARIABLE_MIE			= parseInt(TOTAL_VARIABLE_MIE);// tomar valor en caso de edicion
+
+	var FIELD_TOTAL 			= $("#total").val();
+	TOTAL_MIE			   	= parseInt(FIELD_TOTAL); // tomar valor en caso de edicion
+
+
 	generic_response_form(controlador);
 	form_manu_indirect_expense_validates();
 	$("#tb_manu_indi_expense").bootstrapTable();
@@ -20,11 +30,8 @@ $(document).ready(function () {
 			var type_expense_id       = $("#manu_indi_type_expense option:selected").val();
 			var amount                = $("#manu_indi_subtotal").val();
 
-			if(typeof descr_expense != "undefined" || descr_expense != ""  && typeof amount != "undefined" || amount != "")
-			{
-				row_bt_manu_indi_expense(descr_expense,type_expense,type_expense_id,amount);
-				COUNT_MIE++;   
-			}	
+			row_bt_manu_indi_expense(descr_expense,type_expense,type_expense_id,amount);
+			COUNT_MIE++;   
 		}
 		else
 		{
@@ -36,6 +43,17 @@ $(document).ready(function () {
 
 	$('#tb_manu_indi_expense').on('check.bs.table', function (e, row) 
 	{
+		$('.remove').click(function () 
+		{
+			//var ids = getIdSelections($('#tb_suppy_detail'));
+			$('#tb_manu_indi_expense').bootstrapTable('remove', 
+			{
+			  field: 'id',
+			  values: [row.id]
+			});
+			rest_type_expense_mie(row.type_expense,row.subtotal);
+			$('.remove').prop('disabled', true);
+      });
 		
 	}); 
 
@@ -43,23 +61,20 @@ $(document).ready(function () {
 
 function row_bt_manu_indi_expense(descr_expense,type_expense,type_expense_id,amount)
 {
-	//TOTAL += parseFloat(amount);
-	verify_type_expense(type_expense_id,amount,"new");
-	TOTAL_FIXE_AND_VARIABLE_MIE = TOTAL_FIXED_MIE + TOTAL_VARIABLE_MIE;
-
-	$(".manu_indi_expe_total_fixed").text(TOTAL_FIXED_MIE);
-	$(".manu_indi_expe_total_variable").text(TOTAL_VARIABLE_MIE);
-	$(".manu_indi_expe_total_fixed_and_variable").text(TOTAL_FIXE_AND_VARIABLE_MIE);
-
+	TOTAL_MIE += parseFloat(amount);
+	verify_type_expense_mie(type_expense_id,amount);
+	
+	$(".total").text(TOTAL_MIE);
+	$("#total").val(TOTAL_MIE); // suma fijo y variable
 	var  _data_ =  {
 							"id"                       : COUNT_MIE,
 							"code"                     : COUNT_MIE,
 							"descr_expense"            : descr_expense,   
-							"descr_expense_id"         : "<input type='hidden' size='100' name='manu_indi_expense[manu_indi_expense_dets_attributes]["+COUNT+"][name]' value='"+descr_expense+"' >",   
+							"descr_expense_id"         : "<input type='hidden' size='100' name='manu_indi_expense[manu_indi_expense_dets_attributes]["+COUNT_MIE+"][name]' value='"+descr_expense+"' >",   
 							"type_expense"             : type_expense,   
-							"type_expense_id"          : "<input type='hidden' size='20' name='manu_indi_expense[manu_indi_expense_dets_attributes]["+COUNT+"][isFixed]' value="+type_expense_id+">",  
+							"type_expense_id"          : "<input type='hidden' size='20' name='manu_indi_expense[manu_indi_expense_dets_attributes]["+COUNT_MIE+"][isFixed]' value="+type_expense_id+">",  
 							"subtotal"                 : amount,   
-							"subtotal_id"              : "<input type='hidden' size='20' name='manu_indi_expense[manu_indi_expense_dets_attributes]["+COUNT+"][subtotal]' value="+TOTAL_FIXED_MIE+">",   
+							"subtotal_id"              : "<input type='hidden' size='20' name='manu_indi_expense[manu_indi_expense_dets_attributes]["+COUNT_MIE+"][subtotal]' value="+amount+">",   
 							"Action"                   : '<a class="remove  btn btn-danger delete btn-sm" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></a>',
 						};
   
@@ -71,6 +86,43 @@ function row_bt_manu_indi_expense(descr_expense,type_expense,type_expense_id,amo
 	$("#manu_indi_subtotal").val("");
 }
 
+function verify_type_expense_mie(type,subtotal)
+{
+	if(type == 1)
+	{
+		TOTAL_FIXED_MIE += parseFloat(subtotal);
+		$(".total_fixed").text(TOTAL_FIXED_MIE);
+		$("#total_fixed").val(TOTAL_FIXED_MIE);
+	}
+	else
+	{
+		TOTAL_VARIABLE_MIE += parseFloat(subtotal);
+		$(".total_variable").text(TOTAL_VARIABLE_MIE);
+		$("#total_variable").val(TOTAL_VARIABLE_MIE);
+	}
+}
+
+rest_type_expense_mie = function (type,subtotal)
+{
+	if(type == "FIJO")
+	{
+		TOTAL_FIXED_MIE -= subtotal;
+		TOTAL_MIE = TOTAL_MIE - subtotal;
+		$(".total_fixed").text(TOTAL_FIXED_MIE);
+		$("#total_fixed").val(TOTAL_FIXED_MIE);
+		$(".total").text(TOTAL_MIE); // suma fijo y variable
+		$("#total").val(TOTAL_MIE); // suma fijo y variable
+	}
+	else
+	{
+		TOTAL_VARIABLE_MIE -= (subtotal);
+		TOTAL_MIE -= subtotal;
+		$(".total_variable").text(TOTAL_VARIABLE_MIE);
+		$("#total_variable").val(TOTAL_VARIABLE_MIE);
+		$(".total").text(TOTAL_MIE); // suma fijo y variable
+		$("#total").val(TOTAL_MIE); // suma fijo y variable
+	}
+}
 
 function form_manu_indirect_expense_validates()
 {
@@ -151,20 +203,6 @@ function form_manu_indirect_expense_validates()
   });
 }
 
-function verify_type_expense(type,amount,action)
-{
-	if(action == "new")
-	{
-		if(type == 1)
-		{
-			TOTAL_FIXED_MIE += parseFloat(amount);
-		}
-		else
-		{
-			TOTAL_VARIABLE_MIE += parseFloat(amount);
-		}
-	}
-}
 
 function is_valid_fields_mie()
 {

@@ -48,7 +48,7 @@
                      <th data-field="type_expense_id" class="hide"></th>
                      <th data-field="subtotal" data-halign='right'>Monto</th>
                      <th data-field="subtotal_id" class="hide"></th>
-                     <th data-width="80" data-halign='right' data-align='right' data-field="Action" data-events="remove">Acción</th>
+                     <th data-width="60" data-halign='center' data-field="Action" data-events="remove">Acción</th>
                   </tr>
                </thead>
                <tbody>
@@ -59,7 +59,7 @@
                            <td ><%= manu_indi_expense_dets.id%></td>
                            <td ><%= manu_indi_expense_dets.name %></td>
                            <td style="display:none"><!--vacio al crear nuevo --></td>
-                           <td><%= manu_indi_expense_dets.isFixed ? "fijo" : "variable"%></td>
+                           <td><%= manu_indi_expense_dets.isFixed ? "FIJO" : "VARIABLE"%></td>
                            <td style="display:none"><!--vacio al crear nuevo --></td>
                            <td><%= number_with_precision( manu_indi_expense_dets.subtotal, :precision => 0, :delimiter => '.' ) %></td>                  
                            <td style="display:none"></td>
@@ -71,12 +71,12 @@
                         </tr>
                      <% end %>   
                   <div class="hide">
-                     <%= f.text_field :total_fixed, :value => @total_fixed ,:class => "total_fixed" %>
-                     <%= f.text_field :total_variable, :value => @total_variable, :class => "total_variable" %>
-                     <%= f.text_field :totalFixedAndVariable, :value => @total_fixed_and_variable, :class => "total"%>
+                     <%= f.text_field :total_fixed, :value => @total_fixed ,:id => "total_fixed" %>
+                     <%= f.text_field :total_variable, :value => @total_variable,:id => "total_variable"%>
+                     <%= f.text_field :totalFixedAndVariable, :value => @total_fixed_and_variable, :id => "total"%>
                   </div>
                   <% else %>
-                  <div class="d">
+                  <div class="hide">
                      <%= f.text_field :totalFixedAndVariable, :value => 0 ,:id => "total" %>
                      <%= f.text_field :total_fixed, :value => 0 ,:id => "total_fixed" %>
                      <%= f.text_field :total_variable, :value => 0 ,:id => "total_variable" %>
@@ -87,19 +87,19 @@
                   <tr>
                      <td class="h6 font-weight-bold" colspan="4"><strong>TOTAL FIJO :<strong></td>
                      <td colspan="9" class="font-weight-bold text-right">
-                     <strong><span class="manu_indi_expe_total_fixed"> <%= @total_fixed %></span><strong>
+                     <strong><span class="total_fixed"> <%= @total_fixed %></span><strong>
                      </td>
                   </tr>
                  <tr>
                      <td class="h6 font-weight-bold" colspan="4"><strong>TOTAL VARIABLE :<strong></td>
                      <td colspan="9" class="font-weight-bold text-right">
-                        <strong><span class="manu_indi_expe_total_variable"><%= @total_variable %></span><strong>
+                        <strong><span class="total_variable"><%= @total_variable %></span><strong>
                      </td>
                  </tr>
                 <tr>
                   <td class="h6 font-weight-bold" colspan="4"><strong>TOTAL FIJO & VARIABLE :<strong></td>
                   <td colspan="9" class="font-weight-bold text-right">
-                     <strong><span class="manu_indi_expe_total_fixed_and_variable"><%= @total_fixed_and_variable %></span><strong>
+                     <strong><span class="total"><%= @total_fixed_and_variable %></span><strong>
                   </td>
                  </tr>
                </tfoot>

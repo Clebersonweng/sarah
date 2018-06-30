@@ -46,16 +46,13 @@ class ManuIndiExpensesController < ApplicationController
    # POST /manu_indi_expenses
    # POST /manu_indi_expenses.json
    def create
+      get_all      
       @manu_indi_expense = ManuIndiExpense.new(manu_indi_expense_params)
-
-      respond_to do |format|
-         if @manu_indi_expense.save
-            format.html { redirect_to @manu_indi_expense, notice: 'Manu indi expense was successfully created.' }
-            format.json { render :show, status: :created, location: @manu_indi_expense }
-         else
-            format.html { render :new }
-            format.json { render json: @manu_indi_expense.errors, status: :unprocessable_entity }
-         end
+      puts manu_indi_expense_params
+      if @manu_indi_expense.save
+         render json: { contenido: @manu_indi_expense, location: manu_indi_expense_url(@manu_indi_expense),result: :ok },status: 200
+      else
+         render json:  @manu_indi_expense.errors, status: :unprocessable_entity 
       end
    end
 

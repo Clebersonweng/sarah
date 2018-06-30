@@ -28,7 +28,7 @@
                <tr>
                   <td><%= manu_indi_expense.id %></td>
                   <td><%= manu_indi_expense.program_production.estimate_sale.farming_plot.name %></td>
-                  <td><%= manu_indi_expense.program_production.type_of_crop.farming_plot.name %></td>
+                  <td><%= manu_indi_expense.program_production.estimate_sale.type_of_crop.name %></td>
                   <td><%= number_with_precision( manu_indi_expense.total_fixed, :precision => 0, :delimiter => '.' ) %></td>                  
                   <td><%= number_with_precision( manu_indi_expense.total_variable, :precision => 0, :delimiter => '.' ) %></td>                  
                   <td><%= number_with_precision( manu_indi_expense.totalFixedAndVariable, :precision => 0, :delimiter => '.' ) %></td>                  
