@@ -38,7 +38,7 @@
 
 	<table 
 	      id="table_MS"
-      	      data-width="100%"  
+	      data-width="100%"  
 	      data-search="false"                
 	      class="table table-hover table-striped table-condensed display" 
 	      data-toggle="table"
@@ -60,7 +60,7 @@
 			<th data-field="amount" class="hide"></th>
 			<th data-field="subtotal" data-align="right">Monto</th>
 			<th data-field="subtotal_id" class="hide"></th>
-			<th data-width="30" data-halign='right' data-align='right' data-field="Action" data-events="remove">Acción</th>
+         <th data-width="60" data-halign='center' data-field="Action" data-events="remove">Acción</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -70,7 +70,7 @@
 					<td><%= details.id%></td> 
 					<td><%= details.descr%></td>
 					<td></td>
-					<td><%= details.is_fixed ? "fijo" : "variable" %></td>
+					<td><%= details.is_fixed ? "FIJO" : "VARIABLE" %></td>
 					<td></td>
 					<td></td>
 					<td><%= number_with_precision( details.subtotal, :precision => 0, :delimiter => '.' ) %></td> 

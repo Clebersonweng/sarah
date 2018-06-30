@@ -12,29 +12,29 @@
          data-icons="icons" data-sort-name="code" data-sort-order="desc" 
          data-card-view="false"
 	 	>
-			<thead>
-				<tr>
-					<th data-field="id" data-checkbox="false">#</th>
-					<th data-field="program_production_id">Parcela</th>
-					<th data-field="type_of_crop_id">Cultivo</th>
-					<th data-field="total_fixed" >Total de gastos fijos</th> 
-					<th data-field="total_variable" >Total de gastos variables</th>  
-					<th data-field="totalFixedAndVariable" >Total de gastos fijos y variables</th>  
-					<th data-width='80' data-formatter="actionFormatter" data-align="right" data-events="actionEvents">Acción</th>
-				</tr>
-			</thead>
-			<tbody>
-				<% @mark_spendings.each do |data| %>
-				  <tr>
-					 <td><%= data.id %></td>
-					 <td><%= data.program_production.estimate_sale.farming_plot.name %></td>
-					 <td><%= data.program_production.estimate_sale.type_of_crop.name %></td>
-					 <td><%= number_with_precision( data.total_fixed, :precision => 0, :delimiter => '.' ) %></td>                  
-					 <td><%= number_with_precision( data.total_variable, :precision => 0, :delimiter => '.' ) %></td>                  
-					 <td><%= number_with_precision( data.total, :precision => 0, :delimiter => '.' ) %></td>                  
-				  </tr>
-				<% end %>
-			</tbody>
-		</table>
-	</div>
+		<thead>
+			<tr>
+				<th data-field="id" data-checkbox="false">#</th>
+				<th data-field="program_production_id">Parcela</th>
+				<th data-field="type_of_crop_id">Cultivo</th>
+				<th data-field="total_fixed" data-align="right">Total de gastos fijos</th> 
+				<th data-field="total_variable" data-align="right">Total de gastos variables</th>  
+				<th data-field="totalFixedAndVariable" data-align="right">Total de gastos fijos y variables</th>  
+				<th data-width='80' data-formatter="actionFormatter" data-align="right" data-events="actionEvents">Acción</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @mark_spendings.each do |data| %>
+			  <tr>
+				 <td><%= data.id %></td>
+				 <td><%= data.program_production.estimate_sale.farming_plot.name %></td>
+				 <td><%= data.program_production.estimate_sale.type_of_crop.name %></td>
+				 <td><%= number_with_precision( data.total_fixed, :precision => 0, :delimiter => '.' ) %></td>                  
+				 <td><%= number_with_precision( data.total_variable, :precision => 0, :delimiter => '.' ) %></td>                  
+				 <td><%= number_with_precision( data.total, :precision => 0, :delimiter => '.' ) %></td>                  
+			  </tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
 <input type="hidden" id="controller" value="<%= controller_name%>">

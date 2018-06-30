@@ -36,7 +36,7 @@ class ManuIndiExpensesController < ApplicationController
       @manu_details                       = ManuIndiExpenseDet.where(manu_indi_expense_id: @manu.id)
       @total_fixed_and_variable           = @manu.totalFixedAndVariable
       @total_fixed                        = @manu.total_fixed
-      @expense_total_varible              = @manu.total_variable
+      @total_variable                     = @manu.total_variable
       
 
       return :json => {:contenido => @manu_details,:result => "edit"}
