@@ -16,7 +16,7 @@ $(document).ready(function ()
       if (es_valido)
       {
          console.log("es valido");
-         $('#btn_submit_' + controlador).submit();
+         $('form').submit();
       }
       else
       {

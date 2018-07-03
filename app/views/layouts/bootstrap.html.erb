@@ -13,7 +13,6 @@
     </head>
     <body>
         <div id="wrapper"></div>
-
         <header> 
             <%=render 'layouts/navigation' %>
         </header>
@@ -62,36 +61,38 @@
                         <div class="panel-body">
                             <%= yield %>
                         </div> 
-                        <div class="panel-footer"></div>         
-                        </div>          
+                        <div class="panel-footer">
+                           <% if  controller.action_name == 'new' || controller.action_name == "edit"  %>
+                                 <%=  render('layouts/buttons') %>
+                           <% end %>
+                        </div>         
                     </div>
                 </div>
             </div>
+            <%= javascript_include_tag "application"%>
+            <script>
+              <%= yield :js %>
+              <!-- js para activar/desactivar submenu -->
 
-                <%= javascript_include_tag "application"%>
-                <script>
-                  <%= yield :js %>
-                  <!-- js para activar/desactivar submenu -->
+                       var actionName = "<%=controller.action_name %>";
+                       if (actionName === "index") {
+                         $("#submenu_index").addClass("active");
+                       }
+                       else if (actionName === "new" || actionName === "create") {
+                         $("#submenu_new").addClass("active");
+                       }
 
-                           var actionName = "<%=controller.action_name %>";
-                           if (actionName === "index") {
-                             $("#submenu_index").addClass("active");
-                           }
-                           else if (actionName === "new" || actionName === "create") {
-                             $("#submenu_new").addClass("active");
-                           }
+                       var controllerName = "<%= params[:controller] || controller.name %>";
+                       if (controllerName == "default") {
+                         $("#menu_home").addClass("active");
+                       }
+                       else
+                       {
+                         $("#menu_home").removeClass("active");
+                         $("#menu_" + controllerName).addClass("active");
+                       }
 
-                           var controllerName = "<%= params[:controller] || controller.name %>";
-                           if (controllerName == "default") {
-                             $("#menu_home").addClass("active");
-                           }
-                           else
-                           {
-                             $("#menu_home").removeClass("active");
-                             $("#menu_" + controllerName).addClass("active");
-                           }
-
-                </script>
+            </script>
         </div>         
     </body>
 </html>

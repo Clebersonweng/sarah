@@ -15,6 +15,7 @@ Rails.application.routes.draw do
    resources :varieties
 
    post 'estimate_sales/verify_new_estimate_sale'
+   post 'estimate_sales/type_of_crop'
    post 'supplies/calculate_subtotal'
    post 'cost_oper_machine_conts/get_farming_plot'
    get 'income_statements/index'

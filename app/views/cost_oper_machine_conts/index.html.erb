@@ -9,13 +9,13 @@
       data-show-refresh="false" 
       data-pagination="true" 
       onlyInfoPagination="false" 
-      data-icons="icons" data-sort-name="code" data-sort-order="desc" 
+      data-icons="icons" data-sort-name="program_production_id" data-sort-order="desc" 
       data-card-view="false"
    >
 		<thead>
 			<tr>
-				<th data-field="id" data-checkbox="false">#</th>
-				<th data-field="code" data-sortable="true">Código</th> 
+				<th data-width='20' data-field="id" data-checkbox="false">#</th>
+				<th data-width='20'data-field="code" data-sortable="true">Cod</th> 
 				<th data-field="program_production_id" data-sortable="true">Parcela</th> 
 				<th data-field="type_of_crop_id" data-sortable="true">Tipo de cultivo</th> 
 				<th data-align="right" data-field="total">Total</th>
@@ -28,7 +28,7 @@
 				<td><%= machine_cont.id %></td>
 				<td><%= machine_cont.id %></td>
 				<td><%= machine_cont.program_production.estimate_sale.farming_plot.name %></td>
-				<td><%= supply.program_production.estimate_sale.type_of_crop.name %></td>
+				<td><%= machine_cont.program_production.estimate_sale.type_of_crop.name %></td>
 				<td><%= number_with_precision(machine_cont.total, :precision => 0, :delimiter => '.' ) %></td>
 			</tr>
 			<% end %>

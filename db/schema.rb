@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180410041647) do
+ActiveRecord::Schema.define(version: 20180703023836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,13 +43,13 @@ ActiveRecord::Schema.define(version: 20180410041647) do
   end
 
   create_table "cost_oper_machine_conts", force: :cascade do |t|
-    t.integer  "farming_plot_id"
     t.integer  "chart_of_account_id"
     t.float    "total"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.integer  "program_production_id"
     t.index ["chart_of_account_id"], name: "index_cost_oper_machine_conts_on_chart_of_account_id", using: :btree
-    t.index ["farming_plot_id"], name: "index_cost_oper_machine_conts_on_farming_plot_id", using: :btree
+    t.index ["program_production_id"], name: "index_cost_oper_machine_conts_on_program_production_id", using: :btree
   end
 
   create_table "cost_oper_machine_details", force: :cascade do |t|
@@ -401,7 +401,7 @@ ActiveRecord::Schema.define(version: 20180410041647) do
   add_foreign_key "cost_oper_machine_cont_details", "implements"
   add_foreign_key "cost_oper_machine_cont_details", "type_of_services"
   add_foreign_key "cost_oper_machine_conts", "chart_of_accounts"
-  add_foreign_key "cost_oper_machine_conts", "farming_plots"
+  add_foreign_key "cost_oper_machine_conts", "program_productions"
   add_foreign_key "cost_oper_machine_details", "cost_oper_machines"
   add_foreign_key "cost_oper_machine_details", "implements"
   add_foreign_key "cost_oper_machine_details", "machines"

@@ -33,19 +33,6 @@ class CostOperMachineContsController < ApplicationController
 		end
 	end
 
-	def get_farming_plot()
-
-		@result = CostOperMachineCont.get_farming_plot()
-		
-		respond_to do |format|
-			if @result.present?
-				format.json { render json: @result, status: :ok, msg:"success" }
-			else
-				format.json { render json: @result, status: :error, msg:"Ocurrió un error al traer los datos de la parcela xx" }
-			end
-		end
-	end
-
 	# GET /cost_oper_machine_conts/1/edit
 	def edit
 		get_all

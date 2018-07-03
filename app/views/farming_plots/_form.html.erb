@@ -1,31 +1,30 @@
 <%= form_for( @farming_plot, html: {class: 'form-horizontal', id: 'form_farming_plots', remote:true,"data-type": "json",'data-model' => 'farming_plot'}) do |f| %>
    <div class="col-xs-12 col-lg-8 col-sm-12">
-
       <div class="form-group">  
-             <%= f.label :name,"Nombre:",class: "col-sm-3 control-label" %>
-             <div class="col-xs-12 col-md-12 col-sm-12 col-lg-5">
-              <%= f.text_field :name,autofocus: true , class: "form-control upper_text" ,onblur: "this.value=this.value.toUpperCase()" ,:pattern => "[a-zA-Z-0-9 ]+", :"data-error"=>"Verifique si el dato esta correcto.", :maxlength => "40", :required => true  %>
-              <div class="help-block"> <%= f.object.errors[:name].to_sentence if f.object.errors[:name] %></div>
-           </div>
+         <%= f.label :name,"Nombre:",class: "col-sm-3 control-label" %>
+         <div class="col-xs-12 col-md-12 col-sm-12 col-lg-5">
+            <%= f.text_field :name,autofocus: true , class: "form-control upper_text" ,onblur: "this.value=this.value.toUpperCase()" ,:pattern => "[a-zA-Z-0-9 ]+", :"data-error"=>"Verifique si el dato esta correcto.", :maxlength => "40", :required => true  %>
+            <div class="help-block"> <%= f.object.errors[:name].to_sentence if f.object.errors[:name] %></div>
+         </div>
       </div>
 
       <div class="form-group">  
          <%= f.label :area,"Area:",class: "control-label col-sm-3"  %> 
          <div class="col-xs-12 col-md-12 col-sm-12 col-lg-4">
-          <div class="input-group">
-           <%= f.text_field :area,autofocus: true , :type => "number",:step => ".1",  class: "form-control numbers", :"data-error"=>"Verifique si el dato esta correcto.", :maxlength => "10", :required => true   %>
-           <span class="input-group-addon" id="basic-addon2">Ha</span>                                         
-         </div>
-         <p class="help-block"> <%= f.object.errors[:area].to_sentence if f.object.errors[:area] %></p>   
+            <div class="input-group">
+               <%= f.text_field :area,autofocus: true , :type => "number",:step => ".1",  class: "form-control numbers", :"data-error"=>"Verifique si el dato esta correcto.", :maxlength => "10", :required => true   %>
+               <span class="input-group-addon" id="basic-addon2">Ha</span>                                         
+            </div>
+            <p class="help-block"> <%= f.object.errors[:area].to_sentence if f.object.errors[:area] %></p>   
          </div>  
       </div> 
 
       <div class="form-group">  
          <%= f.label  "Encargado:",class: "col-sm-3 control-label"  %>
          <div class="col-xs-12 col-md-12 col-sm-12 col-lg-4">
-          <%= f.select :person_id, options_for_select(@person, f.object.person_id), {}, { :class => 'form-control' ,:required => true}%>
-          <p class="help-block"> <%= f.object.errors[:person_id].to_sentence if f.object.errors[:person_id] %></p>
-       </div>
+            <%= f.select :person_id, options_for_select(@person, f.object.person_id), {}, { :class => 'form-control' ,:required => true}%>
+            <p class="help-block"> <%= f.object.errors[:person_id].to_sentence if f.object.errors[:person_id] %></p>
+         </div>
       </div>
 
       <div class="form-group">  
@@ -35,9 +34,6 @@
             <p class="help-block"> <%= f.object.errors[:description].to_sentence if f.object.errors[:description] %></p>   
          </div>
       </div>
-
-      <%= render('layouts/buttons')%>
-
       <input type="hidden" id="controller" value="<%= controller_name%>">
    </div>
 <%end%>

@@ -1,9 +1,15 @@
-var TOTAL_HOURS_NEEDED  = 0;
-var COUNT               = 0;
-var TOTAL_MP				= 0;
-var SUBTOTAL 				= 0;  
+var TOTAL_HOURS_NEEDED_MP     = 0;
+var COUNT_MP                  = 0;
+var TOTAL_MP				      = 0;
+var SUBTOTAL_MP			      = 0;  
 $(document).ready( function() 
 {
+
+  var FIELD_HN_TOTAL     = $("#total_hours_needed").val();
+  TOTAL_HOURS_NEEDED_MP  = parseFloat(FIELD_HN_TOTAL);// tomar valor en caso de edicion
+
+  var FIELD_TOTAL       = $("#total").val();
+  TOTAL_MP              = parseFloat(FIELD_TOTAL); // tomar valor en caso de edicion
 
    controlador = $("#controller").val();
    generic_response_form(controlador,true);
@@ -21,7 +27,7 @@ $(document).ready( function()
 	      var hours_needed         = $("#hours_needed").val();
    	
       	row_man_power(type_work_id,type_work,employee_id,employee,hours_needed,salary);
-      	COUNT++;
+      	COUNT_MP++;
       }
       else
       {
@@ -42,38 +48,31 @@ $(document).ready( function()
          $remove.prop('disabled', true);
          TOTAL_MP -= row.subtotal;
          $("#total").text(TOTAL_MP);
-         $(".total_hours_needed").val(TOTAL_HOURS_NEEDED);
+         $(".total_hours_needed").val(TOTAL_HOURS_NEEDED_MP);
 
       });
    }); 
 });
 
+
 function row_man_power(type_work_id,type_work,employee_id,employee,hours_needed,salary)
 { 
    
-   SUBTOTAL 				= parseFloat(salary) * parseFloat(hours_needed);
-   TOTAL_MP 				+= SUBTOTAL;
-   TOTAL_HOURS_NEEDED 	+= parseFloat(hours_needed);
-
-   //total texto td + total campo + total de horas necesarias de trabajo
-   $("#total").text(TOTAL_MP);
-   $(".man_powers_total").val(TOTAL_MP);
-   $(".total_hours_needed").val(TOTAL_HOURS_NEEDED);
-
+   SUBTOTAL_MP 				= parseFloat(salary) * parseFloat(hours_needed);
+   calc_totals_mp(SUBTOTAL_MP,hours_needed);
       
 
    var  _data_ =  {
-                     "id": COUNT,
-                     "code": COUNT,
+                     "id": COUNT_MP,
                      "employee": employee,   
-                     "employee_id": "<input type='hidden' size='20' name='man_power[man_power_details_attributes]["+COUNT+"][person_id]' id='txt' value="+employee_id+">",  
+                     "employee_id": "<input type='hidden' size='20' name='man_power[man_power_details_attributes]["+COUNT_MP+"][person_id]' id='txt' value="+employee_id+">",  
                      "type_of_work": type_work,   
-                     "type_of_work_id":   "<input type='hidden' size='20' name='man_power[man_power_details_attributes]["+COUNT+"][type_of_work_id]' id='txt' value="+type_work_id+">",   
+                     "type_of_work_id":   "<input type='hidden' size='20' name='man_power[man_power_details_attributes]["+COUNT_MP+"][type_of_work_id]' id='txt' value="+type_work_id+">",   
                      "salary": set_numeric(parseInt(salary)),
                      "hours_needed": hours_needed,  //horas necesaria de trabajo para este tipo de servicio y este empleado
-                     "hours_needed_id":   "<input type='hidden' size='20' name='man_power[man_power_details_attributes]["+COUNT+"][hours_needed]' id='txt2' value="+hours_needed+'>',  
-                     "subtotal": SUBTOTAL.toFixed(0),
-                     "subtotal_id": "<input type='hidden' size='20' name='man_power[man_power_details_attributes]["+COUNT+"][subtotal]' id='txt2' value="+SUBTOTAL.toFixed(0)+'>',
+                     "hours_needed_id":   "<input type='hidden' size='20' name='man_power[man_power_details_attributes]["+COUNT_MP+"][hours_needed]' id='txt2' value="+hours_needed+'>',  
+                     "subtotal": SUBTOTAL_MP.toFixed(0),
+                     "subtotal_id": "<input type='hidden' size='20' name='man_power[man_power_details_attributes]["+COUNT_MP+"][subtotal]' id='txt2' value="+SUBTOTAL_MP.toFixed(0)+'>',
                      "Action" : '<a class="remove  btn btn-danger delete btn-sm" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></a>',
                   };
 
@@ -85,17 +84,25 @@ function row_man_power(type_work_id,type_work,employee_id,employee,hours_needed,
 function form_man_power_validates()
 {
   $('#form_man_powers').bootstrapValidator({
-    excluded: [':disabled', ':hidden', ':not(:visible)'],
-    fields: {
-      "man_power[hours_needed]": 
-      {
-        validators: {
-          notEmpty: {
-            message: 'Necesita cargar la cantidad de horas!'
-          }
-        }
-      }
-    }
+      excluded: [':disabled', ':hidden', ':not(:visible)'],
+      fields: {
+               "man_power[total_hours_needed]": 
+               {
+                 validators: {
+                   notEmpty: {
+                     message: 'Necesita cargar la cantidad de horas!'
+                   }
+                 }
+               }
+               ,"man_power[total]": 
+               {
+                 validators: {
+                   notEmpty: {
+                     message: 'Necesita cargar la cantidad de horas!'
+                   }
+                 }
+               }
+            }
   }).on('init.field.fv', function (e, data) {
    	e.preventDefault();
     	if (data.fv.getInvalidFields().length > 0) {    // There is invalid field
@@ -109,6 +116,17 @@ function form_man_power_validates()
    }).on('change', 'form', function (e) {
    	e.preventDefault();
    });
+}
+
+calc_totals_mp = function(subtotal,hours)
+{
+   TOTAL_MP                += subtotal;
+   TOTAL_HOURS_NEEDED_MP   += parseFloat(hours);
+
+   $(".total").text(TOTAL_MP); 
+   $(".total_hours_needed").text(TOTAL_HOURS_NEEDED_MP); 
+   $("#total").val(TOTAL_MP); 
+   $("#total_hours_needed").val(TOTAL_HOURS_NEEDED_MP); 
 }
 
 function is_valid_fields_mp()

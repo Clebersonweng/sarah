@@ -13,12 +13,20 @@ $(document).ready(function () {
 
 	controlador = $("#controller").val();
 	
-	verify_exist_type_crop_to_period();
 	$("#openHistory").off("click").on("click", function () {
 		$("#md_historyProd").modal('show');
 		charge_history_prod();
 	});
 
+	$("#estimate_sale_farming_plot_id").on("change", function ()
+	{
+		if($("#id_").val() == "")
+		{
+			verify_exist_type_crop_to_period();	
+		}
+		
+	});
+	
 });
 
 
@@ -225,16 +233,15 @@ function remove_error_before_charge_gross_sale()
 	});
 }
 
-function verify_exist_type_crop_to_period()
+verify_exist_type_crop_to_period = function()
 {
-	$("#estimate_sale_farming_plot_id").on("change", function ()
-	{
+	
 		var date_init       = convert_date($("#estimate_sale_date_init").val());
 		var date_end        = convert_date($("#estimate_sale_date_end").val());
 		var farming_plot_id = $("#estimate_sale_farming_plot_id").val();
 		var type_of_crop_id = $("#estimate_sale_type_of_crop_id").val();
 
-		if (typeof date_init != "" && typeof date_end != "" && typeof farming_plot_id != "" && typeof type_of_crop_id != "" && farming_plot_id != "")
+		if (date_init != "" && date_end != "" && farming_plot_id != "" &&  type_of_crop_id != "")
 		{
 			$.ajax({
 				type: "POST",
@@ -242,23 +249,13 @@ function verify_exist_type_crop_to_period()
 				data: {"date_init": date_init, "date_end": date_end, "farming_plot_id": farming_plot_id},
 				url: "/" + controlador + "/verify_new_estimate_sale",
 				success: function (response) {
-					console.log(response);
 					if (response.status == "ok")
 					{
-						// fv.updateMessage(field, 'blank', response.fields[field]).updateStatus(field, 'INVALID', 'blank');
 						run_option_result(response);
-						//reset_errors("farming_plot_id");
-						//reset_errors("type_of_crop_id");
-						//reset_errors("date_init");
-						//reset_errors("date_end");
 					}
 					else if (response.status == "existe")
 					{
 						run_option_result(response);
-						//add_errors("farming_plot_id");
-						//add_errors("type_of_crop_id");
-						//add_errors("date_init");
-						//add_errors("date_end");
 					}
 				},
 				error: function (response) {
@@ -269,7 +266,7 @@ function verify_exist_type_crop_to_period()
 				}
 			});
 		}
-	});
+	
 }
 
 function run_option_result(response)
@@ -282,3 +279,5 @@ function run_option_result(response)
 		select.append($("<option></option>").attr("value", value).text(item));
 	});
 }
+
+

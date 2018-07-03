@@ -1,93 +1,86 @@
-    <%= form_for( @implement, html: {class: 'form-horizontal', id: 'form_implements', remote:true,"data-type": "json",'data-model' => 'implement'}) do |f| %>
-
-
-    <div class="col-sm-6 col-md-6">
+ <%= form_for( @implement, html: {class: 'form-horizontal', id: 'form_implements', remote:true,"data-type": "json",'data-model' => 'implement'}) do |f| %>
+   <div class="col-sm-6 col-md-6">
       <div class="form-group">
-        <%= f.label :name,"Nombre :" ,class: "control-label col-sm-3"%>
-        <div class="col-sm-8">
-         <%= f.text_field :name, autofocus: true , class: "form-control", :required => true %>
-         <span class="help-block"> <%= f.object.errors[:name].to_sentence if f.object.errors[:name] %></span>   
+         <%= f.label :name,"Nombre :" ,class: "control-label col-sm-3"%>
+         <div class="col-sm-8">
+            <%= f.text_field :name, autofocus: true , class: "form-control", :required => true %>
+            <span class="help-block"> <%= f.object.errors[:name].to_sentence if f.object.errors[:name] %></span>   
+         </div>
+      </div>
+
+      <div class="form-group">
+         <%= f.label :brand, "Marca :" ,class: "control-label col-sm-3"%>
+         <div class="col-sm-6">
+            <%= f.text_field :brand, autofocus: true , class: "form-control", :required => true%>
+            <span class="help-block"> <%= f.object.errors[:brand].to_sentence if f.object.errors[:brand] %></span>   
+         </div>
+      </div>
+
+      <div class="form-group">
+         <%= f.label :model, "Modelo :" ,class: "control-label col-sm-3"%>
+         <div class="col-sm-6">
+            <%= f.text_field :model, autofocus: true , class: "form-control", :required => true %>
+            <span class="help-block"> <%= f.object.errors[:model].to_sentence if f.object.errors[:model] %></span>   
+         </div>
+      </div>
+
+      <div class="form-group">
+         <%= f.label :year, "Año :" ,class: "control-label col-sm-3 col-md-3"%>
+         <div class="col-sm-3 col-md-3 ">
+            <%= f.text_field :year, autofocus: true , class: "form-control only_numbers replace_comma", :required => true %>
+            <span class="help-block"> <%= f.object.errors[:year].to_sentence if f.object.errors[:year] %></span>   
+         </div>
+      </div>
+
+      <div class="form-group">
+         <%= f.label :price, "Precio :" ,class: "control-label col-sm-3 col-md-3 "%>
+         <div class="col-sm-3 col-md-3">
+            <%= f.text_field :price, autofocus: true , class: "form-control only_numbers replace_comma", :required => true %>
+            <span class="help-block"> <%= f.object.errors[:price].to_sentence if f.object.errors[:price] %></span>   
+         </div>
+      </div> 
+   </div>
+   <div class="col-md-6 col-sm-6">
+      <div class="form-group">
+         <%= f.label :machine_id,"Máquina :" ,class: "control-label col-sm-5"%>
+         <div class="col-sm-5">
+            <%= f.select :machine_id, options_for_select(@machines, f.object.machine_id), {}, { :class => 'form-control', :required => true }%>
+            <span class="help-block"> <%= f.object.errors[:machine_id].to_sentence if f.object.errors[:machine_id] %></span>   
+         </div>
+      </div>
+
+      <div class="form-group">
+         <%= f.label :coef_cccr, "Coef. reparación y mantenimiento:" ,class: "control-label col-sm-6"%>
+         <div class="col-sm-4">
+            <%= f.text_field :coef_cccr, autofocus: true , class: "form-control only_numbers replace_comma", :required => true %>
+            <span class="help-block"> <%= f.object.errors[:coef_cccr].to_sentence if f.object.errors[:coef_cccr] %></span>   
+         </div>
+      </div>
+
+      <div class="form-group">
+         <%= f.label :working_capacity,"Capacidad de Trabajo (Has/hs):" ,class: "control-label col-sm-6 col-md-6"%>
+         <div class="col-sm-3 col-md-3">
+            <%= f.text_field :working_capacity, class: 'form-control text-right replace_comma', :required => true  %>
+         </div>
+         <a href="#" class="btn btn-default col-xs-offset-2 col-lg-offset-0" data-toggle="modal" data-target="#md_ctt"><i class="fa fa-calculator" aria-hidden="true"></i></a>   
+      </div>
+
+      <div class="form-group">
+         <%= f.label :working_capacity_effective,"Capacidad de Trabajo Efectiva (Has/hs):",class: "control-label col-sm-6 col-md-6"%>
+         <div class="col-sm-3 col-md-3">
+            <%= f.text_field :working_capacity_effective, class: "form-control text-right replace_comma", :required => true   %>  
+         </div>
+         <a href="#" class="btn btn-default col-xs-offset-2 col-lg-offset-0" data-toggle="modal" data-target="#md_cte"><i class="fa fa-calculator" aria-hidden="true"></i></a>   
+      </div>
+
+      <div class="form-group">
+         <%= f.label "Tiempo Operativo (Hs/Ha):" ,class: "control-label col-sm-6"%>
+         <div class="col-sm-4">
+            <%= f.text_field :oper_time, autofocus: true , class: "form-control text-right replace_comma", :required => true %>
+            <span class="help-block"> <%= f.object.errors[:oper_time].to_sentence if f.object.errors[:oper_time] %></span>   
+         </div>                   
       </div>
    </div>
-
-   <div class="form-group">
-     <%= f.label :brand, "Marca :" ,class: "control-label col-sm-3"%>
-     <div class="col-sm-6">
-      <%= f.text_field :brand, autofocus: true , class: "form-control", :required => true%>
-      <span class="help-block"> <%= f.object.errors[:brand].to_sentence if f.object.errors[:brand] %></span>   
-   </div>
-</div>
-
-<div class="form-group">
-  <%= f.label :model, "Modelo :" ,class: "control-label col-sm-3"%>
-  <div class="col-sm-6">
-   <%= f.text_field :model, autofocus: true , class: "form-control", :required => true %>
-   <span class="help-block"> <%= f.object.errors[:model].to_sentence if f.object.errors[:model] %></span>   
-</div>
-</div>
-
-<div class="form-group">
- <%= f.label :year, "Año :" ,class: "control-label col-sm-3 col-md-3"%>
- <div class="col-sm-3 col-md-3 ">
-  <%= f.text_field :year, autofocus: true , class: "form-control only_numbers replace_comma", :required => true %>
-  <span class="help-block"> <%= f.object.errors[:year].to_sentence if f.object.errors[:year] %></span>   
-</div>
-</div>
-
-<div class="form-group">
- <%= f.label :price, "Precio :" ,class: "control-label col-sm-3 col-md-3 "%>
- <div class="col-sm-3 col-md-3">
-  <%= f.text_field :price, autofocus: true , class: "form-control only_numbers replace_comma", :required => true %>
-  <span class="help-block"> <%= f.object.errors[:price].to_sentence if f.object.errors[:price] %></span>   
-</div>
-</div> 
-</div>
-
-<div class="col-md-6 col-sm-6">
-  
-   <div class="form-group">
-     <%= f.label :machine_id,"Máquina :" ,class: "control-label col-sm-5"%>
-     <div class="col-sm-5">
-      <%= f.select :machine_id, options_for_select(@machines, f.object.machine_id), {}, { :class => 'form-control', :required => true }%>
-      <span class="help-block"> <%= f.object.errors[:machine_id].to_sentence if f.object.errors[:machine_id] %></span>   
-   </div>
-</div>
-
-<div class="form-group">
- <%= f.label :coef_cccr, "Coef. reparación y mantenimiento:" ,class: "control-label col-sm-6"%>
- <div class="col-sm-4">
-  <%= f.text_field :coef_cccr, autofocus: true , class: "form-control only_numbers replace_comma", :required => true %>
-  <span class="help-block"> <%= f.object.errors[:coef_cccr].to_sentence if f.object.errors[:coef_cccr] %></span>   
-</div>
-</div>
-
-
-<div class="form-group">
-   <%= f.label :working_capacity,"Capacidad de Trabajo (Has/hs):" ,class: "control-label col-sm-6 col-md-6"%>
-   <div class="col-sm-3 col-md-3">
-      <%= f.text_field :working_capacity, class: 'form-control text-right replace_comma', :required => true  %>
-   </div>
-   <a href="#" class="btn btn-default col-xs-offset-2 col-lg-offset-0" data-toggle="modal" data-target="#md_ctt"><i class="fa fa-calculator" aria-hidden="true"></i></a>   
-</div>
-
-<div class="form-group">
-   <%= f.label :working_capacity_effective,"Capacidad de Trabajo Efectiva (Has/hs):",class: "control-label col-sm-6 col-md-6"%>
-   <div class="col-sm-3 col-md-3">
-      <%= f.text_field :working_capacity_effective, class: "form-control text-right replace_comma", :required => true   %>  
-   </div>
-   <a href="#" class="btn btn-default col-xs-offset-2 col-lg-offset-0" data-toggle="modal" data-target="#md_cte"><i class="fa fa-calculator" aria-hidden="true"></i></a>   
-</div>
-
-<div class="form-group">
-   <%= f.label "Tiempo Operativo (Hs/Ha):" ,class: "control-label col-sm-6"%>
-   <div class="col-sm-4">
-      <%= f.text_field :oper_time, autofocus: true , class: "form-control text-right replace_comma", :required => true %>
-      <span class="help-block"> <%= f.object.errors[:oper_time].to_sentence if f.object.errors[:oper_time] %></span>   
-   </div>                   
-</div>
-</div>
-<%= render('layouts/error_lists')%>
-<%= render('layouts/buttons2col')%>
 </div>
 <%end%>           
 <input type="hidden" id="controller" value="<%=controller_name%>">

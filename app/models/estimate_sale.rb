@@ -20,7 +20,6 @@ class EstimateSale < ApplicationRecord
 	end
   #["SELECT body FROM comments WHERE author = :user_id OR approved_by = :user_id", { :user_id => user_id }]
 	def self.validate_periods(farming_plot,date_init, date_end)
-		#EstimateSale.where(" date_init >= ? AND date_end <= ? AND farming_plot_id = ?",date_init, date_end,faming_plot)
 		EstimateSale.find_by_sql([ " 	SELECT 
 													id,name 
 												FROM 
@@ -55,6 +54,8 @@ class EstimateSale < ApplicationRecord
 		"]
 	end
   
+  
+
   private
   def add_zeros_to_code 
 	 codigo = EstimateSale.maximum(:code) #5

@@ -1,16 +1,16 @@
+<div class="row">
+	<div class="col-md-4 col-sm-4"></div>
+	<div class="col-md-8 col-sm-8">
+		   <% if controller.action_name == "edit" %>
+		     <%= link_to "<i class='fa fa-trash-o' aria-hidden='true'></i>  Cancelar".html_safe, "../../#{controller_name}",:type => "button",:class =>"btn btn-danger" %>
 
-<div class="form-group">
-	<div class="col-lg-offset-3 col-md-6 col-sm-6">
-	   <% if controller.action_name == "edit" %>
-	     <%= link_to "<i class='fa fa-trash-o' aria-hidden='true'></i>  Cancelar".html_safe, "../../#{controller_name}",:type => "button",:class =>"btn btn-danger" %>
+		   <% else %>
 
-	   <% else %>
+		     <%= link_to "<i class='fa fa-trash-o' aria-hidden='true'></i>  Cancelar".html_safe, "../#{controller_name}",:type => "button",:class =>"btn btn-danger" %>
+		   <% end %>
 
-	     <%= link_to "<i class='fa fa-trash-o' aria-hidden='true'></i>  Cancelar".html_safe, "../#{controller_name}",:type => "button",:class =>"btn btn-danger" %>
-	   <% end %>
-
-	   <%= link_to "<i class='fa fa-floppy-o' aria-hidden='true'></i>  Guardar".html_safe, "../#{controller_name}",:type => "button",:class =>"btn btn-success",:id => "btn_submit_#{controller_name}" ,
-      data: { disable_with: "Guardando.." } %>
+		   <%= link_to "<i class='fa fa-floppy-o' aria-hidden='true'></i>  Guardar".html_safe, "../#{controller_name}",:type => "button",:class =>"btn btn-success",:id => "btn_submit_#{controller_name}" ,
+	      data: { disable_with: "Guardando.." } %>
 
 	</div>
 </div>

@@ -1,24 +1,21 @@
-   <%= form_for(@brand,html: {class: 'form-horizontal',id:'form_brands', remote:true,"data-type": "json",'data-model' => 'brand'}) do |f| %>
-      
-      <div class="col-sm-6 col-lg-8 col-md-12">
+<%= form_for(@brand,html: {class: 'form-horizontal',id:'form_brands', remote:true,"data-type": "json",'data-model' => 'brand'}) do |f| %>
+   <div class="col-sm-6 col-lg-8 col-md-12">
 
-         <div class="form-group">
-            <%= f.label :name,"Marca :" ,class: "control-label col-sm-3"%>
-            <div class="col-sm-5">
-               <%= f.text_field :name, autofocus: true , class: "form-control upper_text"%>
-               <div class="help-block with-errors"> <%= f.object.errors[:name].to_sentence if f.object.errors[:name] %></div>
-            </div>
+      <div class="form-group">
+         <%= f.label :name,"Marca :" ,class: "control-label col-sm-3"%>
+         <div class="col-sm-5">
+            <%= f.text_field :name, autofocus: true , class: "form-control upper_text"%>
+            <div class="help-block with-errors"> <%= f.object.errors[:name].to_sentence if f.object.errors[:name] %></div>
          </div>
-
-         <div class="form-group">
-            <%= f.label :description,"Descripción:" ,class: "control-label col-sm-3"%>
-            <div class="col-sm-6">
-               <%= f.text_area :description, autofocus: true , class: "form-control"%>
-               <div class="help-block with-errors"> <%= f.object.errors[:description].to_sentence if f.object.errors[:description] %></div>
-            </div>
-         </div>
-
-         <%= render('layouts/buttons')%>
       </div>
-      <input type="hidden" id="controller" value="<%= controller_name%>">
-   <% end %>
+
+      <div class="form-group">
+         <%= f.label :description,"Descripción:" ,class: "control-label col-sm-3"%>
+         <div class="col-sm-6">
+            <%= f.text_area :description, autofocus: true , class: "form-control"%>
+            <div class="help-block with-errors"> <%= f.object.errors[:description].to_sentence if f.object.errors[:description] %></div>
+         </div>
+      </div>
+   </div>
+   <input type="hidden" id="controller" value="<%= controller_name%>">
+<% end %>

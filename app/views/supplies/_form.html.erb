@@ -37,13 +37,13 @@
 		<tr>
 			<th data-field="id" data-checkbox="true">#</th>
 			<th data-field="product">Insumos</th>
-			<th data-field="product_id"></th>
+			<th data-field="product_id" class="hide"></th>
 			<th data-field="quantity_needed">Cantidad Necesária</th>
-			<th data-field="quantity_needed_id"></th>
+			<th data-field="quantity_needed_id" class="hide"></th>
 			<th data-field="unit_measure">U.M</th>
 			<th data-halign='right' data-id="subtotal" data-footer-formatter="sumFormatter" data-align='right' data-field="subtotal" >Sub-total</th>
-			<th data-halign='right' data-field="subtotal_id"></th>
-			<th data-halign='right' data-align='right' data-field="Action" data-events="remove">Acción</th>
+			<th data-halign='right' data-field="subtotal_id" class="hide"></th>
+			<th data-width="60" data-halign='right' data-align='right' data-field="Action" data-events="remove">Acción</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -87,7 +87,6 @@
 
 
 	<%= f.hidden_field :program_production_id, :value => @program_production_id %>
-	<%= render('layouts/buttons')%>
 <% end %>
 <input type="hidden" id="controller" value="<%= controller_name%>">
 

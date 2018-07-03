@@ -1,8 +1,7 @@
-<div class="panel-body">
 	<%= form_for(@unit_of_measurement,html: {class: 'form-horizontal', id: "form_unit_of_measurements", remote: true,"data-type": "json",'data-model' => 'unit_of_measurement'}) do |f| %>
 	<div class="col-sm-12 col-xs-12">
 		<div class="form-group">  
-			<%= f.label :name,class: "control-label col-sm-3" %>
+			<%= f.label :name,"Nombre :",class: "control-label col-sm-3" %>
 			<div class="col-sm-6">
 				<%= f.text_field :name,autofocus: true , class: "form-control upper_text" ,onblur: "this.value=this.value.toUpperCase()"  %>
 				<p class="help-block"> <%= f.object.errors[:name].to_sentence if f.object.errors[:name] %></p>
@@ -10,22 +9,20 @@
 		</div>
 
 		<div class="form-group">  
-			<%= f.label :abbreviation,class: "control-label col-sm-3"  %>
+			<%= f.label :abbreviation,"Abreviación :",class: "control-label col-sm-3"  %>
 			<div class="col-sm-6">                                         
 				<%= f.text_field :abbreviation,autofocus: true , class: "form-control upper_text"  %>   
 				<p class="help-block"> <%= f.object.errors[:abbreviation].to_sentence if f.object.errors[:abbreviation] %></p>
 			</div>
 		</div>
 		<div class="form-group">  
-			<%= f.label :coefficient,class: "control-label col-sm-3"  %>
+			<%= f.label :coefficient,"Coeficiente :",class: "control-label col-sm-3"  %>
 			<div class="col-sm-6">                                         
 				<%= f.text_area :coefficient,autofocus: true , class: "form-control"  %>   
 				<p class="help-block"> <%= f.object.errors[:coefficient].to_sentence if f.object.errors[:coefficient] %></p>
 			</div>
 		</div>
-		<%= render('layouts/buttons')%>
 	</div>
 	<input type="hidden" id="controller" value="<%= controller_name%>">
 	<% end %>
-</div>
 

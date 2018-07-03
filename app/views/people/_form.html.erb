@@ -71,7 +71,6 @@
             </div>
             <%= f.hidden_field :user_id,autofocus: true , class: "form-control" ,:pattern => "[a-zA-Z-0-9 ]+", :maxlength => "40", :required => true, :value => "#{current_user.id}" %>
                       <div class="help-block"> <%= f.object.errors[:user_id].to_sentence if f.object.errors[:user_id] %></div>     
-   <%= render('layouts/buttons2col')%>
    <input type="hidden" id="controller" value="<%= controller_name%>">
    </div>
 <%end%>

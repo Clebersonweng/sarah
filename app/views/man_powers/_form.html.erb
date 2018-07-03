@@ -50,15 +50,15 @@
                <tr>
                   <th data-field="id" data-checkbox="true">#</th>
                   <th data-field="employee">Empleado</th>
-                  <th data-field="employee_id" ></th>
-                  <th data-field="type_of_work" >Tipo de trabajo</th>
-                  <th data-field="type_of_work_id"></th>
-                  <th data-field="salary" >Sueldo(Hs)</th>
+                  <th data-field="employee_id" class="hide"></th>
+                  <th data-field="type_of_work">Tipo de trabajo</th>
+                  <th data-field="type_of_work_id" class="hide"></th>
+                  <th data-field="salary" data-align='right'>Sueldo(Hs)</th>
                   <th data-field="hours_needed">Horas necesárias</th>
-                  <th data-field="hours_needed_id"></th>
+                  <th data-field="hours_needed_id" data-align='right' class="hide"></th>
                   <th data-halign='right' data-align='right' data-field="subtotal" >Sub-total</th>
-                  <th data-halign='right' data-align='right' data-field="subtotal_id" ></th>
-                  <th data-halign='right' data-align='right' data-field="Action" data-events="remove">Acción</th>
+                  <th data-halign='right' data-align='right' data-field="subtotal_id" class="hide"></th>
+                  <th data-width="60" data-halign='right' data-align='right' data-field="Action" data-events="remove">Acción</th>
                </tr>
             </thead>
             <tbody>
@@ -67,38 +67,49 @@
                   <tr>
                      <td><%= man_power_det.id%></td>
                      <td><%= man_power_det.person.name %></td>
-                     <td></td>
+                     <td class="hide"></td>
                      <td><%= man_power_det.type_of_work.name %></td>
-                     <td></td>
-                     <td><%= number_with_precision( man_power_det.type_of_work.price_hours, :precision => 0, :delimiter => '.' ) %></td>                  
-                     <td><%= number_with_precision(man_power_det.hours_needed, :precision => 0, :delimiter => '.' ) %></td>                  
-                     <td ></td>
+                     <td class="hide"></td>
+                     <td><%= number_with_precision( man_power_det.type_of_work.price_hours, :precision => 0, :delimiter => '.' ) %></td> 
+                     <td><%= number_with_precision(man_power_det.hours_needed, :precision => 0, :delimiter => '.' ) %></td>   
+                     <td class="hide"></td>
                      <td><%= number_with_precision( man_power_det.subtotal, :precision => 0, :delimiter => '.' ) %></td>                  
-                     <td ></td>
+                     <td class="hide"></td>
                      <td >
                         <a class="change_status btn btn-danger btn-sm" href="" title="Cambiar status" >
                            <i class="fa fa-minus-square"></i>
                         </a>                    
                      </td>
                   </tr>
-                  <% end %>   
-               <% end %>
+               <% end %> 
+               <div class="hide">
+                  <%= f.text_field :total_hours_needed, :value => @total_hours_needed ,:id => "total_hours_needed" %>
+                  <%= f.text_field :total, :value => @total ,:id => "total" %>
+               </div>
+               <% else %>
+               <div class="hide">
+                  <%= f.text_field :total_hours_needed, :value => 0 ,:id => "total_hours_needed" %>
+                  <%= f.text_field :total, :value => 0 ,:id => "total" %>
+               </div>
+            <% end %>
             </tbody>
                  
             <tfoot>
               <tr>
-               <td class="h6 font-weight-bold" colspan="8"><strong>Total :<strong></td>
-               <td colspan="5" class="font-weight-bold text-right">
-                  <strong><span id="total"><%= @total %></span><strong>
-               </td>
+                  <td class="h6 font-weight-bold" colspan="6"><strong>TOTAL :<strong></td>
+                  <td colspan="5" class="font-weight-bold text-right"><strong><span class="total">
+                     <%=number_with_precision( @total, :precision => 0, :delimiter => '.' ) %></span><strong>
+                  </td>
+              </tr>
+              <tr class="">
+                  <td class="h6 font-weight-bold" colspan="6"><strong>TOTAL DE HORAS NECESARIAS :<strong></td>
+                  <td colspan="5" class="font-weight-bold text-right"><strong><span class="total_hours_needed">
+                     <%=number_with_precision( @total_hours_needed, :precision => 0, :delimiter => '.' ) %></span><strong>
+                  </td>
               </tr>
             </tfoot>
          </table>
-         
-         <%= render('layouts/buttons')%>
          <input type="hidden" name='man_power[program_production_id]' value="<%= @program_production_id %>" />
-         <input type="hidden" name='man_power[total]' class="man_powers_total" value="<%= @total %>"/>
-         <input type="hidden" name="man_power[total_hours_needed]" class="total_hours_needed" value="<%= @total_hours_needed %>"/>  
       </div>
    <%end%>
 <input type="hidden" id="controller" value="<%= controller_name%>">

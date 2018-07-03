@@ -64,7 +64,7 @@
             <thead>
                <tr>
                   <th data-field="id" data-checkbox="true">#</th>
-                  <th data-index="index" data-field="code"> Código</th>
+                  <th data-index="index" data-field="code">Cod</th>
                   <th data-field="machine">Máquinaria</th>
                   <th data-field="machine_id" class="hide"></th>
                   <th data-field="implement">Implemento</th>
@@ -135,8 +135,6 @@
               </tr>
             </tfoot>
          </table>
-         
-         <%= render('layouts/buttons')%>
          <%= f.hidden_field :program_production_id, :value => @program_production_id %>
 <%end%>
 <input type="hidden" id="controller" value="<%= controller_name%>">

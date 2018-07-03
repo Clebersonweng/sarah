@@ -24,8 +24,6 @@
 					<span class="help-block"> <%= f.object.errors[:quantity].to_sentence if f.object.errors[:quantity] %></span>   
 				</div>
 			</div>
-
-			<%= render('layouts/buttons')%>
 		</div>
 		<input type="hidden" id="controller" value="<%= controller_name%>">
 	<% end %>
