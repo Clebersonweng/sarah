@@ -27,7 +27,6 @@ class EstimateSalesController < ApplicationController
     @date_end         = params[:date_end]
     @farming_plot_id  = params[:farming_plot_id]
     @type_of_crop_id  = params[:type_of_crop_id]
-    @estimate_sale_id  = params[:estimate_sale_id]
     valor = EstimateSale.validate_periods(@farming_plot_id,@date_init,@date_end)
 
     if valor.present?
