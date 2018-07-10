@@ -20,10 +20,10 @@ $(document).ready(function () {
 
 	$("#estimate_sale_farming_plot_id").on("change", function ()
 	{
-		if($("#id_").val() == "")
-		{
+		//if($("#id_").val() == "")
+		//{
 			verify_exist_type_crop_to_period();	
-		}
+		//}
 		
 	});
 	
@@ -239,9 +239,12 @@ verify_exist_type_crop_to_period = function()
 		var date_init       = convert_date($("#estimate_sale_date_init").val());
 		var date_end        = convert_date($("#estimate_sale_date_end").val());
 		var farming_plot_id = $("#estimate_sale_farming_plot_id").val();
-		var type_of_crop_id = $("#estimate_sale_type_of_crop_id").val();
+		/*var type_of_crop_id = $("#estimate_sale_type_of_crop_id").val();*/
+		console.log(date_init);
+		console.log(date_end);
+		console.log(farming_plot_id);
 
-		if (date_init != "" && date_end != "" && farming_plot_id != "" &&  type_of_crop_id != "")
+		if (date_init != "" && date_end != "" && farming_plot_id != "" /*&&  type_of_crop_id != ""*/)
 		{
 			$.ajax({
 				type: "POST",
@@ -265,6 +268,9 @@ verify_exist_type_crop_to_period = function()
 					alert_sarah("Ocurrió un error en el servidor", "danger");
 				}
 			});
+		}
+		else{
+			console.log("no paso");
 		}
 	
 }
