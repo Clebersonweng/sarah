@@ -93,13 +93,21 @@
                  <tr>
                      <td class="h6 font-weight-bold" colspan="4"><strong>TOTAL VARIABLE :<strong></td>
                      <td colspan="9" class="font-weight-bold text-right">
-                        <strong><span class="total_variable"><%= @total_variable %></span><strong>
+                        <strong>
+                           <span class="total_variable">
+                              <%=number_with_precision( @total_variable, :precision => 0, :delimiter => '.' ) %></span><strong>
+                           </span>
+                        <strong>
                      </td>
                  </tr>
                 <tr>
                   <td class="h6 font-weight-bold" colspan="4"><strong>TOTAL FIJO & VARIABLE :<strong></td>
                   <td colspan="9" class="font-weight-bold text-right">
-                     <strong><span class="total"><%= @total_fixed_and_variable %></span><strong>
+                     <strong>
+                        <span class="total">
+                           <%=number_with_precision( @total_fixed_and_variable, :precision => 0, :delimiter => '.' ) %></span><strong>
+                        </span>
+                     <strong>
                   </td>
                  </tr>
                </tfoot>
