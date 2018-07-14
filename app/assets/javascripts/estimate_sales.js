@@ -240,10 +240,6 @@ verify_exist_type_crop_to_period = function()
 		var date_end        = convert_date($("#estimate_sale_date_end").val());
 		var farming_plot_id = $("#estimate_sale_farming_plot_id").val();
 		/*var type_of_crop_id = $("#estimate_sale_type_of_crop_id").val();*/
-		console.log(date_init);
-		console.log(date_end);
-		console.log(farming_plot_id);
-
 		if (date_init != "" && date_end != "" && farming_plot_id != "" /*&&  type_of_crop_id != ""*/)
 		{
 			$.ajax({

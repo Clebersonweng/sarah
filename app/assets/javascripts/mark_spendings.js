@@ -37,12 +37,12 @@ $(document).ready(function () {
 		}
 	});
 
-	$('#tb_structure_expense').on('check.bs.table', function (e, row) 
+	$('#table_MS').on('check.bs.table', function (e, row) 
 	{
 		$('.remove').click(function () 
 		{
 			//var ids = getIdSelections($('#tb_suppy_detail'));
-			$('#tb_structure_expense').bootstrapTable('remove', 
+			$('#table_MS').bootstrapTable('remove', 
 			{
 			  field: 'id',
 			  values: [row.id]

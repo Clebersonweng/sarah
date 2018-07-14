@@ -1,24 +1,31 @@
 
 <%= form_for(@supply,html: { id: "form_supplies", remote: true,"data-type": "json",'data-model' => 'supply'}) do |f| %>
-	<div class="col-md-4 col-sm-4">
-		<div class="form-group">
-			<%= f.label :program_production_id,"Area :" ,class: " col-sm-6 col-lg-5 col-xs-12"%>
-			<input class="form-control" id="farm_area" name="farming_plot_area" value="<%= @farm_area %>" readonly required/>
+	<div class="row">
+		<div class="col-md-3 col-sm-3">
+			<div class="form-group">
+				<%= f.label :program_production_id,"Area :" ,class: " col-sm-6 col-lg-12 col-xs-12"%>
+				<input class="form-control" id="farm_area" name="farming_plot_area" value="<%= @farm_area %>" readonly required/>
+			</div>
+		</div>
+		<div class="col-md-3 col-sm-3">
+			<div class="form-group">
+				<%= f.label :program_production_id,"Cant a producir :" ,class: "col-sm-8 col-lg-12 col-xs-12"%>
+				<input class="form-control" id="farm_prog_total_production" value="<%= @quantity_production %>" readonly required/>
+			</div>
+		</div>
+		<div class="col-md-3 col-sm-3">
+			<div class="form-group">
+				<%= f.label :program_production_id,"Producto :" ,class: "col-sm-6 col-lg-12 col-xs-12"%>
+				<%= select("supply_detail", "product", options_for_select(@products),{}, {class: "form-control",required: true})%>
+			</div>
+		</div>	
+		<div class="col-md-3 col-sm-3">
+			<div class="form-group">
+				<label>&nbsp</label>
+				<btn class="col-xs-12"><a class="btn btn-default btn-sm align_btn" id="add_product">Agregar</a></btn>
+			</div>
 		</div>
 	</div>
-	<div class="col-md-4 col-sm-4">
-		<div class="form-group">
-			<%= f.label :program_production_id,"Cant a producir :" ,class: "col-sm-8 col-lg-8 col-xs-12"%>
-			<input class="form-control" id="farm_prog_total_production" value="<%= @quantity_production %>" readonly required/>
-		</div>
-	</div>
-	<div class="col-md-3 col-sm-3">
-		<div class="form-group">
-			<%= f.label :program_production_id,"Producto :" ,class: "col-sm-6 col-lg-8 col-xs-12"%>
-			<%= select("supply_detail", "product", options_for_select(@products),{}, {class: "form-control",required: true})%>
-		</div>
-	</div>
-	<btn><a class="btn btn-default btn-sm align_btn" id="add_product">Agregar</a></btn>
 
 	<table id="tb_suppy_detail" 
       data-width="100%"  
