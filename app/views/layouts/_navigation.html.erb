@@ -257,28 +257,74 @@
                          
                         <li>
                             <a href="#"><i class="fa fa-briefcase" aria-hidden="true"></i> Catastros<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">                              
+                            <ul class="nav nav-second-level collapse">                              
                                 <li>
                                     <a href="#"><i class="fa fa-pagelines" aria-hidden="true"></i> Parcela <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <li class="<%= '' if params[:controller] == 'farming_plots' && params[:action] == 'index'%>"><%= link_to 'Parcela Agrícola', farming_plots_path %></li>
+                                    <ul class="nav nav-third-level collapse">
+                                        <li class="">
+                                            <% if controller.controller_name == 'farming_plots' &&  controller.action_name == 'new' %>
+                                                <%= link_to  'Parcela', new_farming_plot_path %>
+                                            <% else %>
+                                                <%= link_to  'Parcela', farming_plots_path %>
+                                            <% end %>                                            
+                                        </li>
 
-                                        <li class="<%= '' if params[:controller] == 'type_of_crops' && params[:action] == 'index' %>"><%= link_to 'Tipo de Cultivo', type_of_crops_path %></li>
-                                        <li class="<%= '' if params[:controller] == 'history_sales' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to '<i class="fa fa-book" aria-hidden="true"></i> Histórico de Produción'.html_safe, history_sales_path %></li>
-                        
-            
+                                        <li class="">
+                                            <% if controller.controller_name == 'type_of_crops' &&  controller.action_name == 'new' %>
+                                                <%= link_to  'Tipo de cultivo', new_type_of_crop_path %>
+                                            <% else %>
+                                                <%= link_to  'Tipo de cultivo', type_of_crops_path %>
+                                            <% end %>                                            
+                                        </li>
+                                        <li class="">
+                                            <% if controller.controller_name == 'history_sales' &&  controller.action_name == 'new' %>
+                                                <%= link_to  'Histórico de Produción', new_history_sale_path %>
+                                            <% else %>
+                                                <%= link_to  'Histórico de Produción', history_sales_path %>
+                                            <% end %>                                            
+                                        </li>
                                     </ul>
                                     <!-- /.nav-third-level -->
                                 </li>
 
                                 <li>
                                     <a href="#"><i class="fa  fa-truck  " aria-hidden="true" ></i> Máquinas & Implementos <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <li class="<%= '' if params[:controller] == 'brands' && params[:action] == 'index' || params[:action] == 'new' %>"><%= link_to 'Marca', brands_path %></li>
-                                        <li class="<%= '' if params[:controller] == 'models' && params[:action] == 'index' %>"><%= link_to 'Modelo', models_path %></li>
-                                        <li class="<%= '' if params[:controller] == 'implements' && params[:action] == 'index' %>"><%= link_to 'Implemento', implements_path %></li>
-                                        <li class="<%= '' if params[:controller] == 'machines' && params[:action] == 'index' %>"><%= link_to 'Maquinária', machines_path %></li> 
-                                     <li><%= link_to 'Clasificación', type_machines_path %></li>
+                                    <ul class="nav nav-third-level collapse">
+                                        <li class="">
+                                            <% if controller.controller_name == 'brands' &&  controller.action_name == 'new' %>
+                                                <%= link_to  'Marca', new_brand_path %>
+                                            <% else %>
+                                                <%= link_to  'Marca', brands_path %>
+                                            <% end %>                                            
+                                        </li>
+                                        <li class="">
+                                            <% if controller.controller_name == 'models' &&  controller.action_name == 'new' %>
+                                                <%= link_to  'Modelo', new_model_path %>
+                                            <% else %>
+                                                <%= link_to  'Modelo', models_path %>
+                                            <% end %>                                            
+                                        </li>
+                                        <li class="">
+                                            <% if controller.controller_name == 'implements' &&  controller.action_name == 'new' %>
+                                                <%= link_to  'Modelo', new_implement_path %>
+                                            <% else %>
+                                                <%= link_to  'Modelo', implements_path %>
+                                            <% end %>                                            
+                                        </li>
+                                        <li class="">
+                                            <% if controller.controller_name == 'machines' &&  controller.action_name == 'new' %>
+                                                <%= link_to  'Maquinária', new_machine_path %>
+                                            <% else %>
+                                                <%= link_to  'Maquinária', machines_path %>
+                                            <% end %>                                            
+                                        </li> 
+                                     <li>
+                                        <% if controller.controller_name == 'type_machines' &&  controller.action_name == 'new' %>
+                                            <%= link_to  'Clasificación', new_type_machine_path %>
+                                        <% else %>
+                                            <%= link_to  'Clasificación', type_machines_path %>
+                                        <% end %>                                            
+                                     </li>
 
             
                                     </ul>
@@ -287,23 +333,47 @@
 
                                 <li>
                                     <a href="#"><i class="fa fa-book" aria-hidden="true"></i> Productos <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                         <li class="<%= '' if params[:controller] == 'products' && params[:action] == 'index' %>"><%= link_to 'Productos', products_path %></li>
+                                    <ul class="nav nav-third-level collapse">
+                                        <li class="">
+                                            <% if controller.controller_name == 'products' &&  controller.action_name == 'new' %>
+                                                <%= link_to  'Productos', new_product_path %>
+                                            <% else %>
+                                                <%= link_to  'Productos', products_path %>
+                                            <% end %>                                            
+                                        </li>
                                     </ul>
                                     <!-- /.nav-third-level -->
                                 </li> 
                                 <li>
                                     <a href="#"><i class="fa fa-male" aria-hidden="true"></i> Personas <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <li class="<%= '' if params[:controller] == 'people' && params[:action] == 'index' %>"><%= link_to 'Personas', people_path %></li>
+                                    <ul class="nav nav-third-level collapse">
+                                        <li class="">
+                                            <% if controller.controller_name == 'people' &&  controller.action_name == 'new' %>
+                                                <%= link_to  'Funcionário', new_person_path %>
+                                            <% else %>
+                                                <%= link_to  'Funcionário', people_path %>
+                                            <% end %>                                            
+                                        </li>
                                     </ul>
                                     <!-- /.nav-third-level -->
                                 </li>
                                  <li>
                                     <a href="#">Tipos <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-second-level">
-                                        <li class="<%= '' if params[:controller] == 'type_of_services' && params[:action] == 'index' %>"><%= link_to 'Tipo de Servicio', type_of_services_path %></li>
-                                         <li class="<%= '' if params[:controller] == 'type_of_works' && params[:action] == 'index' %>"><%= link_to 'Tipo de Trabajo', type_of_works_path %></li>
+                                    <ul class="nav nav-second-level collapse">
+                                        <li class="">
+                                            <% if controller.controller_name == 'type_of_services' &&  controller.action_name == 'new' %>
+                                                <%= link_to  'Tipo de servicio', new_type_of_service_path %>
+                                            <% else %>
+                                                <%= link_to  'Tipo de servicio', type_of_services_path %>
+                                            <% end %>                                            
+                                        </li>
+                                        <li class="">
+                                            <% if controller.controller_name == 'type_of_works' &&  controller.action_name == 'new' %>
+                                                <%= link_to  'Tipo de trabajo', new_type_of_work_path %>
+                                            <% else %>
+                                                <%= link_to  'Tipo de trabajo', type_of_works_path %>
+                                            <% end %>                                            
+                                        </li>
 
             
                                     </ul>
@@ -314,31 +384,87 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <!-- Begin create estimate production -->
-                <li>
+                        <li>
                             <a href="#"><i class="fa fa-cubes" aria-hidden="true"></i> Crear Estimación<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
+                            <ul class="nav nav-second-level collapse">
                               
                                 <li>
-                                    <li class="<%= '' if params[:controller] == 'estimate_sales' && params[:action] == 'index' || params[:action] == 'new' %>"><%= link_to 'Estimación de Ventas', estimate_sales_path %></li>
+                                    <li class="" id="estimate_sales" >
+                                        <% if controller.controller_name == 'estimate_sales' &&  controller.action_name == 'new' %>
+                                            <%= link_to 'Estimación de Ventas', new_estimate_sale_path %>
+                                        <% else %>
+                                            <%= link_to 'Estimación de Ventas', estimate_sales_path %>
+                                        <% end %>
+                                            
+                                    </li>
 
-                                     <li class="<%= '' if params[:controller] == 'program_productions' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to 'Programa de Producción', program_productions_path %></li>
+                                    <li class="" id="program_productions">
+                                        <% if controller.controller_name == 'program_productions' &&  controller.action_name == 'new' %>
+                                            <%= link_to 'Programa de producción', new_program_production_path %>
+                                        <% else %>
+                                            <%= link_to 'Programa de producción', program_productions_path %>
+                                        <% end %>
+                                            
+                                    </li>
 
-                                     <li class="<%= '' if params[:controller] == 'supplies' && params[:action] == 'index' %>"><%= link_to 'Insumos', supplies_path %></li>
+                                    <li class="">
+                                        <% if controller.controller_name == 'supplies' &&  controller.action_name == 'new' %>
+                                            <%= link_to 'Insumos', new_supply_path %>
+                                        <% else %>
+                                            <%= link_to 'Insumos', supplies_path %>
+                                        <% end %>
+                                    </li>
 
 
-                                     <li class="<%= '' if params[:controller] == 'cost_oper_machine_conts' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to 'Costo Oper. Maquinária Tercerizada', cost_oper_machine_conts_path %></li>
+                                    <li class="">
+                                        <% if controller.controller_name == 'cost_oper_machine_conts' &&  controller.action_name == 'new' %>
+                                            <%= link_to 'Costo Oper. Maquinária Tercerizada', new_cost_oper_machine_cont_path %>
+                                        <% else %>
+                                            <%= link_to 'Costo Oper. Maquinária Tercerizada', cost_oper_machine_conts_path %>
+                                        <% end %>
+                                    </li>
 
-                                     <li class="<%= '' if params[:controller] == 'cost_oper_machines' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to 'Costo Oper. Maquinária Propia', cost_oper_machines_path %></li>
+                                    <li class="">
+                                        <% if controller.controller_name == 'cost_oper_machines' &&  controller.action_name == 'new' %>
+                                            <%= link_to  'Costo Oper. Maquinária Propia', new_cost_oper_machine_path %>
+                                        <% else %>
+                                            <%= link_to  'Costo Oper. Maquinária Propia', cost_oper_machines_path %>
+                                        <% end %>
+                                    </li>
 
-                                     <li class="<%= '' if params[:controller] == 'man_powers' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to 'Mano de Obra', man_powers_path %></li>
+                                    <li class="">
+                                        <% if controller.controller_name == 'man_powers' &&  controller.action_name == 'new' %>
+                                            <%= link_to  'Mano de Obra', new_man_power_path %>
+                                        <% else %>
+                                            <%= link_to  'Mano de Obra', man_powers_path %>
+                                        <% end %>
+                                    </li>
 
                                      
 
-                                     <li class="<%= '' if params[:controller] == 'manu_indi_expenses' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to 'Gastos Indirectos', manu_indi_expenses_path %></li>
+                                     <li class="">
+                                        <% if controller.controller_name == 'manu_indi_expenses' &&  controller.action_name == 'new' %>
+                                            <%= link_to  'Gastos indirectos', new_manu_indi_expense_path %>
+                                        <% else %>
+                                            <%= link_to  'Gastos indirectos', manu_indi_expenses_path %>
+                                        <% end %>
+                                    </li>
                                      
-                                     <li class="<%= '' if params[:controller] == 'structure_expenses' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to 'Gastos de Estructura', structure_expenses_path %></li>
+                                    <li class="">
+                                        <% if controller.controller_name == 'structure_expenses' &&  controller.action_name == 'new' %>
+                                            <%= link_to  'Gastos de Estructura', new_structure_expense_path %>
+                                        <% else %>
+                                            <%= link_to  'Gastos de Estructura', structure_expenses_path %>
+                                        <% end %>
+                                    </li>
 
-                                    <li class="<%= '' if params[:controller] == 'mark_spendings' && params[:action] == 'index' || params[:action] = 'new' %>"><%= link_to 'Gastos de comercialización', mark_spendings_path %></li>
+                                    <li class="">
+                                        <% if controller.controller_name == 'mark_spendings' &&  controller.action_name == 'new' %>
+                                            <%= link_to  'Gastos de comercialización', new_mark_spending_path %>
+                                        <% else %>
+                                            <%= link_to  'Gastos de comercialización', mark_spendings_path %>
+                                        <% end %>
+                                    </li>
 
                                      
                                     <!-- /.nav-third-level -->
@@ -351,16 +477,28 @@
                         <!-- End create estimate production -->
                         <li>
                             <a href="#"><i class="fa fa-paperclip"></i> Auxiliares<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li class="<%= 'active' if params[:controller] == 'fuels' && params[:action] == 'index' %>"><%= link_to 'Combustible', fuels_path %></li>
-                                <li class="<%= 'active' if params[:controller] == 'unit_of_measurements' && params[:action] == 'index' %>"><%= link_to 'Unid. de Medida', unit_of_measurements_path %></li>
+                            <ul class="nav nav-second-level collapse">
+                                <li class="">
+                                    <% if controller.controller_name == 'fuels' &&  controller.action_name == 'new' %>
+                                        <%= link_to  'Combustible', new_fuel_path %>
+                                    <% else %>
+                                        <%= link_to  'Combustible', fuels_path %>
+                                    <% end %>
+                                </li>
+                                <li class="<%= 'active' if params[:controller] == 'unit_of_measurements' && params[:action] == 'index' %>">
+                                    <% if controller.controller_name == 'unit_of_measurements' &&  controller.action_name == 'new' %>
+                                        <%= link_to  'Unid. de Medida', new_unit_of_measurement_path %>
+                                    <% else %>
+                                        <%= link_to  'Unid. de Medida', unit_of_measurements_path %>
+                                    <% end %>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <li class="">
-                                 <%= link_to  income_statements_index_path do %>                        
+                            <li class="<%= 'active' if params[:controller] == 'income_statements' && params[:action] == 'index' %>">
+                                 <%= link_to  income_statements_path do %>                        
                                     <i class="fa fa-area-chart" aria-hidden="true"></i> &nbsp;Cuenta de resultados 
                                 <%end%>
                             </li>

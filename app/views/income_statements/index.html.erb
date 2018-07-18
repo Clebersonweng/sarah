@@ -1,7 +1,7 @@
   <div class="table-responsive">
 	 <table 
 	   data-width="100%"  
-	   data-height="540"
+	   data-height="500"
 		data-flat="true"
 		data-response-handler="flatJSON"
 		data-search="true"                
@@ -11,7 +11,7 @@
 		data-show-refresh="false" 
 		data-pagination="true" 
 		onlyInfoPagination="false" 
-		data-icons="icons" data-sort-name="code" data-sort-order="desc" 
+		data-icons="icons" data-sort-name="periodo" data-sort-order="desc" 
 		data-card-view="false"
 		id="tb_income_statements"
 	   >
@@ -19,11 +19,11 @@
 				<tr>
 					<th data-width='20'data-field="id" data-checkbox="false">#</th>
 					<th data-field="farming_plot_id" data-visible="false">Parcela</th>
-					<th data-width='200' data-field="farming_plot_name">Parcela</th>
-					<th data-field="type_of_crop_id" data-visible="false">tipo cultivo</th>
-					<th data-width='200'data-field="type_of_crop">Tipo de cultivo</th>
-					<th data-width='200' data-field="periodo">Periodo</th>
-					<th data-width='80' data-align="right" data-formatter="btn_income">Acción</th>
+					<th data-width='200' data-sortable="true" data-field="farming_plot_name">Parcela</th>
+					<th data-field="type_of_crop_id" data-sortable="true"data-visible="false">tipo cultivo</th>
+					<th data-width='200' data-sortable="true" data-field="type_of_crop">Tipo de cultivo</th>
+					<th data-width='200' data-sortable="true" data-field="periodo">Periodo</th>
+					<th data-width='60' data-align="right" data-formatter="btn_income">Acción</th>
 				</tr>
 			</thead>
 			<tbody>

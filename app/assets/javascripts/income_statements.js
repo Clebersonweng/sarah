@@ -49,7 +49,7 @@ $(document).ready(function ()
 function income_result(type_of_crop_id)
 {
 	$.post({
-	      url: "get_income_statement",
+	      url: "/" + controlador +"/get_income_statement",
 	      datatype: 'json',
 	      data: {"type_of_crop_id":type_of_crop_id},
 	      success: function (response) 
@@ -144,7 +144,7 @@ function income_result(type_of_crop_id)
       },
       always: function(resp)
       {
-      	
+         progress(false);
       }
    });
 }

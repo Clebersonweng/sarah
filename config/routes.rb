@@ -13,12 +13,14 @@ Rails.application.routes.draw do
    resources :cost_oper_machine_cont_details, :type_of_services, :fuels,:cost_oper_machine_details,:cost_oper_machines, :implements
    resources :machines, :models, :brands, :type_of_works, :man_power_details, :man_powers, :products, :estimate_sales, :unit_of_measurements
    resources :varieties
+   #resources :income_statements
 
    post 'estimate_sales/verify_new_estimate_sale'
    post 'estimate_sales/type_of_crop'
    post 'supplies/calculate_subtotal'
    post 'cost_oper_machine_conts/get_farming_plot'
-   get 'income_statements/index'
+   get  'income_statements/index'
+   get "income_statements" => "income_statements#index"
    post 'income_statements/get_income_statement'
   
    devise_for :users
