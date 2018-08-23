@@ -12,25 +12,30 @@ $(document).ready(function ()
 	generic_response_form(controlador);
 	form_implements_validates();
     $('#width_machine,#work_velocity,#real_width_machine,#real_work_velocity').valida_sarah('0123456789.,');
-	$('#save_ctt').on("click",function()
+	$('#save_ctt_machine').on("click",function()
    {
       var ctt = total_working_capacity($("#width_machine").val(),$("#work_velocity").val());
       $("#implement_working_capacity").val(ctt.toFixed(4)).focus();
       $('form').bootstrapValidator('revalidateField', 'implement[working_capacity]');  
    });
 
-    $('#save_cte').on("click",function()
+    $('#save_cte_machine').on("click",function()
     {
       var cte = total_working_capacity_efective($("#real_width_machine").val(),$("#real_work_velocity").val());
       $("#implement_working_capacity_effective").val(cte.toFixed(4)).focus();
       $('form').bootstrapValidator('revalidateField', 'implement[working_capacity_effective]');  
+
+		var result = total_time_oper( $('#implement_working_capacity_effective').val(),$("#implement_working_capacity").val() );
+		$("#implement_oper_time").val(result.toFixed(4));
+
     });
 
 	$('#implement_working_capacity_effective').on("focusout",function()
-    {
-		var result = total_time_oper($('#implement_working_capacity_effective').val(),$("#implement_working_capacity").val() );
-   		$("#implement_oper_time").val(result.toFixed(4));
-   	});
+	{
+		var result = total_time_oper( $('#implement_working_capacity_effective').val(),$("#implement_working_capacity").val() );
+		$("#implement_oper_time").val(result.toFixed(4));
+		$('form').bootstrapValidator('revalidateField', 'implement[time_oper]');  
+	});
 
 });
 
@@ -140,17 +145,6 @@ function total_working_capacity_efective(real_width_machine,real_velocity)
   return result;
 }
 
-function total_time_oper(work_capacity_total_efective,work_capacity_total)
-{
-    if(!isNan(work_capacity_total) && !isNan(work_capacity_total_efective))  
-    {
-	  	field_eficient 	 = (parseFloat(work_capacity_total_efective) / parseFloat(work_capacity_total)); //eficiencia de campo, tiempo perdido por remate,curvas,o recarga de maquinaria
-		return  (field_eficient/work_capacity_total_efective);
-    }
-    else
-    {
-   	   return 0;
-    }
-}  
+
 
 

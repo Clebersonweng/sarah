@@ -2,18 +2,18 @@
 	<table id="tb_income" class="table table-condensed">
 		<thead>
 			<tr>
-				<th>Descripción</th>
+				<th>Concepto</th>
 				<th>Monto</th>
 				<th class="text-right">% sobre ventas</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr class="h6 font-weight-bold active">
-				<td>Ventas brutas :</td>
+				<td>1. Ventas brutas :</td>
 				<td class="text-right" id="total_gross_sale"></td>
 				<td class="text-right">100.00</td>
 			</tr>
-			<tr>
+		<!--<tr>
 				<td>Devoluciones :</td>
 				<td class="text-right" id="total_devolution">0</td>
 				<td class="text-right" id="porciento_devoluciones">0</td>
@@ -28,73 +28,69 @@
 				<td class="text-right" id="total_net_sales">0</td>
 				<td class="text-right" id="porciento_ventas_netas">0</td>
 			</tr>
+		-->
 			<tr>
 				<td>Coste de producción : </td>
 				<td class="text-right" id="prod_cost"></td>
 				<td class="text-right" id=""></td>
 			</tr>
-       	<tr>
-				<td class="table-indent">Coste de producción por insumos: </td>
-				<td class="text-right" id="total_supply">0</td>
-				<td class="text-right" id="porciento_insumos">0</td>
-			</tr>
-	      <tr>
-				<td class="table-indent">Coste de producción por máquina tercerizada: </td>
-				<td class="text-right" id="total_mach_out">0</td>
-				<td class="text-right" id="porciento_maquina_tercerizada">0</td>
-			</tr>
-			<tr>
-				<td class="table-indent">Coste de producción por máquina propia: </td>
-				<td class="text-right" id="total_mach_own">0</td>
-				<td class="text-right" id="porciento_maquina_propia">0</td>
-			</tr>
-			<tr>
-				<td class="table-indent">Coste de producción por mano de obra: </td>
-				<td class="text-right" id="total_man_pow">0</td>
-				<td class="text-right" id="porciento_mano_obra">0</td>
-			</tr>
-			<tr class="primary">
-				<td class="table-indent">Coste de producción por ha: </td>
-				<td class="text-right" id="total_ha">0</td>
-				<td class="text-right">0</td>
-			</tr>
+	       	<tr>
+					<td class="table-indent">A. Coste de producción por insumos: </td>
+					<td class="text-right" id="total_supply">0</td>
+					<td class="text-right" id="porciento_insumos">0</td>
+				</tr>
+		      <tr>
+					<td class="table-indent">B. Coste de producción por máquina tercerizada: </td>
+					<td class="text-right" id="total_mach_out">0</td>
+					<td class="text-right" id="porciento_maquina_tercerizada">0</td>
+				</tr>
+				<tr>
+					<td class="table-indent">C. Coste de producción por máquina propia: </td>
+					<td class="text-right" id="total_mach_own">0</td>
+					<td class="text-right" id="porciento_maquina_propia">0</td>
+				</tr>
+				<tr>
+					<td class="table-indent">D. Coste de producción por mano de obra: </td>
+					<td class="text-right" id="total_man_pow">0</td>
+					<td class="text-right" id="porciento_mano_obra">0</td>
+				</tr>
 
-			<tr>
-				<td>Coste de producción de las unidades vendidas de la parcela : </td>
+			<tr class="h6 font-weight-bold active">
+				<td>2. Coste de producción de las unidades vendidas de la parcela : </td>
 				<td class="text-right" id="total_cost_prod_plot">0</td>
 				<td class="text-right" id="costo_parcela_porciento" >0</td>
 			</tr>
 			<tr>
-				<td>Coste de comercialización :</td>
+				<td class="table-indent">E. Coste de comercialización :</td>
 				<td class="text-right" id="total_spend">0</td>
 				<td class="text-right" id="porciento_transporte">0</td>
 			</tr>
 			<tr class="h6 font-weight-bold active" info>
-				<td>Margen de producto :</td>
+				<td>3. ([1-2]- E) Margen de producto :</td>
 				<td class="text-right" id="margin_product">0</td>
 				<td class="text-right" id="porciento_margen_producto">0</td>
 			</tr>
 			<tr>
-				<td>Gastos indirectos de producción :</td>
+				<td class="table-indent">F. Gastos indirectos de producción :</td>
 				<td class="text-right" id="total_exp_indi">0</td>
 				<td class="text-right" id="porciento_gastos_indi_produccion">0</td>
 			</tr>
 			<tr>
-				<td>Gastos de estructura :</td>
+				<td class="table-indent">G. Gastos de estructura :</td>
 				<td class="text-right" id="total_stru">0</td>
-				<td class="text-right">0</td>
+				<td class="text-right" id="porciento_estructura">0</td>
 			</tr>
 			<tr>
-				<td>Dotación a las amortizaciones :</td>
+				<td class="table-indent">H. Dotación a las amortizaciones :</td>
 				<td class="text-right" id="total_depre">0</td>
 				<td class="text-right" id="porciento_depreciacion">0</td>
 			</tr>
 			<tr class="h6 font-weight-bold active" >
-				<td>Resultado de explotación :</td>
-				<td class="text-right" id="total_res_exp"></td>
-				<td class="text-right" id="porciento_resultado_explotacion">0</td>
+				<td>COSTO TOTAL :</td>
+				<td class="text-right" id="total_cost_">0</td>
+				<td class="text-right" id="porciento_total_cost_">0</td>
 			</tr>
-			<tr>
+			<!--<tr>
 				<td>Ingresos Financieros :</td>
 				<td class="text-right" id="total_fin_inco">0</td>
 				<td class="text-right" id="porciento_ingresos_financieros">0</td>
@@ -104,28 +100,69 @@
 				<td class="text-right" id="total_extra_expe">0</td>
 				<td class="text-right" id="porciento_gastos_extraordinarios">0</td>
 			</tr>
+	
 			<tr class="h6 font-weight-bold active">
-				<td>Resultado ante impuestos :</td>
+				<td>4. Resultado ante impuestos :</td>
 				<td class="text-right" id="res_before_trib">0</td>
 				<td class="text-right" id="porciento_resultado_ante_impuestos">0</td>
 			</tr>
 			<tr >
-				<td>Resultado de. sociedades :</td>
-				<td class="text-right" id="total_res_comp">0</td>
-				<td class="text-right" id="porciento_resultado_sociedades">0</td>
-			</tr>
-			<tr class="h6 font-weight-bold warning">
-				<td>Resultado despues de impuestos :</td>
-				<td class="text-right" id="total_res_trib">0</td>
-				<td class="text-right" id="porciento_resultado_despues_impuestos">0</td>
-			</tr>
+				<td>Impuesto :</td>
+				<td class="text-right" id="total_impuesto">0</td>
+				<td class="text-right" id="porciento_impuesto">0</td>
+			</tr>	
+			<tr class="h6 font-weight-bold success">
+				<td>4. (3-[F+G+H]) Utilidad :</td>
+				<td class="text-right" id="total_utilidad">0</td>
+				<td class="text-right" id="porciento_total_utilidad">0</td>
+			</tr>-->
 			<tr></tr>
+				<tr class="info text-justify font-weight-bold border-0">
+                <strong><td class="text-center" colspan="3">Análisis Financiero</td></strong>
+            </tr>
+            <!--             Analisis Financiero    -->
+				<thead>
+            <tr>
+                <td><strong>1. Rendimiento esperado :</strong></td>
+                <td class="text-left" id="">Kilogramo</td>
+                <td class="text-right" id="est_espected_return">0</td>
+            </tr>
+            <tr>
+                <td><strong>2.  Precio de venta:</strong></td>
+                <td class="text-left" id="">Gs/Kg</td>
+                <td class="text-right" id="est_price">0</td>
+            </tr>
+            
+            <tr>
+                <td><strong>3. Ingreso bruto (1x2) :</strong></td>
+                <td class="text-left">Guaraníes</td>
+                <td class="text-right" id="est_sale_gross">0</td>
+            </tr>
+            
+            <tr>
+                <td><strong>4. Costo total :</strong></td>
+                <td class="text-left" id="">Guaraníes</td>
+                <td class="text-right" id="est_total_cost">0</td>
+            </tr>
+            
+            <tr>
+                <td><strong>5. Ingreso neto (3-4) :</strong></td>
+                <td class="text-left" id="">Guaraníes</td>
+                <td class="text-right" id="est_net_income">0</td>
+            </tr>
+            
+            <tr>
+                <td><strong>6. Costo medio (4/1) :</strong></td>
+                <td class="text-left" id="">Gs/Kg</td>
+                <td class="text-right" id="est_med_cost">0</td>
+            </tr>
+            
+            <tr>
+                <td><strong>7. Rentabilidad ({[3/4]-1} x 100) :</strong></td>
+                <td class="text-left" id=""> % </td>
+                <td class="text-right" id="est_rentability">0</td>
+            </tr>	
+			</thead>
 		</tbody>
 	</table>  
 </div>
-
-
-
-
-
-

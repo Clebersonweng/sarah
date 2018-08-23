@@ -1,19 +1,20 @@
-var COUNT = 0;
-var TOTAL_S = 0.0;
-var subtotal ;
+var  COUNT_SUPPLY        = 0;
+var TOTAL_SUPPLY         = 0;
 $(document).ready(function ()
 {
 
    controlador          = $("#controller").val();
+
    var FIELD_TOTAL_S    = $("#total").val();
-   TOTAL_S              = parseInt(FIELD_TOTAL_S); // tomar valor en caso de edicion
+   TOTAL_SUPPLY         = parseInt(FIELD_TOTAL_S); // tomar valor en caso de edicion
+   
    generic_response_form(controlador);
    $('#form_supplies').bootstrapValidator();
 
    $('#add_product').click(function () {
       
 
-      if(is_valid_fields())
+      if(is_valid_form_supply())
       {
          $product_           =  $("#supply_detail_product option:selected");
          $product_id         =  $product_.val();
@@ -24,7 +25,7 @@ $(document).ready(function ()
          var area            =  $("#farm_area").val();
 
          row_table(product,$product_id,price,dosage,area,measure);
-         COUNT++; 
+         COUNT_SUPPLY++; 
          $('#supply_detail_product').val("");
   
       }
@@ -36,32 +37,19 @@ $(document).ready(function ()
 
    $('#tb_suppy_detail').on('check.bs.table', function (e, row) 
    {
-      $remove = $('.remove');
-      selections = [];
-      $remove.click(function () {
-         //var ids = getIdSelections($('#tb_suppy_detail'));
-         $('#tb_suppy_detail').bootstrapTable('remove', {
-            field: 'id',
-            values: [row.id]
+      $('.remove').click(function () 
+      {
+         $('#tb_suppy_detail').bootstrapTable('remove', 
+         {
+           field: 'id',
+           values: [row.id]
          });
-         
-         $remove.prop('disabled', true);
-         var n_total = row.subtotal
-         total = parseInt(total) - eval(n_total);
-         $("#supplies_total").text(parseInt(total));
-         $("#supply_total").val(parseInt(total));
+         rest_total_supply(row.subtotal);
+         $('.remove').prop('disabled', true);
       });
-   });
+   }); 
+
 });
-
-function getIdSelections(table) 
-{
-   return $.map(table.bootstrapTable('getSelections'), function (row) {
-      console.log(row.id);
-      return row.id
-   });
-}
-
 
 
 function row_table(product,product_id,price,dosage,area,measure)
@@ -69,62 +57,42 @@ function row_table(product,product_id,price,dosage,area,measure)
    var quantity_need   =  area * dosage
    subtotal            =  price * quantity_need;
    
-   TOTAL_S            += parseInt(subtotal);
+   total_supply(subtotal);
    
-   $(".total").html(TOTAL_S); // suma fijo y variable
-   $("#total").val(TOTAL_S); // suma fijo y variable
-
    var  _data_ = {
-      "id": COUNT,
+      "id": COUNT_SUPPLY,
       "product": product,
-      "product_id": "<input type='hidden' name='supply[supply_details_attributes]["+COUNT+"][product_id]' value="+product_id+">",
+      "product_id": "<input type='hidden' name='supply[supply_details_attributes]["+COUNT_SUPPLY+"][product_id]' value="+product_id+">",
       "quantity_needed": quantity_need.toFixed(2) ,          
-      "quantity_needed_id": "<input type='hidden' name='supply[supply_details_attributes]["+COUNT+"][quantity_needed]' value="+quantity_need+">",          
+      "quantity_needed_id": "<input type='hidden' name='supply[supply_details_attributes]["+COUNT_SUPPLY+"][quantity_needed]' value="+quantity_need+">",          
       "unit_measure": measure,
-      "subtotal": subtotal.toFixed(2),
-      "subtotal_id": "<input type='hidden' name='supply[supply_details_attributes]["+COUNT+"][subtotal]' value="+subtotal+">",
+      "subtotal": subtotal.toFixed(0),
+      "subtotal_id": "<input type='hidden' name='supply[supply_details_attributes]["+COUNT_SUPPLY+"][subtotal]' value="+subtotal+">",
       "Action" : '<a class="remove  btn btn-danger delete btn-sm" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></a>',
    };
    $('#tb_suppy_detail').bootstrapTable("append", _data_);
-
-
 }
 
-function delete_row_table(obj)
+function rest_total_supply(subtotal)
 {
-   total = 0.0;
-
-  // $(obj).parent().parent().remove().fadeOut();
-  $("#tb_suppy_detail tbody tr").each(function(indice,valor) {
-      var subtotal = parseFloat($(obj).find("td:eq(6)").html());
-      if (!isNaN(subtotal))
-      {
-         total           += subtotal;
-      }
-   });
-  $("#supplies_total").text(total);
-  $("#supply_total").val(total);
+   TOTAL_SUPPLY -= subtotal;
+   $(".total").text(TOTAL_SUPPLY.toFixed(0)); 
+   $("#total").val(TOTAL_SUPPLY.toFixed(0)); 
 }
 
-
-/*
-function addNewRow(product_id,quantity, subtotal) 
+function total_supply(subtotal)
 {
- count++;
- $("#addRow").append(
-    "<input type='hidden' size='20' name='supply[supply_details_attributes]["+count+"][product_id]' id='txt_"+count+"' value="+product_id+">"+
-    "<input type='hidden' size='20' name='supply[supply_details_attributes]["+count+"][quantity_needed]' id='txt_"+count+"' value="+quantity+">"+
-    "<input type='hidden' size='20' name='supply[supply_details_attributes]["+count+"][subtotal]' id='txt_"+count+"' value="+subtotal+">"    
-    );
+   TOTAL_SUPPLY += parseFloat(subtotal);
+   $(".total").text(TOTAL_SUPPLY.toFixed(0)); 
+   $("#total").val(TOTAL_SUPPLY.toFixed(0)); 
 }
-*/
-function is_valid_fields()
+
+function is_valid_form_supply()
 {
    $product_        =  $("#supply_detail_product option:selected");
    $product         =  $product_.val();
-      
 
-   if(typeof $product != "undefined" && $product != "" )
+   if($product != "" )
    {
       return true;
    }

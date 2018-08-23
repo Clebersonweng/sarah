@@ -11,8 +11,6 @@ consumo de combustible por horas = hp * coeficiente de consumo
 
 
 var ready;
-var kilometer = 1000;  //1 km = 1000 m
-var hectare  = 10000; // 10000 metros cuadrados
 ready = $(document).ready(function ()
 {
 	controlador = $("#controller").val();
@@ -41,10 +39,6 @@ ready = $(document).ready(function ()
 		
 		var total_to = total_time_oper($("#real_width_machine").val(),$("#real_work_velocity").val());
 		$("#machine_time_oper").val(total_to.toFixed(4));
-		
-		////var time_oper = total_time_oper($("#machine_working_capacity_effective").val(),$("#machine_working_capacity").val());
-		//$("#machine_time_oper").val(time_oper);
-		//$('form').bootstrapValidator('revalidateField', 'machine[working_capacity_effective]');  
 	});
 
 	$('#md_consumption').on("hidden.bs.modal",function()
@@ -54,9 +48,9 @@ ready = $(document).ready(function ()
 
 	$('#machine_working_capacity_effective').on("focusout",function()
 	{
-		//var total_to = total_time_oper($("#real_width_machine").val(),$("#real_work_velocity").val());
-		//$("#machine_time_oper").val(total_to);
-		//$('form').bootstrapValidator('revalidateField', 'machine[time_oper]');  
+		var total_to = total_time_oper($("#real_width_machine").val(),$("#real_work_velocity").val());
+		$("#machine_time_oper").val(total_to);
+		$('form').bootstrapValidator('revalidateField', 'machine[time_oper]');  
 	});
 
 	$('#machine_type_machine_id').on("change",function(e)
@@ -271,33 +265,5 @@ function calc_cons_fuel_per_hours()
 	} 
 }
 
-function total_working_capacity(width_machine,velocity)
-{
-	var  result = (width_machine * velocity * kilometer) / hectare;
-	return result;
-}
-
-function total_working_capacity_efective(real_width_machine,real_velocity)
-{
-	var result = (real_width_machine * real_velocity * kilometer) / hectare;
-	return result;
-}
-
-function total_time_oper(work_capacity_total_efective,work_capacity_total)
-{
-	//var efficient_field = 0;
-
-	if(work_capacity_total != "" && work_capacity_total_efective != "") 
-	{
-
-		var efficient_field 		= (parseInt(work_capacity_total_efective) / parseInt(work_capacity_total));
-		var result         	= (efficient_field/work_capacity_total_efective);
-		return result;	
-	}
-	else
-	{
-		console.log("no realizo el calculo de teimpo operativo");
-	}
-
-}  
+ 
 

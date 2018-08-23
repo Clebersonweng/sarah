@@ -65,7 +65,7 @@
       <span class="help-block" id="message_total_prod"> <%= f.object.errors[:total_production].to_sentence if f.object.errors[:total_production] %></span>
    </div>
 
-   <div class="form-group" id="gr_price">
+   <div class="form-group">
       <label for="price" class=" col-sm-3 control-label">Precio</label>
       <div class="col-sm-4">
          <%= f.text_field :price,input_html: { min: '3', max: '15' }, class: "form-control only_numbers",:pattern => "[0-9]+", :required => true%>
@@ -80,7 +80,10 @@
       </div>
       <span class="help-block"> <%= f.object.errors[:gross_sale].to_sentence if f.object.errors[:gross_sale] %></span>
    </div>
-   <input type="hidden" id="id_" value=<%= @id %>>
+
+   <input type="hidden" id="id_" value=<%= @id %> />
+
 <%end%>
-</div>
+   </div>
+
 <input type="hidden" id="controller" value="<%= controller_name%>">

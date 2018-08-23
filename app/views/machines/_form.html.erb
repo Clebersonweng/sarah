@@ -44,7 +44,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<%= f.label :consumption, "Consumo (hs) :", class: "control-label col-sm-3 col-md-3"%>
+			<%= f.label :consumption, "Consumo (Lt/Hs) :", class: "control-label col-sm-3 col-md-3"%>
 			<div class="col-sm-5 col-md-5">
 				<%= f.text_field :consumption,placeholder: " ej: 0.16%", class: 'form-control text-right only_numbers replace_comma',:required => true %>
 				<span class="help-block"> <%= f.object.errors[:period].to_sentence if f.object.errors[:period] %></span>   
@@ -80,7 +80,7 @@
 		<div class="form-group">
 			<%= f.label :working_capacity,"Capacidad de Trabajo (Has/hs):" ,class: "control-label col-sm-6 col-md-6"%>
 			<div class="col-sm-3">
-				<%= f.text_field :working_capacity, class: 'form-control text-right only_numbers' %>
+				<%= f.text_field :working_capacity, class: 'form-control text-right only_numbers',  :readonly =>"readonly" %>
 				<span class="help-block"> <%= f.object.errors[:period].to_sentence if f.object.errors[:period] %></span>   
 			</div>
 			<a class="btn btn-default col-xs-offset-2 col-lg-offset-0" data-target="#md_ctt" data-toggle="modal">
@@ -90,7 +90,7 @@
 		<div class="form-group">
 			<%= f.label :working_capacity_effective,"Capacidad de Trabajo Efectiva Has/hs:",class: "control-label col-sm-6 col-md-6"%>
 			<div class="col-sm-3 col-md-3">
-				<%= f.text_field :working_capacity_effective, class: "form-control text-right only_numbers"  %>
+				<%= f.text_field :working_capacity_effective, class: "form-control text-right only_numbers" ,  :readonly =>"readonly" %>
 				<span class="help-block"> <%= f.object.errors[:period].to_sentence if f.object.errors[:period] %></span>   
 			</div>
 			<a class="btn btn-default col-xs-offset-2 col-lg-offset-0" data-target="#md_cte" data-toggle="modal">
@@ -100,7 +100,7 @@
 		<div class="form-group">
 			<%= f.label :time_oper,"Tiempo Operativo (Hs/ha):" ,class: "control-label col-sm-7"%>
 			<div class="col-sm-3 col-md-3">
-				<%= f.text_field :time_oper, class: "form-control only_numbers" %>
+				<%= f.text_field :time_oper, class: "form-control only_numbers",  :readonly =>"readonly" %>
 				<span class="help-block"> <%= f.object.errors[:period].to_sentence if f.object.errors[:period] %></span>   
 			</div>
 		</div>

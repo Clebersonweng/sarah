@@ -98,8 +98,7 @@ class CostOperMachineContsController < ApplicationController
 	def get_all
 		# @programs = CostOperMachineCont.program_production.collect {|p| [ p.program_production, p.id ] }
 		@type_services = TypeOfService.all.collect {|p| [ p.name, p.id ,{"data-price"=> p.price, "data-u_measure"=>p.unit_of_measurement.name}] } 
-		@implements   = Implement.all.collect {|p| [ p.name, p.id ,{"data-oper_time"=> p.oper_time }] } 
-		@unit_measure = UnitOfMeasurement.all.collect { |p| [p.name, p.id ]}
+		@unit_measure = { HECTAREA: 1, HORAS: 0 }
 		@path = " / crear estimación / costo operativo de máquinas tercerizadas"
 	  	@edit_name = "Editar costo operativo de máquina tercerizada"
 	end

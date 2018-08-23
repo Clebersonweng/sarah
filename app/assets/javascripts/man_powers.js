@@ -37,7 +37,7 @@ $(document).ready( function()
       }
    });
 
-   $('#tb_man_power').on('check.bs.table', function (e, row)
+   /*$('#tb_man_power').on('check.bs.table', function (e, row)
    {
       //TOTAL_MP =  parseFloat($("#man_powers_total").text());
       $('.remove').on("click",function () {
@@ -51,7 +51,23 @@ $(document).ready( function()
          $(".total_hours_needed").val(TOTAL_HOURS_NEEDED_MP);
 
       });
+   }); */
+   $('#tb_man_power').on('check.bs.table', function (e, row) 
+   {
+      $('.remove').click(function () 
+      {
+         //var ids = getIdSelections($('#tb_suppy_detail'));
+         $('#tb_man_power').bootstrapTable('remove', 
+         {
+           field: 'id',
+           values: [row.id]
+         });
+         rest_totals_mp(row.subtotal,row.hours_needed);
+         $('.remove').prop('disabled', true);
+      });
+      
    }); 
+
 });
 
 
@@ -127,6 +143,16 @@ calc_totals_mp = function(subtotal,hours)
    $(".total_hours_needed").text(TOTAL_HOURS_NEEDED_MP); 
    $("#total").val(TOTAL_MP); 
    $("#total_hours_needed").val(TOTAL_HOURS_NEEDED_MP); 
+}
+
+rest_totals_mp = function (subtotal,hours)
+{
+   TOTAL_MP                -= subtotal;
+   TOTAL_HOURS_NEEDED_MP   -= hours;
+   $(".total").text(TOTAL_MP);
+   $("#total").val(TOTAL_MP);
+   $(".total_hours_needed").text(TOTAL_HOURS_NEEDED_MP); // suma fijo y variable
+   $("#total_hours_needed").val(TOTAL_HOURS_NEEDED_MP); // suma fijo y variable
 }
 
 function is_valid_fields_mp()

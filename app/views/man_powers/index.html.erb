@@ -26,7 +26,7 @@
                <tr>
                   <td><%= man_power.id%></td>
                   <td><%= man_power.program_production.estimate_sale.farming_plot.name %></td>
-                  <td><%= number_with_precision( man_power.total_hours_needed, :precision => 0, :delimiter => '.' ) %></td>
+                  <td><%= number_with_precision( man_power.total_hours_needed, :precision => 2, :delimiter => '.' ) %></td>
                   <td><%= number_with_precision( man_power.total, :precision => 0, :delimiter => '.' ) %></td>                  
                </tr>
             <% end %>

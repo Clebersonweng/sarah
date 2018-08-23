@@ -1,8 +1,9 @@
-var COUNT, sum,TOTAL_COM = 0;
+var COUNT_COMO, sum,TOTAL_COM = 0;
 var fuel,lubricant,repair_and_maintenance,time_oper = 0;
 var res_total_repair_machine,res_total_repair_implement,res_sum_repair_machine_implement,res_total_fuel,res_total_lub,res_total_hours = 0 ;
 
-$(document).ready(function() {
+$(document).ready(function() 
+{
 
 
 	controlador = $("#controller").val();
@@ -72,26 +73,25 @@ $(document).ready(function() {
 
 	$('#tb_cost_machine').on('check.bs.table', function (e, row) 
 	{
-	  TOTAL_COM =  parseFloat($("#oper_own_total").text());
-	  $remove = $('.remove');
-	  selections = [];
-	  $remove.click(function () {
+		$('.remove').click(function () 
+		{
 			//var ids = getIdSelections($('#tb_suppy_detail'));
-			$('#tb_cost_machine').bootstrapTable('remove', {
-				field: 'id',
-				values: [row.id]
+			$('#tb_cost_machine').bootstrapTable('remove', 
+			{
+			  field: 'id',
+			  values: [row.id]
 			});
-			$remove.prop('disabled', true);
-			TOTAL_COM -= row.subtotal;
-			$("#oper_own_total").text(TOTAL_COM.toFixed(0));
-		});
-  });
+			rest_cost_oper_m_own(row.subtotal);
+			$('.remove').prop('disabled', true);
+      });
+		
+	}); 
 });
 
 
 function new_row_dt(machine_text,implement_text,fuel_price,machine_price,machine_rm,implement_price,machine_hp,machine_cons,implement_rm,machine_to,implement_to,area,machine_id,implement_id,amount)
 {
-	// se calcula por horas para postior multiplicar por la cantidad de horas trabajadas
+	// se calcula por horas para posterior multiplicar por la cantidad de horas trabajadas
 	res_total_repair_machine     = total_cost_repair_machine_per_hours(machine_price,machine_rm); //Rep y Mant valor a nuevo. * coefciente de mantenimiento
 	res_total_repair_implement   = total_repair_implement_por_hours(implement_price, implement_rm);
 	
@@ -119,31 +119,31 @@ function new_row_dt(machine_text,implement_text,fuel_price,machine_price,machine
 
 	var  _row_ =      
 	{
-		"id": COUNT,
-		"code": COUNT,
+		"id": COUNT_COMO,
+		"code": COUNT_COMO,
 		"machine": machine_text,   
-		"machine_id": "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+COUNT+"][machine_id]' id='txt' value="+machine_id+">",
+		"machine_id": "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+COUNT_COMO+"][machine_id]' id='txt' value="+machine_id+">",
 		"implement": implement_text,  
-		"implement_id": "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+COUNT+"][implement_id]' id='txt' value="+implement_id+">",  
+		"implement_id": "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+COUNT_COMO+"][implement_id]' id='txt' value="+implement_id+">",  
 		"fuel": res_total_fuel,  
-		"fuel_id": "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+COUNT+"][fuel]' id='txt' value="+res_total_fuel+">", 
+		"fuel_id": "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+COUNT_COMO+"][fuel]' id='txt' value="+res_total_fuel+">", 
 		"lubricant": res_total_lub.toFixed(0),  
-		"lubricant_id": "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+COUNT+"][lubricant]' id='txt' value="+res_total_lub.toFixed(0)+">",
+		"lubricant_id": "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+COUNT_COMO+"][lubricant]' id='txt' value="+res_total_lub.toFixed(0)+">",
 		"rep_and_maint": res_sum_repair_machine_implement.toFixed(0),   
-		"rep_and_maint_id": "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+COUNT+"][repair_and_maintenance]' id='txt' value="+res_sum_repair_machine_implement+">",  
+		"rep_and_maint_id": "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+COUNT_COMO+"][repair_and_maintenance]' id='txt' value="+res_sum_repair_machine_implement+">",  
 		"hours_needed": res_total_hours, 
-		"hours_needed_id": "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+COUNT+"][hours_needed]' id='txt' value="+res_total_hours+">", 
+		"hours_needed_id": "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+COUNT_COMO+"][hours_needed]' id='txt' value="+res_total_hours+">", 
 		"amount": amount,   
-		"amount_id": "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+COUNT+"][amount]' id='txt' value="+amount+">", 
+		"amount_id": "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+COUNT_COMO+"][amount]' id='txt' value="+amount+">", 
 		"subtotal": subtotal.toFixed(0),
-		"subtotal_val":  "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+COUNT+"][subtotal]' id='txt' value="+subtotal.toFixed(0)+">",
+		"subtotal_val":  "<input type='hidden' size='20' name='cost_oper_machine[cost_oper_machine_details_attributes]["+COUNT_COMO+"][subtotal]' id='txt' value="+subtotal.toFixed(0)+">",
 		"Action" : '<a class="remove  btn btn-danger delete btn-sm" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></a>'
 	};
 
 	$('#tb_cost_machine').bootstrapTable("append", _row_);   
 	$("#cost_oper_own_machine_id").val("");
 	$("#cost_oper_own_implement_id").val("");
-	COUNT++;
+	COUNT_COMO++;
 }
 
 
@@ -240,7 +240,13 @@ function is_valid_fields_com()
 	}
 }
 
-
+rest_cost_oper_m_own = function (subtotal)
+{
+	TOTAL_COM -= subtotal;
+	$(".cost_oper_machine_total").text(TOTAL_COM); // suma fijo y variable
+	$("#cost_oper_machine_total").val(TOTAL_COM); // suma fijo y variable
+}
+	
 
 
 

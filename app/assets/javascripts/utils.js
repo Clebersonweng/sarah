@@ -1,6 +1,11 @@
+const KILOMETER = 1000;  //1 km = 1000 m
+const HECTARE   = 10000; // 10000 metros cuadrados
+
 var controlador;
 var _id;
 var TOTAL = 0;
+
+
 
 $(document).ready(function ()
 {
@@ -15,14 +20,14 @@ $(document).ready(function ()
 
       if (es_valido)
       {
-         console.log("es valido");
+         //console.log("es valido");
          $('form').submit();
       }
       else
       {
-         console.log("no es valido");
+         
          $("#form_" + controlador).data('bootstrapValidator').validate();
-         $.rails.enableElement($('a[data-disable-with]'));
+         $("#btn_submit_unit_of_measurements").html("<i class='fa fa-floppy-o' aria-hidden='true'></i>  Guardar");
       }
    });
 
@@ -110,11 +115,11 @@ $(document).ready(function ()
    });
 
    $('.datepicker')
-   .datepicker({
-      format: 'dd/mm/yyyy'
-   }).on('changeDate', function(e) {
-      $(e.currentTarget.form.id).bootstrapValidator('revalidateField', 'e.target.id');  
-   });   
+                  .datepicker({
+                     format: 'dd/mm/yyyy'
+                  }).on('changeDate', function(e) {
+                                                      $(e.currentTarget.form.id).bootstrapValidator('revalidateField', 'e.target.id');  
+                                                   });   
 
    //sirve para saber el estado de carga de la tabla
    $('.table').on('load-success.bs.table', function(e, data)
@@ -288,7 +293,7 @@ function generic_response_form(sufixe,force)
    $(document).on("ajax:success", 'form#form_' + sufixe, function (e, data, status) 
    {
       progress(false);
-      delayedRedirect();
+      //delayedRedirect();
       setTimeout(function ()
       {
          alert_sarah("El registro fue realizado con exito", "success");
@@ -332,12 +337,12 @@ function progress(data)
 function md_popover(_id,_title,_content)
 {
    $('#'+_id).popover({ 
-   html : true,
-   title: _title,
-   placement: 'top',
-   trigger: 'click',
-   content: "<b>"+_content+"</b>"
-   }).popover('hide');
+                           html : true,
+                           title: _title,
+                           placement: 'top',
+                           trigger: 'focusin',
+                           content: "<b>"+_content+"</b>"
+                     }).popover('hide');
 }
 
 function actionFormatter(value, row, index) 
@@ -355,10 +360,10 @@ function actionFormatter(value, row, index)
 function btn_income(value, row, index) 
 {  
    return   [
-               '<a class="edit btn btn-info btn-sm btn_statistics hide" title="grafico de gastos" data-id='+row.type_of_crop_id+' >',
+               '<a class="edit btn btn-info btn-sm btn_statistics hide" title="grafico de gastos" data-id='+row.id+' >',
                '  <i class="fa fa-line-chart" aria-hidden="true"></i>',
                '</a> ',
-               '<a class="edit btn btn-warning btn-sm btn_income" title="ver cuenta de resultados" data-id='+row.type_of_crop_id+' >',
+               '<a class="edit btn btn-warning btn-sm btn_income" title="ver cuenta de resultados" data-id='+row.id+' >',
                '  <i class="fa fa-table" aria-hidden="true"></i>',
                '</a> '
 
@@ -482,8 +487,32 @@ function set_numeric(value)
    return n_value;
 }
 
+total_working_capacity = function(width_machine,velocity)
+{
+   var  result = (width_machine * velocity * KILOMETER) / HECTARE;
+   return result;
+}
 
+total_working_capacity_efective = function(real_width_machine,real_velocity)
+{
+   var result = (real_width_machine * real_velocity * KILOMETER) / HECTARE;
+   return result;
+}
 
+total_time_oper = function(work_capacity_total_efective,work_capacity_total)
+{
+   if(work_capacity_total != "" && work_capacity_total_efective != "") 
+   {
+      var efficient_field     = (work_capacity_total_efective) / (work_capacity_total);
+      var result              = (efficient_field/work_capacity_total_efective);
+      return result; 
+   }
+   else
+   {
+      console.log("no realizo el calculo de tiempo operativo");
+   }
+
+} 
 
 
 /*
