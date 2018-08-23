@@ -20,14 +20,15 @@ $(document).ready(function ()
 
       if (es_valido)
       {
-         //console.log("es valido");
+         $(this).button('loading');
          $('form').submit();
       }
       else
       {
          
          $("#form_" + controlador).data('bootstrapValidator').validate();
-         $("#btn_submit_unit_of_measurements").html("<i class='fa fa-floppy-o' aria-hidden='true'></i>  Guardar");
+         $(this).button('reset');
+         //$("#btn_submit_unit_of_measurements").html("<i class='fa fa-floppy-o' aria-hidden='true'></i>  Guardar");
       }
    });
 
@@ -302,7 +303,7 @@ function generic_response_form(sufixe,force)
       $("#form_" + sufixe)[0].reset();
       $("#form_" + sufixe).data('bootstrapValidator').resetForm();
       $('input:visible:enabled:first').focus();
-      $.rails.enableElement($('a[data-disable-with]'));
+      $('#btn_submit_'+sufixe).button('reset');
       seta_valores(data);
    })
    .on('ajax:error', 'form#form_' + sufixe, function (e, data, status) 
@@ -315,7 +316,7 @@ function generic_response_form(sufixe,force)
          $input = $('input[name="' + $model + '[' + field + ']"]');
          $input.closest('.form-group').addClass('has-error').find('.help-block').html( messages.join(' & ') );
       });
-      $.rails.enableElement($('a[data-disable-with]'));
+      $('#btn_submit_'+sufixe).button('reset');
    });  
 }
 
