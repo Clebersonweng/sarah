@@ -476,7 +476,7 @@
 
                         <!-- End create estimate production -->
                         <li>
-                            <a href="#"><i class="fa fa-paperclip"></i> Auxiliares<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-cogs"></i> Configuraciones<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level collapse">
                                 <li class="">
                                     <% if controller.controller_name == 'fuels' &&  controller.action_name == 'new' %>
@@ -490,6 +490,13 @@
                                         <%= link_to  'Unid. de Medida', new_unit_of_measurement_path %>
                                     <% else %>
                                         <%= link_to  'Unid. de Medida', unit_of_measurements_path %>
+                                    <% end %>
+                                </li>
+                                <li class="<%= 'active' if params[:controller] == 'revaluation_coefficients' && params[:action] == 'index' %>">
+                                    <% if controller.controller_name == 'revaluation_coefficients' &&  controller.action_name == 'new' %>
+                                        <%= link_to  'Coef. de revalúo', new_revaluation_coefficient_path %>
+                                    <% else %>
+                                        <%= link_to  'Coef. de revalúo', revaluation_coefficients_path %>
                                     <% end %>
                                 </li>
                             </ul>
