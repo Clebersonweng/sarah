@@ -1,32 +1,31 @@
-<%= form_for(revaluation_coefficient) do |f| %>
-  <% if revaluation_coefficient.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(revaluation_coefficient.errors.count, "error") %> prohibited this revaluation_coefficient from being saved:</h2>
+<div class="panel-body">
+   <%= form_for(@revaluation_coefficient,html: {class: 'form-horizontal', id: "form_revaluation_coefficients", remote: true,"data-type": "json",'data-model' => 'revaluation_coefficient'}) do |f| %>
+   <div class="col-sm-6 col-lg-8 col-lg-8">
 
-      <ul>
-      <% revaluation_coefficient.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+      <div class="form-group">
+         <%= f.label :start_period, "Fecha inicio :" ,class: "control-label col-sm-3"%>
+         <div class="col-sm-4">
+            <%= f.text_field :start_period, autofocus: true, class: "form-control upper_text datepicker", :required => true%>
+            <span class="help-block"> <%= f.object.errors[:start_period].to_sentence if f.object.errors[:start_period] %></span>
+         </div>
+      </div>
 
-  <div class="field">
-    <%= f.label :start_period %>
-    <%= f.date_select :start_period %>
-  </div>
+      <div class="form-group">
+         <%= f.label :end_period,"Fecha final :", class: "control-label col-sm-3"%>
+         <div class="col-sm-5">
+            <%= f.text_field :end_period, autofocus: true, class: "form-control upper_text datepicker", :required => true%>
+            <span class="help-block"> <%= f.object.errors[:end_period].to_sentence if f.object.errors[:end_period] %></span>
+         </div>
+      </div>
 
-  <div class="field">
-    <%= f.label :end_period %>
-    <%= f.date_select :end_period %>
-  </div>
-
-  <div class="field">
-    <%= f.label :coefficient %>
-    <%= f.text_field :coefficient %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+      <div class="form-group">
+         <%= f.label :description,"Coeficiente:" ,class: "control-label col-sm-3"%>
+         <div class="col-sm-5">
+            <%= f.text_area :coefficient, autofocus: true , class: "form-control"%>
+            <span class="help-block"> <%= f.object.errors[:coefficient].to_sentence if f.object.errors[:coefficient] %></span>
+         </div>
+      </div>
+   </div>  
+   <% end %>
+</div>
+<input type="hidden" id="controller" value="<%= controller_name%>">

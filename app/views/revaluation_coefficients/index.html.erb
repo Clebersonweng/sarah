@@ -1,31 +1,37 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Revaluation Coefficients</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Start period</th>
-      <th>End period</th>
-      <th>Coefficient</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @revaluation_coefficients.each do |revaluation_coefficient| %>
-      <tr>
-        <td><%= revaluation_coefficient.start_period %></td>
-        <td><%= revaluation_coefficient.end_period %></td>
-        <td><%= revaluation_coefficient.coefficient %></td>
-        <td><%= link_to 'Show', revaluation_coefficient %></td>
-        <td><%= link_to 'Edit', edit_revaluation_coefficient_path(revaluation_coefficient) %></td>
-        <td><%= link_to 'Destroy', revaluation_coefficient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Revaluation Coefficient', new_revaluation_coefficient_path %>
+<div class="panel-body">
+   <div class="table-responsive">
+      <table data-width="100%"  
+      data-flat="true"
+      data-response-handler="flatJSON"
+      data-search="true"                
+      class="table  table-hover table-striped table-condensed display" 
+      data-toggle="table"
+      data-show-toggle="true"                
+      data-show-refresh="false" 
+      data-pagination="true" 
+      onlyInfoPagination="false" 
+      data-icons="icons" data-sort-name="code" data-sort-order="desc" 
+      data-card-view="false">
+      <thead>
+         <tr>
+            <th style="widhth:0%" data-visible="false" data-field="id">Id</th> 
+            <th style="widhth:30%" data-sortable="true" data-field="start_period">Fecha inicio</th> 
+            <th style="widhth:30%" data-sortable="true"  data-field="end_period">Fecha termino</th> 
+            <th style="widhth:30%" data-field="coefficient">Coeficiente</th> 
+            <th  data-width='80' data-halign="right" data-align="right" data-formatter="actionFormatter" data-events="actionEvents">Acción</th>
+         </tr>
+      </thead>
+      <tbody>
+         <% @revaluation_coefficients.each do |revaluation_coefficient| %>
+         <tr>
+            <td><%= revaluation_coefficient.id %></td>
+            <td><%= revaluation_coefficient.start_period %></td>
+            <td><%= revaluation_coefficient.end_period %></td>
+            <td><%= revaluation_coefficient.coefficient %></td>
+          </tr>
+         <% end %>
+      </tbody>
+   </table>
+</div>
+</div>
+<input type="hidden" id="controller" value="<%= controller_name%>">
