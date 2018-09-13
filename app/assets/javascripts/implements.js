@@ -11,24 +11,25 @@ $(document).ready(function ()
 	controlador = $("#controller").val();
 	generic_response_form(controlador);
 	form_implements_validates();
-    $('#width_machine,#work_velocity,#real_width_machine,#real_work_velocity').valida_sarah('0123456789.,');
-	$('#save_ctt_machine').on("click",function()
+   $('#width_machine_impl,#work_velocity_impl,#real_width_machine_impl,#real_work_velocity_impl').valida_sarah('0123456789.,');
+	
+   $('#save_ctt_impl').on("click",function()
    {
-      var ctt = total_working_capacity($("#width_machine").val(),$("#work_velocity").val());
+      var ctt = total_working_capacity($("#width_machine_impl").val(),$("#work_velocity_impl").val());
       $("#implement_working_capacity").val(ctt.toFixed(4)).focus();
       $('form').bootstrapValidator('revalidateField', 'implement[working_capacity]');  
    });
 
-    $('#save_cte_machine').on("click",function()
-    {
-      var cte = total_working_capacity_efective($("#real_width_machine").val(),$("#real_work_velocity").val());
+   $('#save_cte_impl').on("click",function()
+   {
+      var cte = total_working_capacity_efective($("#real_width_machine_impl").val(),$("#real_work_velocity_impl").val());
       $("#implement_working_capacity_effective").val(cte.toFixed(4)).focus();
       $('form').bootstrapValidator('revalidateField', 'implement[working_capacity_effective]');  
 
-		var result = total_time_oper( $('#implement_working_capacity_effective').val(),$("#implement_working_capacity").val() );
-		$("#implement_oper_time").val(result.toFixed(4));
+      var result = total_time_oper( $('#implement_working_capacity_effective').val(),$("#implement_working_capacity").val() );
+      $("#implement_oper_time").val(result.toFixed(4));
 
-    });
+   });
 
 	$('#implement_working_capacity_effective').on("focusout",function()
 	{
