@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Start period:</strong>
+  <%= @revaluation_coefficient.start_period %>
+</p>
+
+<p>
+  <strong>End period:</strong>
+  <%= @revaluation_coefficient.end_period %>
+</p>
+
+<p>
+  <strong>Coefficient:</strong>
+  <%= @revaluation_coefficient.coefficient %>
+</p>
+
+<%= link_to 'Edit', edit_revaluation_coefficient_path(@revaluation_coefficient) %> |
+<%= link_to 'Back', revaluation_coefficients_path %>

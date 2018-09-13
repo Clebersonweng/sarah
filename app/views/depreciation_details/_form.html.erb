@@ -1,0 +1,77 @@
+<%= form_for(depreciation_detail) do |f| %>
+  <% if depreciation_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(depreciation_detail.errors.count, "error") %> prohibited this depreciation_detail from being saved:</h2>
+
+      <ul>
+      <% depreciation_detail.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :depreciation_id %>
+    <%= f.text_field :depreciation_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :cost_oper_machine_id %>
+    <%= f.text_field :cost_oper_machine_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :revaluation_coefficient_id %>
+    <%= f.text_field :revaluation_coefficient_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :year_use_life %>
+    <%= f.number_field :year_use_life %>
+  </div>
+
+  <div class="field">
+    <%= f.label :year_use_life_remain %>
+    <%= f.number_field :year_use_life_remain %>
+  </div>
+
+  <div class="field">
+    <%= f.label :net_value_prev_year %>
+    <%= f.text_field :net_value_prev_year %>
+  </div>
+
+  <div class="field">
+    <%= f.label :revalued_value %>
+    <%= f.text_field :revalued_value %>
+  </div>
+
+  <div class="field">
+    <%= f.label :annual_depre %>
+    <%= f.text_field :annual_depre %>
+  </div>
+
+  <div class="field">
+    <%= f.label :per_day_depre %>
+    <%= f.text_field :per_day_depre %>
+  </div>
+
+  <div class="field">
+    <%= f.label :per_hour_depre %>
+    <%= f.text_field :per_hour_depre %>
+  </div>
+
+  <div class="field">
+    <%= f.label :hours_used %>
+    <%= f.text_field :hours_used %>
+  </div>
+
+  <div class="field">
+    <%= f.label :subtotal %>
+    <%= f.text_field :subtotal %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

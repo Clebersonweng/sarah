@@ -1,0 +1,2 @@
+json.extract! depreciation_detail, :id, :depreciation_id, :cost_oper_machine_id, :revaluation_coefficient_id, :year_use_life, :year_use_life_remain, :net_value_prev_year, :revalued_value, :annual_depre, :per_day_depre, :per_hour_depre, :hours_used, :subtotal, :created_at, :updated_at
+json.url depreciation_detail_url(depreciation_detail, format: :json)

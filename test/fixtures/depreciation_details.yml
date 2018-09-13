@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  depreciation: one
+  cost_oper_machine: one
+  revaluation_coefficient: one
+  year_use_life: 1
+  year_use_life_remain: 1
+  net_value_prev_year: 9.99
+  revalued_value: 9.99
+  annual_depre: 9.99
+  per_day_depre: 9.99
+  per_hour_depre: 9.99
+  hours_used: 9.99
+  subtotal: 9.99
+
+two:
+  depreciation: two
+  cost_oper_machine: two
+  revaluation_coefficient: two
+  year_use_life: 1
+  year_use_life_remain: 1
+  net_value_prev_year: 9.99
+  revalued_value: 9.99
+  annual_depre: 9.99
+  per_day_depre: 9.99
+  per_hour_depre: 9.99
+  hours_used: 9.99
+  subtotal: 9.99

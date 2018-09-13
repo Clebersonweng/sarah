@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180703023836) do
+ActiveRecord::Schema.define(version: 20180913035752) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,34 @@ ActiveRecord::Schema.define(version: 20180703023836) do
     t.integer  "program_production_id"
     t.index ["chart_of_account_id"], name: "index_cost_oper_machines_on_chart_of_account_id", using: :btree
     t.index ["program_production_id"], name: "index_cost_oper_machines_on_program_production_id", using: :btree
+  end
+
+  create_table "depreciation_details", force: :cascade do |t|
+    t.integer  "depreciation_id"
+    t.integer  "revaluation_coefficient_id"
+    t.integer  "year_use_life"
+    t.integer  "year_use_life_remain"
+    t.decimal  "net_value_prev_year",        precision: 15, scale: 5, default: "0.0"
+    t.decimal  "revalued_value",             precision: 15, scale: 5, default: "0.0"
+    t.decimal  "annual_depre",               precision: 15, scale: 5, default: "0.0"
+    t.decimal  "per_day_depre",              precision: 15, scale: 5, default: "0.0"
+    t.decimal  "per_hour_depre",             precision: 15, scale: 5, default: "0.0"
+    t.decimal  "hours_used",                 precision: 15, scale: 5, default: "0.0"
+    t.decimal  "subtotal",                   precision: 15, scale: 5, default: "0.0"
+    t.datetime "created_at",                                                          null: false
+    t.datetime "updated_at",                                                          null: false
+    t.index ["depreciation_id"], name: "index_depreciation_details_on_depreciation_id", using: :btree
+    t.index ["revaluation_coefficient_id"], name: "index_depreciation_details_on_revaluation_coefficient_id", using: :btree
+  end
+
+  create_table "depreciations", force: :cascade do |t|
+    t.integer  "program_production_id"
+    t.integer  "cost_oper_machine_id"
+    t.decimal  "total",                 precision: 15, scale: 5, default: "0.0"
+    t.datetime "created_at",                                                     null: false
+    t.datetime "updated_at",                                                     null: false
+    t.index ["cost_oper_machine_id"], name: "index_depreciations_on_cost_oper_machine_id", using: :btree
+    t.index ["program_production_id"], name: "index_depreciations_on_program_production_id", using: :btree
   end
 
   create_table "estimate_sales", force: :cascade do |t|
@@ -282,6 +310,14 @@ ActiveRecord::Schema.define(version: 20180703023836) do
     t.index ["estimate_sale_id"], name: "index_program_productions_on_estimate_sale_id", using: :btree
   end
 
+  create_table "revaluation_coefficients", force: :cascade do |t|
+    t.date     "start_period"
+    t.date     "end_period"
+    t.decimal  "coefficient",  precision: 6, scale: 4, default: "0.0"
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string   "role"
     t.datetime "created_at", null: false
@@ -407,6 +443,10 @@ ActiveRecord::Schema.define(version: 20180703023836) do
   add_foreign_key "cost_oper_machine_details", "machines"
   add_foreign_key "cost_oper_machines", "chart_of_accounts"
   add_foreign_key "cost_oper_machines", "program_productions"
+  add_foreign_key "depreciation_details", "depreciations"
+  add_foreign_key "depreciation_details", "revaluation_coefficients"
+  add_foreign_key "depreciations", "cost_oper_machines"
+  add_foreign_key "depreciations", "program_productions"
   add_foreign_key "estimate_sales", "chart_of_accounts"
   add_foreign_key "estimate_sales", "farming_plots"
   add_foreign_key "estimate_sales", "type_of_crops"

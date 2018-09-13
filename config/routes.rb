@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   
 
+  resources :depreciation_details
+  resources :depreciations
+  resources :revaluation_coefficients
    resources :man_power_details
    resources :cost_oper_machines
    resources :type_machines

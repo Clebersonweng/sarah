@@ -1,0 +1,1 @@
+json.array! @revaluation_coefficients, partial: 'revaluation_coefficients/revaluation_coefficient', as: :revaluation_coefficient

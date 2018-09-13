@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Depreciation Details</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Depreciation</th>
+      <th>Cost oper machine</th>
+      <th>Revaluation coefficient</th>
+      <th>Year use life</th>
+      <th>Year use life remain</th>
+      <th>Net value prev year</th>
+      <th>Revalued value</th>
+      <th>Annual depre</th>
+      <th>Per day depre</th>
+      <th>Per hour depre</th>
+      <th>Hours used</th>
+      <th>Subtotal</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @depreciation_details.each do |depreciation_detail| %>
+      <tr>
+        <td><%= depreciation_detail.depreciation %></td>
+        <td><%= depreciation_detail.cost_oper_machine %></td>
+        <td><%= depreciation_detail.revaluation_coefficient %></td>
+        <td><%= depreciation_detail.year_use_life %></td>
+        <td><%= depreciation_detail.year_use_life_remain %></td>
+        <td><%= depreciation_detail.net_value_prev_year %></td>
+        <td><%= depreciation_detail.revalued_value %></td>
+        <td><%= depreciation_detail.annual_depre %></td>
+        <td><%= depreciation_detail.per_day_depre %></td>
+        <td><%= depreciation_detail.per_hour_depre %></td>
+        <td><%= depreciation_detail.hours_used %></td>
+        <td><%= depreciation_detail.subtotal %></td>
+        <td><%= link_to 'Show', depreciation_detail %></td>
+        <td><%= link_to 'Edit', edit_depreciation_detail_path(depreciation_detail) %></td>
+        <td><%= link_to 'Destroy', depreciation_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Depreciation Detail', new_depreciation_detail_path %>

@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Revaluation Coefficients</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Start period</th>
+      <th>End period</th>
+      <th>Coefficient</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @revaluation_coefficients.each do |revaluation_coefficient| %>
+      <tr>
+        <td><%= revaluation_coefficient.start_period %></td>
+        <td><%= revaluation_coefficient.end_period %></td>
+        <td><%= revaluation_coefficient.coefficient %></td>
+        <td><%= link_to 'Show', revaluation_coefficient %></td>
+        <td><%= link_to 'Edit', edit_revaluation_coefficient_path(revaluation_coefficient) %></td>
+        <td><%= link_to 'Destroy', revaluation_coefficient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Revaluation Coefficient', new_revaluation_coefficient_path %>

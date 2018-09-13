@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Depreciations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Program production</th>
+      <th>Cost oper machine</th>
+      <th>Total</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @depreciations.each do |depreciation| %>
+      <tr>
+        <td><%= depreciation.program_production %></td>
+        <td><%= depreciation.cost_oper_machine %></td>
+        <td><%= depreciation.total %></td>
+        <td><%= link_to 'Show', depreciation %></td>
+        <td><%= link_to 'Edit', edit_depreciation_path(depreciation) %></td>
+        <td><%= link_to 'Destroy', depreciation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Depreciation', new_depreciation_path %>

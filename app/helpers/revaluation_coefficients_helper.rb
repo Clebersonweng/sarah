@@ -1,0 +1,2 @@
+module RevaluationCoefficientsHelper
+end

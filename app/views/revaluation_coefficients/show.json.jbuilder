@@ -1,0 +1,1 @@
+json.partial! "revaluation_coefficients/revaluation_coefficient", revaluation_coefficient: @revaluation_coefficient

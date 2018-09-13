@@ -1,0 +1,32 @@
+<%= form_for(revaluation_coefficient) do |f| %>
+  <% if revaluation_coefficient.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(revaluation_coefficient.errors.count, "error") %> prohibited this revaluation_coefficient from being saved:</h2>
+
+      <ul>
+      <% revaluation_coefficient.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :start_period %>
+    <%= f.date_select :start_period %>
+  </div>
+
+  <div class="field">
+    <%= f.label :end_period %>
+    <%= f.date_select :end_period %>
+  </div>
+
+  <div class="field">
+    <%= f.label :coefficient %>
+    <%= f.text_field :coefficient %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

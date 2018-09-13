@@ -1,0 +1,1 @@
+json.partial! "depreciation_details/depreciation_detail", depreciation_detail: @depreciation_detail

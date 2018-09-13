@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Depreciation:</strong>
+  <%= @depreciation_detail.depreciation %>
+</p>
+
+<p>
+  <strong>Cost oper machine:</strong>
+  <%= @depreciation_detail.cost_oper_machine %>
+</p>
+
+<p>
+  <strong>Revaluation coefficient:</strong>
+  <%= @depreciation_detail.revaluation_coefficient %>
+</p>
+
+<p>
+  <strong>Year use life:</strong>
+  <%= @depreciation_detail.year_use_life %>
+</p>
+
+<p>
+  <strong>Year use life remain:</strong>
+  <%= @depreciation_detail.year_use_life_remain %>
+</p>
+
+<p>
+  <strong>Net value prev year:</strong>
+  <%= @depreciation_detail.net_value_prev_year %>
+</p>
+
+<p>
+  <strong>Revalued value:</strong>
+  <%= @depreciation_detail.revalued_value %>
+</p>
+
+<p>
+  <strong>Annual depre:</strong>
+  <%= @depreciation_detail.annual_depre %>
+</p>
+
+<p>
+  <strong>Per day depre:</strong>
+  <%= @depreciation_detail.per_day_depre %>
+</p>
+
+<p>
+  <strong>Per hour depre:</strong>
+  <%= @depreciation_detail.per_hour_depre %>
+</p>
+
+<p>
+  <strong>Hours used:</strong>
+  <%= @depreciation_detail.hours_used %>
+</p>
+
+<p>
+  <strong>Subtotal:</strong>
+  <%= @depreciation_detail.subtotal %>
+</p>
+
+<%= link_to 'Edit', edit_depreciation_detail_path(@depreciation_detail) %> |
+<%= link_to 'Back', depreciation_details_path %>

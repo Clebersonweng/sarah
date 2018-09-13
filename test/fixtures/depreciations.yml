@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  program_production: one
+  cost_oper_machine: one
+  total: 
+
+two:
+  program_production: two
+  cost_oper_machine: two
+  total: 

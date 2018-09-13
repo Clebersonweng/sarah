@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start_period: 2018-09-12
+  end_period: 2018-09-12
+  coefficient: 9.99
+
+two:
+  start_period: 2018-09-12
+  end_period: 2018-09-12
+  coefficient: 9.99
