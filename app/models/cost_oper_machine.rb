@@ -9,8 +9,8 @@ class CostOperMachine < ApplicationRecord
    after_save :create_depreciation, :create_depreciation_details
 
    # Anos de vida util fijo por no variar segun el decreto
-   YEAR_USE_LIFE = 10 
-   YEAR_USE_LIFE_REMAIN = 9
+  
+   
   private
 
    def create_depreciation
@@ -25,37 +25,57 @@ class CostOperMachine < ApplicationRecord
    end
 
    def create_depreciation_details
+      
+      year_use_life = 10 
+      year_use_life_remain = 9
+
+      #machines_id   = Array.new
+      #implements_id = Array.new
+
       ####################### INICIO DETALLES DEPRECIACION DETALLES  ##############################
       depreciation_id            = Depreciation.last.id
-      revaluation_coefficient_id = RevaluationCoefficient.last.id
+      revaluation_coefficient    = RevaluationCoefficient.select(:coefficient).order("created_at DESC").limit(1).map(&:coefficient)
+      revaluation_coefficient_id = RevaluationCoefficient.last.id#RevaluationCoefficient.select(:coefficient).order("created_at DESC").limit(1).map(&:coefficient)
 
       # TRAER COSTO DE MAQUINAS E IMPLEMENTOS
-      cost_oper_machine_id       =  self.id
+      cost_oper_machine_id       =  CostOperMachine.last.id #self.id
 
-      details                    = CostOperMachineDetail.where(:cost_oper_machine_id =>cost_oper_machine_id)
+      details                    = CostOperMachineDetail.where(:cost_oper_machine_id =>self.id)
 
       details.all.each do |det|
-         puts det.machine_id
-         puts det.implement_id
+         #machines_id.push(det.machine_id)
+         #implements_id.push(det.implement_id)
+         
+         cost_machine = Machine.where(:id =>det.machine_id ).select(:price,:id).map(&:price) # convierte el objeto hash para el campo que necesito
+
+         #cost_implement = Implement.where(:id =>det.implement_id ).select(:price).map(&:price)
+
+         # Valor Neto Ejercicio Anterior  = VC / (AVU - AVUR)
+         vnea_machine = cost_machine[0] / (year_use_life - year_use_life_remain)
+
+         #Valor Revaluado = VNEA / CR
+         vr_machine =  vnea_machine / revaluation_coefficient[0]
+
+         #Depreciacion Anual = VR / AVU
+         da_machine = vr_machine / year_use_life
+         
+         #Depreciacion Diaria =  DA / 365
+         dd_machine = da_machine / 365
+         
+         #Depreciacion por Hora = DD / 24
+         dh_machine = dd_machine / 24
+
+         #DEPRE = DH * HS USED
+         depre_machine_subtotal = dh_machine.round(4) * det.hours_needed
+
+         DepreciationDetail.create(depreciation_id: depreciation_id, revaluation_coefficient_id: revaluation_coefficient_id, year_use_life: year_use_life,year_use_life_remain: year_use_life_remain,net_value_prev_year: vnea_machine.round(4),revalued_value: vr_machine.round(4),annual_depre: da_machine.round(4),per_day_depre: dd_machine.round(4),per_hour_depre: dh_machine.round(4),hours_used: det.hours_needed.round(4),subtotal: depre_machine_subtotal.round(4))
          
       end
 
-      abort(" FIN ")
+      #puts det.errors
+      #abort(" FIN ")
+
       # FIN COSTO DE MAQUINAS E IMPLEMENTOS
-      year_use_life              = YEAR_USE_LIFE
-      year_use_life_remain       = YEAR_USE_LIFE_REMAIN
-
-      # valor neto del ejercicio anterior = VC *(AVU - AVUR)
-      net_value_prev_year        = 10000
-      revalued_value             = 8000
-      annual_depre               = 120000
-      per_day_depre              = 12000
-      per_hour_depre             = 1200
-      hours_used                 = 1.2
-      subtotal                   = 1440
-    
-      #DepreciationDetail.create(depreciation_id: depreciation_id, revaluation_coefficient_id: revaluation_coefficient_id, year_use_life: year_use_life,year_use_life_remain: year_use_life_remain,net_value_prev_year: net_value_prev_year,revalued_value: revalued_value,annual_depre: annual_depre,per_day_depre: per_day_depre,per_hour_depre: per_hour_depre,hours_used: hours_used,subtotal: subtotal)
-
 
       ####################### FIN DETALLES DEPRECIACION DETALLES  ##############################
    end

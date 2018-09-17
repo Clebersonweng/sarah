@@ -1,4 +1,6 @@
-var COUNT_COMO, sum,TOTAL_COM = 0;
+var COUNT_COMO = 0;
+var  sum = 0;
+var TOTAL_COM = 0;
 var fuel,lubricant,repair_and_maintenance,time_oper = 0;
 var res_total_repair_machine,res_total_repair_implement,res_sum_repair_machine_implement,res_total_fuel,res_total_lub,res_total_hours = 0 ;
 
