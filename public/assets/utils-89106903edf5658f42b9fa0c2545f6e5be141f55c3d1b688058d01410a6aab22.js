@@ -632,3 +632,4 @@ NProgress.done();
 NProgress.remove();
 });
 */
+;
